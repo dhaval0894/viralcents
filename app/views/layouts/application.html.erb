@@ -1,14 +1,133 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-  <title>Viralcents</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ViralCents &mdash;</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  	<%= csrf_meta_tags %>
+
 </head>
-<body>
+  <body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">ViralCents</a>
+					<a href="#menu-toggle" class="navbar-toggle" id="menu-toggle">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+				</div>
 
-<%= yield %>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="col navbar-col">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="icon-user"></i> Username <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#"><i class="icon-logout"></i> Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!-- /.navbar-col -->
+			</div><!-- /.container-fluid -->
+			</nav>
+		    <div id="wrapper">
+		        <!-- Sidebar -->
+		        <div id="sidebar-wrapper">
+		            <ul class="sidebar-nav">
+		                <li>
+		                    <a href="#" class="active" ><i class="icon-dashboard"></i> Dashboard</a>
+		                </li>
+		                <li class="dropdown">
+												<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="icon-book"></i> Stories <span class="caret"></span></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">All Stories</a>
+                            </li>
+                            <li>
+                                <a href="#">My Stories</a>
+                            </li>
+                        </ul>
+		                </li>
+										<li class="dropdown">
+											<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="icon-money"></i> Payments <span class="caret"></span></a>
+											<ul id="demo1" class="collapse">
+													<li>
+															<a href="#"><i class="icon-loop"></i> Withdrawls</a>
+													</li>
+													<li>
+															<a href="#"><i class="icon-dollar"></i> Earnings</a>
+													</li>
+													<li>
+															<a href="#"><i class="icon-chain"></i> Bonuses</a>
+													</li>
+													<li>
+															<a href="#"><i class="icon-tablet"></i> Recharge</a>
+													</li>
+													<li>
+															<a href="#"><i class="icon-credit-card"></i> Add Payment Method</a>
+													</li>
+											</ul>
+		                </li>
+										<li>
+												<a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="icon-users"></i> Referrals <span class="caret"></span></a>
+                        <ul id="demo2" class="collapse">
+                            <li>
+                                <a href="#"><i class="icon-random"></i> Invite</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon-warning"></i> Status</a>
+                            </li>
+                        </ul>
+		                </li>
+		                <li>
+		                    <a href="#"><i class="icon-question"></i> Help</a>
+		                </li>
+		            </ul>
+		        </div>
+		        <!-- /#sidebar-wrapper -->
 
-</body>
+		        <!-- Page Content -->
+		        <div id="page-content-wrapper">
+									<%= yield %>
+		        </div>
+		        <!-- /#page-content-wrapper -->
+
+		    </div>
+		    <!-- /#wrapper -->
+
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+
+  </body>
 </html>
