@@ -6,7 +6,7 @@ gem 'rails', '4.2.3'
 gem 'pg'
 
 # Icomoon and simple-line-icon web application icons for rails
-gem 'icomoon-rails'
+gem 'icomoon_rails'
 gem 'simple-line-icons-rails'
 
 # Use jquery as the JavaScript library
