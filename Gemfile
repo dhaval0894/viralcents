@@ -5,15 +5,21 @@ gem 'rails', '4.2.3'
 # Use postgres as the database for Active Record
 gem 'pg'
 
-# Icomoon and simple-line-icon web application icons for rails
+# Icomoon web application icons for rails
 gem 'icomoon_rails'
-gem 'simple-line-icons-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+#facebook access
+gem 'koala'
+gem 'omniauth-facebook'
+
 # sass for rails
 gem 'sass-rails'
+
+#simple-line-icon web application icons for rails
+gem 'simple-line-icons-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
