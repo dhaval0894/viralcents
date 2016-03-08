@@ -232,17 +232,14 @@
                 <p>Continue With Facebook</p>
                 <div id="user_nav">
                 <div id="status"></div>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" >
-                  </fb:login-button>
-                <% if current_user %>
-                  Signed in as <strong><%= current_user.name %></strong>!
-                  <a href="/" onclick="fbLogout();">Logout</a>
-                <%else%>  
+                
+                <% if not current_user %>
+                  <!-- <a href="/" onclick="fbLogout();">Logout</a> -->
                   <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" >
                   </fb:login-button>
                   <div id="status">
                   </div>
-                    <a href = "/auth/facebook" class="btn btn-primary" onclick="checkLoginState();">Login</a>
+                    <a href = "/auth/facebook" class="btn btn-primary" onclick="fbLogin();">Login</a>
                 <%end%>
                 </div>
             </div>

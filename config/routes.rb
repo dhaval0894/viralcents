@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   get 'auth/failure' => redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
+  #user_panel
+  get 'dashboard' => 'user_panel#dashboard'
 
 end

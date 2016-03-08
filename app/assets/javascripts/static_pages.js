@@ -23,6 +23,11 @@ FB.init({
 
 }
 
+function fbLogin(){
+  FB.login(function(response) {
+    checkLoginState();
+}, {scope: 'email,user_likes'});
+}
 
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
