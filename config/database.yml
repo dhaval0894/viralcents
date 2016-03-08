@@ -13,7 +13,7 @@ default: &default
 development:
   <<: *default
   database: viralcents_development
-
+  
 test:
   <<: *default
   database: viralcents_test

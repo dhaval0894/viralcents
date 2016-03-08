@@ -12,6 +12,10 @@ gem 'simple-line-icons-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+#facebook access
+gem 'omniauth-facebook'
+gem 'koala'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
