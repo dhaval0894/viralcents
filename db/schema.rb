@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304104033) do
+ActiveRecord::Schema.define(version: 20160309102528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "twitter_users", force: :cascade do |t|
+    t.string   "twitter_provider"
+    t.string   "twitter_uid"
+    t.string   "twitter_name"
+    t.string   "twitter_oauth_token"
+    t.string   "twitter_oauth_secret"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
