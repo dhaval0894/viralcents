@@ -24,9 +24,9 @@ FB.init({
 }
 
 function fbLogin(){
-  FB.login(function(response) {
+  FB.login(
     checkLoginState();
-}, {scope: 'email,user_likes'});
+, {scope: 'email,user_likes'});
 }
 
 function statusChangeCallback(response) {
@@ -42,14 +42,19 @@ function statusChangeCallback(response) {
       window.location = '/dashboard';
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
+      console.log("not authorized");
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+      window.location = '/';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into Facebook.';
+      console.log("not authorized");
+      window.location = '/';
     }
+    return response.status;
   }
 function checkLoginState() {
   FB.getLoginStatus(function(response) {
