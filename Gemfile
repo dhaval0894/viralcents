@@ -5,8 +5,8 @@ gem 'rails', '4.2.3'
 # Use postgres as the database for Active Record
 gem 'pg'
 
-# Icomoon web application icons for rails
-gem 'icomoon_rails'
+# font-awesome web application icons for rails
+gem "font-awesome-rails"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -15,14 +15,17 @@ gem 'jquery-rails'
 gem 'koala'
 gem 'omniauth-facebook'
 
+#for twitter authentication
+gem 'omniauth-twitter', '~> 1.0.1'
+
 # sass for rails
 gem 'sass-rails'
 
-#simple-line-icon web application icons for rails
-gem 'simple-line-icons-rails'
-
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
+#twitter access
+gem 'twitter', '~> 5.3.1'
 
 # Twitter Bootstrap For rails
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
