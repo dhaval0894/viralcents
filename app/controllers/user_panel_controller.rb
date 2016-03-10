@@ -1,16 +1,16 @@
 class UserPanelController < ApplicationController
 	#before_action :login_state, only: [:dashboard]
 	def dashboard
-		respond_to do |format|
-      		format.html
-      		format.js 
-  		end
+		if current_user.nil?
+			redirect_to root_path
+	  	else
+	  		respond_to do |format|
+	      		format.html
+	      		format.js
+	  		end
+	  	end
 	end
 
-	private
-		def login_state
-			respond_to do |format|
-    			format.js { render :js => "checkLoginState();" }  
-  			end
-		end
+	def stories
+	end
 end

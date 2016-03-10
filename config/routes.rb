@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
+  get 'stories' => 'user_panel#stories'
 
 end

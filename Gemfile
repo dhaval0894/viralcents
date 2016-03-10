@@ -15,6 +15,9 @@ gem 'jquery-rails'
 gem 'koala'
 gem 'omniauth-facebook'
 
+#extract from link
+gem 'link_thumbnailer'	
+
 #for twitter authentication
 gem 'omniauth-twitter', '~> 1.0.1'
 
