@@ -15,11 +15,20 @@ gem 'jquery-rails'
 gem 'koala'
 gem 'omniauth-facebook'
 
+#extract from link
+gem 'link_thumbnailer'	
+
+#for twitter authentication
+gem 'omniauth-twitter', '~> 1.0.1'
+
 # sass for rails
 gem 'sass-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
+#twitter access
+gem 'twitter', '~> 5.3.1'
 
 # Twitter Bootstrap For rails
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

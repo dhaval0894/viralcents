@@ -7,10 +7,12 @@ Rails.application.routes.draw do
 
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
+  
   get 'auth/failure' => redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
+  get 'stories' => 'user_panel#stories'
 
 end
