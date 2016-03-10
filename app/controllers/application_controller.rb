@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 	def twitter_user
 	  
-	  @twitter_user = TwitterUser.find(session[:user_id]) if session[:user_id]
+	  @twitter_user = TwitterUser.find(session[:tuser_id]) if session[:tuser_id]
 	end
 
 
