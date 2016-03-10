@@ -1,6 +1,6 @@
 <% if twitter_user %>
         <strong><%= twitter_user.twitter_name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+        
       <% else %>
         <%= link_to "Connect with Twitter", "/auth/twitter", id: "sign_in" %>
       <% end %>
