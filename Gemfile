@@ -11,6 +11,9 @@ gem "font-awesome-rails"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# use jQuery plugin for drop-in fix binded events problem caused by Turbolinks
+gem 'jquery-turbolinks'
+
 #facebook access
 gem 'koala'
 gem 'omniauth-facebook'

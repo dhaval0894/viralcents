@@ -67,16 +67,16 @@
 		        <div id="sidebar-wrapper">
 		            <ul class="sidebar-nav">
 		                <li>
-		                     <a href="/dashboard" class="active" ><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
+		                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %>" ><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
 		                </li>
 		                <li>
-							<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
+							<a href="javascript:;" class="<%= 'active' if current_page?(stories_path) %>" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
 	                        <ul id="demo" class="collapse">
 	                            <li>
-	                                <a href="/stories"><i class="fa fa-newspaper-o"></i> All Stories</a>
+	                                <a href="/stories"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-history"></i> My Stories</a>
+	                                <a href="#"><i class="fa fa-history fa-fw"></i> My Stories</a>
 	                            </li>
 	                        </ul>
 		                </li>
@@ -84,19 +84,19 @@
 							<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-credit-card fa-fw"></i> Payment <span class="caret"></span></a>
 							<ul id="demo1" class="collapse">
 									<li>
-											<a href="#"><i class="fa fa-rupee"></i> Withdrawls</a>
+											<a href="#"><i class="fa fa-rupee fa-fw"></i> Withdrawls</a>
 									</li>
 									<li>
-											<a href="#"><i class="fa fa-money"></i> Earnings</a>
+											<a href="#"><i class="fa fa-money fa-fw"></i> Earnings</a>
 									</li>
 									<li>
-											<a href="#"><i class="fa fa-chain"></i> Bonuses</a>
+											<a href="#"><i class="fa fa-chain fa-fw"></i> Bonuses</a>
 									</li>
 									<li>
-											<a href="#"><i class="fa fa-tablet"></i> Recharge</a>
+											<a href="#"><i class="fa fa-tablet fa-fw"></i> Recharge</a>
 									</li>
 									<li>
-											<a href="#"><i class="fa fa-cc-stripe"></i> Payment Method</a>
+											<a href="#"><i class="fa fa-cc-stripe fa-fw"></i> Payment Method</a>
 									</li>
 							</ul>
 		                </li>
@@ -104,10 +104,10 @@
 							<a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-users fa-fw"></i> Referrals <span class="caret"></span></a>
 	                        <ul id="demo2" class="collapse">
 	                            <li>
-	                                <a href="#"><i class="fa fa-random"></i> Invite</a>
+	                                <a href="#"><i class="fa fa-random fa-fw"></i> Invite</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-warning"></i> Status</a>
+	                                <a href="#"><i class="fa fa-warning fa-fw"></i> Status</a>
 	                            </li>
 	                        </ul>
 		                </li>

@@ -40,6 +40,7 @@
 
 #wrapper {
     padding-left: 0;
+    min-height: 100%;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -71,7 +72,7 @@
     min-height:100%;
     position: relative;
     padding: 15px;
-    margin-top: 120px;
+    margin-top: 170px;
 }
 
 .sidebar-nav {
@@ -138,6 +139,7 @@
 /*dashboard styling*/
 .admin-row {
     background: rgb(244, 244, 244);
+    padding: 5px;
 }
 
 .feature-stories{
