@@ -1,5 +1,6 @@
 class Story < ActiveRecord::Base
-	has_many :user, through: :user_story
+	has_many :users, through: :user_stories
+	has_many :user_stories
 
 	def link_thumbnail(url)
 	    link_data = LinkThumbnailer.generate(url)

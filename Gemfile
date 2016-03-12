@@ -6,7 +6,7 @@ gem 'rails', '4.2.3'
 gem 'pg'
 
 #admin-panel and authorize
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
 # Copy To Clipboard
