@@ -5,11 +5,18 @@ gem 'rails', '4.2.3'
 # Use postgres as the database for Active Record
 gem 'pg'
 
+
+# Copy To Clipboard
+gem 'clipboard-rails'
+
 # font-awesome web application icons for rails
 gem "font-awesome-rails"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+# use jQuery plugin for drop-in fix binded events problem caused by Turbolinks
+gem 'jquery-turbolinks'
 
 #facebook access
 gem 'koala'

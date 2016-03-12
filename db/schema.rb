@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20160310125504) do
 
   create_table "stories", force: :cascade do |t|
     t.string   "title"
-    t.string   "original_url"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "orig_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+
   end
 
   create_table "twitter_users", force: :cascade do |t|
@@ -40,9 +41,9 @@ ActiveRecord::Schema.define(version: 20160310125504) do
     t.integer  "fb_likes"
     t.integer  "fb_shares"
     t.integer  "fb_comments"
-    t.integer  "fav"
-    t.integer  "retweet"
+    t.integer  "retweets"
     t.integer  "conversation"
+    t.integer  "fav"
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",   null: false
