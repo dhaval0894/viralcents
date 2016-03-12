@@ -72,6 +72,7 @@ GEM
     buftok (0.2.0)
     builder (3.2.2)
     byebug (8.2.2)
+    cancancan (1.13.1)
     clipboard-rails (1.5.9)
     coderay (1.1.0)
     coffee-rails (4.1.1)
@@ -283,6 +284,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  cancancan
   clipboard-rails
   font-awesome-rails
   jquery-rails
