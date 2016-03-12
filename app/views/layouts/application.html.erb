@@ -21,7 +21,7 @@
 	<meta name="twitter:card" content="" />
 
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  	<%= javascript_include_tag 'application' %>
   	<%= csrf_meta_tags %>
 
 	<!-- Google Fonts-->
@@ -54,7 +54,7 @@
 								<li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
 								<li role="separator" class="divider"></li>
 								<% if current_user %> 
-								<li><a href="#" id="logout" onclick="fbLogout();"><i class="fa fa-sign-out"></i> Logout</a></li>
+								<li><a href="#" onclick="fbLogout();"><i class="fa fa-sign-out"></i> Logout</a></li>
 								<%end%>
 							</ul>
 						</li>
@@ -76,7 +76,7 @@
 	                                <a href="/stories"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>
 	                            </li>
 	                            <li>
-	                                <a href="#"><i class="fa fa-history fa-fw"></i> My Stories</a>
+	                                <a href="/my_stories"><i class="fa fa-history fa-fw"></i> My Stories</a>
 	                            </li>
 	                        </ul>
 		                </li>
