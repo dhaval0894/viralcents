@@ -29,7 +29,7 @@
 
   	<!-- Custom Css -->
 	<link rel="stylesheet" href="assets/admin.css">
-
+	
 
 </head>
   <body>
@@ -54,7 +54,7 @@
 								<li><a href="#"><i class="fa fa-gears"></i> Settings</a></li>
 								<li role="separator" class="divider"></li>
 								<% if current_user %> 
-								<li><a href="#" onclick="fbLogout();"><i class="fa fa-sign-out"></i> Logout</a></li>
+								<li><a href="#" id="logout" onclick="fbLogout();"><i class="fa fa-sign-out"></i> Logout</a></li>
 								<%end%>
 							</ul>
 						</li>
@@ -125,8 +125,9 @@
 		        <!-- /#page-content-wrapper -->
 		    </div>
 		    <!-- /#wrapper -->
-
-		    <!-- user panel script-->
-		    <script type="text/javascript" src="assets/user_panel.js"></script>
-  </body>
+		
+		<!-- user panel script-->
+	    <script type="text/javascript" src="assets/user_panel.js">
+	    </script>
+  	</body>
 </html>

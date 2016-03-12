@@ -32,6 +32,7 @@ function fbLogin() {
   });
 }
 
+// facebook logout 
 function fbLogout() {
   FB.getLoginStatus(function(response) {
         console.log(response);
