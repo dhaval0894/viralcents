@@ -1,16 +1,20 @@
 class UserPanelController < ApplicationController
-	#before_action :login_state, only: [:dashboard]
+	before_action :check_user, only: [:dashboard, :stories]
 	def dashboard
-		if current_user.nil?
-			redirect_to root_path
-	  	else
-	  		respond_to do |format|
-	      		format.html
-	      		format.js
-	  		end
-	  	end
+		respond_to do |format|
+      		format.html
+      		format.js
+  		end
 	end
 
 	def stories
+	end
+
+	private
+
+	def check_user
+		if current_user.nil?
+			redirect_to root_path
+		end
 	end
 end
