@@ -28,6 +28,9 @@ gem 'link_thumbnailer'
 #for twitter authentication
 gem 'omniauth-twitter', '~> 1.0.1'
 
+#admin-panel
+gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git"
+
 # sass for rails
 gem 'sass-rails'
 

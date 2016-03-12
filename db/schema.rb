@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160310125504) do
     t.string   "orig_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
   end
 
   create_table "twitter_users", force: :cascade do |t|
