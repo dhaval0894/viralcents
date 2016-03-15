@@ -15,7 +15,6 @@ ActiveAdmin.register Story do
 	permit_params :title, :original_url
 	form do |f|
     f.inputs "Story" do
-      f.input :title
       f.input :original_url
     end
     f.actions
