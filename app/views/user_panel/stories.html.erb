@@ -1,170 +1,203 @@
-<div class="row admin-row">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-search">Search:</label>
-                    <input type="text" class="form-control input-sm" id="pref-search" placeholder="Enter Keyword">
-                </div><!-- form group [search] -->
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-perpage">Category:</label>
-                    <select id="pref-perpage" class="form-control">
-                        <option value="6">Relationships</option>
-                        <option value="7">LIfe</option>
-                        <option value="8">Inspirational</option>
-                        <option value="9">Health & Well-being</option>
-                        <option selected="selected" value="10">Food</option>
-                    </select>                                
-                </div> <!-- form group [rows] -->
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-orderby">Order by:</label>
-                    <select id="pref-orderby" class="form-control">
-                        <option>Descending</option>
-                        <option value="ascending">Ascending</option>
-                    </select>                                
-                </div> <!-- form group [order by] --> 
-            </form>
+<div id="stories">    
+    <div class="row admin-row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="label-control" style="margin-right:0;" for="pref-search">Search:</label>
+                        <input type="text" class="form-control input-sm search" id="pref-search" placeholder="Enter Keyword">
+                    </div><!-- form group [search] -->
+                    <div class="form-group">
+                        <label class="label-control" style="margin-right:0;" for="filter-category">Category:</label>
+                        <select id="filter-category" name="category" class="form-control">
+                            <option selected="selected" value="">Select a Category</option>
+                            <option value="Relationships">Relationships</option>
+                            <option value="Life">Life</option>
+                            <option value="Inspirational">Inspirational</option>
+                            <option value="Health and Well-being">Health and Well-being</option>
+                            <option value="Food">Food</option>
+                        </select>                                
+                    </div> <!-- form group [Category] -->
+                    <div class="form-group">
+                        <label class="label-control" style="margin-right:0;" for="pref-orderby">Order by:</label>
+                        <select id="pref-orderby" class="form-control">
+                            <option>Descending</option>
+                            <option value="ascending">Ascending</option>
+                        </select>                                
+                    </div> <!-- form group [order by] --> 
+                </form>
+            </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="row admin-row">
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
+    <hr>
+    <div class="row admin-row list" >
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5 class="title">10 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>
+                    <h6 class="category hidden">Inspirational</h6>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text1' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li>
+                        <a href="#" class="fa-stack">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
             </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text1' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
         </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5 class="title">11 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>         
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text2' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text2' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5 class="title">12 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>         
+                    <h6 class="category hidden">Food</h6>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text3' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text3' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5 class="title">13 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>
+                    <h6 class="category hidden">Life</h6>         
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text4' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text4' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5>14 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>
+                    <h6 class="category hidden">Relationships</h6>                  
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text5' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text5' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                <div class="caption">
+                    <h5>15 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                    </h5>         
+                    <h6 class="category hidden">Health and Well-being</h6>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text6' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text6' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
+                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>   
+            </div>
+        </div>    
     </div>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text2' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text2' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text3' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text3' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text4' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text4' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text5' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text5' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                </h5>         
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text6' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text6' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>    
-</div>
+</div>    
+
+    <script type="text/javascript">
+        var options = {
+          valueNames: ['title','category','date']
+        };
+
+        var storyList = new List('stories', options);
+
+        $('#filter-category').change(function () {
+            var selection = this.value;
+            if (selection) {
+                storyList.filter(function(item) {
+                    return (item.values().category == selection);
+                });
+            } else {
+                storyList.filter();
+            }
+        });
+    </script>    
