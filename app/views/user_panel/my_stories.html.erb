@@ -83,7 +83,7 @@
         <div class="thumbnail">
             <img class="img-responsive" src="http://placehold.it/600x300" alt="">
             <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                <h5 class="title">10 Things That Will Give Early 2000s Tweens Severe Flashbacks
                 </h5>         
             </div>
             <div class="input-group">
@@ -172,3 +172,21 @@
         </div>
     </div>    
 </div>
+<script type="text/javascript">
+    var options = {
+      valueNames: ['title','category','date']
+    };
+
+    var storyList = new List('stories', options);
+
+    $('#filter-category').change(function () {
+        var selection = this.value;
+        if (selection) {
+            storyList.filter(function(item) {
+                return (item.values().category == selection);
+            });
+        } else {
+            storyList.filter();
+        }
+    });
+</script>    

@@ -1,8 +1,14 @@
 class Story < ActiveRecord::Base
-	has_many :user, through: :user_story
+	has_many :users, through: :user_stories
+	has_many :user_stories
 
 	def link_thumbnail(url)
-	    link_data = LinkThumbnailer.generate(url)
-	    link_data.title
+		http = Net::HTTP.new("localhost", 3000)
+		http.read_timeout = 15000
+		begin
+	    	link_data = LinkThumbnailer.generate(url)
+	    	link_data
+		rescue Timeout::Error
+		end
   	end
 end

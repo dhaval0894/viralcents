@@ -5,6 +5,9 @@ gem 'rails', '4.2.3'
 # Use postgres as the database for Active Record
 gem 'pg'
 
+#admin-panel and authorize
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
 
 # Copy To Clipboard
 gem 'clipboard-rails'
@@ -30,9 +33,6 @@ gem 'listjs-rails'
 
 #for twitter authentication
 gem 'omniauth-twitter', '~> 1.0.1'
-
-#admin-panel
-gem "rails_admin", :git => "git://github.com/sferik/rails_admin.git"
 
 # sass for rails
 gem 'sass-rails'
