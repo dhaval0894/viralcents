@@ -6,7 +6,6 @@ $(document).ready(function() {
 	console.log(clip);
 
 	zopim_chat();
-	fbLogout();
 });
 
 // chat box
@@ -36,4 +35,34 @@ $("#menu-toggle").click(function(e) {
 	e.preventDefault();
 	$("#wrapper").toggleClass("toggled");
 });
+
+
+function share_to_fb(story_url, s_id) {
+    FB.ui(
+     {
+      display: 'popup',
+      method: 'share',
+      href: story_url,
+      action_properties: JSON.stringify({
+      object:'http://timesofindia.indiatimes.com/world/china/The-next-world-war-will-be-in-the-South-China-Sea-Ask-Thucydides-/articleshow/51066126.cms',
+      })
+    }, function(response){
+      var id_obj = response;
+      var fb_post_id= id_obj.post_id;
+      console.log(fb_post_id);
+      if (fb_post_id !== null){
+        var res = "#fb_" + s_id; 
+        $(res).addClass('btn disabled');
+        console.log('done');
+        $.ajax({
+          type: "POST",
+          url: "/user_stories/addStory_id",
+          data:  JSON.stringify({ 'id' : s_id, 'post_id' : fb_post_id}), // the JSON data, as an object or string
+          contentType: "application/json",
+          dataType: "json",
+        });
+      }
+      else{alert("failure");}
+    });
+  };
 

@@ -9,7 +9,6 @@ Rails.application.routes.draw do
 
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
-  
   get 'auth/failure' => redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
@@ -17,6 +16,9 @@ Rails.application.routes.draw do
   get 'dashboard' => 'user_panel#dashboard'
   get 'my_stories' => 'user_panel#my_stories'
   get 'stories' => 'user_panel#stories'
+
+  #store facebook post id
+  post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'
 
 
 end

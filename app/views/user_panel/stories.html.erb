@@ -56,9 +56,21 @@
                 <input type="text" id='fe_text1' class="form-control" value="URL Text">
             </div>                                
             <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+
+                    <li>
+                    <% i=0 %>
+                    <%@us_story.each do |usr_str|%>
+                        <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
+                            <% i=1 %>      
+                        <%end%>
+                    <%end%> 
+                    <% if i==1 %>
+                        <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "btn disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    <%else%>
+                        <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
+                    <%end%>      
+                    </li>
+                    <li><a href="#" class="btn disabled"><i class="fa fa-2x fa-twitter-square"></i></a>
                 </li>
             </ul>
         </div>
