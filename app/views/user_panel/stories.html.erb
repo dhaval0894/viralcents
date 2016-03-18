@@ -49,15 +49,15 @@
                         </div>
                     <% end %>
 
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-                </span>
-                <input type="text" id='fe_text1' class="form-control" value="URL Text">
-            </div>                                
-            <ul class="list-inline">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <input type="text" id='fe_text1' class="form-control" value="URL Text">
+                </div>                                
+                <ul class="list-inline">
                     <li>
                         <a href="#" class="fa-stack" id="rate" data-toggle="popover" data-trigger="hover">
                           <i class="fa fa-circle fa-stack-2x"></i>
@@ -65,21 +65,22 @@
                         </a>
                     </li>
                     <li>
-                    <% i=0 %>
-                    <%@us_story.each do |usr_str|%>
-                        <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
-                            <% i=1 %>      
-                        <%end%>
-                    <%end%> 
-                    <% if i==1 %>
-                        <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "btn disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
-                    <%else%>
-                        <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
-                    <%end%>      
+                        <% i=0 %>
+                        <%@us_story.each do |usr_str|%>
+                            <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
+                                <% i=1 %>      
+                            <%end%>
+                        <%end%> 
+                        <% if i==1 %>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "btn disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <%else%>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
+                        <%end%> 
                     </li>
-                    <li><a href="#" class="btn disabled"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
+                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <%end%>
     </div>
