@@ -32,7 +32,7 @@
     <hr>
     <div class="row admin-row list">
         <% @stories.each do |story|%>
-        <div class="col-md-4 text-center">
+        <div class="col-lg-4 col-md-4 col-sm-6 text-center">
             <div class="thumbnail">
                     <%if !story.image_url.nil?%>
                         <img class="img-responsive" style="width:300px; height:150px;" src="<%= story.image_url %>" alt="">

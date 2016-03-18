@@ -145,6 +145,12 @@
     .popover-content {
         padding: 4px 10px;
     }
+    #sidebar-wrapper{
+        margin-top:-10px;
+    }
+    #page-content-wrapper {
+        margin-top: 130px;
+    }
 }
 @media (max-width: 480px){
     .popover {
@@ -159,7 +165,23 @@
         padding: 4px 6px;
         font-size:12px;
     }
+    #sidebar-wrapper{
+        margin-top:-10px;
+    }
+    #page-content-wrapper {
+        margin-top: 130px;
+    }
 }   
+
+/* sidebar margin */
+@media (max-width: 314px ){
+    #sidebar-wrapper{
+        margin-top:0;
+    }
+    #page-content-wrapper {
+        margin-top: 170px;
+    }
+}
 
 
 @media (min-width: 768px) {
