@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
 
 	def link_thumbnail(url)
 		http = Net::HTTP.new("localhost", 3000)
-		http.read_timeout = 500
+		http.read_timeout = 15000
 		begin
 	    	link_data = LinkThumbnailer.generate(url)
 	    	link_data

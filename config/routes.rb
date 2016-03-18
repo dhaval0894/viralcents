@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
-  get 'my_stories' => 'user_panel#my_stories'
-  get 'stories' => 'user_panel#stories'
-  get 'tweet' => 'user_panel#post_to_twitter'
-  get 'post' => 'user_panel#tweet'
 
+  get 'my_stories' => 'user_panel#my_stories'
+s
+
+  get 'settings' => 'user_panel#settings'
+
+  get 'stories' => 'user_panel#stories'
 
 end

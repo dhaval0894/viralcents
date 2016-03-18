@@ -3,7 +3,9 @@
     <div class="row text social-row">
         <div class="col-xs-offset-2 col-xs-4">
             <% if twitter_user %>
-                <strong><%= twitter_user.twitter_name %></strong>!
+                <a class="btn btn-block btn-social btn-twitter">
+                    <span class="fa fa-twitter"></span> Hello, <%= twitter_user.twitter_name %>
+                </a>
             <% else %>    
                 <a class="btn btn-block btn-social btn-twitter" id="sign_in" href="/auth/twitter">
                     <span class="fa fa-twitter"></span> Connect with Twitter
@@ -18,7 +20,7 @@
     </div>
     <!-- Statistics -->
     <div class="row stats">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
@@ -35,7 +37,7 @@
                 </div>               
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
@@ -52,7 +54,7 @@
                 </div>               
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">
@@ -69,7 +71,7 @@
                 </div>               
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
             <div class="panel panel-green">
                 <div class="panel-heading">
                     <div class="row">

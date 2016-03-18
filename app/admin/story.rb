@@ -12,10 +12,10 @@ ActiveAdmin.register Story do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-	permit_params :title, :original_url
+	permit_params :title, :orig_url
 	form do |f|
     f.inputs "Story" do
-      f.input :original_url
+      f.input :orig_url
     end
     f.actions
   end
