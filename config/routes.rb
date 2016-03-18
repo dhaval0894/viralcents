@@ -17,10 +17,19 @@ Rails.application.routes.draw do
   get 'dashboard' => 'user_panel#dashboard'
 
   get 'my_stories' => 'user_panel#my_stories'
-s
+  get 'post' => 'user_panel#tweet'
+  get 'stories' => 'user_panel#stories'
+  get 'tweet' => 'user_panel#post_to_twitter'
+  
 
   get 'settings' => 'user_panel#settings'
 
   get 'stories' => 'user_panel#stories'
+
+  get 'bitly' => 'user_panel#bitly'
+   
+  
+
+
 
 end

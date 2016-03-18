@@ -18,19 +18,26 @@ class UserPanelController < ApplicationController
 	end
 
 	def post_to_twitter
-		# raise :test
-  #   	@tid=params[:latest_status_id]
-    #@tweet_info=($client.status(@tid))
-    
-    # @fav=@tweet_info.favourites
+		
   end
 
-  def tweet()
+  def tweet
+		
 		@tweet=twitter_user.twitter.update(params[:p])
 		#raise :test
 		$tid=@tweet.id
-		
+		redirect_to dashboard_path
 	end
+
+	def bitly
+		if !params[:sid].blank?
+			@story=Story.find(params[:sid])
+			@story_url=@story.orig_url
+			# raise :test
+   #    		client = Bitly.client
+   #    		@url = client.shorten(params[:url])
+    end
+  end
 	private
 
 	def check_user

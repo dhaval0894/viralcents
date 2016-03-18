@@ -6,7 +6,7 @@ $(document).ready(function() {
 	console.log(clip);
 
 	zopim_chat();
-	fbLogout();
+	
 });
 
 // chat box

@@ -51,7 +51,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' title='Click here to copy to clipboard.'>
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
                         <i class="fa fa-copy"></i>
                     </button>
                     </span>
@@ -66,7 +66,7 @@
                     </li>
                     <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                     </li>
-                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    <li><a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet"><i class="fa fa-2x fa-twitter-square"></i></a>
                     </li>
                 </ul>
             </div>
@@ -94,6 +94,18 @@
         <span class="fa fa-twitter"></span>Converstion - 3&#8377;   
     </a>
 </div>
+
+<script>
+    function url_generate(story_id){
+var story_id = story_id
+
+alert(story_id);
+window.location.href = "bitly?sid=" + story_id;
+
+}
+</script>
+
+
 <script type="text/javascript">
     var options = {
       valueNames: ['title','category','date']
