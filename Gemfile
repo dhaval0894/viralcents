@@ -26,7 +26,10 @@ gem 'koala'
 gem 'omniauth-facebook'
 
 #extract from link
-gem 'link_thumbnailer'	
+gem 'link_thumbnailer'
+
+# Search, sort and filter
+gem 'listjs-rails'	
 
 #for twitter authentication
 gem 'omniauth-twitter', '~> 1.0.1'

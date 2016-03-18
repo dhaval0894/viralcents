@@ -14,11 +14,15 @@ Rails.application.routes.draw do
   
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
+
   get 'my_stories' => 'user_panel#my_stories'
-  get 'stories' => 'user_panel#stories'
 
   #store facebook post id
   post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'
+
+  get 'settings' => 'user_panel#settings'
+
+  get 'stories' => 'user_panel#stories'
 
 
 end

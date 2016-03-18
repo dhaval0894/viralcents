@@ -51,7 +51,7 @@
 }
 #sidebar-wrapper {
     z-index: 1000;
-    position: absolute;
+    position: fixed;
     left: 250px;
     width: 0;
     height: 100%;
@@ -113,6 +113,76 @@
 #menu-toggle{
 	width:50px;
 }
+
+/* rate icon position in post */
+.fa-stack{
+    vertical-align: bottom;
+}
+
+/* popover responsiveness */
+@media (min-width: 768px) and (max-width: 979px) {
+    .popover {
+        width:200px;
+    }
+    .popover-title {
+        padding: 4px 10px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .popover-content {
+        padding: 4px 10px;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px){
+    .popover {
+        width:180px;
+    }
+    .popover-title {
+        padding: 4px 10px;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .popover-content {
+        padding: 4px 10px;
+    }
+    #sidebar-wrapper{
+        margin-top:-10px;
+    }
+    #page-content-wrapper {
+        margin-top: 130px;
+    }
+}
+@media (max-width: 480px){
+    .popover {
+        width:170px;
+    }
+    .popover-title {
+        padding: 4px 6px;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .popover-content {
+        padding: 4px 6px;
+        font-size:12px;
+    }
+    #sidebar-wrapper{
+        margin-top:-10px;
+    }
+    #page-content-wrapper {
+        margin-top: 130px;
+    }
+}   
+
+/* sidebar margin */
+@media (max-width: 314px ){
+    #sidebar-wrapper{
+        margin-top:0;
+    }
+    #page-content-wrapper {
+        margin-top: 170px;
+    }
+}
+
 
 @media (min-width: 768px) {
     #wrapper {

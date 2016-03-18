@@ -7,13 +7,14 @@
                     <input type="text" class="form-control input-sm" id="pref-search" placeholder="Enter Keyword">
                 </div><!-- form group [search] -->
                 <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-perpage">Category:</label>
-                    <select id="pref-perpage" class="form-control">
-                        <option value="6">Relationships</option>
-                        <option value="7">LIfe</option>
-                        <option value="8">Inspirational</option>
-                        <option value="9">Health & Well-being</option>
-                        <option selected="selected" value="10">Food</option>
+                    <label class="label-control" style="margin-right:0;" for="filter-category">Category:</label>
+                    <select id="filter-category" name="category" class="form-control">
+                        <option selected="selected" value="">Select a Categroy</option>
+                        <option value="Relationships">Relationships</option>
+                        <option value="Life">Life</option>
+                        <option value="Inspirational">Inspirational</option>
+                        <option value="Health & Well-being">Health & Well-being</option>
+                        <option value="Food">Food</option>
                     </select>                                
                 </div> <!-- form group [rows] -->
                 <div class="form-group">
@@ -82,7 +83,7 @@
         <div class="thumbnail">
             <img class="img-responsive" src="http://placehold.it/600x300" alt="">
             <div class="caption">
-                <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
+                <h5 class="title">10 Things That Will Give Early 2000s Tweens Severe Flashbacks
                 </h5>         
             </div>
             <div class="input-group">
@@ -171,3 +172,21 @@
         </div>
     </div>    
 </div>
+<script type="text/javascript">
+    var options = {
+      valueNames: ['title','category','date']
+    };
+
+    var storyList = new List('stories', options);
+
+    $('#filter-category').change(function () {
+        var selection = this.value;
+        if (selection) {
+            storyList.filter(function(item) {
+                return (item.values().category == selection);
+            });
+        } else {
+            storyList.filter();
+        }
+    });
+</script>    

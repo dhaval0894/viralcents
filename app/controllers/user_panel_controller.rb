@@ -9,7 +9,7 @@ class UserPanelController < ApplicationController
 
 	def stories
 		@stories = Story.all
-		@stories.each do |story|
+		@stories.each do |story|	
 			link_data = story.link_thumbnail(story.orig_url)
 			if link_data
 				story.update(title: link_data.title, image_url: link_data.images.first.src.to_s)
