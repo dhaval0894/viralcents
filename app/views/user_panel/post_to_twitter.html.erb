@@ -1,0 +1,15 @@
+<%=  text_area_tag 'query', 'Enter your search query here', :id => "txt", size: "60x5" %>
+
+ <button onclick="run()">Click me</button> 
+
+ <script>
+    function run(){
+var txt = document.getElementById('txt').value;
+
+alert(txt);
+window.location.href = "post?p=" + txt;
+self.close();
+}
+
+
+    </script>

@@ -1,5 +1,5 @@
 class UserPanelController < ApplicationController
-	before_action :check_user, only: [:dashboard, :stories]
+	before_action :check_user
 	def dashboard
 		respond_to do |format|
       		format.html
@@ -17,6 +17,20 @@ class UserPanelController < ApplicationController
 		end
 	end
 
+	def post_to_twitter
+		# raise :test
+  #   	@tid=params[:latest_status_id]
+    #@tweet_info=($client.status(@tid))
+    
+    # @fav=@tweet_info.favourites
+  end
+
+  def tweet()
+		@tweet=twitter_user.twitter.update(params[:p])
+		#raise :test
+		$tid=@tweet.id
+		
+	end
 	private
 
 	def check_user
@@ -24,4 +38,6 @@ class UserPanelController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+	
 end
