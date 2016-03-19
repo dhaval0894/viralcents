@@ -1,5 +1,6 @@
 class UserPanelController < ApplicationController
 	before_action :check_user
+	before_action :load_story, only: [:dashboard, :stories, :user_stories]
 	def dashboard
 		respond_to do |format|
       		format.html
@@ -8,13 +9,7 @@ class UserPanelController < ApplicationController
 	end
 
 	def stories
-		@stories = Story.all
-		@stories.each do |story|	
-			link_data = story.link_thumbnail(story.orig_url)
-			if link_data
-				story.update(title: link_data.title, image_url: link_data.images.first.src.to_s)
-			end
-		end
+		
 		@us_story = UserStory.where(user_id: current_user.id)
 	end
 
@@ -45,6 +40,18 @@ class UserPanelController < ApplicationController
 	def check_user
 		if current_user.nil?
 			redirect_to root_path
+		end
+	end
+
+	def load_story
+		@stories = Story.all
+		@stories.each do |story|	
+			if story.image_url.nil? and story.title.nil?
+				link_data = story.link_thumbnail(story.orig_url)
+				if link_data
+					story.update(title: link_data.title, image_url: link_data.images.first.src.to_s)
+				end
+			end
 		end
 	end
 end
