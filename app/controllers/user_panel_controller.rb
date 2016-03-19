@@ -34,8 +34,8 @@ class UserPanelController < ApplicationController
 			@story=Story.find(params[:sid])
 			@story_url=@story.orig_url
 			# raise :test
-   #    		client = Bitly.client
-   #    		@url = client.shorten(params[:url])
+      		client = Bitly.client
+      		@url = client.shorten(@story_url)
     end
   end
 	private
