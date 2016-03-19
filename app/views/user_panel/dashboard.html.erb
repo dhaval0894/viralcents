@@ -98,13 +98,23 @@
             </div>
             <div class="panel panel-default col-lg-8 feature-stories">
                 <div class="panel-body">
+                    <% @stories[0,4].each do |story|%>
                     <div class="col-md-6 text-center">
                             <div class="thumbnail">
-                                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-                                <div class="caption">
-                                    <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                                    </h5>         
-                                </div>
+                                <%if !story.image_url.nil?%>
+                                    <img class="img-responsive" style="width:300px; height:150px;" src="<%= story.image_url %>" alt="">
+                                <%else%>
+                                    <img class="img-responsive" src="http://placehold.it/600x300" alt="">
+                                <% end %>
+                                <%if !story.title.nil?%>
+                                    <div class="caption">
+                                        <h5 class="title"><%= story.title %></h5>         
+                                    </div>
+                                <% else %>    
+                                    <div class="caption">
+                                        <h5>Unable to fetch</h5>         
+                                    </div>
+                                <% end %>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' id='d_clip_button' title='Click here to copy to clipboard.'>
@@ -121,75 +131,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-6 text-center">
-                            <div class="thumbnail">
-                                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-                                <div class="caption">
-                                    <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                                    </h5>         
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text2' title='Click here to copy to clipboard.'>
-                                        <i class="fa fa-copy"></i>
-                                    </button>
-                                    </span>
-                                    <input type="text" id='fe_text2' class="form-control" value="URL Text">
-                                </div>                                
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <div class="thumbnail">
-                                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-                                <div class="caption">
-                                    <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                                    </h5>         
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text3' title='Click here to copy to clipboard.'>
-                                        <i class="fa fa-copy"></i>
-                                    </button>
-                                    </span>
-                                    <input type="text" id='fe_text3' class="form-control" value="URL Text">
-                                </div>                                
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <div class="thumbnail">
-                                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-                                <div class="caption">
-                                    <h5>10 Things That Will Give Early 2000s Tweens Severe Flashbacks
-                                    </h5>         
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text4' title='Click here to copy to clipboard.'>
-                                        <i class="fa fa-copy"></i>
-                                    </button>
-                                    </span>
-                                    <input type="text" id='fe_text4' class="form-control" value="URL Text">
-                                </div>                                
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <%end%>
                 </div>    
             </div>
             <div class="col-md-4">
