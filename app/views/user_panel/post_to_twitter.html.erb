@@ -1,6 +1,15 @@
-<%=  text_area_tag 'query', 'Enter your search query here', :id => "txt", size: "60x5" %>
-
- <button onclick="run()">Click me</button> 
+<html>
+<head>
+	<title>Post to twitter</title>
+</head>
+<body>
+<center> <h2>Compose new Tweet</h2></center>
+<hr>
+<div style="background-color:#F0F8FF ;height:300px;">
+	<br><br>
+	<%=  text_area_tag 'query', 'Enter your search query here', :id => "txt", size: "66x6" %>
+</div>
+ <button onclick="run()"><img src="assests/tweet.png"</button> 
 
  <script>
     function run(){
@@ -13,3 +22,5 @@ self.close();
 
 
     </script>
+</body>
+</html
