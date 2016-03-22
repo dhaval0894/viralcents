@@ -1,6 +1,6 @@
 class Story < ActiveRecord::Base
 	has_many :users, through: :user_stories
-	has_many :user_stories
+	has_many :user_stories, dependent: :destroy
 
 	def link_thumbnail(url)
 		http = Net::HTTP.new("localhost", 3000)

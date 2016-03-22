@@ -17,3 +17,4 @@
 //= require list
 //= require clipboard
 //= require_tree ./mandatory
+

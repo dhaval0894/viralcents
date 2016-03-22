@@ -41,7 +41,7 @@
                     <% end %>
                     <%if !story.title.nil?%>
                         <div class="caption">
-                            <h5 class="title"><%= story.title %></h5>         
+                            <h5 class="title strt"><%= story.title %></h5>         
                         </div>
                     <% else %>    
                         <div class="caption">
@@ -64,7 +64,18 @@
                           <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
                         </a>
                     </li>
-                    <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    <li>
+                        <% i=0 %>
+                        <%@us_story.each do |usr_str|%>
+                            <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
+                                <% i=1 %>      
+                            <%end%>
+                        <%end%> 
+                        <% if i==1 %>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <%else%>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
+                        <%end%> 
                     </li>
                     <li><a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet"><i class="fa fa-2x fa-twitter-square"></i></a>
                     </li>
@@ -130,6 +141,16 @@ window.location.href = "bitly?sid=" + story_id;
                 content: function() {
                   return $('#popover_content_wrapper').html();
                 }
-        });   
+        }); 
+        $("h5.strt").text(function(index, currentText) {
+            for(var i=0;i<currentText.length;i++){
+                if(i>80){
+                    if(currentText.charAt(i)==' '){
+                        var excerpt=currentText.substr(0,i);
+                        return excerpt+='..';
+                    }
+                }
+            }
+        });  
     });
 </script>    

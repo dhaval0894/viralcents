@@ -27,6 +27,7 @@ function fbLogin() {
   FB.login(function(response) {
     console.log(response);
     if (response.authResponse) {
+      console.log("creating user session");
       window.location = '/auth/facebook/callback'
     }
   });
@@ -37,6 +38,8 @@ function fbLogout() {
   FB.getLoginStatus(function(response) {
         console.log(response);
         if (response.authResponse) {
+          console.log("signing out")
+          console.log(response.authResponse)
           FB.logout();
           window.location = '/signout'
         }
