@@ -9,6 +9,9 @@ gem 'pg'
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
+# Bootstrap For rails
+gem 'bootstrap-sass', '~> 3.3.6'
+
 # Copy To Clipboard
 gem 'clipboard-rails'
 
@@ -42,9 +45,6 @@ gem 'turbolinks'
 
 #twitter access
 gem 'twitter', '~> 5.3.1'
-
-# Twitter Bootstrap For rails
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
