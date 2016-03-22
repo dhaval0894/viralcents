@@ -5,9 +5,9 @@
 <body>
 <center> <h2>Compose new Tweet</h2></center>
 <hr>
-<div style="background-color:#F0F8FF ;height:300px;">
+<div style="background-color:lightblue ;height:300px;">
 	<br><br>
-	<%=  text_area_tag 'query', 'Enter your search query here', :id => "txt", size: "66x6" %>
+	<%=  text_area_tag 'query',:placeholder =>"Enter your search query here", :id => "txt", size: "56x6" %>
 </div>
  <button onclick="run()"><img src="assests/tweet.png"</button> 
 

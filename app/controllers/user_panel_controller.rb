@@ -25,10 +25,14 @@ class UserPanelController < ApplicationController
   end
 
   def tweet
-		
+		@user_id=current_user.id
+
 		@tweet=twitter_user.twitter.update(params[:p])
 		#raise :test
 		$tid=@tweet.id
+		@user_tweet=UserStory.where("user_id = ? AND story_id = ?",@user_id,params[:sid] )
+		@user_tweet.tweet_id=$tid
+
 		redirect_to dashboard_path
 	end
 
@@ -46,8 +50,21 @@ class UserPanelController < ApplicationController
 			# raise :test
       		client = Bitly.client
       		@url = client.shorten(@story_url)
+      		@user_story=UserStory.new
+      		#raise :test
+      		@user_story.user_id=current_user.id
+      		@user_story.story_id =params[:sid]
+      		@user_story.short_url=@url.short_url
+      		@user_story.save
+
     end
   end
+  
+  	def new
+    @user_story = UserStory.new
+    respond_with(@user_story)
+  end
+  
 	private
 
 	def check_user
