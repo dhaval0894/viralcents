@@ -77,6 +77,11 @@ class UserPanelController < ApplicationController
 		
 
 	def user_stories
+		@my_story = UserStory.where(user_id: current_user.id)
+		@a_stories = []
+		@my_story.each do |ms|
+			@a_stories << Story.where(id: ms.story_id)
+		end
 	end
 
 	#adds fbshare_post id to UserStory
