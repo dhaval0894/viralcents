@@ -41,7 +41,7 @@
                     <% end %>
                     <%if !story.title.nil?%>
                         <div class="caption">
-                            <h5 class="title"><%= story.title %></h5>         
+                            <h5 class="title strt"><%= story.title %></h5>         
                         </div>
                     <% else %>    
                         <div class="caption">
@@ -72,7 +72,7 @@
                             <%end%>
                         <%end%> 
                         <% if i==1 %>
-                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "btn disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
                         <%else%>
                             <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
                         <%end%> 
@@ -129,6 +129,16 @@
                 content: function() {
                   return $('#popover_content_wrapper').html();
                 }
-        });   
+        }); 
+        $("h5.strt").text(function(index, currentText) {
+            for(var i=0;i<currentText.length;i++){
+                if(i>80){
+                    if(currentText.charAt(i)==' '){
+                        var excerpt=currentText.substr(0,i);
+                        return excerpt+='..';
+                    }
+                }
+            }
+        });  
     });
 </script>    

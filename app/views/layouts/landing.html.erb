@@ -23,13 +23,12 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/owl.theme.default.min.css">
-	<!-- Landing.css -->
-	<link rel="stylesheet" href="assets/landing.css">
+	<!-- Mandatory CSS -->
+	<%= stylesheet_link_tag 'application', media: 'all'%>
 
-	<%= stylesheet_link_tag    'application', media: 'all'%>
+	<!-- Custom Css -->
+	<%= stylesheet_link_tag 'landing_style', media: 'all'%>
+	
   	<%= javascript_include_tag 'application'%>
   	<%= csrf_meta_tags %>
 

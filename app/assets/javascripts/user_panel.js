@@ -37,11 +37,12 @@ function share_to_fb(story_url, s_id) {
       })
     }, function(response){
       var id_obj = response;
+      console.log(id_obj);
       var fb_post_id= id_obj.post_id;
       console.log(fb_post_id);
-      if (fb_post_id !== null){
+      if (fb_post_id != null){
         var res = "#fb_" + s_id; 
-        $(res).addClass('btn disabled');
+        $(res).addClass('disabled');
         console.log('done');
         $.ajax({
           type: "POST",
