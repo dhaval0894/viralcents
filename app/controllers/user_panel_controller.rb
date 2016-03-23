@@ -2,6 +2,7 @@ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
+	before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
 		respond_to do |format|
@@ -11,37 +12,35 @@ class UserPanelController < ApplicationController
 	end
 
 	def stories
-		@stories = Story.all
-		@stories.each do |story|	
-			link_data = story.link_thumbnail(story.orig_url)
-			if link_data
-				story.update(title: link_data.title, image_url: link_data.images.first.src.to_s)
-			end
-		end
+		@us_story = UserStory.where(user_id: current_user.id)
+
+
 	end
 		
 	
 
 	def post_to_twitter
+		
+		$sid=params[:id]
 		render :layout => false
 		
   end
 
   def tweet
 		@user_id=current_user.id
-
+		#raise :test
 		@tweet=twitter_user.twitter.update(params[:p])
 		#raise :test
 		$tid=@tweet.id
-		@user_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
+		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		
 		
-		if @u_story.nil?
-			@user_story = UserStory.new(tw_post_id: $tid, user_id: current_user.id, story_id: params[:sid])
+		if @user_story.nil?
+			@user_story = UserStory.new(tw_post_id: $tid, user_id: current_user.id,story_id: $sid)
 			@user_story.save	
 			@check = true		
-		elsif @u_story.fb_post_id.nil?
-			@user_story.update(tw_post_id: $tid, user_id: current_user.id, story_id: params[:sid])
+		elsif @user_story.fb_post_id.nil?
+			@user_story.update(tw_post_id: @tweet.id)
 			@check = true
 	    end
 
@@ -61,15 +60,16 @@ class UserPanelController < ApplicationController
 			@story_url=[@story.orig_url,'?', extra.to_query].join("")
 			# raise :test
       		client = Bitly.client
-      		@url = client.shorten(@story_url)
+      		$url = client.shorten(@story_url)
       		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
 	      		if @u_story.nil?
-		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],orig_url: @url.short_url)
+		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],short_url: @url.short_url)
 		      		#raise :test
-		      		@user_story.save
+		      		@u_story.save
 		      	end
 
     end
+
   end
   
   	
@@ -117,6 +117,12 @@ class UserPanelController < ApplicationController
 					story.update(title: link_data.title, image_url: link_data.images.first.src.to_s)
 				end
 			end
+		end
+	end
+
+	def check_twitter_user
+		if twitter_user.nil?
+			redirect_to "/auth/twitter"
 		end
 	end
 end

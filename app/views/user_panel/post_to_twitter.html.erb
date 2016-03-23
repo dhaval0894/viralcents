@@ -1,15 +1,18 @@
 <html>
 <head>
 	<title>Post to twitter</title>
+	
 </head>
 <body>
-<center> <h2>Compose new Tweet</h2></center>
+<center> <h2>Compose new Tweet</h2>
+	
 <hr>
-<div style="background-color:lightblue ;height:300px;">
+<div style="background-color:lightblue ;height:150px;">
 	<br><br>
-	<%=  text_area_tag 'query',:placeholder =>"Enter your search query here", :id => "txt", size: "56x6" %>
+	<%=  text_area_tag 'query', params[:url], :id => "txt", size: "60x6" %>
 </div>
- <button onclick="run()"><img src="assests/tweet.png"</button> 
+</center>
+ <a onclick="run()"><img src="assets/tweet.jpeg" style=" width:90px;height:50px"></a> 
 
  <script>
     function run(){
