@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20160316082725) do
     t.integer  "fb_likes"
     t.integer  "fb_shares"
     t.integer  "fb_comments"
-    t.integer  "retweets"
-    t.integer  "conversation"
     t.integer  "fav"
+    t.integer  "retweet"
+    t.integer  "conversation"
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",   null: false
