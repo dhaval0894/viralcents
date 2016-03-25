@@ -15,24 +15,14 @@ Rails.application.routes.draw do
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
 
+  get 'user_stories' => 'user_panel#user_stories'
   get 'post' => 'user_panel#tweet'
   get 'stories' => 'user_panel#stories'
   get 'tweet' => 'user_panel#post_to_twitter'
-  get 'my_stories' => 'user_panel#user_stories'
+  get 'settings' => 'user_panel#settings'
+  get 'referrals' => 'user_panel#referrals'
 
   #store facebook post id
   post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'
-
-  get 'settings' => 'user_panel#settings'
-
-  get 'stories' => 'user_panel#stories'
-
-
   get 'bitly' => 'user_panel#bitly'
-   
-  
-
-
-
-
 end

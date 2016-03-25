@@ -13,20 +13,14 @@ class UserPanelController < ApplicationController
 
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
-
-
 	end
-		
-	
 
 	def post_to_twitter
-		
 		$sid=params[:id]
 		render :layout => false
-		
-  end
+  	end
 
-  def tweet
+  	def tweet
 		@user_id=current_user.id
 		#raise :test
 		@tweet=twitter_user.twitter.update(params[:p])
@@ -54,7 +48,7 @@ class UserPanelController < ApplicationController
   			:utm_medium => 'SOCIAL',
   			:utm_term => current_user.uid
   
-}
+		}
 		if !params[:sid].blank?
 			@story=Story.find(params[:sid])
 			@story_url=[@story.orig_url,'?', extra.to_query].join("")
@@ -68,13 +62,9 @@ class UserPanelController < ApplicationController
 		      		@u_story.save
 		      	end
 
-    end
+    	end
 
-  end
-  
-  	
-		
-		
+  	end	
 
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
@@ -82,6 +72,9 @@ class UserPanelController < ApplicationController
 		@my_story.each do |ms|
 			@a_stories << Story.where(id: ms.story_id)
 		end
+	end
+
+	def referrals
 	end
 
 	#adds fbshare_post id to UserStory
