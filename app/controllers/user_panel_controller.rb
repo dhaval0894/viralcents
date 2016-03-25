@@ -5,10 +5,12 @@ class UserPanelController < ApplicationController
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
+		@us_story = UserStory.where(user_id: current_user.id)
 		respond_to do |format|
       		format.html
       		format.js
   		end
+
 	end
 
 	def stories
