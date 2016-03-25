@@ -60,13 +60,14 @@ class UserPanelController < ApplicationController
 			@story_url=[@story.orig_url,'?', extra.to_query].join("")
 			# raise :test
       		client = Bitly.client
-      		$url = client.shorten(@story_url)
+      		@url = client.shorten(@story_url)
       		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
 	      		if @u_story.nil?
 		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],short_url: @url.short_url)
 		      		#raise :test
 		      		@u_story.save
 		      	end
+		redirect_to story_path
 
     end
 
