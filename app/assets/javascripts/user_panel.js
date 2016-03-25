@@ -73,4 +73,14 @@ function generate_url(uid, root_p)
 }
 
 
+    function url_generate(story_id){
+var story_id = story_id
+
+alert(story_id);
+window.location.href = "bitly?sid=" + story_id;
+
+};
+
+
+
 

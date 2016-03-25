@@ -2,13 +2,15 @@ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
-	before_action :check_twitter_user ,only: [:post_to_twitter]
+	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
+		@us_story = UserStory.where(user_id: current_user.id)
 		respond_to do |format|
       		format.html
       		format.js
   		end
+
 	end
 
 	def stories
@@ -54,13 +56,14 @@ class UserPanelController < ApplicationController
 			@story_url=[@story.orig_url,'?', extra.to_query].join("")
 			# raise :test
       		client = Bitly.client
-      		$url = client.shorten(@story_url)
+      		@url = client.shorten(@story_url)
       		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
 	      		if @u_story.nil?
 		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],short_url: @url.short_url)
 		      		#raise :test
 		      		@u_story.save
 		      	end
+		redirect_to stories_path
 
     	end
 
@@ -118,9 +121,5 @@ class UserPanelController < ApplicationController
 		end
 	end
 
-	def check_twitter_user
-		if twitter_user.nil?
-			redirect_to "/auth/twitter"
-		end
-	end
+	
 end
