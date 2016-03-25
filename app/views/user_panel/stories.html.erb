@@ -51,9 +51,8 @@
                     
                     <%@us_story.each do |usr_str|%>
                             <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
-                            <%@u=usr_str.short_url%>
-                            <%else%>
-                            <%@u=''%>
+                            <% @u=usr_str.short_url%>
+                            
                             <%end%>
                     <%end%>
  
@@ -138,15 +137,7 @@
     </a>
 </div>
 
-<script>
-    function url_generate(story_id){
-var story_id = story_id
 
-alert(story_id);
-window.location.href = "bitly?sid=" + story_id;
-
-}
-</script>
 
 
 <script type="text/javascript">

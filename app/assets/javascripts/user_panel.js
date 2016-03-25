@@ -59,4 +59,14 @@ function share_to_fb(story_url, s_id) {
   };
 
 
+    function url_generate(story_id){
+var story_id = story_id
+
+alert(story_id);
+window.location.href = "bitly?sid=" + story_id;
+
+};
+
+
+
 

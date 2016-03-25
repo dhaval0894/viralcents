@@ -69,7 +69,7 @@ class UserPanelController < ApplicationController
 		      		#raise :test
 		      		@u_story.save
 		      	end
-		redirect_to story_path
+		redirect_to stories_path
 
     end
 

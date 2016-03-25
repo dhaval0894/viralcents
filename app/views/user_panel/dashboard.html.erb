@@ -119,8 +119,7 @@
                                     <%@us_story.each do |usr_str|%>
                             <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
                             <%@u=usr_str.short_url%>
-                            <%else%>
-                            <%@u=''%>
+                            
                             <%end%>
                     <%end%>
  
