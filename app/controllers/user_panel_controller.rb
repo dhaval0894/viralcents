@@ -2,7 +2,7 @@ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
-	before_action :check_twitter_user ,only: [:post_to_twitter]
+	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
 		respond_to do |format|
@@ -125,9 +125,5 @@ class UserPanelController < ApplicationController
 		end
 	end
 
-	def check_twitter_user
-		if twitter_user.nil?
-			redirect_to "/auth/twitter"
-		end
-	end
+	
 end
