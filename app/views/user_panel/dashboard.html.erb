@@ -115,9 +115,12 @@
                                         </div>
                                     <% end %>
                                     
-                                    <%@us_story.each do |usr_str|%>
+                                   <%k=0%>
+                    <%@us_story.each do |usr_str|%>
+                    
                             <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
-                            <%@u=usr_str.short_url%>
+                            <% @u=usr_str.short_url%>
+                            <%k=1%>
                             
                             <%end%>
                     <%end%>
@@ -129,22 +132,41 @@
                         <i class="fa fa-copy"></i>
                     </button>
                     </span>
-                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>'>
-                </div>                                      
-                                    <ul class="list-inline">
+                    <% if k==1%>
+                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>' readonly>
+                    <%else%>
+                    <input type="text" id='fe_text1' class="form-control" value='Url'>
+                    <% end%>
+                </div>                                
+                <ul class="list-inline">
                     <li>
                         <a href="#" class="fa-stack" id="rate" data-toggle="popover" data-trigger="hover">
                           <i class="fa fa-circle fa-stack-2x"></i>
                           <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
                         </a>
                     </li>
-                    <li>
-                        <% i=0 %>
+                    <% i=0 %><% j=0 %>
                         <%@us_story.each do |usr_str|%>
                             <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
                                 <% i=1 %>      
                             <%end%>
+                            <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
+                            <%j=1%>
+                            <%end%>
                         <%end%> 
+
+                        <% if not j==1 %>
+                        <li><a  href="javascript:UrlAlert(<%=story.id%>);"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <li><a  href="javascript:UrlAlert();"><i class="fa fa-2x fa-twitter-square"></i></a></li>
+                            <script type="text/javascript">
+                                function UrlAlert(story_id) {
+                                var answer = confirm ("First generate url!")
+                                
+                                
+                                }
+                            </script>
+                            <%else%>
+                            <li>
                         <% if i==1 %>
                             <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
                         <%else%>
@@ -174,6 +196,7 @@
                                 }
                             </script>
                             <%end%>
+                        <%end%>
                         <%end%>
                     </li>
                 </ul>
