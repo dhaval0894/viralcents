@@ -74,6 +74,9 @@ class UserPanelController < ApplicationController
 		@a_stories = []
 		@my_story.each do |ms|
 			@a_stories << Story.where(id: ms.story_id)
+			if !ms.fb_post_id.nil?
+				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
+			end
 		end
 	end
 
@@ -84,13 +87,8 @@ class UserPanelController < ApplicationController
 	#adds fbshare_post id to UserStory
 	def add_fbStory_id
 		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
-		if @u_story.nil?
-			@u_story = UserStory.new(fb_post_id: params[:post_id], user_id: current_user.id, story_id: params[:id])
-			@u_story.save	
-			@check = true		
-		elsif @u_story.fb_post_id.nil?
+		if @u_story.fb_post_id.nil?
 			@u_story.update(fb_post_id: params[:post_id], user_id: current_user.id, story_id: params[:id])
-			@check = true
 	    end
 	    respond_to do |format|
 	      format.json
