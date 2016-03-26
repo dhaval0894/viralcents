@@ -1,33 +1,4 @@
-<div class="row admin-row">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-search">Search:</label>
-                    <input type="text" class="form-control input-sm" id="pref-search" placeholder="Enter Keyword">
-                </div><!-- form group [search] -->
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="filter-category">Category:</label>
-                    <select id="filter-category" name="category" class="form-control">
-                        <option selected="selected" value="">Select a Categroy</option>
-                        <option value="Relationships">Relationships</option>
-                        <option value="Life">Life</option>
-                        <option value="Inspirational">Inspirational</option>
-                        <option value="Health & Well-being">Health & Well-being</option>
-                        <option value="Food">Food</option>
-                    </select>                                
-                </div> <!-- form group [rows] -->
-                <div class="form-group">
-                    <label class="label-control" style="margin-right:0;" for="pref-orderby">Order by:</label>
-                    <select id="pref-orderby" class="form-control">
-                        <option>Descending</option>
-                        <option value="ascending">Ascending</option>
-                    </select>                                
-                </div> <!-- form group [order by] --> 
-            </form>
-        </div>
-    </div>
-</div>
+<%= render 'searchbox' %>
 <hr>
 <div class="row admin-row">
     <div class="col-lg-12">
@@ -36,7 +7,6 @@
     <% @a_stories.each do |ms|%>
     <div class="col-md-4 text-center">
         <div class="thumbnail">
-            
             <%if !ms[0].image_url.nil?%>
                 <img class="img-responsive" style="width:300px; height:150px;" src="<%= ms[0].image_url %>" alt="">
             <%else%>
@@ -47,10 +17,10 @@
                     <h5 class="title"><%= ms[0].title %></h5>         
                 </div>
             <% else %>    
-               <div class="caption">
-                            <h5>Unable to fetch</h5>         
-                        </div>
-    <% end %>                 
+                <div class="caption">
+                    <h5>Unable to fetch</h5>         
+                </div>
+            <% end %>                 
                                          
             <ul class="list-inline">
                 <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
@@ -62,21 +32,4 @@
     </div>
     <% end %>    
 </div>
-<script type="text/javascript">
-    var options = {
-      valueNames: ['title','category','date']
-    };
-
-    var storyList = new List('stories', options);
-
-    $('#filter-category').change(function () {
-        var selection = this.value;
-        if (selection) {
-            storyList.filter(function(item) {
-                return (item.values().category == selection);
-            });
-        } else {
-            storyList.filter();
-        }
-    });
-</script>    
+    
