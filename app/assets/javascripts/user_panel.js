@@ -68,7 +68,7 @@ function generate_url(uid, root_p)
   var suffix = epicRandomString(5);
   uid = prefix + uid + suffix;
   g_url = root_p + "?ref=" + uid; 
-  $('div#g_url').text(g_url);
+  document.getElementById('g_url').value=g_url;
   $('#but').addClass('disabled');
 }
 
