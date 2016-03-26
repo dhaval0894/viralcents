@@ -35,7 +35,7 @@
         <div class="col-lg-4 col-md-4 col-sm-6 text-center">
             <div class="thumbnail">
                     <%if !story.image_url.nil?%>
-                        <img class="img-responsive" style="width:300px; height:150px;" src="<%= story.image_url %>-" alt="">
+                        <img class="img-responsive" style="width:300px; height:150px;" src="<%= story.image_url %>" alt="">
                     <%else%>
                         <img class="img-responsive" src="http://placehold.it/600x300" alt="">
                     <% end %>
@@ -60,9 +60,8 @@
  
                 <div class="input-group">
                     <span class="input-group-addon">
-
-                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
-                        <i class="fa fa-copy"></i>
+                        <button class='btn btn-primary btn-xs' onclick="url_generate(<%= story.id %>)">
+                        <i class="fa fa-link"></i>
                     </button>
                     </span>
                     <% if k==1%>
