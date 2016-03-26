@@ -66,7 +66,7 @@
                     </button>
                     </span>
                     <% if k==1%>
-                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>'>
+                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>' readonly>
                     <%else%>
                     <input type="text" id='fe_text1' class="form-control" value='Url'>
                     <% end%>
@@ -89,13 +89,13 @@
                         <%end%> 
 
                         <% if not j==1 %>
-                        <li><a  href="javascript:UrlAlert();"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <li><a  href="javascript:UrlAlert(<%=story.id%>);"><i class="fa fa-2x fa-facebook-square"></i></a>
                         <li><a  href="javascript:UrlAlert();"><i class="fa fa-2x fa-twitter-square"></i></a></li>
                             <script type="text/javascript">
-                                function UrlAlert() {
+                                function UrlAlert(story_id) {
                                 var answer = confirm ("First generate url!")
-                                if (answer)
-                                window.location="stories";
+                                
+                                
                                 }
                             </script>
                             <%else%>
