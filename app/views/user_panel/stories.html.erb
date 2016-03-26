@@ -48,22 +48,28 @@
                             <h5>Unable to fetch</h5>         
                         </div>
                     <% end %>
-                    
+                    <%@f = 0%>
                     <%@us_story.each do |usr_str|%>
-                            <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
-                            <% @u=usr_str.short_url%>
-                            
+                        
+                        <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
+                            <% @f= 1%>
+                                <% @u=usr_str.short_url%>                               
                             <%end%>
                     <%end%>
- 
-                <div class="input-group">
-                    <span class="input-group-addon">
+                    <div class="input-group">
+                        <span class="input-group-addon">
 
-                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
-                        <i class="fa fa-copy"></i>
-                    </button>
-                    </span>
-                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>'>
+                            <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
+                            <i class="fa fa-copy"></i>
+                        </button>
+                        </span>
+                    <%if @f = 1%>
+                        <input type="text" id='fe_text1' class="form-control" value='<%= @u %>'>
+                    <%else%>
+                        <input type="text" id='fe_text1' class="form-control" value='Generate url'>
+                    <% end -%>
+
+                    
                 </div>                                
                 <ul class="list-inline">
                     <li>
@@ -80,9 +86,9 @@
                             <%end%>
                         <%end%> 
                         <% if i==1 %>
-                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
                         <%else%>
-                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= story.orig_url %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
+                            <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
                         <%end%> 
                     </li>
                     <li>
@@ -94,7 +100,7 @@
                         <%end%>
                         <% if i==1 %>
 
-                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= story.orig_url %>"><i class="fa fa-2x fa-twitter-square"></i></a>
+                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-2x fa-twitter-square"></i></a>
                         <%else%>
                             <%if twitter_user %> 
                             <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-2x fa-twitter-square"></i></a>
@@ -109,6 +115,7 @@
                             </script>
                             <%end%>
                         <%end%>
+                        
                     </li>
                 </ul>
             </div>
@@ -167,7 +174,7 @@
         }); 
         $("h5.strt").text(function(index, currentText) {
             for(var i=0;i<currentText.length;i++){
-                if(i>80){
+                if(i>60){
                     if(currentText.charAt(i)==' '){
                         var excerpt=currentText.substr(0,i);
                         return excerpt+='..';
