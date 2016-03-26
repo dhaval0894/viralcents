@@ -118,6 +118,12 @@
 .fa-stack{
     vertical-align: bottom;
 }
+/* story caption responsiveness*/
+.caption{
+    height: 70px;
+    padding: 10px;
+    margin: 10px;
+}
 
 /* popover responsiveness */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -207,7 +213,7 @@
 }
 
 /* Disable anchor tag */
-a.disabled{cursor:not-allowed;pointer-events:none;opacity:.65;filter:alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none}
+button.disabled, a.disabled{cursor:not-allowed;pointer-events:none;opacity:.65;filter:alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none}
 
 /*dashboard styling*/
 .admin-row {
@@ -240,6 +246,11 @@ a.disabled{cursor:not-allowed;pointer-events:none;opacity:.65;filter:alpha(opaci
 .medium{
     font-size: 20px;
     font-weight: bold;
+}
+
+.btn-theme {
+    background-color: #352f44;
+    color: #fff;
 }
 
 .panel-theme {

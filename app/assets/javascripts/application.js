@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery.dotdotdot
 //= require bootstrap-sprockets
 //= require list
 //= require clipboard

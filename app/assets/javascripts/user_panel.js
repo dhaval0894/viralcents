@@ -7,6 +7,18 @@ $(document).ready(function() {
 
 	zopim_chat();
 
+  $('[data-toggle="popover"]').popover({
+      html : true,
+
+      content: function() {
+        return $('#popover_content_wrapper').html();
+      }
+  });
+  $(".caption").dotdotdot({
+          //  configuration goes here
+          wrap: 'letter'
+  });
+
 });
 
 // chat box
@@ -81,6 +93,29 @@ window.location.href = "bitly?sid=" + story_id;
 
 };
 
+
+var options = {
+  valueNames: ['title','category','date']
+};
+
+var storyList = new List('stories', options);
+
+$('#filter-category').change(function () {
+    var selection = this.value;
+    if (selection) {
+        storyList.filter(function(item) {
+            return (item.values().category == selection);
+        });
+    } else {
+        storyList.filter();
+    }
+});
+
+function AlertIt() {
+    var answer = confirm ("First connect with twitter!")
+    if (answer)
+    window.location="dashboard";
+}
 
 
 

@@ -21,6 +21,9 @@ gem 'clipboard-rails'
 # font-awesome web application icons for rails
 gem "font-awesome-rails"
 
+# Jquery plugin for text excerpt
+gem 'jquery-dotdotdot-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 

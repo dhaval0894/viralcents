@@ -78,6 +78,7 @@ class UserPanelController < ApplicationController
 	end
 
 	def referrals
+		
 	end
 
 	#adds fbshare_post id to UserStory
