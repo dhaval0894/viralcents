@@ -48,28 +48,27 @@
                             <h5>Unable to fetch</h5>         
                         </div>
                     <% end %>
-                    <%@f = 0%>
+
+                    <%k=0%>
                     <%@us_story.each do |usr_str|%>
-                        
-                        <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
-                            <% @f= 1%>
-                                <% @u=usr_str.short_url%>                               
+                    
+                            <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
+                            <% @u=usr_str.short_url%>
+                            <%k=1%>
                             <%end%>
                     <%end%>
                     <div class="input-group">
                         <span class="input-group-addon">
 
-                            <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
-                            <i class="fa fa-copy"></i>
-                        </button>
-                        </span>
-                    <%if @f = 1%>
-                        <input type="text" id='fe_text1' class="form-control" value='<%= @u %>'>
+                        <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#fe_text1' onclick="url_generate(<%= story.id %>)" title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                    </span>
+                    <% if k==1%>
+                    <input type="text" id='fe_text1' class="form-control" value='<%=@u%>' readonly>
                     <%else%>
-                        <input type="text" id='fe_text1' class="form-control" value='Generate url'>
-                    <% end -%>
-
-                    
+                    <input type="text" id='fe_text1' class="form-control" value='Url'>
+                    <% end%>
                 </div>                                
                 <ul class="list-inline">
                     <li>
@@ -78,13 +77,29 @@
                           <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
                         </a>
                     </li>
-                    <li>
-                        <% i=0 %>
+                    <% i=0 %><% j=0 %>
                         <%@us_story.each do |usr_str|%>
                             <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
                                 <% i=1 %>      
                             <%end%>
+                            <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
+                            <%j=1%>
+                            <%end%>
                         <%end%> 
+
+                        <% if not j==1 %>
+                        <li><a  href="javascript:UrlAlert(<%=story.id%>);"><i class="fa fa-2x fa-facebook-square"></i></a>
+                        <li><a  href="javascript:UrlAlert();"><i class="fa fa-2x fa-twitter-square"></i></a></li>
+                            <script type="text/javascript">
+                                function UrlAlert(story_id) {
+                                var answer = confirm ("First generate url!")
+                                
+                                
+                                }
+                            </script>
+                            <%else%>
+                    <li>
+                        
                         <% if i==1 %>
                             <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
                         <%else%>
@@ -92,12 +107,16 @@
                         <%end%> 
                     </li>
                     <li>
+
                     <% i=0 %>
                         <%@us_story.each do |usr_str|%>
                             <%if usr_str.story_id == story.id && !usr_str.tw_post_id.nil?%>
                                 <% i=1 %>      
                             <%end%>
+                            
                         <%end%>
+                        
+
                         <% if i==1 %>
 
                         <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-2x fa-twitter-square"></i></a>
@@ -115,7 +134,8 @@
                             </script>
                             <%end%>
                         <%end%>
-                        
+
+                        <%end%>
                     </li>
                 </ul>
             </div>

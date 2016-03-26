@@ -68,15 +68,15 @@ function generate_url(uid, root_p)
   var suffix = epicRandomString(5);
   uid = prefix + uid + suffix;
   g_url = root_p + "?ref=" + uid; 
-  $('div#g_url').text(g_url);
+  document.getElementById('g_url').value=g_url;
   $('#but').addClass('disabled');
 }
 
 
-    function url_generate(story_id){
+function url_generate(story_id){
 var story_id = story_id
 
-alert(story_id);
+//alert(story_id);
 window.location.href = "bitly?sid=" + story_id;
 
 };

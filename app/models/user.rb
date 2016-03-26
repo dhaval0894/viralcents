@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+	class User < ActiveRecord::Base
 	has_one :twitter_user
 	has_many :story, through: :user_stories
 	has_many :user_stories
