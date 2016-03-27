@@ -15,8 +15,7 @@ $(document).ready(function() {
       }
   });
   $(".caption").dotdotdot({
-          //  configuration goes here
-          wrap: 'letter'
+      wrap: 'letter'
   });
 
 });
@@ -115,12 +114,4 @@ $('#filter-category').change(function () {
         storyList.filter();
     }
 });
-
-function AlertIt() {
-    var answer = confirm ("First connect with twitter!")
-    if (answer)
-    window.location="dashboard";
-}
-
-
 
