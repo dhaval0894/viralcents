@@ -6,8 +6,6 @@
         <div class="col-md-offset-1 col-md-3">
         <%if current_user.referral_link.nil? %>
         	<button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
-        <%else%>
-            <button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm disabled">Generate Referral Link</button>
         <%end%>
         </div>
         <div class="input-group col-md-5">
@@ -22,5 +20,27 @@
                 <input type="text" id="g_url" class="form-control" value="<%= current_user.referral_link %>" readonly>
             <%end%>
         </div>
-</div>        
+</div>  
+<br><br>
+<table>
+    <thead>
+        <tr>    
+            <th colspan="5">Name</th>
+            <th colspan="5">Created at</th>
+            <th colspan="5">Amount credited</th> 
+
+        </tr>
+    </thead>
+    <tbody>
+        <%@all_users.each do |au|%>
+            <%if au.referrer == current_user.uid%>
+                <tr>
+                <td colspan="5"><%=au.name %></td>
+                <td colspan="5"><%=au.created_at.strftime("%d/%mobile/%Y")%></td>
+                <td>Rs 10</td>
+                </tr>
+            <%end%>
+        <%end%>
+</tbody>
+</table>      
 

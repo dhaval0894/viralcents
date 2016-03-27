@@ -81,13 +81,13 @@ class UserPanelController < ApplicationController
 	end
 
 	def referrals
+		@all_users = User.all
 	end
 
 	#adds referral link to user
 	def add_referral_link
-		@u = User.find(current_user.id)
-		if @u.referral_link.nil?
-			@u.update(referral_link: params[:r_link])
+		if current_user.referral_link.nil?
+			current_user.update(referral_link: params[:r_link])
 		end
 	end
 
