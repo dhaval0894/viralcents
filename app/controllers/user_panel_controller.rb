@@ -81,7 +81,14 @@ class UserPanelController < ApplicationController
 	end
 
 	def referrals
-		
+	end
+
+	#adds referral link to user
+	def add_referral_link
+		@u = User.find(current_user.id)
+		if @u.referral_link.nil?
+			@u.update(referral_link: params[:r_link])
+		end
 	end
 
 	#adds fbshare_post id to UserStory

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325111914) do
+ActiveRecord::Schema.define(version: 20160327075243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20160325111914) do
     t.integer  "fb_likes"
     t.integer  "fb_shares"
     t.integer  "fb_comments"
-    t.integer  "retweets"
-    t.integer  "conversation"
     t.integer  "fav"
+    t.integer  "retweet"
+    t.integer  "conversation"
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",   null: false
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20160325111914) do
     t.string   "notification_type"
     t.string   "email"
     t.string   "referrer"
+    t.string   "referral_link"
   end
 
   add_foreign_key "twitter_users", "users"

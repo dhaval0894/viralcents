@@ -4,7 +4,11 @@
         </div>
         <p>Share the referral link with your friends and get them signed up using this link to get free mobile recharge of worth &#8377;100!</p>
         <div class="col-md-offset-1 col-md-3">
-        	<button href="#" id = "but" onclick="generate_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
+        <%if current_user.referral_link.nil? %>
+        	<button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
+        <%else%>
+            <button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm disabled">Generate Referral Link</button>
+        <%end%>
         </div>
         <div class="input-group col-md-5">
             <span class="input-group-addon">
@@ -12,7 +16,11 @@
                 <i class="fa fa-copy"></i>
             </button>
             </span>
-            <input type="text" id="g_url" class="form-control">
+            <%if current_user.referral_link.nil?%>
+                <input type="text" id="g_url" class="form-control" readonly>
+            <%else%>
+                <input type="text" id="g_url" class="form-control" value="<%= current_user.referral_link %>" readonly>
+            <%end%>
         </div>
 </div>        
 

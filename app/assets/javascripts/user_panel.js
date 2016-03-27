@@ -51,13 +51,10 @@ function share_to_fb(story_url, s_id) {
       })
     }, function(response){
       var id_obj = response;
-      console.log(id_obj);
       var fb_post_id= id_obj.post_id;
-      console.log(fb_post_id);
       if (fb_post_id != null){
         var res = "#fb_" + s_id; 
         $(res).addClass('disabled');
-        console.log('done');
         $.ajax({
           type: "POST",
           url: "/user_stories/addStory_id",
@@ -74,7 +71,7 @@ function epicRandomString(b){
   for(var a=(Math.random()*eval("1e"+~~(50*Math.random()+50))).toString(36).split(""),c=3;c<a.length;c++)c==~~(Math.random()*c)+1&&a[c].match(/[a-z]/)&&(a[c]=a[c].toUpperCase());a=a.join("");a=a.substr(~~(Math.random()*~~(a.length/3)),~~(Math.random()*(a.length-~~(a.length/3*2)+1))+~~(a.length/3*2));if(24>b)return b?a.substr(a,b):a;a=a.substr(a,b);if(a.length==b)return a;for(;a.length<b;)a+=epicRandomString();return a.substr(0,b)
 };
 
-function generate_url(uid, root_p)
+function generate_ref_url(uid, root_p)
 {
   var prefix = epicRandomString(5);
   var suffix = epicRandomString(5);
@@ -82,6 +79,14 @@ function generate_url(uid, root_p)
   g_url = root_p + "?ref=" + uid; 
   document.getElementById('g_url').value=g_url;
   $('#but').addClass('disabled');
+  // window.location.href = "add_referral_link?r_link=" + g_url;
+  $.ajax({
+      type: "POST",
+      url: "add_referral_link",
+      data:  JSON.stringify({ 'r_link' : g_url}), // the JSON data, as an object or string
+      contentType: "application/json",
+      dataType: "json",
+  });
 }
 
 
