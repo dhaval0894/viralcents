@@ -72,8 +72,11 @@ class UserPanelController < ApplicationController
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
+		i=0
 		@my_story.each do |ms|
 			@a_stories << Story.where(id: ms.story_id)
+			@a_stories[i]<< ms.short_url
+			i+=1
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
