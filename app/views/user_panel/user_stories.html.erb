@@ -1,35 +1,10 @@
-<%= render 'searchbox' %>
-<hr>
-<div class="row admin-row">
-    <div class="col-lg-12">
-        <h2 class="page-header text-left">Shared Stories</h2>
-    </div>
-    <% @a_stories.each do |ms|%>
-    <div class="col-md-4 text-center">
-        <div class="thumbnail">
-            <%if !ms[0].image_url.nil?%>
-                <img class="img-responsive" style="width:300px; height:150px;" src="<%= ms[0].image_url %>" alt="">
-            <%else%>
-                <img class="img-responsive" src="http://placehold.it/600x300" alt="">
-            <% end %>
-            <%if !ms[0].title.nil?%>
-                <div class="caption">
-                    <h5 class="title"><%= ms[0].title %></h5>         
-                </div>
-            <% else %>    
-                <div class="caption">
-                    <h5>Unable to fetch</h5>         
-                </div>
-            <% end %>                 
-                                         
-            <ul class="list-inline">
-                <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <% end %>    
-</div>
-    
+<div id="stories">
+	<%= render 'searchbox' %>
+	<hr>
+	<div class="row admin-row list">
+	    <div class="col-lg-12">
+	        <h2 class="page-header text-left">Shared Stories</h2>
+	    </div>
+    	<%= render partial:'mystory'%>        
+	</div>
+</div>    
