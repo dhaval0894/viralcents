@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'tweet' => 'user_panel#post_to_twitter'
   get 'settings' => 'user_panel#settings'
   get 'referrals' => 'user_panel#referrals'
+  get 'transactions' => 'user_panel#wallet'
 
   #store facebook post id
   post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'

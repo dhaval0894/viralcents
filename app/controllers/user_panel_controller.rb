@@ -99,6 +99,29 @@ class UserPanelController < ApplicationController
 		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
 	end
 
+	def wallet
+		@u_story=UserStory.where(user_id: current_user)
+		@total=0.0
+
+		@u_story.each do |us|
+			@story=Story.find_by(id: us.story_id)
+			@click_amt=us.clicks*@story.click_amt
+			@like_amt=us.fb_likes*@story.like_amt
+			@share_amt=us.fb_shares*@story.share_amt
+			@comment_amt=us.fb_comments*@story.comment_amt
+			@fav_amt=us.fav*@story.fav_amt
+			@retweet_amt=us.retweets*@story.retweet_amt
+			@conv_amt=us.conversation*@story.conversation_amt
+			@total+=@click_amt+@like_amt+@share_amt+@comment_amt+@fav_amt+@retweet_amt+@conv_amt
+		end
+		@usr_wallet=Wallet.find_by(user_id: current_user)
+		if @usr_wallet.nil?
+			Wallet.new(user_id: current_user,balance: @total)
+		else
+			Wallet.update(balance: @total)
+		end
+	end
+
 	private
 
 	def check_user

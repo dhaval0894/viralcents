@@ -1,5 +1,6 @@
 	class User < ActiveRecord::Base
 	has_one :twitter_user
+	has_one :wallet
 	has_many :story, through: :user_stories
 	has_many :user_stories
 	def self.from_omniauth(auth)
