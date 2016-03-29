@@ -12,6 +12,8 @@ gem 'pg'
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 
+gem 'sendgrid-ruby'
+gem 'resque'
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'
 
