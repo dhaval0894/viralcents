@@ -1,3 +1,10 @@
+$(document).ready(function() {
+  // Facebook Login
+  $('#fb_login').click(function(){
+    fbLogin();  
+  });
+});  
+
 // Load the SDK asynchronously
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -33,17 +40,3 @@ function fbLogin() {
   });
 }
 
-// facebook logout 
-function fbLogout() {
-  FB.getLoginStatus(function(response) {
-        console.log(response);
-        if (response.authResponse) {
-          console.log("signing out")
-          console.log(response.authResponse)
-          FB.logout();
-          window.location = '/signout'
-        }
-    });
-}
-
-// Test user email:lisa_zbjykeq_test@tfbnw.net pass:testviral

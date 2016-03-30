@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # Landing page route
   root 'static_pages#index'
 
+  get 'gridmailer/index'
+  get 'gridmailer/themail'
+  get 'gridmailer/messaagehome'
+  get 'gridmailer/message'
+
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => redirect('/')

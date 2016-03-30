@@ -13,8 +13,13 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'cancancan'
 
+gem 'sendgrid-ruby'
+gem 'resque'
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'
+
+# Bootstrap alert, confirm box
+gem 'bootbox-rails', '~>0.4'
 
 # Copy To Clipboard
 gem 'clipboard-rails'
