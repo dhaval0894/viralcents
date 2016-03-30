@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   # Landing page route
   root 'static_pages#index'
 
+  get 'gridmailer/index'
+  get 'gridmailer/themail'
+  get 'gridmailer/messaagehome'
+  get 'gridmailer/message'
+
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => redirect('/')
@@ -14,7 +19,6 @@ Rails.application.routes.draw do
   
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
-
   get 'user_stories' => 'user_panel#user_stories'
   get 'post' => 'user_panel#tweet'
   get 'stories' => 'user_panel#stories'
@@ -26,4 +30,5 @@ Rails.application.routes.draw do
   #store facebook post id
   post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'
   get 'bitly' => 'user_panel#bitly'
+  post 'add_referral_link' => "user_panel#add_referral_link"
 end

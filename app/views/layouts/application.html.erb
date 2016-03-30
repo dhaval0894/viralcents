@@ -29,6 +29,7 @@
 	<%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
   	
   	<%= javascript_include_tag 'application' %>
+  	<%= javascript_include_tag 'user_panel' %>
   	<%= csrf_meta_tags %>
 	
 
@@ -38,6 +39,8 @@
 </head>
   <body>
   		<div id="fb-root"></div>
+
+  		<!-- navbar -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -58,71 +61,62 @@
 								<li><a href="/settings"><i class="fa fa-gears"></i> Settings</a></li>
 								<li role="separator" class="divider"></li>
 								<% if current_user %> 
-									<li><a href="#" onclick="fbLogout();"><i class="fa fa-sign-out"></i> Logout</a></li>
+									<li><a href="#" id="fb_logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 								<%end%>
 							</ul>
 						</li>
 					</ul>
 				</div><!-- /.navbar-col -->
 			</div><!-- /.container-fluid -->
-			</nav>
-		    <div id="wrapper">
-		        <!-- Sidebar -->
-		        <div id="sidebar-wrapper">
-		            <ul class="sidebar-nav">
-		                <li>
-		                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %>" ><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
-		                </li>
-		                <li>
-							<a href="javascript:;" class="<%= 'active' if current_page?(stories_path) %>" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
-	                        <ul id="demo" class="collapse">
-	                            <li>
-	                                <a href="/stories"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>
-	                            </li>
-	                            <li>
-	                                <a href="/user_stories"><i class="fa fa-history fa-fw"></i> My Stories</a>
-	                            </li>
-	                        </ul>
-		                </li>
-						<li>
-							<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-credit-card fa-fw"></i> Wallet <span class="caret"></span></a>
-							<ul id="demo1" class="collapse">
-									<li>
-											<a href="transactions"><i class="fa fa-rupee fa-fw"></i> Credits</a>
-									</li>
-									<li>
-											<a href="#"><i class="fa fa-tablet fa-fw"></i> Recharge</a>
-									</li>
-							</ul>
-		                </li>
-						<li>
-							<a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-users fa-fw"></i> Referrals <span class="caret"></span></a>
-	                        <ul id="demo2" class="collapse">
-	                            <li>
-	                                <a href="/referrals"><i class="fa fa-random fa-fw"></i> Invite</a>
-	                            </li>
-	                            <li>
-	                                <a href="#"><i class="fa fa-warning fa-fw"></i> Status</a>
-	                            </li>
-	                        </ul>
-		                </li>
-		                <li>
-		                    <a href="#"><i class="fa fa-question-circle fa-fw"></i>Need Help</a>
-		                </li>
-		            </ul>
-		        </div>
-		        <!-- /#sidebar-wrapper -->
+		</nav>
 
-		        <!-- Page Content -->
-		        <div id="page-content-wrapper">
-									<%= yield %>
-		        </div>
-		        <!-- /#page-content-wrapper -->
-		    </div>
-		    <!-- /#wrapper -->
-		
-		<!-- user panel script-->
-	    <script type="text/javascript" src="assets/user_panel.js">
-	    </script>
+		<!-- Wrapper -->
+	    <div id="wrapper">
+
+	        <!-- Sidebar -->
+	        <div id="sidebar-wrapper">
+	            <ul class="sidebar-nav">
+	                <li>
+	                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %>" ><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
+	                </li>
+	                <li>
+						<a href="javascript:;" class="<%= 'active' if current_page?(stories_path) %>" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="/stories"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>
+                            </li>
+                            <li>
+                                <a href="/user_stories"><i class="fa fa-history fa-fw"></i> My Stories</a>
+                            </li>
+                        </ul>
+	                </li>
+					<li>
+						<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-credit-card fa-fw"></i> Wallet <span class="caret"></span></a>
+						<ul id="demo1" class="collapse">
+								<li>
+										<a href="#"><i class="fa fa-rupee fa-fw"></i> Credits</a>
+								</li>
+								<li>
+										<a href="#"><i class="fa fa-tablet fa-fw"></i> Recharge</a>
+								</li>
+						</ul>
+	                </li>
+					<li>
+						<a href="/referrals"><i class="fa fa-random fa-fw"></i> Referrals</a>
+	                </li>
+	                <li>
+	                    <a href="#"><i class="fa fa-question-circle fa-fw"></i>Need Help</a>
+	                </li>
+	            </ul>
+        	</div>
+        	<!-- /#sidebar-wrapper -->
+
+	        <!-- Page Content -->
+	        <div id="page-content-wrapper">
+				<%= yield %>
+	        </div>
+	        <!-- /#page-content-wrapper -->
+	    </div>
+	    <!-- /#wrapper -->
   	</body>
 </html>

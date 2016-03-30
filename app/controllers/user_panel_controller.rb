@@ -67,14 +67,16 @@ class UserPanelController < ApplicationController
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
 
+		i=0
 		@my_story.each do |ms|
 			@a_stories << Story.where(id: ms.story_id)
+			@a_stories[i]<< ms.short_url
+			i+=1
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
 			if !ms.tw_post_id.nil?
 				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
-				byebug
 				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
 			end
 			if !ms.short_url.nil?
@@ -86,7 +88,14 @@ class UserPanelController < ApplicationController
 	end
 
 	def referrals
-		
+		@all_users = User.all
+	end
+
+	#adds referral link to user
+	def add_referral_link
+		if current_user.referral_link.nil?
+			current_user.update(referral_link: params[:r_link])
+		end
 	end
 
 	#adds fbshare_post id to UserStory

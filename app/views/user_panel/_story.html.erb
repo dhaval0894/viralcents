@@ -6,7 +6,7 @@
     <% end %>
     <%if !story.title.nil?%>
         <div class="caption">
-            <h5 class="title strt"><%= story.title %></h5>         
+            <h5 class="title"><%= story.title %></h5>         
         </div>
     <% else %>    
         <div class="caption">
@@ -22,14 +22,19 @@
             <%end%>
     <%end%>
     <div class="input-group">
-        <span class="input-group-addon">
-            <button class='btn btn-primary btn-xs' onclick="url_generate(<%= story.id %>)">
-            <i class="fa fa-link"></i>
-            </button>
-        </span>
         <% if k==1%>
-            <input type="text" id='fe_text1' class="form-control" value='<%=@u%>' readonly>
+            <span class="input-group-addon">
+                <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=story.id%>" title='Click here to copy to clipboard.'>
+                    <i class="fa fa-copy"></i>
+                </button>
+            </span>
+            <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
         <%else%>
+            <span class="input-group-addon">
+                <button class='btn btn-primary btn-xs' onclick="url_generate(<%= story.id %>)">
+                    <i class="fa fa-link"></i>
+                </button>
+            </span>
             <input type="text" id='fe_text1' class="form-control" value='Generate Url'>
         <% end%>
     </div>                                
@@ -51,14 +56,14 @@
         <%end%> 
 
         <% if not j==1 %>
-            <li><a  href="javascript:alert('Generate Url First')"><i class="fa fa-2x fa-facebook-square"></i></a>
-            <li><a  href="javascript:alert('Connect With Twitter First')"><i class="fa fa-2x fa-twitter-square"></i></a></li>
+            <li><a  href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook facebook_share"><i class="fa fa-facebook"> Share</i></a>
+            <li><a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
         <%else%>
             <li>
                 <% if i==1 %>
-                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "disabled"><i class="fa fa-2x fa-facebook-square"></i></a>
+                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
                 <%else%>
-                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");'><i class="fa fa-2x fa-facebook-square"></i></a> 
+                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a> 
                 <%end%> 
             </li>
             <li>
@@ -70,12 +75,12 @@
                 <%end%>
                 
                 <% if i==1 %>
-                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-2x fa-twitter-square"></i></a>
+                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                 <%else%>
                     <%if twitter_user %> 
-                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-2x fa-twitter-square"></i></a>
+                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     <% else %>
-                        <a  href="javascript:AlertIt();"><i class="fa fa-2x fa-twitter-square"></i></a>
+                        <a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     <%end%>
                 <%end%>
             </li>

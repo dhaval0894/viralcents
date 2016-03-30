@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery.dotdotdot
 //= require bootstrap-sprockets
+//= require bootbox
 //= require list
 //= require clipboard
 //= require_tree ./mandatory
