@@ -2,11 +2,9 @@ class MailSender
 
 	@queue = :mail_queue
 
-	def self.perform()
+	def self.perform(param)
 
-		
-		    require 'sendgrid-ruby'
-		    
+      
 		
 	end
 
