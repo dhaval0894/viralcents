@@ -1,12 +1,26 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+/* Function Calls */
 $(document).ready(function() {
-	// clipboard copy
-	var clip = new Clipboard('.my_clip_button');
-	console.log(clip);
 
-	zopim_chat();
+  // clipboard copy
+  var clip = new Clipboard('.my_clip_button');
 
+  // Facebook Alert Box
+  $('.facebook_share').click(function() {
+      bootbox.alert("Generate URL First");  
+  });
+
+  // Facebook Logout
+  $('#fb_logout').click(function(){
+    fbLogout();  
+  });
+
+  //menu-toggle
+  $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+
+  // Story rate popover
   $('[data-toggle="popover"]').popover({
       html : true,
 
@@ -14,31 +28,45 @@ $(document).ready(function() {
         return $('#popover_content_wrapper').html();
       }
   });
+
+  // Story title excerpt
   $(".caption").dotdotdot({
       wrap: 'letter'
   });
 
+  // Twitter Alert Box
+  $('.twitter_share').click(function() {
+      bootbox.alert("Connect with Twitter First");  
+  });
+
 });
+
+  
+/* Function Definition */
 
 // chat box
 function zopim_chat(){
-
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="//v2.zopim.com/?3kxTxB6zH9i31AZ0o3sfl0yiRkWHCToF";z.t=+new Date;$.
-type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-
+  window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+  d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+  _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+  $.src="//v2.zopim.com/?3kxTxB6zH9i31AZ0o3sfl0yiRkWHCToF";z.t=+new Date;$.
+  type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 }
 
-//menu-toggle
-$("#menu-toggle").click(function(e) {
-	e.preventDefault();
-	$("#wrapper").toggleClass("toggled");
-});
+// facebook logout 
+function fbLogout() {
+  FB.getLoginStatus(function(response) {
+        console.log(response);
+        if (response.authResponse) {
+          console.log("signing out")
+          console.log(response.authResponse)
+          FB.logout();
+          window.location = '/signout'
+        }
+    });
+}
 
-
-
+// Facebook Share
 function share_to_fb(story_url, s_id) {
     FB.ui(
      {
@@ -66,10 +94,13 @@ function share_to_fb(story_url, s_id) {
     });
   };
 
+
+// Generates Random string for Referral Url
 function epicRandomString(b){
   for(var a=(Math.random()*eval("1e"+~~(50*Math.random()+50))).toString(36).split(""),c=3;c<a.length;c++)c==~~(Math.random()*c)+1&&a[c].match(/[a-z]/)&&(a[c]=a[c].toUpperCase());a=a.join("");a=a.substr(~~(Math.random()*~~(a.length/3)),~~(Math.random()*(a.length-~~(a.length/3*2)+1))+~~(a.length/3*2));if(24>b)return b?a.substr(a,b):a;a=a.substr(a,b);if(a.length==b)return a;for(;a.length<b;)a+=epicRandomString();return a.substr(0,b)
 };
 
+// Generates Referral Url
 function generate_ref_url(uid, root_p)
 {
   var prefix = epicRandomString(5);
@@ -88,16 +119,7 @@ function generate_ref_url(uid, root_p)
   });
 }
 
-
-function url_generate(story_id){
-  var story_id = story_id
-
-  //alert(story_id);
-  window.location.href = "bitly?sid=" + story_id;
-
-};
-
-
+// Search and Filter for story-list.js
 var options = {
   valueNames: ['title','category','date']
 };
@@ -114,4 +136,14 @@ $('#filter-category').change(function () {
         storyList.filter();
     }
 });
+
+// Shortened Url for story
+function url_generate(story_id)
+{
+  var story_id = story_id
+
+  //alert(story_id);
+  window.location.href = "bitly?sid=" + story_id;
+
+};
 
