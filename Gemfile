@@ -11,6 +11,7 @@ gem 'pg'
 #admin-panel and authorize
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'cancancan'
 
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'

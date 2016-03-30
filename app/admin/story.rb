@@ -13,11 +13,22 @@ ActiveAdmin.register Story do
 #   permitted
 # end
 	permit_params :title, :orig_url
+
+	index do
+	  selectable_column
+	  id_column
+	  column :orig_url
+	  column :created_at
+	  column :updated_at
+	  column :current_user_id do
+	      current_admin_user.try(:id)
+	  end
+	end
 	form do |f|
-    f.inputs "Story" do
-      f.input :orig_url
-    end
-    f.actions
-  end
+	    f.inputs "Story" do
+	      f.input :orig_url
+	    end
+	    f.actions
+	end	  
 
 end
