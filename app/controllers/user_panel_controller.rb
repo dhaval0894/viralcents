@@ -6,6 +6,8 @@ class UserPanelController < ApplicationController
 
 	def dashboard
 		@us_story = UserStory.where(user_id: current_user.id)
+		@wallet_amt = Wallet.find_by(user_id: current_user.id)
+		@shared_story = UserStory.where(user_id: current_user.id).count
 		respond_to do |format|
       		format.html
       		format.js
@@ -45,18 +47,10 @@ class UserPanelController < ApplicationController
 
 	def bitly
 
-		extra = {
-			:utm_source => 'NOTSET',
-  			:utm_medium => 'SOCIAL',
-  			:utm_term => current_user.uid
-  
-		}
+		
 		if !params[:sid].blank?
-			@story=Story.find(params[:sid])
-			@story_url=[@story.orig_url,'?', extra.to_query].join("")
-			# raise :test
-      		client = Bitly.client
-      		@url = client.shorten(@story_url)
+			@url=bitly_hash(params[:sid])
+      		
       		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
 	      		if @u_story.nil?
 		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],short_url: @url.short_url)
@@ -72,10 +66,21 @@ class UserPanelController < ApplicationController
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
+
 		@my_story.each do |ms|
 			@a_stories << Story.where(id: ms.story_id)
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
+			end
+			if !ms.tw_post_id.nil?
+				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+				byebug
+				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+			end
+			if !ms.short_url.nil?
+				@url=bitly_hash(ms.story_id)
+				ms.update(clicks: @url.stats["clicks"])
+
 			end
 		end
 	end
@@ -100,8 +105,11 @@ class UserPanelController < ApplicationController
 	end
 
 	def wallet
-		@u_story=UserStory.where(user_id: current_user)
+		@u_story=UserStory.where(user_id: current_user.id)
+		@w=Wallet.find_by(user_id: current_user.id)
+		
 		@total=0.0
+	
 
 		@u_story.each do |us|
 			@story=Story.find_by(id: us.story_id)
@@ -114,13 +122,36 @@ class UserPanelController < ApplicationController
 			@conv_amt=us.conversation*@story.conversation_amt
 			@total+=@click_amt+@like_amt+@share_amt+@comment_amt+@fav_amt+@retweet_amt+@conv_amt
 		end
-		@usr_wallet=Wallet.find_by(user_id: current_user)
+		@usr_wallet=Wallet.find_by(user_id: current_user.id)
+		
 		if @usr_wallet.nil?
-			Wallet.new(user_id: current_user,balance: @total)
+			@new_wallet=Wallet.new(user_id: current_user.id,balance: @total)
+			@new_wallet.save
+			
+
 		else
-			Wallet.update(balance: @total)
+			@usr_wallet.update(balance: @total)
 		end
+		@current=@total-@w.balance
+		
+		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @current,trans_type: 'cr',trans_date: DateTime.now)
+		@new_trans.save
 	end
+
+	protected
+
+	def bitly_hash(story_id)
+		extra = {
+			:utm_source => 'NOTSET',
+  			:utm_medium => 'SOCIAL',
+  			:utm_term => current_user.uid
+  
+		}
+		@story=Story.find(story_id)
+		@story_url=[@story.orig_url,'?', extra.to_query].join("")
+		client = Bitly.client
+      	client.shorten(@story_url)
+      end
 
 	private
 
@@ -129,6 +160,12 @@ class UserPanelController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+	# def check_twitter_user
+	# 	if twitter_user.nil?
+	# 		redirect_to "/auth/twitter"
+	# 	end
+	# end
 
 
 	def load_story

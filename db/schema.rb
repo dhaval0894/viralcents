@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329104314) do
+ActiveRecord::Schema.define(version: 20160330102306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(version: 20160329104314) do
     t.string   "tw_post_id"
   end
 
+  create_table "user_transactions", force: :cascade do |t|
+    t.float    "amt",        default: 0.0
+    t.datetime "trans_date"
+    t.string   "trans_type"
+    t.integer  "user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "provider"
     t.string   "uid"
@@ -121,5 +128,6 @@ ActiveRecord::Schema.define(version: 20160329104314) do
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"
   add_foreign_key "user_stories", "users"
+  add_foreign_key "user_transactions", "users"
   add_foreign_key "wallets", "users"
 end
