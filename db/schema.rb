@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330102306) do
+ActiveRecord::Schema.define(version: 20160331082940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20160330102306) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "recharge_stats", force: :cascade do |t|
+    t.integer "pay_id"
+    t.integer "recharge_id"
+  end
+
+  create_table "recharges", force: :cascade do |t|
+    t.string  "mobile"
+    t.float   "amount",  default: 0.0
+    t.integer "user_id"
+  end
 
   create_table "stories", force: :cascade do |t|
     t.string   "title"
@@ -122,10 +133,12 @@ ActiveRecord::Schema.define(version: 20160330102306) do
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.float   "balance"
+    t.float   "balance", default: 0.0
     t.integer "user_id"
   end
 
+  add_foreign_key "recharge_stats", "recharges"
+  add_foreign_key "recharges", "users"
   add_foreign_key "transactions", "users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"

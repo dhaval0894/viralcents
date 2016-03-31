@@ -4,7 +4,7 @@
 	has_many :story, through: :user_stories
 
 	has_many :user_transaction
-
+	has_many :recharge
 	has_many :user_stories, dependent: :destroy
 
 	def self.from_omniauth(auth)

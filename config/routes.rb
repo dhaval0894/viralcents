@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get 'settings' => 'user_panel#settings'
   get 'referrals' => 'user_panel#referrals'
   get 'transactions' => 'user_panel#wallet'
-
+  get 'recharges' => 'user_panel#recharges'
+  post 'recharges' => 'user_panel#addrecharge'
   #store facebook post id
   post 'user_stories/addStory_id' => 'user_panel#add_fbStory_id'
   get 'bitly' => 'user_panel#bitly'

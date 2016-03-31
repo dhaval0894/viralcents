@@ -147,6 +147,18 @@ class UserPanelController < ApplicationController
 		@new_trans.save
 	end
 
+	def recharges
+
+		@recharge=Recharge.new()
+	end
+	def addrecharge
+		@recharge = Recharge.new(user_id: current_user.id,mobile: params[:recharge][:mobile],amount: params[:recharge][:amount])
+		@recharge.save
+		
+    
+    
+    end
+
 	protected
 
 	def bitly_hash(story_id)
