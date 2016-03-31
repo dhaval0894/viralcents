@@ -15,6 +15,25 @@ class UserPanelController < ApplicationController
 
 	end
 
+
+	def settings
+
+		@user_email = params[:email]  # email after form submit
+
+		@user_contact = params[:contact]  # contact after form submit
+    
+      if(@user_email != NULL)
+      	
+	       Resque.enqueue(NotificationMailSender,@user_email)  #notification confirm mail to user
+	        
+      elsif(@user_contact != NULL)
+	       
+	       Resque.enqueue(NotificationMessageSender,@user_contact)  #notification confirm msg. to user
+	       
+       end        
+        
+	end
+
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
 	end
@@ -149,6 +168,7 @@ class UserPanelController < ApplicationController
 
 	protected
 
+
 	def bitly_hash(story_id)
 		extra = {
 			:utm_source => 'NOTSET',
@@ -162,7 +182,11 @@ class UserPanelController < ApplicationController
       	client.shorten(@story_url)
       end
 
-	private
+
+
+
+	private  # private methods dont add any public code below
+    
 
 	def check_user
 		if current_user.nil?
@@ -187,7 +211,8 @@ class UserPanelController < ApplicationController
 				end
 			end
 		end
-	end
+	
+	end   # private block ends here
 
 	
 end
