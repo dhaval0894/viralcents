@@ -6,7 +6,7 @@ class MessageSender
 
 				require 'net/http'
 				uri = URI('http://sms.hspsms.com:/sendSMS')
-				params = {:username => "nitesh.mishra143@gmail.com", 
+				params = {:username => "", 
 					      :message => "check with activeadmin",
 					      :sendername =>"VIRALS",
 					      :smstype =>"TRANS",
