@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 20160329122834) do
     t.string   "email"
     t.string   "referrer"
     t.string   "referral_link"
-    t.string   "role"
   end
 
   add_foreign_key "twitter_users", "users"

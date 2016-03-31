@@ -1,18 +1,13 @@
 	class User < ActiveRecord::Base
 	has_one :twitter_user
 	has_many :story, through: :user_stories
-<<<<<<< HEAD
 	has_many :user_stories
 
-=======
-	has_many :user_stories, dependent: :destroy
->>>>>>> 8d570205d2c4f0d889d49582b15eadc6a2e48c70
 	def self.from_omniauth(auth)
 	  where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
 	    user.provider = auth.provider
 	    user.uid = auth.uid
 	    user.name = auth.info.name
-	    user.email = auth.info.email	
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 	    user.save!
@@ -62,12 +57,7 @@
 		fspost_id = ""
 		fspost_id = uid + "_" + post_id
 		begin
-			@count = []
-			@shares = facebook.get_object('/'+fspost_id+'/sharedposts?limit=10000&format=json')
-			@shares.each do |sh|
-				@count << sh["id"][0..14]
-			end
-			@count.uniq.length
+			facebook.get_object('/'+fspost_id+'/sharedposts?limit=10000&format=json').size
 		rescue
 			return false
 		end
@@ -78,12 +68,7 @@
 		fcpost_id = ""
 		fcpost_id = uid + "_" + post_id
 		begin
-			@count = []
-			@comments = facebook.get_object(fcpost_id, :fields => "comments.summary(true)")["comments"]["data"]
-			@comments.each do |cm|
-				@count << cm["from"]["id"]
-			end
-			@count.uniq.length
+			facebook.get_object(fcpost_id, :fields => "comments.summary(true)")["comments"]["summary"]["total_count"]
 		rescue
 			return false
 		end

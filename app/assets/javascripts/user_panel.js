@@ -39,6 +39,9 @@ $(document).ready(function() {
       bootbox.alert("Connect with Twitter First");  
   });
 
+  // Zopim Chat
+  zopim_chat();
+
 });
 
   
