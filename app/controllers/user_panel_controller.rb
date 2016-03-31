@@ -22,11 +22,11 @@ class UserPanelController < ApplicationController
 
 		@user_contact = params[:contact]  # contact after form submit
     
-      if(@user_email != NULL)
+      if(@user_email != nil)
       	
 	       Resque.enqueue(NotificationMailSender,@user_email)  #notification confirm mail to user
 	        
-      elsif(@user_contact != NULL)
+      elsif(@user_contact != nil)
 	       
 	       Resque.enqueue(NotificationMessageSender,@user_contact)  #notification confirm msg. to user
 	       
