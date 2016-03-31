@@ -16,7 +16,7 @@ class MailSender
 <head>
 <style type="text/css">  
 
-body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 20px;    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;    color: #7d7d7d;   font-size: 14px; }  .content {  width: 100%;    max-width: 480px;   margin: 0 auto;  }   
+body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 21px;    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;    color: #7d7d7d;   font-size: 14px; }  .content {  width: 100%;    max-width: 480px;   margin: 0 auto;  }   
 
 
 
