@@ -16,11 +16,7 @@ class MailSender
 <head>
 <style type="text/css">  
 
-body { background-color: #F2F2FF; margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 20px;    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;    color: #7d7d7d;   font-size: 14px; }  .content {  width: 100%;    max-width: 480px;   margin: 0 auto;  }   
-a:link{color:#ed4545; text-decoration: none;}a:hover{color:#ee7474;} h1{font-size: 38px; line-height: 40px; font-weight: bold; color: #636363;} h2{font-size: 28px; line-height: 40px; font-weight: bold; color: #636363;} h3{font-size: 24px; line-height: 20px; font-weight: bold; color: #636363;}  
-
- a.dark{color: #636363; text-decoration: underline;}   
-
+body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 20px;    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;    color: #7d7d7d;   font-size: 14px; }  .content {  width: 100%;    max-width: 480px;   margin: 0 auto;  }   
 
 
 
