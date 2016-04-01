@@ -1,9 +1,16 @@
+<!-- Partial For All Stories in dashboard and stories view -->
+
+<!-- thumbanil -->
 <div class="thumbnail">
+
+    <!-- Story Image -->
     <%if !story.image_url.nil?%>
         <img class="img-responsive" style="width:300px; height:150px;" src="<%= story.image_url %>" alt="">
     <%else%>
         <img class="img-responsive" src="http://placehold.it/600x300" alt="">
     <% end %>
+
+    <!-- Story Title -->
     <%if !story.title.nil?%>
         <div class="caption">
             <h5 class="title"><%= story.title %></h5>         
@@ -14,6 +21,7 @@
         </div>
     <% end %>
 
+    <!-- Shortened URL For Bitly -->
     <%k=0%>
     <%@us_story.each do |usr_str|%>
             <%if usr_str.story_id == story.id && !usr_str.short_url.nil?%>
@@ -21,15 +29,20 @@
                 <%k=1%>
             <%end%>
     <%end%>
+    <!-- input-group -->
     <div class="input-group">
-        <% if k==1%>
+
+        <% if k==1%> <!-- If Shortened URL Is Generated -->
+            <!-- copy to clipboard button -->
             <span class="input-group-addon">
                 <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=story.id%>" title='Click here to copy to clipboard.'>
                     <i class="fa fa-copy"></i>
                 </button>
             </span>
+            
             <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
-        <%else%>
+
+        <%else%> <!-- For Generating Shorten URL -->
             <span class="input-group-addon">
                 <button class='btn btn-primary btn-xs' onclick="url_generate(<%= story.id %>)">
                     <i class="fa fa-link"></i>
@@ -37,14 +50,20 @@
             </span>
             <input type="text" id='fe_text1' class="form-control" value='Generate Url'>
         <% end%>
-    </div>                                
+    </div>
+
+    <!-- list-inline -->
     <ul class="list-inline">
+        <!-- Social Activity Payout --> 
         <li>
             <a href="#" class="fa-stack" id="rate" data-toggle="popover" data-trigger="hover">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
             </a>
         </li>
+
+        <!-- Social Sharing Buttons -->
+
         <% i=0 %><% j=0 %>
         <%@us_story.each do |usr_str|%>
             <%if usr_str.story_id == story.id && !usr_str.fb_post_id.nil?%>
@@ -55,17 +74,27 @@
             <%end%>
         <%end%> 
 
-        <% if not j==1 %>
+        <% if not j==1 %> <!-- If shortened url is not generated -->
+            
+            <!-- Facebook Sharing button -->
             <li><a  href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook facebook_share"><i class="fa fa-facebook"> Share</i></a>
+
+            <!-- Twitter Sharing button -->    
             <li><a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
-        <%else%>
+        
+        <%else%> <!-- If shortened url is genrated -->
+
+            <!-- Facebook Sharing button --> 
             <li>
-                <% if i==1 %>
+                <% if i==1 %> <!-- If story is already shared on facebook -->
                     <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
-                <%else%>
+
+                <%else%> <!-- If story is not shared on facebook -->
                     <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a> 
                 <%end%> 
             </li>
+
+            <!-- Twitter Sharing Button -->
             <li>
                 <% i=0 %>
                 <%@us_story.each do |usr_str|%>
@@ -74,16 +103,21 @@
                     <%end%>    
                 <%end%>
                 
-                <% if i==1 %>
-                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
-                <%else%>
-                    <%if twitter_user %> 
+                <% if i==1 %> <!-- If Story is already Tweeted on Twitter -->
+                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter disabled"><i class="fa fa-twitter"> Tweet</i></span></a>
+                
+                <%else%> 
+                    <%if twitter_user %> <!-- If connected via twitter -->
                         <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
-                    <% else %>
+                    
+                    <% else %> <!-- If Not connected via twitter -->
                         <a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     <%end%>
                 <%end%>
             </li>
+
         <%end%>    
     </ul>
+    <!-- ./list-inline -->
 </div>
+<!--./thumbnail -->

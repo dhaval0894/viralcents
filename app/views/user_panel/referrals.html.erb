@@ -4,20 +4,28 @@
             <h2 class="page-header text-left">Referral Link</h2>
         </div>
         <p>Share the referral link with your friends and get them signed up using this link to get free mobile recharge of worth &#8377;100!</p>
+
         <div class="col-md-offset-1 col-md-3">
-            <%if current_user.referral_link.nil? %>
+            <%if current_user.referral_link.nil? %><!-- If referral link is not generated -->
+                <!-- Generate Referral Link button -->
             	<button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
             <%end%>
         </div>
+
         <div class="input-group col-md-5">
+            <!-- copy to clipboard button -->
             <span class="input-group-addon">
                 <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target='#g_url' title='Click here to copy to clipboard.'>
                 <i class="fa fa-copy"></i>
             </button>
             </span>
-            <%if current_user.referral_link.nil?%>
+            
+            <%if current_user.referral_link.nil?%><!-- If referral link is not generated -->
+                <!-- Blank input field -->
                 <input type="text" id="g_url" class="form-control" readonly>
-            <%else%>
+
+            <%else%><!-- If referral link is generated -->
+                <!-- Input field with genrated url -->
                 <input type="text" id="g_url" class="form-control" value="<%= current_user.referral_link %>" readonly>
             <%end%>
         </div>
@@ -27,21 +35,22 @@
 <!-- Users Signed Up By referral link --> 
 <div class="row">
     <table class="table table-bordered">
+        
         <thead>
             <tr>    
                 <th colspan="5">Name</th>
                 <th colspan="5">Created at</th>
                 <th colspan="5">Amount credited</th> 
-
             </tr>
         </thead>
+
         <tbody>
             <%@all_users.each do |au|%>
                 <%if au.referrer == current_user.uid%>
                     <tr>
-                    <td colspan="5"><%=au.name %></td>
-                    <td colspan="5"><%=au.created_at.strftime("%d/%mobile/%Y")%></td>
-                    <td>Rs 10</td>
+                        <td colspan="5"><%=au.name %></td>
+                        <td colspan="5"><%=au.created_at.strftime("%d/%m/%Y")%></td>
+                        <td>Rs 10</td>
                     </tr>
                 <%end%>
             <%end%>
