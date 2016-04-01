@@ -5,8 +5,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         ref = request.referrer
         if ref.length > 25 and user.referrer.nil? and user.uid != ref[32..-6]
-          @u = User.find(user.id)
-          @u.update(referrer: ref[32..-6])
+          @u = User.find(user.id)         
         end
   	else
         @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash)

@@ -5,7 +5,7 @@ ActiveAdmin.register_page "Dashboard" do
       section "Recent Stories" do
         table_for Story.order("created_at desc").limit(5) do
             column :title
-            column :original_url
+            column :orig_url
         end
         strong {link_to "View all stories", admin_stories_path}
       end

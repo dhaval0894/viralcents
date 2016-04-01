@@ -6,12 +6,12 @@ class MessageSender
 
 				require 'net/http'
 				uri = URI('http://sms.hspsms.com:/sendSMS')
-				params = {:username => "nitesh.mishra143@gmail.com", 
+				params = {:username => "", 
 					      :message => "check with activeadmin",
 					      :sendername =>"VIRALS",
 					      :smstype =>"TRANS",
-					      :numbers => "8349320184",
-					      :apikey =>"eaf93dbe-bf68-43c7-8e47-c7a38bae0371"}
+					      :numbers => "",
+					      :apikey =>""}
 				uri.query = URI.encode_www_form(params)
 				res = Net::HTTP.get_response(uri)
 				puts res.body if res.is_a?(Net::HTTPSuccess)

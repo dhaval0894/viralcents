@@ -1,4 +1,4 @@
-class MailSender
+class NotificationMailSender
 
 	@queue = :mail_queue
 
@@ -66,17 +66,13 @@ body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 21
 
 
             Hi XYZ,
+
+            <br> Notificatios are active now
        <br>
 
-            Thanks for signing up with viralscents.
+            Viralscents Keep notify you.
              <br>
 
-            Some text here.............
-            <br>
-
-            asdasdasdasd
-
-            <br>
 
             </p>    
 
