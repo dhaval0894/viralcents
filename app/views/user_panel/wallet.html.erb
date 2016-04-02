@@ -1,0 +1,26 @@
+<!-- Statistics -->
+<%= render 'stats' %>
+<!--details for last 10 user transaction-->
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th colspan="5">Date</th>
+                <th colspan="5">Amount</th>
+                <th colspan="5">Type</th> 
+
+            </tr>
+        </thead>
+        <tbody>
+            <%@last.each do |l|%>
+                
+                    <tr>
+                    <td colspan="5"><%=l.trans_date.strftime("%d/%m/%Y") %></td>
+                    <td colspan="5"><%=l.amt%></td>
+                    <td><%=l.trans_type%></td>
+                    </tr>
+                
+            <%end%>
+        </tbody>
+    </table>      
+</div>

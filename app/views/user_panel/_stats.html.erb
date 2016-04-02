@@ -1,26 +1,32 @@
-<!-- Statistics -->
+<!-- Partial for statistics in dashboard -->
+
+<!-- row -->
 <div class="row stats">
+
+    <!-- Shared Stories -->
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">13</div>
+                        <div class="huge"><%=@shared_story%></div>
                         <i class="fa fa-newspaper-o fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
-                        <div class="medium">Shared Stories</div>
+                        <div class="medium">Shared Story</div>
                     </div>
                 </div>
             </div>               
         </div>
     </div>
+
+    <!-- Wallet Balance -->
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">120</div>
+                        <div class="huge"><%=@wallet_amt%></div>
                         <i class="fa fa-rupee fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
@@ -30,12 +36,14 @@
             </div>               
         </div>
     </div>
+
+    <!-- Earning This Week -->
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">10</div>
+                        <div class="huge"><%=@week_earning%></div>
                             <i class="fa fa-rupee fa-3x"></i>
                         </div>
                     <div class="col-xs-12 stats-name">
@@ -45,21 +53,24 @@
             </div>               
         </div>
     </div>
+
+    <!-- Withdrawl -->
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="panel panel-green">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">260</div>
+                        <div class="huge"><%= @last_withdraw.amt%></div>
                         <i class="fa fa-rupee fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
-                        <div class="medium">Withdrawl</div>
+                        <div class="medium">Last Withdrawl</div>
                     </div>
                 </div>
             </div>               
         </div>
     </div>
+
 </div>
 <!-- /.row -->
 <hr>

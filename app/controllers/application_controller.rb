@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
  
   protect_from_forgery with: :exception
 
-  	def current_user
+  #get the current user
+  def current_user
 	  @current_user = User.find(session[:user_id]) if session[:user_id]
-	end
+  end
 
 	def twitter_user
 	  @twitter_user = TwitterUser.find(session[:tuser_id]) if session[:tuser_id]

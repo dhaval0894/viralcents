@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329122834) do
+
+
+ActiveRecord::Schema.define(version: 20160402074054) do
+
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,12 +54,40 @@ ActiveRecord::Schema.define(version: 20160329122834) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "recharge_stats", force: :cascade do |t|
+    t.integer "pay_id"
+    t.integer "recharge_id"
+    t.float   "amount",      default: 0.0
+  end
+
+  create_table "recharges", force: :cascade do |t|
+    t.string  "mobile"
+    t.integer "user_id"
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "orig_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "image_url"
+
+    t.integer  "admin_user_id"
+    t.float    "click_amt",        default: 0.0
+    t.float    "like_amt",         default: 0.0
+    t.float    "share_amt",        default: 0.0
+    t.float    "comment_amt",      default: 0.0
+    t.float    "fav_amt",          default: 0.0
+    t.float    "retweet_amt",      default: 0.0
+    t.float    "conversation_amt", default: 0.0
+
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.float    "amt"
+    t.datetime "trans_date"
+    t.string   "type"
+    t.integer  "user_id"
   end
 
   create_table "twitter_users", force: :cascade do |t|
@@ -71,19 +103,32 @@ ActiveRecord::Schema.define(version: 20160329122834) do
 
   create_table "user_stories", force: :cascade do |t|
     t.string   "short_url"
-    t.integer  "clicks"
-    t.integer  "fb_likes"
-    t.integer  "fb_shares"
-    t.integer  "fb_comments"
-    t.integer  "retweets"
-    t.integer  "conversation"
-    t.integer  "fav"
+    t.integer  "clicks",       default: 0
+    t.integer  "fb_likes",     default: 0
+    t.integer  "fb_shares",    default: 0
+    t.integer  "fb_comments",  default: 0
+    t.integer  "fav",          default: 0
+    t.integer  "retweets",     default: 0
+
     t.integer  "user_id"
     t.integer  "story_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "fb_post_id"
     t.string   "tw_post_id"
+    t.integer  "old_clicks",   default: 0
+    t.integer  "old_likes",    default: 0
+    t.integer  "old_shares",   default: 0
+    t.integer  "old_comments", default: 0
+    t.integer  "old_fav",      default: 0
+    t.integer  "old_retweets", default: 0
+  end
+
+  create_table "user_transactions", force: :cascade do |t|
+    t.float    "amt",        default: 0.0
+    t.datetime "trans_date"
+    t.string   "trans_type"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,9 +144,23 @@ ActiveRecord::Schema.define(version: 20160329122834) do
     t.string   "referrer"
     t.string   "referral_link"
     t.string   "role"
+
   end
 
+  create_table "wallets", force: :cascade do |t|
+    t.float   "balance", default: 0.0
+    t.integer "user_id"
+
+  end
+
+
+  add_foreign_key "recharge_stats", "recharges"
+  add_foreign_key "recharges", "users"
+  add_foreign_key "stories", "admin_users"
+  add_foreign_key "transactions", "users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"
   add_foreign_key "user_stories", "users"
+  add_foreign_key "user_transactions", "users"
+  add_foreign_key "wallets", "users"
 end

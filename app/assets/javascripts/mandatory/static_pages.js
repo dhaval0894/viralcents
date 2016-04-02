@@ -15,21 +15,18 @@ $(document).ready(function() {
 }(document, 'script', 'facebook-jssdk'));
   
 
-window.fbAsyncInit = function() {
-FB.init({
-  appId      : '1357150584310400',
-  cookie     : true,  // enable cookies to allow the server to access 
-                      // the session
-  xfbml      : true,  // parse social plugins on this page
-  version    : 'v2.5' // use graph api version 2.5
-});
-
-// This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1357150584310400',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.5' // use graph api version 2.5
+  });
 
 }
 
+//login for facebook
 function fbLogin() {
   FB.login(function(response) {
     console.log(response);

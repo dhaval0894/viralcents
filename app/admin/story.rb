@@ -1,32 +1,46 @@
 ActiveAdmin.register Story do
-
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
-	permit_params :title, :orig_url
-
-	index do
-	  selectable_column
-	  id_column
-	  column :orig_url
-	  column :created_at
-	  column :updated_at
-	  column :current_user_id do
-	      current_admin_user.try(:id)
-	  end
+# story resource for admin
+	config.filters = false
+	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id
+	
+	controller do
+	    def scoped_collection
+	    	#show all for superadmin
+	    	if current_admin_user.role == "superadmin"
+	    		Story.all
+	    	else
+    			Story.where(:admin_user_id => current_admin_user.id)      
+    		end
+	    end
 	end
+	index do
+	 	  selectable_column
+		  id_column
+		  column :orig_url
+		  column :created_at
+		  column :updated_at
+		  column :admin_user_id	
+		  column :click_amt
+		  column :like_amt
+		  column :share_amt
+		  column :comment_amt
+		  column :fav_amt
+		  column :retweet_amt
+		  actions
+	end	
+
+
 	form do |f|
 	    f.inputs "Story" do
 	      f.input :orig_url
+	      f.hidden_field :admin_user_id, value: current_admin_user.id
+	      f.input :click_amt
+	      f.input :like_amt
+	      f.input :share_amt
+	      f.input :comment_amt
+	      f.input :fav_amt
+	      f.input :retweet_amt
+
 	    end
 	    f.actions
 	end	  
