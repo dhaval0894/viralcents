@@ -7,9 +7,14 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
+$skinActiveColor: #00284d;
+$skinHeaderBck: #00284d;
+$panelHeaderBck: #00284d;
+$secondary-color: #000000 !default;
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import "active_skin";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

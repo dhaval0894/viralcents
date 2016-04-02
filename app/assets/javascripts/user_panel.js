@@ -109,7 +109,7 @@ function generate_ref_url(uid, root_p)
   g_url = root_p + "?ref=" + uid; 
   document.getElementById('g_url').value=g_url;
   $('#but').addClass('disabled');
-  // window.location.href = "add_referral_link?r_link=" + g_url;
+  //ajax call to controller action to add referral_url to database
   $.ajax({
       type: "POST",
       url: "add_referral_link",

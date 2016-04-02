@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329122834) do
+ActiveRecord::Schema.define(version: 20160330125122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 20160329122834) do
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "orig_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "image_url"
+    t.integer  "admin_user_id"
   end
 
   create_table "twitter_users", force: :cascade do |t|
@@ -75,9 +76,9 @@ ActiveRecord::Schema.define(version: 20160329122834) do
     t.integer  "fb_likes"
     t.integer  "fb_shares"
     t.integer  "fb_comments"
-    t.integer  "retweets"
-    t.integer  "conversation"
     t.integer  "fav"
+    t.integer  "retweet"
+    t.integer  "conversation"
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",   null: false
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 20160329122834) do
     t.string   "role"
   end
 
+  add_foreign_key "stories", "admin_users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"
   add_foreign_key "user_stories", "users"
