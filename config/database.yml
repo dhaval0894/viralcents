@@ -13,13 +13,16 @@ default: &default
 development:
   <<: *default
   database: viralcents_development
-  
+  pool: 25
+
 test:
   <<: *default
   database: viralcents_test
+  pool: 25
 
 production:
   <<: *default
   database: viralcents_production
+  pool: 25
   username: 
   password: 

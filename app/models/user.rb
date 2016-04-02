@@ -20,8 +20,7 @@
 	    
 	    @param = auth.info.email
 
-	    Resque.enqueue(MailSender,@param)  #signup confirmation mail to user
-
+        MailSender.perform_async(@param)
         
 
 	  end
