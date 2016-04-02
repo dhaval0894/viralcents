@@ -1,11 +1,19 @@
+<!-- Partial For User Shared Stories-- >
+
 <% @a_stories.each do |ms|%>
+    <!-- col-md-4 -->
     <div class="col-md-4 text-center">
+        <!-- thumnail -->
         <div class="thumbnail">
+
+            <!-- Story Image -->
             <%if !ms[0].image_url.nil?%>
                 <img class="img-responsive" style="width:300px; height:150px;" src="<%= ms[0].image_url %>" alt="">
             <%else%>
                 <img class="img-responsive" src="http://placehold.it/600x300" alt="">
             <% end %>
+
+            <!-- Story Title -->
             <%if !ms[0].title.nil?%>
                 <div class="caption">
                     <h5 class="title"><%= ms[0].title %></h5>         
@@ -14,21 +22,30 @@
                 <div class="caption">
                     <h5>Unable to fetch</h5>         
                 </div>
-            <% end %>                 
+            <% end %>         
+
+            <!-- Shortened URL -->        
             <div class="input-group">
+                <!-- copy to clipboard button -->
                 <span class="input-group-addon">
                     <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=ms[0].id%>" title='Click here to copy to clipboard.'>
                         <i class="fa fa-copy"></i>
                     </button>
                 </span>
+                
                 <input type="text" id='cp_text<%=ms[0].id%>' class="form-control" value='<%=ms[1]%>' readonly>
-            </div>                             
+            </div>
+
+            <!-- Social Sharing Button -->                             
             <ul class="list-inline">
                 <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                 </li>
                 <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
                 </li>
             </ul>
+
         </div>
-    </div>  
+        <!-- ./thumbnail -->
+    </div>
+    <!-- ./col-md-4 -->  
 <% end %>    

@@ -1,11 +1,21 @@
+<!-- Search, Filter Panel for stories -->
+
+<!-- row -->
 <div class="row filter-row">
+    <!-- panel -->
     <div class="panel panel-default">
+        <!-- panel-body -->
         <div class="panel-body">
+            <!-- form -->
             <form class="form-inline" role="form">
+
+                <!-- form group [search] -->
                 <div class="form-group">
                     <label class="label-control" style="margin-right:0;" for="pref-search">Search:</label>
                     <input type="text" class="form-control input-sm search" id="pref-search" placeholder="Enter Keyword">
-                </div><!-- form group [search] -->
+                </div>
+
+                <!-- form group [Category] -->
                 <div class="form-group">
                     <label class="label-control" style="margin-right:0;" for="filter-category">Category:</label>
                     <select id="filter-category" name="category" class="form-control">
@@ -16,16 +26,22 @@
                         <option value="Health and Well-being">Health and Well-being</option>
                         <option value="Food">Food</option>
                     </select>                                
-                </div> <!-- form group [Category] -->
+                </div> 
+
+                <!-- form group [order by] --> 
                 <div class="form-group">
                     <label class="label-control" style="margin-right:0;" for="pref-orderby">Order by:</label>
                     <select id="pref-orderby" class="form-control">
                         <option>Descending</option>
                         <option value="ascending">Ascending</option>
                     </select>                                
-                </div> <!-- form group [order by] --> 
+                </div> 
+
             </form>
         </div>
+        <!-- ./panel-body -->
     </div>
+    <!-- ./panel -->
 </div>
+<!-- ./row -->
 <hr>

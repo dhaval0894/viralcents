@@ -18,5 +18,6 @@ class TwitterUser < ActiveRecord::Base
       config.access_token        = twitter_oauth_token
       config.access_token_secret = twitter_oauth_secret
     end
+    
 end
 end

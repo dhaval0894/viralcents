@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
         ref = request.referrer
         #if user is invited then save referrer uid in db
         if ref.length > 25 and user.referrer.nil? and user.uid != ref[32..-6]
-          @u = User.find(user.id)
-          @u.update(referrer: ref[32..-6])
+          @u = User.find(user.id)         
         end
   	else
         @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash)
