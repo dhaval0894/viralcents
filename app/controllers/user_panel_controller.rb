@@ -12,7 +12,6 @@ class UserPanelController < ApplicationController
       		format.html
       		format.js
   		end
-
 	end
 
 
@@ -82,12 +81,14 @@ class UserPanelController < ApplicationController
 
   	end	
 
+  	#stories shared by user
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
 
 		i=0
 		@my_story.each do |ms|
+			#add all stories to the list
 			@a_stories << Story.where(id: ms.story_id)
 			@a_stories[i]<< ms.short_url
 			i+=1
@@ -106,6 +107,7 @@ class UserPanelController < ApplicationController
 		end
 	end
 
+	#generate referral url for inviting
 	def referrals
 		@all_users = User.all
 	end
@@ -128,6 +130,7 @@ class UserPanelController < ApplicationController
 	    end
 	end
 
+	#check whether a post is already shared to facebook
 	def check_fb_share
 		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
 	end
@@ -166,7 +169,7 @@ class UserPanelController < ApplicationController
 		@new_trans.save
 	end
 
-	protected
+	protected # protected methods dont add any public methods below
 
 
 	def bitly_hash(story_id)
@@ -187,7 +190,7 @@ class UserPanelController < ApplicationController
 
 	private  # private methods dont add any public code below
     
-
+	#check whether user is logged in
 	def check_user
 		if current_user.nil?
 			redirect_to root_path
@@ -200,7 +203,7 @@ class UserPanelController < ApplicationController
 	# 	end
 	# end
 
-
+	#generate thumbnails from the url added
 	def load_story
 		@stories = Story.all
 		@stories.each do |story|	

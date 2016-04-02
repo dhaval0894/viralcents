@@ -15,6 +15,3 @@
 /log/*
 !/log/.keep
 /tmp
-
-# Ignore all secret keys and id
-/config/secrets.yml

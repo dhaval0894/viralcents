@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330102306) do
+ActiveRecord::Schema.define(version: 20160402074054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160330102306) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "image_url"
+    t.integer  "admin_user_id"
     t.float    "click_amt",        default: 0.0
     t.float    "like_amt",         default: 0.0
     t.float    "share_amt",        default: 0.0
@@ -89,9 +90,9 @@ ActiveRecord::Schema.define(version: 20160330102306) do
     t.integer  "fb_likes",     default: 0
     t.integer  "fb_shares",    default: 0
     t.integer  "fb_comments",  default: 0
+    t.integer  "fav",          default: 0
     t.integer  "retweets",     default: 0
     t.integer  "conversation", default: 0
-    t.integer  "fav",          default: 0
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",               null: false
@@ -119,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160330102306) do
     t.string   "email"
     t.string   "referrer"
     t.string   "referral_link"
+    t.string   "role"
   end
 
   create_table "wallets", force: :cascade do |t|
@@ -126,6 +128,7 @@ ActiveRecord::Schema.define(version: 20160330102306) do
     t.integer "user_id"
   end
 
+  add_foreign_key "stories", "admin_users"
   add_foreign_key "transactions", "users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"

@@ -10,6 +10,7 @@ gem 'pg'
 
 #admin-panel and authorize
 gem 'activeadmin', github: 'activeadmin'
+gem 'active_skin'
 gem 'devise'
 gem 'cancancan'
 
