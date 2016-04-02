@@ -10,11 +10,19 @@ gem 'pg'
 
 #admin-panel and authorize
 gem 'activeadmin', github: 'activeadmin'
+gem 'active_skin'
 gem 'devise'
 gem 'cancancan'
 
 gem 'sendgrid-ruby'
-gem 'resque'
+
+gem 'sidekiq'
+
+gem 'sinatra' ,require: false
+
+gem 'slim'
+
+
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'
 
@@ -72,5 +80,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # light-weight development server
+  gem 'thin'
 end
 

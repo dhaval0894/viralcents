@@ -1,3 +1,4 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -7,11 +8,8 @@ Rails.application.routes.draw do
   # Landing page route
   root 'static_pages#index'
 
-  get 'gridmailer/index'
-  get 'gridmailer/themail'
-  get 'gridmailer/messaagehome'
-  get 'gridmailer/message'
-
+      mount Sidekiq::Web ,at: '/sidekiq'
+  
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => redirect('/')

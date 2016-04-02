@@ -24,7 +24,25 @@ class UserPanelController < ApplicationController
       		format.html
       		format.js
   		end
+	end
 
+
+	def settings
+
+		@user_email = params[:email]  # email after form submit
+
+		@user_contact = params[:contact]  # contact after form submit
+    
+      if(@user_email != nil)
+      	
+	       Resque.enqueue(NotificationMailSender,@user_email)  #notification confirm mail to user
+	        
+      elsif(@user_contact != nil)
+	       
+	       Resque.enqueue(NotificationMessageSender,@user_contact)  #notification confirm msg. to user
+	       
+       end        
+        
 	end
 
 	def stories
@@ -66,6 +84,7 @@ class UserPanelController < ApplicationController
 
   	end	
 
+
   	#stories shared by user and stories analytics
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
@@ -73,6 +92,7 @@ class UserPanelController < ApplicationController
 
 		i=0
 		@my_story.each do |ms|
+			#add all stories to the list
 			@a_stories << Story.where(id: ms.story_id)
 			@a_stories[i]<< ms.short_url
 			i+=1
@@ -91,6 +111,7 @@ class UserPanelController < ApplicationController
 		end
 	end
 
+	#generate referral url for inviting
 	def referrals
 		@all_users = User.all
 	end
@@ -113,6 +134,7 @@ class UserPanelController < ApplicationController
 	    end
 	end
 
+	#check whether a post is already shared to facebook
 	def check_fb_share
 		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
 	end
@@ -170,6 +192,7 @@ class UserPanelController < ApplicationController
 		@new_trans.save
 	end
 
+
 	#user details for recharge
 	def recharges
 
@@ -210,7 +233,8 @@ class UserPanelController < ApplicationController
       	
     end
 
-	protected
+	
+	protected # protected methods dont add any public methods below
 
 	#bitly connection and get its response
 	def bitly_hash(story_id)
@@ -226,8 +250,12 @@ class UserPanelController < ApplicationController
       	client.shorten(@story_url)
       end
 
-	private
 
+
+
+	private  # private methods dont add any public code below
+    
+	#check whether user is logged in
 	def check_user
 		if current_user.nil?
 			redirect_to root_path
@@ -240,7 +268,7 @@ class UserPanelController < ApplicationController
 	# 	end
 	# end
 
-
+	#generate thumbnails from the url added
 	def load_story
 		@stories = Story.all
 		@stories.each do |story|	
@@ -251,7 +279,8 @@ class UserPanelController < ApplicationController
 				end
 			end
 		end
-	end
+	
+	end   # private block ends here
 
 	
 end
