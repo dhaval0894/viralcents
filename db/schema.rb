@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331082940) do
+ActiveRecord::Schema.define(version: 20160401094911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20160331082940) do
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
     t.integer "recharge_id"
+    t.float   "amount",      default: 0.0
   end
 
   create_table "recharges", force: :cascade do |t|
     t.string  "mobile"
-    t.float   "amount",  default: 0.0
     t.integer "user_id"
   end
 

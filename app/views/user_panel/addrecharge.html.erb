@@ -1,0 +1,11 @@
+<% if @recharge_user.nil? %>
+	<h3>Number: <%=@recharge.mobile%></h3>
+<%else%>
+	<h3>Number: <%=@recharge_user.mobile%></h3>
+<%end%>
+	<h3>Amount: <%=@pay_status.amount%></h3>
+	<h3>Pay_id: <%=@pay_status.pay_id%></h3>
+	<h3>Status:</h3>
+
+
+

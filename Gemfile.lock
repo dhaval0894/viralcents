@@ -344,6 +344,7 @@ DEPENDENCIES
   clipboard-rails
   devise
   font-awesome-rails
+  httparty
   jquery-dotdotdot-rails
   jquery-rails
   jquery-turbolinks
