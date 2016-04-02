@@ -20,6 +20,13 @@ ActiveAdmin.register Story do
 		  column :created_at
 		  column :updated_at
 		  column :admin_user_id	
+		  column :click_amt
+		  column :like_amt
+		  column :share_amt
+		  column :comment_amt
+		  column :fav_amt
+		  column :retweet_amt
+		  actions
 	end	
 
 	form do |f|
