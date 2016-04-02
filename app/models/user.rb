@@ -5,7 +5,7 @@
 
 
 	has_many :user_transaction
-
+	has_many :recharge
 	has_many :user_stories, dependent: :destroy
 
 	#save data to user when sign-up
