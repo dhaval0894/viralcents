@@ -6,8 +6,20 @@ class UserPanelController < ApplicationController
 
 	def dashboard
 		@us_story = UserStory.where(user_id: current_user.id)
-		@wallet_amt = Wallet.find_by(user_id: current_user.id)
+		#stats calculation
+		@wallet = Wallet.find_by(user_id: current_user.id)
+		@wallet_amt=@wallet.balance
 		@shared_story = UserStory.where(user_id: current_user.id).count
+		#find week earning
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@week_earning=0.0
+		@last_week.each do |l|
+			if l.trans_date > 1.week.ago
+				@week_earning+=l.amt
+			end
+		end
+		#find last_withdraw
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
 		respond_to do |format|
       		format.html
       		format.js
@@ -108,39 +120,53 @@ class UserPanelController < ApplicationController
 	#find wallet balance
 	def wallet
 		@u_story=UserStory.where(user_id: current_user.id)
-		@usr_wallet=Wallet.find_by(user_id: current_user.id)
-		if @usr_wallet.nil?
-			@total=0.0
-		else
-			@total=@usr_wallet.balance
-		end
-	
 
+		#stats calculation
+		@usr_wallet=Wallet.find_by(user_id: current_user.id)
+		@shared_story = UserStory.where(user_id: current_user.id).count
+		#find week earning
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@week_earning=0.0
+		@last_week.each do |l|
+			if l.trans_date > 1.week.ago
+				@week_earning+=l.amt
+			end
+		end
+
+		#find last_withdraw
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		
+		#last 10 user transaction
+		@last=UserTransaction.where(user_id: current_user.id).limit(10)
+
+		@total=0.0
+	
+		#calculate current earning of user
 		@u_story.each do |us|
 			@story=Story.find_by(id: us.story_id)
-			@click_amt=us.clicks*@story.click_amt
-			@like_amt=us.fb_likes*@story.like_amt
-			@share_amt=us.fb_shares*@story.share_amt
-			@comment_amt=us.fb_comments*@story.comment_amt
-			@fav_amt=us.fav*@story.fav_amt
-			@retweet_amt=us.retweets*@story.retweet_amt
-			@conv_amt=us.conversation*@story.conversation_amt
-			@total+=@click_amt+@like_amt+@share_amt+@comment_amt+@fav_amt+@retweet_amt+@conv_amt
+			@click_bal=(us.clicks-us.old_clicks)*@story.click_amt
+			@like_bal=(us.fb_likes-us.old_likes)*@story.like_amt
+			@share_bal=(us.fb_shares-us.old_shares)*@story.share_amt
+			@comment_bal=(us.fb_comments-us.old_comments)*@story.comment_amt
+			@fav_bal=(us.fav-us.old_fav)*@story.fav_amt
+			@retweet_bal=(us.retweets-us.old_retweets)*@story.retweet_amt
+			us.update(old_clicks: us.clicks,old_likes: us.fb_likes,old_shares: us.fb_shares,old_comments: us.fb_comments,old_fav: us.fav,old_retweets: us.retweets)
+			@total+=@click_bal+@like_bal+@share_bal+@comment_bal+@fav_bal+@retweet_bal
 		end
 		
-		
+		#update wallet
+		@wallet_amt=@total+@usr_wallet.balance
 		if @usr_wallet.nil?
-			@new_wallet=Wallet.new(user_id: current_user.id,balance: @total)
+			@new_wallet=Wallet.new(user_id: current_user.id,balance: @wallet_amt)
 			@new_wallet.save
-			@current=@total
-
 		else
-			@usr_wallet.update(balance: @total)
-			@current=@total-@usr_wallet.balance
+			
+			@usr_wallet.update(balance: @wallet_amt)
+			
 		end
 		
-		
-		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @current,trans_type: 'cr',trans_date: DateTime.now)
+		#update credit transaction
+		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
 		@new_trans.save
 	end
 
@@ -173,6 +199,7 @@ class UserPanelController < ApplicationController
       		@pay_status.save
       	end
 
+      	#update debit transaction and wallet
       	if @rec_stat_data["status"]=="success"
       		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
 			@new_trans.save
@@ -181,8 +208,6 @@ class UserPanelController < ApplicationController
 			@wallet.update(balance: @balance)
 		end
       	
-      # 	byebug
-      # render :nothing => true
     end
 
 	protected

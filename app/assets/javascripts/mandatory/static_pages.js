@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 window.fbAsyncInit = function() {
 FB.init({
-  appId      : '1097221353655855',
+  appId      : '1357150584310400',
   cookie     : true,  // enable cookies to allow the server to access 
                       // the session
   xfbml      : true,  // parse social plugins on this page

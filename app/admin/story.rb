@@ -34,7 +34,6 @@ ActiveAdmin.register Story do
 	      f.input :comment_amt
 	      f.input :fav_amt
 	      f.input :retweet_amt
-	      f.input :conversation_amt
 	    end
 	    f.actions
 	end	  
