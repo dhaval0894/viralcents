@@ -1,17 +1,22 @@
+
 class MailSender
 
-	@queue = :mail_queue
+  include Sidekiq::Worker
 
-	def self.perform(param)
+  def perform(param)
 
-		
-		    require 'sendgrid-ruby'
+   user_mail = param
+    
+        require 'sendgrid-ruby'
+          sendgrid = SendGrid::Client.new do |c|
+             c.api_key ='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'
+            end
 
-		      email = SendGrid::Mail.new do |m|
-		          m.to      = x
-		          m.from    = 'rjv834@gmail.com'
-		          m.subject = 'welcome'
-		          m.html    = '<html>
+          email = SendGrid::Mail.new do |m|
+              m.to      =  user_mail
+              m.from    = 'rjv834@gmail.com'
+              m.subject = 'welcome'
+              m.html    = '<!DOCTYPE html><html>
 <head>
 <style type="text/css">  
 body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 21px;    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;    color: #7d7d7d;   font-size: 14px; }  .content {  width: 100%;    max-width: 480px;   margin: 0 auto;  }   
@@ -111,12 +116,27 @@ body { margin: 0;    padding: 0;   min-width: 100% !important;   line-height: 21
       </table>
       </body>
       </html>'
-		        end
-		    sendgrid.send(email)
+            end
+        sendgrid.send(email)
 
-		
-	end
+    
+  end
 
 
 
 end
+
+
+
+
+
+
+
+
+
+
+
+# 
+
+# 
+

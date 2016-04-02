@@ -14,7 +14,14 @@ gem 'devise'
 gem 'cancancan'
 
 gem 'sendgrid-ruby'
-gem 'resque'
+
+gem 'sidekiq'
+
+gem 'sinatra' ,require: false
+
+gem 'slim'
+
+
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'
 
