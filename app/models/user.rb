@@ -21,7 +21,7 @@
 	    @param = auth.info.email
 
 
-        MailSender.perform_async(@param)
+        #MailSender.perform_async(@param)
 
 
 	  end
