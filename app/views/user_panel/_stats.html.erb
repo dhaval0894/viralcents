@@ -60,7 +60,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge"><%= @last_withdraw.amt%></div>
+                        <%if @last_withdraw.nil?%>
+                            <div class="huge">0.0</div>
+                        <%else%>
+                            <div class="huge"><%= @last_withdraw.amt%></div>
+                        <%end%>
                         <i class="fa fa-rupee fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
