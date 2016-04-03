@@ -8,7 +8,11 @@ class UserPanelController < ApplicationController
 		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
-		@wallet_amt=@wallet.balance
+		if !@wallet.nil?
+			@wallet_amt=@wallet.balance
+		else
+			@wallet_amt=0.0
+		end
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
 		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
@@ -99,7 +103,7 @@ class UserPanelController < ApplicationController
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
-			if !ms.tw_post_id.nil?
+			if !ms.tw_post_id.nil? and twitter_user
 				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
 				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
 			end
@@ -177,12 +181,12 @@ class UserPanelController < ApplicationController
 		end
 		
 		#update wallet
-		@wallet_amt=@total+@usr_wallet.balance
+		
 		if @usr_wallet.nil?
-			@new_wallet=Wallet.new(user_id: current_user.id,balance: @wallet_amt)
+			@new_wallet=Wallet.new(user_id: current_user.id,balance: @total)
 			@new_wallet.save
 		else
-			
+			@wallet_amt=@total+@usr_wallet.balance
 			@usr_wallet.update(balance: @wallet_amt)
 			
 		end
@@ -202,33 +206,45 @@ class UserPanelController < ApplicationController
 
 	#process recharge request and update transaction deatils
 	def addrecharge
-		@recharge_key=Rails.application.secrets.recharge_api_token
-    	@url=["https://www.pay2all.in/web-api/get-number?api_token=",@recharge_key,"&number=",params[:recharge][:mobile]].join("")
-    	@recharge_details=HTTParty.get(@url)
-    	@provider_id=JSON.parse(@recharge_details.body)["provider_id"]
-      	@recharge_url=["https://www.pay2all.in/web-api/paynow?api_token=",@recharge_key,"&number=",params[:recharge][:mobile],"&provider_id=",@provider_id,"&amount=",params[:recharge_stat][:amount],"&client_id=",current_user.uid].join("")
-      	#@recharge_status=HTTParty.get(@recharge_url)
-      	#@rec_stat_data=JSON.parse(@recharge_status.body)
+		@flag=0
+		@wallet=Wallet.find_by(user_id: current_user.id)
+      	if !@wallet.nil?  
+      		if @wallet.balance>= (params[:recharge_stat][:amount]).to_f
+	      		@flag=1
+				@recharge_key=Rails.application.secrets.recharge_api_token
+		    	@url=["https://www.pay2all.in/web-api/get-number?api_token=",@recharge_key,"&number=",params[:recharge][:mobile]].join("")
+		    	@recharge_details=HTTParty.get(@url)
+		    	@provider_id=JSON.parse(@recharge_details.body)["provider_id"]
+		      	@recharge_url=["https://www.pay2all.in/web-api/paynow?api_token=",@recharge_key,"&number=",params[:recharge][:mobile],"&provider_id=",@provider_id,"&amount=",params[:recharge_stat][:amount],"&client_id=",current_user.uid].join("")
+	      	
+		      	#@recharge_status=HTTParty.get(@recharge_url)
+		      	#@rec_stat_data=JSON.parse(@recharge_status.body)
+				
+				#update db related to recharge
+				@recharge_user=Recharge.find_by(user_id: current_user.id)
+				if @recharge_user.nil? or @recharge_user.mobile!=params[:recharge][:mobile]
+					@recharge = Recharge.new(user_id: current_user.id,mobile: params[:recharge][:mobile])
+					@recharge.save
+					@pay_status = RechargeStat.new(recharge_id: @recharge.id,pay_id:@rec_stat_data["payid"] ,amount: params[:recharge_stat][:amount])
+					@pay_status.save
+				else
+					@pay_status = RechargeStat.new(recharge_id: @recharge_user.id, pay_id: @rec_stat_data["payid"],amount: params[:recharge_stat][:amount])
+		      		@pay_status.save
+		      	end
 
-      	#update db related to recharge
-		@recharge_user=Recharge.find_by(user_id: current_user.id)
-		if @recharge_user.nil? or @recharge_user.mobile!=params[:recharge][:mobile]
-			@recharge = Recharge.new(user_id: current_user.id,mobile: params[:recharge][:mobile])
-			@recharge.save
-			@pay_status = RechargeStat.new(recharge_id: @recharge.id,pay_id:@rec_stat_data["payid"] ,amount: params[:recharge_stat][:amount])
-			@pay_status.save
+		      	#update debit transaction and wallet
+		      	if @rec_stat_data["status"]=="success"
+		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
+					@new_trans.save
+					
+					@balance=@wallet.balance-@pay_status.amount
+					@wallet.update(balance: @balance)
+				end
+			else
+				@message="Not enough balance"
+			end
 		else
-			@pay_status = RechargeStat.new(recharge_id: @recharge_user.id, pay_id: @rec_stat_data["payid"],amount: params[:recharge_stat][:amount])
-      		@pay_status.save
-      	end
-
-      	#update debit transaction and wallet
-      	if @rec_stat_data["status"]=="success"
-      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
-			@new_trans.save
-			@wallet=Wallet.find_by(user_id: current_user.id)
-			@balance=@wallet.balance-@pay_status.amount
-			@wallet.update(balance: @balance)
+			@message="Wallet not exist"
 		end
       	
     end
