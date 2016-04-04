@@ -11,6 +11,7 @@ class TwitterUser < ActiveRecord::Base
 		@twitter_user
 	end
 
+	#set twitter client to access client's timeline
 	def twitter
     $twitter_client = Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.secrets.twitter_api_key

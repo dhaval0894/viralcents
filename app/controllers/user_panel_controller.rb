@@ -6,8 +6,24 @@ class UserPanelController < ApplicationController
 
 	def dashboard
 		@us_story = UserStory.where(user_id: current_user.id)
-		@wallet_amt = Wallet.find_by(user_id: current_user.id)
+		#stats calculation
+		@wallet = Wallet.find_by(user_id: current_user.id)
+		if !@wallet.nil?
+			@wallet_amt=@wallet.balance
+		else
+			@wallet_amt=0.0
+		end
 		@shared_story = UserStory.where(user_id: current_user.id).count
+		#find week earning
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@week_earning=0.0
+		@last_week.each do |l|
+			if l.trans_date > 1.week.ago
+				@week_earning+=l.amt
+			end
+		end
+		#find last_withdraw
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
 		respond_to do |format|
       		format.html
       		format.js
@@ -37,36 +53,27 @@ class UserPanelController < ApplicationController
 		@us_story = UserStory.where(user_id: current_user.id)
 	end
 
+	#twitter widget for displaying tweet
 	def post_to_twitter
 		$sid=params[:id]
 		render :layout => false
   	end
 
+  	#post tweet to twitter
   	def tweet
 		@user_id=current_user.id
-		#raise :test
 		@tweet=twitter_user.twitter.update(params[:p])
-		#raise :test
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
+		@user_story.update(tw_post_id: @tweet.id)
 		
-		
-		if @user_story.nil?
-			@user_story = UserStory.new(tw_post_id: $tid, user_id: current_user.id,story_id: $sid)
-			@user_story.save	
-			@check = true		
-		elsif @user_story.fb_post_id.nil?
-			@user_story.update(tw_post_id: @tweet.id)
-			@check = true
-	    end
-
 		redirect_to dashboard_path
 	end
 
+	#update short url in user_story
 	def bitly
-
-		
 		if !params[:sid].blank?
+			#connect with bitly
 			@url=bitly_hash(params[:sid])
       		
       		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
@@ -81,7 +88,8 @@ class UserPanelController < ApplicationController
 
   	end	
 
-  	#stories shared by user
+
+  	#stories shared by user and stories analytics
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
@@ -95,7 +103,7 @@ class UserPanelController < ApplicationController
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
-			if !ms.tw_post_id.nil?
+			if !ms.tw_post_id.nil? and twitter_user
 				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
 				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
 			end
@@ -135,43 +143,116 @@ class UserPanelController < ApplicationController
 		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
 	end
 
+	#find wallet balance
 	def wallet
 		@u_story=UserStory.where(user_id: current_user.id)
-		@w=Wallet.find_by(user_id: current_user.id)
+
+		#stats calculation
+		@usr_wallet=Wallet.find_by(user_id: current_user.id)
+		@shared_story = UserStory.where(user_id: current_user.id).count
+		#find week earning
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@week_earning=0.0
+		@last_week.each do |l|
+			if l.trans_date > 1.week.ago
+				@week_earning+=l.amt
+			end
+		end
+
+		#find last_withdraw
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
 		
+		#last 10 user transaction
+		@last=UserTransaction.where(user_id: current_user.id).limit(10)
+
 		@total=0.0
 	
-
+		#calculate current earning of user
 		@u_story.each do |us|
 			@story=Story.find_by(id: us.story_id)
-			@click_amt=us.clicks*@story.click_amt
-			@like_amt=us.fb_likes*@story.like_amt
-			@share_amt=us.fb_shares*@story.share_amt
-			@comment_amt=us.fb_comments*@story.comment_amt
-			@fav_amt=us.fav*@story.fav_amt
-			@retweet_amt=us.retweets*@story.retweet_amt
-			@conv_amt=us.conversation*@story.conversation_amt
-			@total+=@click_amt+@like_amt+@share_amt+@comment_amt+@fav_amt+@retweet_amt+@conv_amt
+			@click_bal=(us.clicks-us.old_clicks)*@story.click_amt
+			@like_bal=(us.fb_likes-us.old_likes)*@story.like_amt
+			@share_bal=(us.fb_shares-us.old_shares)*@story.share_amt
+			@comment_bal=(us.fb_comments-us.old_comments)*@story.comment_amt
+			@fav_bal=(us.fav-us.old_fav)*@story.fav_amt
+			@retweet_bal=(us.retweets-us.old_retweets)*@story.retweet_amt
+			us.update(old_clicks: us.clicks,old_likes: us.fb_likes,old_shares: us.fb_shares,old_comments: us.fb_comments,old_fav: us.fav,old_retweets: us.retweets)
+			@total+=@click_bal+@like_bal+@share_bal+@comment_bal+@fav_bal+@retweet_bal
 		end
-		@usr_wallet=Wallet.find_by(user_id: current_user.id)
+		
+		#update wallet
 		
 		if @usr_wallet.nil?
 			@new_wallet=Wallet.new(user_id: current_user.id,balance: @total)
 			@new_wallet.save
-			
-
 		else
-			@usr_wallet.update(balance: @total)
+			@wallet_amt=@total+@usr_wallet.balance
+			@usr_wallet.update(balance: @wallet_amt)
+			
 		end
-		@current=@total-@w.balance
 		
-		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @current,trans_type: 'cr',trans_date: DateTime.now)
+		#update credit transaction
+		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
 		@new_trans.save
 	end
 
+
+	#user details for recharge
+	def recharges
+
+		@recharge=Recharge.new()
+		@recharge_stat=RechargeStat.new()
+	end
+
+	#process recharge request and update transaction deatils
+	def addrecharge
+		@flag=0
+		@wallet=Wallet.find_by(user_id: current_user.id)
+      	if !@wallet.nil?  
+      		if @wallet.balance>= (params[:recharge_stat][:amount]).to_f
+	      		@flag=1
+				@recharge_key=Rails.application.secrets.recharge_api_token
+		    	@url=["https://www.pay2all.in/web-api/get-number?api_token=",@recharge_key,"&number=",params[:recharge][:mobile]].join("")
+		    	@recharge_details=HTTParty.get(@url)
+		    	@provider_id=JSON.parse(@recharge_details.body)["provider_id"]
+		      	@recharge_url=["https://www.pay2all.in/web-api/paynow?api_token=",@recharge_key,"&number=",params[:recharge][:mobile],"&provider_id=",@provider_id,"&amount=",params[:recharge_stat][:amount],"&client_id=",current_user.uid].join("")
+	      	
+		      	#@recharge_status=HTTParty.get(@recharge_url)
+		      	#@rec_stat_data=JSON.parse(@recharge_status.body)
+				
+				#update db related to recharge
+				@recharge_user=Recharge.find_by(user_id: current_user.id)
+				if @recharge_user.nil? or @recharge_user.mobile!=params[:recharge][:mobile]
+					@recharge = Recharge.new(user_id: current_user.id,mobile: params[:recharge][:mobile])
+					@recharge.save
+					@pay_status = RechargeStat.new(recharge_id: @recharge.id,pay_id:@rec_stat_data["payid"] ,amount: params[:recharge_stat][:amount])
+					@pay_status.save
+				else
+					@pay_status = RechargeStat.new(recharge_id: @recharge_user.id, pay_id: @rec_stat_data["payid"],amount: params[:recharge_stat][:amount])
+		      		@pay_status.save
+		      	end
+
+		      	#update debit transaction and wallet
+		      	if @rec_stat_data["status"]=="success"
+		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
+					@new_trans.save
+					
+					@balance=@wallet.balance-@pay_status.amount
+					@wallet.update(balance: @balance)
+				end
+			else
+				@message="Not enough balance"
+			end
+		else
+			@message="Wallet not exist"
+		end
+      	
+    end
+
+	
 	protected # protected methods dont add any public methods below
 
-
+	#bitly connection and get its response
 	def bitly_hash(story_id)
 		extra = {
 			:utm_source => 'NOTSET',

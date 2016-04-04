@@ -9,12 +9,12 @@ class MailSender
     
         require 'sendgrid-ruby'
           sendgrid = SendGrid::Client.new do |c|
-             c.api_key ='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'
+             c.api_key ='secret'
             end
 
           email = SendGrid::Mail.new do |m|
               m.to      =  user_mail
-              m.from    = 'rjv834@gmail.com'
+              m.from    = 'secret'
               m.subject = 'welcome'
               m.html    = '<!DOCTYPE html><html>
 <head>
@@ -135,6 +135,7 @@ end
 
 
 
+	
 
 # 
 

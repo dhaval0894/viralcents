@@ -9,11 +9,11 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">13</div>
+                        <div class="huge"><%=@shared_story%></div>
                         <i class="fa fa-newspaper-o fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
-                        <div class="medium">Shared Stories</div>
+                        <div class="medium">Shared Story</div>
                     </div>
                 </div>
             </div>               
@@ -26,7 +26,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">120</div>
+                        <div class="huge"><%=@wallet_amt%></div>
                         <i class="fa fa-rupee fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
@@ -43,7 +43,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">10</div>
+                        <div class="huge"><%=@week_earning%></div>
                             <i class="fa fa-rupee fa-3x"></i>
                         </div>
                     <div class="col-xs-12 stats-name">
@@ -60,11 +60,15 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-12 stats-num">
-                        <div class="huge">260</div>
+                        <%if @last_withdraw.nil?%>
+                            <div class="huge">0.0</div>
+                        <%else%>
+                            <div class="huge"><%= @last_withdraw.amt%></div>
+                        <%end%>
                         <i class="fa fa-rupee fa-3x"></i>
                     </div>
                     <div class="col-xs-12 stats-name">
-                        <div class="medium">Withdrawl</div>
+                        <div class="medium">Last Withdrawl</div>
                     </div>
                 </div>
             </div>               
