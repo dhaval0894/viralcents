@@ -34,6 +34,11 @@ $(document).ready(function() {
       wrap: 'letter'
   });
 
+  // Tweet on  twitter
+  $("#tweet_btn").click(function(){
+    run();
+  });
+
   // Twitter Alert Box
   $('.twitter_share').click(function() {
       bootbox.alert("Connect with Twitter First");  
@@ -150,3 +155,10 @@ function url_generate(story_id)
 
 };
 
+// Tweet on Twitter
+function run(){
+  var txt = document.getElementById('txt').value;
+
+  window.opener.location.href = "post?p=" + txt;
+  self.close();
+}
