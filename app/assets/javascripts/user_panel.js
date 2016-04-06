@@ -154,4 +154,3 @@ function url_generate(story_id)
   window.location.href = "bitly?sid=" + story_id;
 
 };
-
