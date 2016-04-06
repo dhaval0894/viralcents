@@ -11,7 +11,7 @@ $skinActiveColor: #00284d;
 $skinHeaderBck: #00284d;
 $panelHeaderBck: #00284d;
 $secondary-color: #000000 !default;
-$form-label-color: #000000;
+
 // Active Admin's got SASS!
 @import "bootstrap-sprockets";
 @import "active_admin/mixins";
@@ -24,3 +24,8 @@ $form-label-color: #000000;
 // For example, to change the default status-tag color:
 //	
 //   .status_tag { background: #6090DB; }
+.label
+{
+	color: #5E6469;
+	font-size: 100%;
+}

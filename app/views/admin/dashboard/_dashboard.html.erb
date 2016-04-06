@@ -4,18 +4,18 @@
     <tr>
       <th> S_no </th>
       <th> Story Url</th>
-      <th> Budget </th>
+      <th> Total Budget </th>
       <th> Clicks </th>
       <th> avg_CPC </th>
-      <th> Total_cost </th>
+      <th> Total_cost paid to users </th>
     </tr>
   </thead>
   <tbody>
-    <%stories.each do |s|%>
+    <%stories.each_with_index do |s,i|%>
     <tr>
-        <td> 1 </td>
+        <td> <%=i+1%> </td>
         <td> <%=s.orig_url%> </td>
-        <td> 10rs </td>
+        <td> <%=s.total_budget%> </td>
         <td> 500 </td>
         <td> 0.2p </td>
         <td> 100 </td>

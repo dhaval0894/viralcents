@@ -1,0 +1,47 @@
+<!-- form for new story-->
+
+<li class="url input optional stringish" id="story_orig_url_input">
+	<label for="story_orig_url" class="label">Post url</label>
+	<input id="story_orig_url" name="story[orig_url]" type="url">
+</li>
+
+<input value="1" name="story[admin_user_id]" id="story_admin_user_id" type="hidden">
+
+<li class="number input optional numeric stringish" id="story_total_budget_input">
+	<label for="story_total_budget" class="label">Total budget</label>
+	<input id="story_total_budget" step="any" name="story[total_budget]" type="number">
+</li>	
+
+<li class="number input optional numeric stringish" id="story_click_amt_input">	   <label for="story_click_amt" class="label">Click amt</label>
+	<input id="story_click_amt" step="any" value="0.0" name="story[click_amt]" type="number">
+</li>
+
+<li class="number input optional numeric stringish" id="story_like_amt_input"><label for="story_like_amt" class="label">Like amt</label><input id="story_like_amt" step="any" value="0.0" name="story[like_amt]" type="number">
+
+</li>
+
+<li class="number input optional numeric stringish" id="story_share_amt_input"><label for="story_share_amt" class="label">Share amt</label><input id="story_share_amt" step="any" value="0.0" name="story[share_amt]" type="number">
+
+</li>
+
+<li class="number input optional numeric stringish" id="story_comment_amt_input"><label for="story_comment_amt" class="label">Comment amt</label><input id="story_comment_amt" step="any" value="0.0" name="story[comment_amt]" type="number">
+
+</li>
+
+<li class="number input optional numeric stringish" id="story_fav_amt_input"><label for="story_fav_amt" class="label">Fav amt</label><input id="story_fav_amt" step="any" value="0.0" name="story[fav_amt]" type="number">
+
+</li>
+
+<li class="number input optional numeric stringish" id="story_retweet_amt_input"><label for="story_retweet_amt" class="label">Retweet amt</label><input id="story_retweet_amt" step="any" value="0.0" name="story[retweet_amt]" type="number">
+
+</li>
+	
+<li class="date input optional stringish" id="story_expiry_date_input"><label for="story_expiry_date" class="label">Expiry Date</label><input id="story_expiry_date" name="story[expiry_date]" type="date">
+
+</li>	
+
+<script type= "text/javascript">	
+$('#story_expiry_date').datepicker
+    dateFormat: 'yy-mm-dd'
+</script>
+			
