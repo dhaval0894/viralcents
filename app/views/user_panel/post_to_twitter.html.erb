@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Share a link to twitter</title>
@@ -19,6 +20,8 @@
 	<!-- Mandatory Css -->
 	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 	
+	<%= javascript_include_tag 'application' %>
+
   	<%= csrf_meta_tags %>
 	
 
@@ -26,34 +29,25 @@
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="container">
-	<div class="text-left">
-		<img src="assets/twitter.png" alt="" class="img-responsive">
-	</div>
-	<hr>		
-	<h3 class="text-left text-muted">Share a link with your followers</h2>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<%=  text_area_tag 'query', params[:url], :id => "txt", rows: "3", :class => 'form-control', maxlength: "140" %>
+	<div class="container">
+		<div class="text-left">
+			<img src="assets/twitter.png" alt="" class="img-responsive">
+		</div>
+		<hr>		
+		<h3 class="text-left text-muted">Share a link with your followers</h2>
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<%=  text_area_tag 'query', params[:url], :id => "txt", rows: "3", :class => 'form-control', maxlength: "140" %>
+			</div>
+		</div>
+		<br/>
+		<div class="col-md-3 pull-right">
+			<span id="remaining_char" class="text-muted"></span>
+		 	<a id="tweet_btn" class="btn btn-social-icon btn-twitter">
+	            <strong>Tweet</strong> 
+	        </a>
 		</div>
 	</div>
-	<br/>
-	<div class="col-md-3 pull-right">
-		<span class="text-muted">140</span>
-	 	<a onclick="run()" class="btn btn-social-icon btn-twitter">
-            <strong>Tweet</strong> 
-        </a>
-	</div>
-</div>	
- <script>
-    function run(){
-var txt = document.getElementById('txt').value;
-
-window.opener.location.href = "post?p=" + txt;
-self.close();
-}
-
-
-    </script>
+	<script type="text/javascript" src="assets/post_to_twitter.js"></script>	
 </body>
 </html>
