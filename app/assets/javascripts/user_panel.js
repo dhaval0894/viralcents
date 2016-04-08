@@ -150,3 +150,12 @@ function url_generate(story_id)
 
 };
 
+//share referrer to facebook
+function facebookShare(link, app_id)
+{
+  FB.ui({
+  method: 'feed', 
+  link: link,  
+  href: link,
+  }, function(response){});
+}
