@@ -104,8 +104,15 @@ class UserPanelController < ApplicationController
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
 			if !ms.tw_post_id.nil? and twitter_user
-				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
-				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				#to check whether tweet exist or not
+				@status_url=["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join("")
+				@response=HTTParty.get(@status_url)
+				if !@response==404  #tweet exist
+					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				end
+				#byebug
+				
 			end
 			if !ms.short_url.nil?
 				@url=bitly_hash(ms.story_id)
