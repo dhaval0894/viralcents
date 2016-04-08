@@ -11,12 +11,16 @@ $skinActiveColor: #00284d;
 $skinHeaderBck: #00284d;
 $panelHeaderBck: #00284d;
 $secondary-color: #000000 !default;
+$form-label-color: #000000;
 // Active Admin's got SASS!
+@import "bootstrap-sprockets";
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "active_skin";
+@import "bootstrap";
+@import "font-awesome";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
-//
+//	
 //   .status_tag { background: #6090DB; }

@@ -9,17 +9,12 @@ ActiveAdmin.register_page "Dashboard" do
             column :orig_url
         end
       else
-        table_for Story.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(5) do
-            column :S_no
-            column :orig_url
-            column :budget
-            column :clicks
-            column :avg_CPC
-            column :Total_cost
-            
-        end
+        @stories = Story.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(5)
+        render partial: 'dashboard', locals: {
+          stories: @stories
+        }  
+      end
         
         strong {link_to "View all stories", admin_stories_path}
-      end
   end
 end

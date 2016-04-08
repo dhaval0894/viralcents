@@ -1,8 +1,11 @@
 class Ability
+
+  
   #to set roles for different users in adminUser
   include CanCan::Ability
 
   def initialize(user)
+
     user ||= AdminUser.new
     if user.role == "superadmin"
         can :manage, :all
@@ -11,6 +14,7 @@ class Ability
         can :crud, Story
         can :read, ActiveAdmin::Page, :name => "Dashboard"
     end
+
 
   end
 end
