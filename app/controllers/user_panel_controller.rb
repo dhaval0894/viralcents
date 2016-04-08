@@ -62,7 +62,8 @@ class UserPanelController < ApplicationController
   	#post tweet to twitter
   	def tweet
 		@user_id=current_user.id
-		@tweet=twitter_user.twitter.update(params[:p])
+		@story=Story.find_by(id: $sid)
+		@tweet=twitter_user.twitter.update_with_media(@story.title+" : "+params[:p],open(@story.image_url))
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
