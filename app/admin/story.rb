@@ -2,7 +2,7 @@ ActiveAdmin.register Story do
 # story resource for admin
 	config.filters = false
 	config.batch_actions = false
-	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date
+	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date, :category_id
 	
 	breadcrumb do
   	end
@@ -30,7 +30,7 @@ ActiveAdmin.register Story do
 		  column :comment_amt
 		  column :fav_amt
 		  column :retweet_amt
-
+		  column :category_id
 		  actions
 	end	
 
@@ -41,6 +41,7 @@ ActiveAdmin.register Story do
           f: f
         }  
 	    end
+	    f.inputs :category_id, :as => :select,:multiple => false, :input_html => {:size => 1}
 	    f.actions
 	end	  
 
