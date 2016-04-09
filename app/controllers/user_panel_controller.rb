@@ -49,8 +49,19 @@ class UserPanelController < ApplicationController
         
 	end
 
+	#all stories page
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
+		@categories = Category.all
+		if !params[:category].nil?
+			@category = Category.find(params[:category])
+			@selected = @category["name"]
+			if @selected != "All"
+				@stories = Story.where(category_id: params[:category])
+			else
+				@stories = Story.all
+			end
+		end
 	end
 
 	#twitter widget for displaying tweet

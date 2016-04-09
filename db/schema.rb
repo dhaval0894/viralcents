@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 20160409090719) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
     t.integer "recharge_id"
@@ -75,6 +81,12 @@ ActiveRecord::Schema.define(version: 20160409090719) do
     t.float    "retweet_amt",   default: 0.0
     t.integer  "admin_user_id"
     t.string   "story_status",  default: "active"
+    t.float    "total_budget"
+    t.boolean  "published",     default: false
+    t.string   "category"
+    t.datetime "expiry_date"
+    t.string   "status"
+    t.integer  "category_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -146,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160409090719) do
   add_foreign_key "recharge_stats", "recharges"
   add_foreign_key "recharges", "users"
   add_foreign_key "stories", "admin_users"
+  add_foreign_key "stories", "categories"
   add_foreign_key "transactions", "users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"

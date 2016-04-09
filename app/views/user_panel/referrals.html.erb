@@ -28,7 +28,22 @@
                 <!-- Input field with genrated url -->
                 <input type="text" id="g_url" class="form-control" value="<%= current_user.referral_link %>" readonly>
             <%end%>
-        </div>
+            </div>
+            
+            <!--share referral link to social sites! -->
+            <ul class="list-inline">
+            <!--facebook share -->
+            <li>
+            <a href="" alt="Share on Facebook" onclick="facebookShare('<%= current_user.referral_link%>', '<%= Rails.application.secrets.facebook_app_id%>')" class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
+            </li>
+            
+            <!--twitter share -->
+            <li>
+            <a href="" alt="Share on Twitter" onclick="javascript:window.open('https://twitter.com/intent/tweet?text=Sign up to an amazing app VIRALCENTS!! \r\n &amp;url=<%= current_user.referral_link %>','Twitter-dialog','width=626,height=436'); return false;">
+            <span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter">Tweet</i></span></a>
+            </li>
+            </ul>
+
 </div>
 <hr> 
 
