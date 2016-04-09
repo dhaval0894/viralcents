@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402091800) do
+ActiveRecord::Schema.define(version: 20160409173622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,17 @@ ActiveRecord::Schema.define(version: 20160402091800) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "coupon_title"
+    t.string   "coupon_company_name"
+    t.string   "coupon_company_logo"
+    t.integer  "coupon_amount"
+    t.string   "coupon_description"
+    t.string   "coupon_terms"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
 
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
