@@ -7,6 +7,14 @@ ActiveAdmin.register_page "Dashboard" do
         table_for Story.order("created_at desc").limit(5) do
             column :title
             column :orig_url
+            column :total_budget
+            column :click_amt
+            column :like_amt
+            column :share_amt
+            column :comment_amt
+            column :fav_amt
+            column :retweet_amt
+            actions
         end
       else
         @stories = Story.where(:admin_user_id => current_admin_user.id).order("created_at desc").limit(5)
