@@ -37,6 +37,10 @@ gem "font-awesome-rails"
 
 gem 'httparty'
 
+#image uploading to aws-s3
+gem 'paperclip'
+gem 'aws-sdk'
+
 # Jquery plugin for text excerpt
 gem 'jquery-dotdotdot-rails'
 
@@ -54,7 +58,7 @@ gem 'omniauth-facebook'
 gem 'link_thumbnailer'
 
 # Search, sort and filter
-gem 'listjs-rails'	
+gem 'listjs-rails'  
 
 #for twitter authentication
 gem 'omniauth-twitter', '~> 1.0.1'
@@ -84,4 +88,3 @@ group :development, :test do
   # light-weight development server
   gem 'thin'
 end
-

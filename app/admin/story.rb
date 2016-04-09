@@ -2,7 +2,7 @@ ActiveAdmin.register Story do
 # story resource for admin
 	config.filters = false
 	config.batch_actions = false
-	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id
+	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :story_status
 	
 	breadcrumb do
   	end
@@ -25,8 +25,7 @@ ActiveAdmin.register Story do
 		  id_column
 		  column :orig_url
 		  column :created_at
-		  column :updated_at
-		  column :admin_user_id	
+		  column :total_budget
 		  column :click_amt
 		  column :like_amt
 		  column :share_amt
@@ -34,27 +33,23 @@ ActiveAdmin.register Story do
 		  column :fav_amt
 		  column :retweet_amt
 		  column :story_status
+		  #column :category_id
 		  actions
 	end	
 
 
 	form do |f|
 	    f.inputs "Story" do
-	      f.input :orig_url
-	      f.hidden_field :admin_user_id, value: current_admin_user.id
-	      f.input :click_amt
-	      f.input :like_amt
-	      f.input :share_amt
-	      f.input :comment_amt
-	      f.input :fav_amt
-	      f.input :retweet_amt
-	      #f.select :story_status, [['active'],['pause'],['expire']]
-	      f.input :story_status, :as => :select, 
+
+	      render partial: 'new', locals: {
+          f: f
+        } 
+        f.input :story_status, :as => :select, 
                :label => "Story Status", :include_blank => false,
-               :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]   
-    		  
-	    end
-	    f.actions
-	end	
+               :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
+         end
+		f.actions
+	end
+
 
 end
