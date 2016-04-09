@@ -108,7 +108,7 @@
                 
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->
-                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     
                     <% else %> <!-- If Not connected via twitter -->
                         <a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>

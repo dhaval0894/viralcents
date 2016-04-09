@@ -39,7 +39,8 @@ $(document).ready(function() {
 
   // Twitter Alert Box
   $('.twitter_share').click(function() {
-      bootbox.alert("Connect with Twitter First");  
+      bootbox.alert("Connect with Twitter First"); 
+      window.location = '/settings' 
   });
 
   // Zopim Chat

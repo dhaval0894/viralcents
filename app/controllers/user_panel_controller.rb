@@ -62,7 +62,8 @@ class UserPanelController < ApplicationController
   	#post tweet to twitter
   	def tweet
 		@user_id=current_user.id
-		@tweet=twitter_user.twitter.update(params[:p])
+		@story=Story.find_by(id: $sid)
+		@tweet=twitter_user.twitter.update_with_media(@story.title+" : "+params[:p],open(@story.image_url))
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
@@ -104,8 +105,15 @@ class UserPanelController < ApplicationController
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
 			if !ms.tw_post_id.nil? and twitter_user
-				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
-				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				#to check whether tweet exist or not
+				@status_url=["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join("")
+				@response=HTTParty.get(@status_url)
+				if !@response==404  #tweet exist
+					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				end
+				#byebug
+				
 			end
 			if !ms.short_url.nil?
 				@url=bitly_hash(ms.story_id)
