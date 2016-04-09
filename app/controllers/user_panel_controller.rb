@@ -286,7 +286,7 @@ class UserPanelController < ApplicationController
 
 	#generate thumbnails from the url added
 	def load_story
-		@stories = Story.all
+		@stories = Story.where(story_status: "active")
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?
 				link_data = story.link_thumbnail(story.orig_url)
