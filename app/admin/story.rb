@@ -39,10 +39,11 @@ ActiveAdmin.register Story do
 	    f.inputs "Story" do
 	      render partial: 'new', locals: {
           f: f
-        }  
-	    end
-	    f.inputs :category_id, :as => :select,:multiple => false, :input_html => {:size => 1}
-	    f.actions
-	end	  
+        } 
+
+        f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
+		end 
+		f.actions
+	end
 
 end
