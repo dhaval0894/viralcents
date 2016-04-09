@@ -64,12 +64,6 @@ GEM
     ast (2.2.0)
     autoprefixer-rails (6.3.6)
       execjs
-    aws-sdk (2.2.32)
-      aws-sdk-resources (= 2.2.32)
-    aws-sdk-core (2.2.32)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.2.32)
-      aws-sdk-core (= 2.2.32)
     bcrypt (3.1.11)
     bitly (0.10.4)
       httparty (>= 0.7.6)
@@ -86,11 +80,7 @@ GEM
     builder (3.2.2)
     byebug (8.2.2)
     cancancan (1.13.1)
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
     clipboard-rails (1.5.9)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -149,8 +139,6 @@ GEM
       railties (>= 3.2, < 5)
       responders
     iso8601 (0.9.0)
-    jmespath (1.2.3)
-      json_pure (>= 1.8.1)
     jquery-dotdotdot-rails (1.6.5)
       railties (>= 3.1)
     jquery-rails (4.1.1)
@@ -163,7 +151,6 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
-    json_pure (1.8.3)
     jwt (1.5.1)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -228,12 +215,6 @@ GEM
       omniauth-oauth (~> 1.0)
     open_uri_redirections (0.2.1)
     orm_adapter (0.5.0)
-    paperclip (4.3.6)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (= 0.3.0)
     pg (0.18.4)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
@@ -362,7 +343,6 @@ PLATFORMS
 DEPENDENCIES
   active_skin
   activeadmin!
-  aws-sdk
   bitly
   bootbox-rails (~> 0.4)
   bootstrap-sass (~> 3.3.6)
@@ -380,7 +360,6 @@ DEPENDENCIES
   listjs-rails
   omniauth-facebook
   omniauth-twitter (~> 1.0.1)
-  paperclip
   pg
   pry-rails
   rails (= 4.2.3)

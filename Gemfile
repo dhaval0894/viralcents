@@ -37,10 +37,6 @@ gem "font-awesome-rails"
 
 gem 'httparty'
 
-#image uploading to aws-s3
-gem 'paperclip'
-gem 'aws-sdk'
-
 # Jquery plugin for text excerpt
 gem 'jquery-dotdotdot-rails'
 
