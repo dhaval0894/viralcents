@@ -14,4 +14,6 @@ class Story < ActiveRecord::Base
 		rescue Timeout::Error
 		end
   	end
+
+
 end

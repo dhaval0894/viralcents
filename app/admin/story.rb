@@ -16,6 +16,8 @@ ActiveAdmin.register Story do
     			Story.where(:admin_user_id => current_admin_user.id)      
     		end
 	    end
+
+	    
 	end
 	index do
 		  render partial: 'search'
@@ -31,6 +33,7 @@ ActiveAdmin.register Story do
 		  column :comment_amt
 		  column :fav_amt
 		  column :retweet_amt
+		  column :story_status
 		  actions
 	end	
 
@@ -45,9 +48,13 @@ ActiveAdmin.register Story do
 	      f.input :comment_amt
 	      f.input :fav_amt
 	      f.input :retweet_amt
-
+	      #f.select :story_status, [['active'],['pause'],['expire']]
+	      f.input :story_status, :as => :select, 
+               :label => "Story Status", :include_blank => false,
+               :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]   
+    		  
 	    end
 	    f.actions
-	end	  
+	end	
 
 end
