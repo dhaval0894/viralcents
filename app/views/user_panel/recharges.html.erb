@@ -1,5 +1,5 @@
 <h3 class="page-header text-left"><i class="fa fa-fw fa-mobile"></i> Mobile Recharge</h3>
-<div class="panel panel-theme">
+<div class="panel panel-grey">
   <div class="panel-body">
     <!-- form for recharge details-->
     <%= form_for @recharge, url: {action: "addrecharge"}, html: {class: "form-inline"} do |f| %>
@@ -35,8 +35,36 @@
     <% end %>
   </div>  
 </div>
-<div class="panel panel-theme hide" id="plans">
+<div class="panel panel-grey" id="plans">
   <div class="panel-body">
-    
+    <div class="col-md-3">
+      <ul class="nav nav-tabs nav-stacked">
+        <li role="presentation" class="active text-left"><a href="#">Top Up</a></li>
+        <li role="presentation" class="text-left"><a href="#">Full Talktime</a></li>
+        <li role="presentation" class="text-left"><a href="#">3G Data</a></li>
+        <li role="presentation" class="text-left"><a href="#">2G Data</a></li>
+        <li role="presentation" class="text-left"><a href="#">Roaming</a></li>
+        <li role="presentation" class="text-left"><a href="#">Special Recharge</a></li>
+      </ul>  
+    </div>
+    <div class="col-md-9">  
+      <table class="table">
+        <thead>
+          <th colspan="4">Talktime</th>
+          <th colspan="2">Validity</th>
+          <th>Description</th>
+          <th>Price</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>N/A</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+
   </div>
 </div>  

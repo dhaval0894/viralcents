@@ -2,14 +2,8 @@ $(document).ready(function() {
 	// Find Operator
 	$("#mobNum").keyup(function(){
     	var mobile=document.getElementById('mobNum').value;
-    	if (mobile.length==5){
+    	if (mobile.length>=5){
     		get_operator(mobile);
-      }
-  });
-  $("#mobNum").bind("paste",function(){
-      var mobile=document.getElementById('mobNum').value;
-      if (mobile.length==5){
-        get_operator(mobile);
       }
   });
 });
@@ -28,6 +22,11 @@ function get_plans(numData){
 
 function show_plan(planData){
   $("#plans").removeClass("hide");
+  for(key in planData){
+    if(planData.hasOwnProperty(key)){
+      console.log(key+":"+planData[key]);
+    }  
+  }
 }
 
 function get_operator(mobile){
