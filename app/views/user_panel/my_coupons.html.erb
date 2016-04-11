@@ -1,0 +1,17 @@
+
+
+<h1> My Coupons </h1>
+
+<hr>
+
+ <% @my_coupons.each do |f| %>
+
+
+<div class="jumbotron">
+ 	     <% coupon_data = Coupon.find(f) %>
+
+ 	     <%= coupon_data.coupon_title %>
+</div>
+
+ 	<% end %>
+

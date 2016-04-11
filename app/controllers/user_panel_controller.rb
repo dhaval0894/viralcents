@@ -31,6 +31,42 @@ class UserPanelController < ApplicationController
 	end
 
 
+   #coupons
+		    def show_coupons
+		     	@coupons = Coupon.all.order("created_at DESC")
+
+		    end
+		       
+		    def my_coupons
+		     	   @my_coupons = []
+		     	   
+		     	   @all_coupons =  Mapcoupon.all
+		     	   
+		     	   @all_coupons.each do |f|
+		     	  		
+				     	  	if f.user_id.to_i == current_user.id
+				     	  		@my_coupons.push(f.coupon_id)
+				     	  	else
+				     	  		@my_coupons = "else"
+				     	  	end
+				    end	
+            end
+
+		    def map_coupon
+			     	 @mapcoupon_new = Mapcoupon.new
+	                 @mapcoupon_new.user_id = params[:user_id]
+	                 @mapcoupon_new.coupon_id =  params[:coupon_id]
+	                 if @mapcoupon_new.save
+	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
+	                 else
+	                 redirect_to show_coupons_path ,notice: 'Something went wrong'
+	                 end 
+	        end
+   
+   #coupons end
+
+
+
 	def settings
 
 		@user_email = params[:email]  # email after form submit
