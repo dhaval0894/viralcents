@@ -13,10 +13,10 @@ class SessionsController < ApplicationController
           @u = User.find(user.id)
           @u.update(referrer: ref["ref"].join(",")[5..-6])
         end      
-  	else
+    else
         @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash)
-  		  session[:tuser_id]=@twitter_user.id
-  	end
+        session[:tuser_id]=@twitter_user.id
+    end
     redirect_to '/dashboard'
   end
 
@@ -30,6 +30,6 @@ class SessionsController < ApplicationController
   protected
 
   def auth_hash
-  	request.env['omniauth.auth']
+    request.env['omniauth.auth']
   end
 end

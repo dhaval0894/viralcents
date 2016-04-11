@@ -35,4 +35,10 @@ Rails.application.routes.draw do
   #get unique url per user per story
   get 'bitly' => 'user_panel#bitly'
   post 'add_referral_link' => "user_panel#add_referral_link"
+   
+   #show coupons in coupons page
+   get 'show_coupons' =>'user_panel#show_coupons'
+   get 'my_coupons' =>'user_panel#my_coupons'
+   post 'map_coupon' =>'user_panel#map_coupon'
+
 end

@@ -6,7 +6,8 @@ $(document).ready(function() {
 
   // Facebook Alert Box
   $('.facebook_share').click(function() {
-      bootbox.alert("Generate URL First");  
+      bootbox.alert("Generate URL First");
+       
   });
 
   // Facebook Logout

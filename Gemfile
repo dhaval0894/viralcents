@@ -22,6 +22,13 @@ gem 'sinatra' ,require: false
 
 gem 'slim'
 
+gem 'carrierwave'
+
+gem 'fog'
+
+gem "figaro", "~> 0.7.0"
+# Use jquery as the JavaScript library
+
 
 # Bootstrap For rails
 gem 'bootstrap-sass', '~> 3.3.6'

@@ -19,6 +19,7 @@ ActiveAdmin.register Story do
 
 	    
 	end
+	
 	index do
 		  render partial: 'search'
 		  selectable_column
