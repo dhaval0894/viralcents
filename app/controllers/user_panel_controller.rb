@@ -305,6 +305,7 @@ class UserPanelController < ApplicationController
 
 	#generate thumbnails from the url added
 	def load_story
+		#select only active stories
 		@stories = Story.where(story_status: "active")
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?

@@ -37,7 +37,7 @@ ActiveAdmin.register Story do
 		  actions
 	end	
 
-
+	#form fields for new story
 	form do |f|
 	    f.inputs "Story" do
 
@@ -48,7 +48,8 @@ ActiveAdmin.register Story do
         f.input :story_status, :as => :select, 
                :label => "Story Status", :include_blank => false,
                :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
-         
+        
+        #form field for category
 		f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
 		end 
 
