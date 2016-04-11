@@ -49,8 +49,19 @@ class UserPanelController < ApplicationController
         
 	end
 
+	#all stories page
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
+		@categories = Category.all
+		if !params[:category].nil?
+			@category = Category.find(params[:category])
+			@selected = @category["name"]
+			if @selected != "All"
+				@stories = Story.where(category_id: params[:category])
+			else
+				@stories = Story.all
+			end
+		end
 	end
 
 	#twitter widget for displaying tweet
@@ -294,7 +305,7 @@ class UserPanelController < ApplicationController
 
 	#generate thumbnails from the url added
 	def load_story
-		@stories = Story.all
+		@stories = Story.where(story_status: "active")
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?
 				link_data = story.link_thumbnail(story.orig_url)
