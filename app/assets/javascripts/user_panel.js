@@ -134,16 +134,16 @@ function search_panel(){
 
   var storyList = new List('stories', options);
 
-  $('#filter-category').change(function () {
-      var selection = this.value;
-      if (selection) {
-          storyList.filter(function(item) {
-              return (item.values().category == selection);
-          });
-      } else {
-          storyList.filter();
-      }
-  });
+  // $('#filter-category').change(function () {
+  //     var selection = this.value;
+  //     if (selection) {
+  //         storyList.filter(function(item) {
+  //             return (item.values().category == selection);
+  //         });
+  //     } else {
+  //         storyList.filter();
+  //     }
+  // });
 }
 
 // Shortened Url for story
