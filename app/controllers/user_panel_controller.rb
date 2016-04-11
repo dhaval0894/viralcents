@@ -59,14 +59,19 @@ class UserPanelController < ApplicationController
 	                 @mapcoupon_new.coupon_id =  params[:coupon_id]
 
 	                 if @mapcoupon_new.save
+	                 	#deduct coupon amt from wallet amt 
 	                 	@coupon=Coupon.find_by(id: params[:coupon_id])
 		                @c_amt=@coupon.coupon_amount
 		                @wallet=Wallet.find_by(user_id: params[:user_id])
 		                @w_amt=@wallet.balance-@c_amt
 		                @wallet.update(balance: @w_amt)
+		                #do transaction entry
+	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'debit',trans_date: DateTime.now)
+						@new_trans.save
+
 	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
 	                 else
-	                 redirect_to show_coupons_path ,notice: 'Something went wrong'
+	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
 	                 end 
 	        end
    
