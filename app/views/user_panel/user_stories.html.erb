@@ -1,6 +1,6 @@
 <div id="stories">
 	<!-- Search, filter panel -->
-	<%= render 'searchbox' %>
+	<%= render 'searchbox', categories: @categories, selected: @selected %>
 
 	<!-- All stories panel -->
 	<div class="row admin-row list">

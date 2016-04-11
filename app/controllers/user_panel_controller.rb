@@ -2,6 +2,7 @@ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
+	before_action :category_check, only: [:stories, :user_stories]
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
@@ -52,16 +53,6 @@ class UserPanelController < ApplicationController
 	#all stories page
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
-		@categories = Category.all
-		if !params[:category].nil? and params[:category] != ""
-			@category = Category.find(params[:category])
-			@selected = @category["name"]
-			if @selected != "All"
-				@stories = Story.where(category_id: params[:category])
-			else
-				@stories = Story.all
-			end
-		end
 	end
 
 	#twitter widget for displaying tweet
@@ -290,6 +281,20 @@ class UserPanelController < ApplicationController
 
 	private  # private methods dont add any public code below
     
+    #categories drop down for story page
+    def category_check
+    	@categories = Category.all
+		if !params[:category].nil? and params[:category] != ""
+			@category = Category.find(params[:category])
+			@selected = @category["name"]
+			if @selected != "All"
+				@stories = Story.where(category_id: params[:category])
+			else
+				@stories = Story.all
+			end
+		end
+    end
+
 	#check whether user is logged in
 	def check_user
 		if current_user.nil?
