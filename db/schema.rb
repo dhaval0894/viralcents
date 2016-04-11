@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "coupon_title"
+    t.string   "coupon_company_name"
+    t.string   "coupon_company_logo"
+    t.integer  "coupon_amount"
+    t.string   "coupon_description"
+    t.string   "coupon_terms"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
     t.integer "recharge_id"

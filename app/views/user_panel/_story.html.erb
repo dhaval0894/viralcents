@@ -90,7 +90,7 @@
                     <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
 
                 <%else%> <!-- If story is not shared on facebook -->
-                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a> 
+                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook ">Share</i> </a> 
                 <%end%> 
             </li>
 
@@ -104,7 +104,7 @@
                 <%end%>
                 
                 <% if i==1 %> <!-- If Story is already Tweeted on Twitter -->
-                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class = "disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter disabled"><i class="fa fa-twitter"> Tweet</i></span></a>
+                    <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" href="/tweet?id=<%= story.id%>&url=<%= @u %>"><i class="fa fa-twitter"> Tweet</i></a>
                 
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->

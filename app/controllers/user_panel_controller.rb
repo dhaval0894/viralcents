@@ -105,7 +105,6 @@ class UserPanelController < ApplicationController
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
-
 		i=0
 		@my_story.each do |ms|
 			#add all stories to the list
