@@ -68,8 +68,8 @@ function fbLogout() {
           console.log("signing out")
           console.log(response.authResponse)
           FB.logout();
-          window.location = '/signout'
         }
+        window.location = '/signout';
     });
 }
 

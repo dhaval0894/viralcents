@@ -53,7 +53,7 @@ class UserPanelController < ApplicationController
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
 		@categories = Category.all
-		if !params[:category].nil?
+		if !params[:category].nil? and params[:category] != ""
 			@category = Category.find(params[:category])
 			@selected = @category["name"]
 			if @selected != "All"
