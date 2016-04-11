@@ -37,10 +37,15 @@ ActiveAdmin.register Story do
 
 	form do |f|
 	    f.inputs "Story" do
-	      render partial: 'new', locals: {
-          f: f
-        } 
-
+	      f.input :orig_url, :label => "Post URL"
+	      f.hidden_field :admin_user_id, value: current_admin_user.id
+	      f.input :total_budget
+	      f.input :click_amt
+	      f.input :like_amt
+	      f.input :share_amt
+	      f.input :comment_amt
+	      f.input :fav_amt
+	      f.input :retweet_amt
         f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
 		end 
 		f.actions
