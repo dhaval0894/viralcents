@@ -44,7 +44,7 @@
 
         <%else%> <!-- For Generating Shorten URL -->
             <span class="input-group-addon">
-                <button class='btn btn-primary btn-xs' onclick="url_generate(<%= story.id %>)">
+                <button id="gen_link" class='btn btn-primary btn-xs' data-story-id='<%= story.id %>'>
                     <i class="fa fa-link"></i>
                 </button>
             </span>
@@ -87,7 +87,7 @@
             <!-- Facebook Sharing button --> 
             <li>
                 <% if i==1 %> <!-- If story is already shared on facebook -->
-                    <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
+                    <a id="fb_<%=story.id%>" href="#" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
 
                 <%else%> <!-- If story is not shared on facebook -->
                     <a id="fb_<%=story.id%>" href="#" onclick= 'share_to_fb("<%= @u %>","<%= story.id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a> 
@@ -97,7 +97,7 @@
             <!-- Twitter Sharing Button -->
             <li>
                 <% i=0 %>
-                <%@us_story.each do |usr_str|%>
+            `    <%@us_story.each do |usr_str|%>
                     <%if usr_str.story_id == story.id && !usr_str.tw_post_id.nil?%>
                         <% i=1 %>      
                     <%end%>    
