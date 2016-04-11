@@ -39,6 +39,9 @@ class UserPanelController < ApplicationController
 		    end
 		       
 		    def my_coupons
+		    	if $i !=0
+		    		$message="yes"
+		    	end
 		     	   @my_coupons = []
 		     	   
 		     	   @all_coupons =  Mapcoupon.all
@@ -50,10 +53,12 @@ class UserPanelController < ApplicationController
 				     	  	else
 				     	  		@my_coupons = "else"
 				     	  	end
-				    end	
+				    end
+				    $i=1	
             end
 
 		    def map_coupon
+		    	$i =0
 		    	@coupon=Coupon.find_by(id: params[:coupon_id])
 		        @c_amt=@coupon.coupon_amount
 		        @wallet=Wallet.find_by(user_id: params[:user_id])
@@ -69,13 +74,15 @@ class UserPanelController < ApplicationController
 		                #do transaction entry
 	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'debit',trans_date: DateTime.now)
 						@new_trans.save
-
+						$massage="yes"
 	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
 	                 else
 	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
 	                 end 
 	            else
-	            	redirect_to show_coupons_path ,notice: 'Not enough balance'
+	            	#if not enough balance
+	            	$message="not"
+	            	redirect_to my_coupons_path ,notice: 'Not enough balance'
 	            end
 	        end
    
