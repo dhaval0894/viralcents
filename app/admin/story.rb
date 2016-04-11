@@ -49,7 +49,7 @@ ActiveAdmin.register Story do
 	      f.input :comment_amt
 	      f.input :fav_amt
 	      f.input :retweet_amt
-        f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
+          f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
 		end 
 
 		f.actions
