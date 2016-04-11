@@ -2,7 +2,7 @@ ActiveAdmin.register Story do
 # story resource for admin
 	config.filters = false
 	config.batch_actions = false
-	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :story_status
+	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date, :category_id, :story_status
 	
 	breadcrumb do
   	end
@@ -33,7 +33,7 @@ ActiveAdmin.register Story do
 		  column :fav_amt
 		  column :retweet_amt
 		  column :story_status
-		  #column :category_id
+		  column :category_id
 		  actions
 	end	
 
@@ -44,10 +44,14 @@ ActiveAdmin.register Story do
 	      render partial: 'new', locals: {
           f: f
         } 
+
         f.input :story_status, :as => :select, 
                :label => "Story Status", :include_blank => false,
                :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
-         end
+         
+		f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
+		end 
+
 		f.actions
 	end
 

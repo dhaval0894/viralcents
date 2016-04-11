@@ -11,7 +11,7 @@ $skinActiveColor: #00284d;
 $skinHeaderBck: #00284d;
 $panelHeaderBck: #00284d;
 $secondary-color: #000000 !default;
-$form-label-color: #000000;
+
 // Active Admin's got SASS!
 @import "bootstrap-sprockets";
 @import "active_admin/mixins";
@@ -28,4 +28,6 @@ $form-label-color: #000000;
 {
 	color: #5E6469;
 	font-size: 100%;
+
 }
+

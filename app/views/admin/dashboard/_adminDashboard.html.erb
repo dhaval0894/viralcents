@@ -1,0 +1,33 @@
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th> S_no </th>
+      <th> Title</th>
+      <th> Original url</th>
+      <th> Total Budget</th>
+      <th> Click amt</th>
+      <th> Like amt</th>
+      <th> Share amt</th>
+      <th> Comment amt</th>
+      <th> Fav amt</th>
+      <th> Retweet amt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%stories.each_with_index do |s,i|%>
+    <tr>
+        <td> <%=i+1%> </td>
+        <td><%= s.title%> </td>
+        <td> <%=s.orig_url%> </td>
+        <td> <%=s.total_budget%> </td>
+        <td> <%=s.click_amt%> </td>
+        <td> <%=s.like_amt%> </td>
+        <td> <%=s.share_amt%> </td>
+        <td> <%=s.comment_amt%> </td>
+        <td> <%=s.fav_amt%> </td>
+        <td> <%=s.retweet_amt%> </td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
