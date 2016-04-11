@@ -1,69 +1,69 @@
 (function(){
 
   $(document).ready(function() {
-
     // Clipboard copy instance
     new Clipboard('.my_clip_button');
+  });  
 
     /*---- Function Calls ----*/
-      // Facebook Alert Box
-      $('.facebook_share').click(function() {
-          bootbox.alert("Generate URL First");  
+      // Facebook/Twitter Alert Box
+      $(document).on("click", ".so_share", function(){
+          bootbox.alert("Generate URL First");
       });
 
       // Facebook Logout
-      $('#fb_logout').click(function(){
-          fbLogout();  
-      });
+      $(document).on("click", "#fb_logout", fbLogout);
 
       // Facebook Share
-      $('.fb_share').click(function(){
-          share_to_fb($(this).data('story-url'),$(this).data('story-id'));
+      $(document).on("click", ".fb_share", function(){
+          share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
       });
-
+      
       // Generate Url
-      $('.gen_link').click(function(){
-          url_generate($(this).data('story-id'));    
+      $(document).on("click", ".gen_link", function(){
+          url_generate($(this).data('story-id'));
       });
       
       //menu-toggle
-      $("#menu-toggle").click(function(e) {
+      $(document).on("click", "#menu-toggle", function(e) {
           e.preventDefault();
           $("#wrapper").toggleClass("toggled");
       });
 
       // Search Panel 
-      search_panel();
+      $(document).on("ready",search_panel);
 
       // Story rate popover
-      $('[data-toggle="popover"]').popover({
-          html : true,
+      $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({
+            html : true,
 
-          content: function() {
-            return $('#popover_content_wrapper').html();
-          }
-      });
+            content: function() {
+              return $('#popover_content_wrapper').html();
+            }
+        });
+      });  
 
       // Story title excerpt
-      $(".caption").dotdotdot({
-          wrap: 'letter'
+      $(document).on("dotdotdot", ".caption", function(){
+          wrap: 'letter'  
       });
 
       // Twitter Alert Box
-      $('.twitter_share').click(function() {
-          bootbox.alert("Connect with Twitter First"); 
-          window.location = '/settings' 
+      $(document).on("click", ".twitter_share", function(){ 
+          bootbox.dialog({
+            title: "Connect With Twitter First",
+            message: '<a class="btn btn-block btn-social-icon btn-sm btn-twitter" id="sign_in" href="/auth/twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a>'
+          });  
       });
 
       // Twitter Share Window
-      $('.tw_share').click(function(){
-          twShareWindow();
-      });
+      $(document).on("click", ".tw_share", twShareWindow);
 
       // Zopim Chat
-      zopim_chat();
+      $(document).on("ready", zopim_chat);
 
-  });
+  
 
     
   /*---- Function Definition ----*/
