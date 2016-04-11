@@ -50,8 +50,8 @@ ActiveAdmin.register Story do
 	      f.input :fav_amt
 	      f.input :retweet_amt
 	      f.input :story_status, :as => :select, 
--               :label => "Story Status", :include_blank => false,
--               :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
+                :label => "Story Status", :include_blank => false,
+                :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
           f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
 		end 
 
