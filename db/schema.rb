@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409090719) do
+ActiveRecord::Schema.define(version: 20160411062452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,9 +83,7 @@ ActiveRecord::Schema.define(version: 20160409090719) do
     t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
-    t.string   "category"
     t.datetime "expiry_date"
-    t.string   "status"
     t.integer  "category_id"
   end
 
