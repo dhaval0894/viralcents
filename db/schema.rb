@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409070520) do
+ActiveRecord::Schema.define(version: 20160411062452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,21 +70,21 @@ ActiveRecord::Schema.define(version: 20160409070520) do
   create_table "stories", force: :cascade do |t|
     t.string   "title"
     t.string   "orig_url"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "image_url"
-    t.integer  "admin_user_id"
     t.float    "click_amt",     default: 0.0
     t.float    "like_amt",      default: 0.0
     t.float    "share_amt",     default: 0.0
     t.float    "comment_amt",   default: 0.0
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
+    t.integer  "admin_user_id"
+    t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
-    t.string   "category"
     t.datetime "expiry_date"
-    t.string   "status"
+    t.integer  "category_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -111,8 +111,8 @@ ActiveRecord::Schema.define(version: 20160409070520) do
     t.integer  "fb_likes",     default: 0
     t.integer  "fb_shares",    default: 0
     t.integer  "fb_comments",  default: 0
-    t.integer  "fav",          default: 0
     t.integer  "retweets",     default: 0
+    t.integer  "fav",          default: 0
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",               null: false
@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(version: 20160409070520) do
     t.string   "email"
     t.string   "referrer"
     t.string   "referral_link"
-    t.string   "role"
   end
 
   create_table "wallets", force: :cascade do |t|
@@ -157,6 +156,7 @@ ActiveRecord::Schema.define(version: 20160409070520) do
   add_foreign_key "recharge_stats", "recharges"
   add_foreign_key "recharges", "users"
   add_foreign_key "stories", "admin_users"
+  add_foreign_key "stories", "categories"
   add_foreign_key "transactions", "users"
   add_foreign_key "twitter_users", "users"
   add_foreign_key "user_stories", "stories"

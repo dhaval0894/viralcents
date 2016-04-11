@@ -20,6 +20,9 @@ $(document).ready(function() {
     $("#wrapper").toggleClass("toggled");
   });
 
+  // Search Panel 
+  search_panel();
+
   // Story rate popover
   $('[data-toggle="popover"]').popover({
       html : true,
@@ -36,7 +39,8 @@ $(document).ready(function() {
 
   // Twitter Alert Box
   $('.twitter_share').click(function() {
-      bootbox.alert("Connect with Twitter First");  
+      bootbox.alert("Connect with Twitter First"); 
+      window.location = '/settings' 
   });
 
   // Zopim Chat
@@ -122,23 +126,25 @@ function generate_ref_url(uid, root_p)
   });
 }
 
-// Search and Filter for story-list.js
-var options = {
-  valueNames: ['title','category','date']
-};
+// Search and Filter for story using list.js
+function search_panel(){
+  var options = {
+    valueNames: ['title','category','date']
+  };
 
-var storyList = new List('stories', options);
+  var storyList = new List('stories', options);
 
-$('#filter-category').change(function () {
-    var selection = this.value;
-    if (selection) {
-        storyList.filter(function(item) {
-            return (item.values().category == selection);
-        });
-    } else {
-        storyList.filter();
-    }
-});
+  $('#filter-category').change(function () {
+      var selection = this.value;
+      if (selection) {
+          storyList.filter(function(item) {
+              return (item.values().category == selection);
+          });
+      } else {
+          storyList.filter();
+      }
+  });
+}
 
 // Shortened Url for story
 function url_generate(story_id)
@@ -159,3 +165,4 @@ function facebookShare(link, app_id)
   href: link,
   }, function(response){});
 }
+

@@ -2,7 +2,7 @@ ActiveAdmin.register Story do
 # story resource for admin
 	config.filters = false
 	config.batch_actions = false
-	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date, :category_id
+	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date, :category_id, :story_status
 	
 	breadcrumb do
   	end
@@ -16,6 +16,8 @@ ActiveAdmin.register Story do
     			Story.where(:admin_user_id => current_admin_user.id)      
     		end
 	    end
+
+	    
 	end
 	index do
 		  render partial: 'search'
@@ -30,14 +32,15 @@ ActiveAdmin.register Story do
 		  column :comment_amt
 		  column :fav_amt
 		  column :retweet_amt
+		  column :story_status
 		  column :category_id
 		  actions
 	end	
 
-
+	#form fields for new story
 	form do |f|
 	    f.inputs "Story" do
-	      f.input :orig_url, :label => "Post URL"
+		  f.input :orig_url, :label => "Post URL"
 	      f.hidden_field :admin_user_id, value: current_admin_user.id
 	      f.input :total_budget
 	      f.input :click_amt
@@ -48,7 +51,9 @@ ActiveAdmin.register Story do
 	      f.input :retweet_amt
         f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
 		end 
+
 		f.actions
 	end
+
 
 end

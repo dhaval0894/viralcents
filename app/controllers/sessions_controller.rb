@@ -22,7 +22,6 @@ class SessionsController < ApplicationController
 
   def destroy
     #destroy all session variables on logout
-    session[:tuser_id] = nil
     session[:user_id] = nil
     redirect_to root_url
     # redirect_to '/dashboard'
