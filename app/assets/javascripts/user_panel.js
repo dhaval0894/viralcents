@@ -6,7 +6,8 @@ $(document).ready(function() {
 
   // Facebook Alert Box
   $('.facebook_share').click(function() {
-      bootbox.alert("Generate URL First");  
+      bootbox.alert("Generate URL First");
+       
   });
 
   // Facebook Logout
@@ -39,7 +40,8 @@ $(document).ready(function() {
 
   // Twitter Alert Box
   $('.twitter_share').click(function() {
-      bootbox.alert("Connect with Twitter First");  
+      bootbox.alert("Connect with Twitter First"); 
+      window.location = '/settings' 
   });
 
   // Zopim Chat
@@ -154,3 +156,14 @@ function url_generate(story_id)
   window.location.href = "bitly?sid=" + story_id;
 
 };
+
+//share referrer to facebook
+function facebookShare(link, app_id)
+{
+  FB.ui({
+  method: 'feed', 
+  link: link,  
+  href: link,
+  }, function(response){});
+}
+
