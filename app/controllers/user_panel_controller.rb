@@ -54,16 +54,17 @@ class UserPanelController < ApplicationController
             end
 
 		    def map_coupon
-			     	 @mapcoupon_new = Mapcoupon.new
-	                 @mapcoupon_new.user_id = params[:user_id]
-	                 @mapcoupon_new.coupon_id =  params[:coupon_id]
-
-	                 if @mapcoupon_new.save
+		    	@coupon=Coupon.find_by(id: params[:coupon_id])
+		        @c_amt=@coupon.coupon_amount
+		        @wallet=Wallet.find_by(user_id: params[:user_id])
+		        #redeem coupon if enough wallet balance 
+		        if @c_amt <= @wallet.balance
+					@mapcoupon_new = Mapcoupon.new
+	                @mapcoupon_new.user_id = params[:user_id]
+	                @mapcoupon_new.coupon_id =  params[:coupon_id]
+					if @mapcoupon_new.save
 	                 	#deduct coupon amt from wallet amt 
-	                 	@coupon=Coupon.find_by(id: params[:coupon_id])
-		                @c_amt=@coupon.coupon_amount
-		                @wallet=Wallet.find_by(user_id: params[:user_id])
-		                @w_amt=@wallet.balance-@c_amt
+	                 	@w_amt=@wallet.balance-@c_amt
 		                @wallet.update(balance: @w_amt)
 		                #do transaction entry
 	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'debit',trans_date: DateTime.now)
@@ -73,6 +74,9 @@ class UserPanelController < ApplicationController
 	                 else
 	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
 	                 end 
+	            else
+	            	redirect_to show_coupons_path ,notice: 'Not enough balance'
+	            end
 	        end
    
    #coupons end
