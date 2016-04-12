@@ -39,15 +39,15 @@
             <!-- Social Sharing Button -->                             
             <ul class="list-inline">
                 <li>
-                    <%if !ms[2].nil?%>
-                        <a id="fb_<%=ms[0].id%>" href="#" onclick= 'share_to_fb("<%= ms[1] %>","<%= ms[0].id%>");' class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <%if !ms[2].nil?%><!--if shared on facebook-->
+                        <a id="fb_<%=ms[0].id%>" href="#"  class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
                     <%else%>
-                        <a id="fb_<%=ms[0].id%>" href="#" onclick= 'share_to_fb("<%= ms[1] %>","<%= ms[0].id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
-                        <%end%>
+                        <a id="fb_<%=ms[0].id%>" href="#" onclick= 'share_to_fb("<%= ms[1] %>","<%= ms[0].id%>");' class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a> 
+                        <% end %>
                 </li>
                 <li>
-                    <% if !ms[3].nil? %>
-                        <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" href="/tweet?id=<%= ms[0].id%>&url=<%= ms[1] %>"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <% if !ms[3].nil? %><!--if shared on twitter-->
+                        <a  class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" href="#"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
                     <%else%>
                         <%if twitter_user %> <!-- If connected via twitter -->
                         <a target="popup" onclick="window.open('', 'popup', 'width=580,height=360,scrollbars=no, toolbar=no,status=no,resizable=yes,menubar=no,location=no,directories=no,top=10,left=10')" href="/tweet?id=<%= ms[0].id%>&url=<%= ms[0].title+' : '+ms[1] %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
