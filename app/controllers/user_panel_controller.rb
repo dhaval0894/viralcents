@@ -80,7 +80,7 @@ class UserPanelController < ApplicationController
 	                 	@w_amt=@wallet.balance-@c_amt
 		                @wallet.update(balance: @w_amt)
 		                #do transaction entry
-	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'debit',trans_date: DateTime.now)
+	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'coupon',trans_date: DateTime.now)
 						@new_trans.save
 						$massage="yes"
 	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
