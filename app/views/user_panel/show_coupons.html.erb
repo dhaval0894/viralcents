@@ -1,35 +1,32 @@
 
 <h1> Coupons available for you </h1>
-
-
 <hr>
 
-<div class="well">
+<style type="text/css">
+	
+	#demo
+	{
+            background-image:url('assets/coupon1.jpg');
+            color: #fff;
+	}
+</style>
+
 
 
 <% @coupons.each do |coupon| %>
+<div class="well" id="demo" >
  
-  <%= image_tag coupon.coupon_company_logo ,:height=>"100px", 
-:width=>"100px" %> <br>
 
-<%= coupon.coupon_title %> <br>
+<div class="text-left"> <h2 style="color: #fff">  <%= coupon.coupon_title %>  </h2></div>
 
 
-<%= coupon.coupon_amount %> <br>
+<div class="text-left"> <h2 style="color:#fff"> By <i class="fa fa-hand fa-2x"></i> <%= coupon.coupon_company_name %> </h2> </div> 
 
-<%= coupon.coupon_company_name %><br>
+<% if coupon.coupon_amount %>
+<div class="text-left"> Only For <%= coupon.coupon_amount %> </div> 
+<% end %>
 
-<%= coupon.coupon_description %><br>
 
-
-
-<p class="row col-sm-10">
-
-<p class="col-sm-3">
-<button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom" data-content="<%= coupon.coupon_terms %>">
-  TERMS  
-</button>
-</p>
 
 <% $coupon =  coupon.id %>
 
@@ -39,16 +36,29 @@ end
 %>
 
 
-<p class="col-sm-3">
+
+
+<p class="row col-sm-12">
+
+<p class="col-sm-3 col-sm-pull-1">
+  <%= image_tag coupon.coupon_company_logo ,:width=>"100px",:height=>"70px" ,:class=>"img-rounded" %>
+</p>
+
+
+
+<p class="col-sm-4 ">
 <%= form_tag("/map_coupon", method: "post") do %>
-<br>
 <%= hidden_field_tag 'user_id' , current_user.id %>
-
 <%= hidden_field_tag 'coupon_id' , coupon_tag  %>
+<button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom" data-content= "Description <br><%= coupon.coupon_description %> <hr> Terms
+<br> <%= coupon.coupon_terms %> <br> so"  >
+  TERMS  & Conditions
+</button>
 
-  <%= submit_tag "REDEEM", :class => "btn btn-info"  %>
+ <%= submit_tag "REDEEM", :class => "btn btn-info"  %>
 <% end %>
 </p>
+
 </p>
 
 
