@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         url = request.referrer
         uri = URI.parse(url) rescue nil
         ref = CGI.parse(uri.query) rescue nil
-        if ref !=nil and user.referrer.nil? and user.uid != ref["ref"].join(",")[5..-6]
+        if ref !=nil and user.referrer.nil? and user.uid != ref["ref"].join(",")[5..-6] and user.uid
           @u = User.find(user.id)
           @u.update(referrer: ref["ref"].join(",")[5..-6])
         end      
