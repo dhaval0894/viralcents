@@ -1,42 +1,41 @@
 ActiveAdmin.register Story do
 # story resource for admin
-	config.filters = false
+	#config.filters = false
 	config.batch_actions = false
 	permit_params :title, :orig_url, :click_amt, :like_amt,:share_amt,:comment_amt,:fav_amt,:retweet_amt,:conversation_amt,:admin_user_id, :total_budget, :expiry_date, :category_id, :story_status
 	
 	breadcrumb do
   	end
 
+  	#filters
+  	filter :orig_url
+  	filter :category
+  	filter :story_status
+  	filter :created_at
+
 	controller do
 	    def scoped_collection
 	    	#show all for superadmin
 	    	if current_admin_user.role == "superadmin"
-	    		Story.all
+				Story.all
 	    	else
     			Story.where(:admin_user_id => current_admin_user.id)      
     		end
 	    end
-
 	    
 	end
+
 	index do
-		  render partial: 'search'
 		  selectable_column
 		  id_column
 		  column :orig_url
 		  column :created_at
 		  column :total_budget
-		  column :click_amt
-		  column :like_amt
-		  column :share_amt
-		  column :comment_amt
-		  column :fav_amt
-		  column :retweet_amt
 		  column :story_status
 		  column :category_id
 		  actions
 	end	
-
+	
 	#form fields for new story
 	form do |f|
 	    f.inputs "Story" do
