@@ -34,8 +34,16 @@ class UserPanelController < ApplicationController
 
    #coupons
 		    def show_coupons
-		     	@coupons = Coupon.all.order("created_at DESC")
-
+		    	@coupons=[]
+		    	@my_coupons=Mapcoupon.pluck(:coupon_id)
+		    	@all_coupons = Coupon.all.order("created_at DESC")
+		     	#remove redeem coupons from all coupons list
+		     	@all_coupons.each do |c|
+		     		if !@my_coupons.include?c.id.to_s
+		     			@coupons.append(c)
+		     		end
+		     	end
+		     	
 		    end
 		       
 		    def my_coupons
