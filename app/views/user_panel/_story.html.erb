@@ -90,7 +90,7 @@
                     <a id="fb_<%=story.id%>" href="#" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i></a>
 
                 <%else%> <!-- If story is not shared on facebook -->
-                    <a id="fb_<%=story.id%>" href="#" onclick= '' class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= @u%>' data-story-id='<%= story.id %>'><i class="fa fa-facebook"> Share</i></a> 
+                    <a id="fb_<%=story.id%>" href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= @u%>' data-story-id='<%= story.id %>'><i class="fa fa-facebook"> Share</i></a> 
                 <%end%> 
             </li>
 
