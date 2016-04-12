@@ -12,6 +12,12 @@ class SessionsController < ApplicationController
         if ref !=nil and user.referrer.nil? and user.uid != ref["ref"].join(",")[5..-6]
           @u = User.find(user.id)
           @u.update(referrer: ref["ref"].join(",")[5..-6])
+          #update wallet amount for refferer
+          @referer=User.find(uid: ref["ref"].join(",")[5..-6 )
+          @wallet=Wallet.find(user_id: @referer.id)
+          @wallet.update(balance: @wallet.balance+5.0)
+          @new_trans=UserTransaction.new(user_id: @referer.id,amt: @wallet.balance+5.0,trans_type: 'referral',trans_date: DateTime.now)
+          @new_trans.save
         end      
     else
         @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash)
