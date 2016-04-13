@@ -34,11 +34,22 @@ class UserPanelController < ApplicationController
 
    #coupons
 		    def show_coupons
-		     	@coupons = Coupon.all.order("created_at DESC")
-
+		    	@coupons=[]
+		    	@my_coupons=Mapcoupon.pluck(:coupon_id)
+		    	@all_coupons = Coupon.all.order("created_at DESC")
+		     	#remove redeem coupons from all coupons list
+		     	@all_coupons.each do |c|
+		     		if !@my_coupons.include?c.id.to_s
+		     			@coupons.append(c)
+		     		end
+		     	end
+		     	
 		    end
 		       
 		    def my_coupons
+		    	if $i !=0
+		    		$message="yes"
+		    	end
 		     	   @my_coupons = []
 		     	   
 		     	   @all_coupons =  Mapcoupon.all
@@ -50,18 +61,37 @@ class UserPanelController < ApplicationController
 				     	  	else
 				     	  		@my_coupons = "else"
 				     	  	end
-				    end	
+				    end
+				    $i=1	
             end
 
 		    def map_coupon
-			     	 @mapcoupon_new = Mapcoupon.new
-	                 @mapcoupon_new.user_id = params[:user_id]
-	                 @mapcoupon_new.coupon_id =  params[:coupon_id]
-	                 if @mapcoupon_new.save
+		    	$i =0
+		    	@coupon=Coupon.find_by(id: params[:coupon_id])
+		        @c_amt=@coupon.coupon_amount
+		        @wallet=Wallet.find_by(user_id: params[:user_id])
+		        #redeem coupon if enough wallet balance 
+		        if @c_amt <= @wallet.balance
+					@mapcoupon_new = Mapcoupon.new
+	                @mapcoupon_new.user_id = params[:user_id]
+	                @mapcoupon_new.coupon_id =  params[:coupon_id]
+					if @mapcoupon_new.save
+	                 	#deduct coupon amt from wallet amt 
+	                 	@w_amt=@wallet.balance-@c_amt
+		                @wallet.update(balance: @w_amt)
+		                #do transaction entry
+	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'coupon',trans_date: DateTime.now)
+						@new_trans.save
+						$massage="yes"
 	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
 	                 else
-	                 redirect_to show_coupons_path ,notice: 'Something went wrong'
+	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
 	                 end 
+	            else
+	            	#if not enough balance
+	            	$message="not"
+	            	redirect_to my_coupons_path ,notice: 'Not enough balance'
+	            end
 	        end
    
    #coupons end
