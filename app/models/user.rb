@@ -1,6 +1,7 @@
 	class User < ActiveRecord::Base
 	has_one :twitter_user
 	has_one :wallet
+	has_many :mapcoupon
 	has_many :story, through: :user_stories
 	has_many :user_transaction
 	has_many :recharge

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411115718) do
+
+ActiveRecord::Schema.define(version: 20160411173400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +64,9 @@ ActiveRecord::Schema.define(version: 20160411115718) do
     t.integer  "coupon_amount"
     t.string   "coupon_description"
     t.string   "coupon_terms"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "coupon_reuse",        default: false
   end
 
   create_table "mapcoupons", force: :cascade do |t|
@@ -98,11 +100,11 @@ ActiveRecord::Schema.define(version: 20160411115718) do
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
     t.integer  "admin_user_id"
-    t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
     t.datetime "expiry_date"
     t.integer  "category_id"
+    t.string   "story_status",  default: "active"
   end
 
   create_table "transactions", force: :cascade do |t|

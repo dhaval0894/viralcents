@@ -10,10 +10,12 @@
 
 
 <div class="jumbotron">
- 	     <% coupon_data = Coupon.find(f) %>
 
- 	     <%= coupon_data.coupon_title %>
-</div>
+       <%= a =  f.to_i %>
+
+       <%= Coupon.find(a).coupon_title if Coupon.exists?(a) %>
+
+ </div>
 
  	<% end %>
 <% end%>
