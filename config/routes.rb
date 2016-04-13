@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'user_stories' => 'user_panel#user_stories'
   get 'post' => 'user_panel#tweet'
   get 'stories' => 'user_panel#stories'
+  get 'leaderboard' => 'user_panel#leaderboard'
   #post to twitter
   get 'tweet' => 'user_panel#post_to_twitter'
   get 'settings' => 'user_panel#settings'
