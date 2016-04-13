@@ -4,6 +4,23 @@
     $primary-color: #352f44;
     $primary-background: rgb(244, 244, 244);
     $secondary-color: #fff;
+
+    /*---MIXIN--*/
+        /*MIXIN FOR BROWSER PREFIXES*/
+        @mixin prefix($property, $value, $prefixes: ()) {
+            @each $prefix in $prefixes {
+            #{'-' + $prefix + '-' + $property}: $value;
+            }
+
+            // Output standard non-prefixed declaration
+            #{$property}: $value;
+        }
+        /*MIXIN FOR POPOVER TITLE*/
+        @mixin popover($padding-value,$font-value,$line-value){
+            padding:$padding-value;
+            font-size:$font-value;
+            line-height:$line-value;
+        }
     
     /*Top navigation bar*/
     .navbar {
@@ -53,10 +70,7 @@
     #wrapper {
         padding-left: 0;
         min-height: 100%;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
+        @include prefix(transition, all 0.5s ease, webkit moz o);
     }
     #wrapper.toggled {
         padding-left: 250px;
@@ -72,10 +86,7 @@
             margin-left: -250px;
             overflow-y: auto;
             background: $primary-color;
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
+            @include prefix(transition, all 0.5s ease, webkit moz o);
         }
         #wrapper.toggled #sidebar-wrapper {
             width: 220px;
@@ -157,8 +168,7 @@
                     pointer-events:none;
                     opacity:.65;
                     filter:alpha(opacity=65);
-                    -webkit-box-shadow:none;
-                    box-shadow:none;
+                    @include prefix(box-shadow, none, webkit);
                 }
                 /* input-group-addon */
                 .input-group-addon{
@@ -237,9 +247,7 @@
         width:200px;
     }
     .popover-title {
-        padding: 4px 10px;
-        font-size: 14px;
-        line-height: 18px;
+        @include popover(4px 10px, 14px, 18px);
     }
     .popover-content {
         padding: 4px 10px;
@@ -273,9 +281,7 @@
         width:180px;
     }
     .popover-title {
-        padding: 4px 10px;
-        font-size: 14px;
-        line-height: 16px;
+        @include popover(4px 10px, 14px, 16px);
     }
     .popover-content {
         padding: 4px 10px;
@@ -297,6 +303,7 @@
         padding: 4px 6px;
         font-size: 14px;
         line-height: 14px;
+        @include popover(4px 6px, 14px, 14px);
     }
     .popover-content {
         padding: 4px 6px;
