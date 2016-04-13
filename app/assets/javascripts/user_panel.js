@@ -1,16 +1,6 @@
 /* Function Calls */
 $(document).ready(function() {
 
-  var options = {};
-  var trip = new Trip([
-     
-     {
-         sel : $('#elem2'),
-         content : 'This is element 2'
-     }
-  ], options); // details about options are listed below
-
-  trip.start();
   // clipboard copy
   var clip = new Clipboard('.my_clip_button');
 

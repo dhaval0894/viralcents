@@ -1,8 +1,7 @@
 
 <!-- Stats Row -->
-<div id = "elem2">
 <%= render 'stats' %>
-</div>
+
 <!-- Content Row -->
 <div class="row admin-row">
 
@@ -10,7 +9,7 @@
         <div class="col-lg-12">
             <h2 class="page-header col-lg-8 text-left">Featured Stories</h2>
         </div>
-        <div class="panel panel-default col-lg-8 feature-stories" >
+        <div class="panel panel-default col-lg-8 feature-stories">
             <div class="panel-body">
                 <% @stories[0,4].each do |story|%>
                     <div class="col-md-6 text-center">
