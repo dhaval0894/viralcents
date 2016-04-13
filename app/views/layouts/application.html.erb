@@ -12,11 +12,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
+	<meta property="og:title" content="Viralcents"/>
+	<meta property="og:image" content="https://imgur.com/gallery/pJofj"/>
+	<!-- <meta property="og:url" content=""/> -->
+	<meta property="og:site_name" content="Viralcents"/>
+	<meta property="og:description" content="Share to get your share"/>
 	<meta name="twitter:title" content="" />
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
@@ -90,14 +90,21 @@
                         </ul>
 	                </li>
 					<li>
-						<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-credit-card fa-fw"></i> Wallet <span class="caret"></span></a>
+						<a href="wallet" class="<%= 'active' if current_page?(wallet_path) %>">
+						<i class="fa fa-credit-card fa-fw"></i> Wallet </a>
+	                </li>
+	                <li>
+						<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee fa-fw"></i>Redeem <span class="caret"></span></a>
 						<ul id="demo1" class="collapse">
-								<li>
-										<a href="/wallet"><i class="fa fa-rupee fa-fw"></i> Credits</a>
-								</li>
-								<li>
-										<a href="/recharges"><i class="fa fa-tablet fa-fw"></i> Recharge</a>
-								</li>
+							<li>
+								<a href="/recharges"><i class="fa fa-tablet fa-fw"></i> Mobile Recharge</a>
+							</li>
+							<li>
+								<a href="/show_coupons"><i class="fa fa-tags fa-fw"></i> Get Coupons</a>
+							</li>
+							<li>
+								<a href="/my_coupons"><i class="fa fa-shopping-basket fa-fw"></i> My Coupons </a>
+							</li>
 						</ul>
 	                </li>
 					<li>

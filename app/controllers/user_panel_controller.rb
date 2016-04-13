@@ -2,6 +2,7 @@ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
+	before_action :category_check, only: [:stories, :user_stories]
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
@@ -15,7 +16,8 @@ class UserPanelController < ApplicationController
 		end
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@credit_type=["referral","credit"]
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
 		@week_earning=0.0
 		@last_week.each do |l|
 			if l.trans_date > 1.week.ago
@@ -23,12 +25,79 @@ class UserPanelController < ApplicationController
 			end
 		end
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		respond_to do |format|
       		format.html
       		format.js
   		end
 	end
+
+
+   #coupons
+		    def show_coupons
+		    	@coupons=[]
+		    	@my_coupons=Mapcoupon.pluck(:coupon_id)
+		    	@all_coupons = Coupon.all.order("created_at DESC")
+		     	#remove redeem coupons from all coupons list
+		     	@all_coupons.each do |c|
+		     		if !@my_coupons.include?c.id.to_s
+		     			@coupons.append(c)
+		     		end
+		     	end
+		     	
+		    end
+		       
+		    def my_coupons
+		    	if $i !=0
+		    		$message="yes"
+		    	end
+		     	   @my_coupons = []
+		     	   
+		     	   @all_coupons =  Mapcoupon.all
+		     	   
+		     	   @all_coupons.each do |f|
+		     	  		
+				     	  	if f.user_id.to_i == current_user.id
+				     	  		@my_coupons.push(f.coupon_id)
+				     	  	else
+				     	  		@my_coupons = "else"
+				     	  	end
+				    end
+				    $i=1	
+            end
+
+		    def map_coupon
+		    	$i =0
+		    	@coupon=Coupon.find_by(id: params[:coupon_id])
+		        @c_amt=@coupon.coupon_amount
+		        @wallet=Wallet.find_by(user_id: params[:user_id])
+		        #redeem coupon if enough wallet balance 
+		        if @c_amt <= @wallet.balance
+					@mapcoupon_new = Mapcoupon.new
+	                @mapcoupon_new.user_id = params[:user_id]
+	                @mapcoupon_new.coupon_id =  params[:coupon_id]
+					if @mapcoupon_new.save
+	                 	#deduct coupon amt from wallet amt 
+	                 	@w_amt=@wallet.balance-@c_amt
+		                @wallet.update(balance: @w_amt)
+		                #do transaction entry
+	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'coupon',trans_date: DateTime.now)
+						@new_trans.save
+						$massage="yes"
+	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
+	                 else
+	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
+	                 end 
+	            else
+	            	#if not enough balance
+	            	$message="not"
+	            	redirect_to my_coupons_path ,notice: 'Not enough balance'
+	            end
+	        end
+   
+   #coupons end
+
 
 
 	def settings
@@ -49,6 +118,7 @@ class UserPanelController < ApplicationController
         
 	end
 
+	#all stories page
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
 	end
@@ -62,7 +132,8 @@ class UserPanelController < ApplicationController
   	#post tweet to twitter
   	def tweet
 		@user_id=current_user.id
-		@tweet=twitter_user.twitter.update(params[:p])
+		@story=Story.find_by(id: $sid)
+		@tweet=twitter_user.twitter.update_with_media(@story.title+" : "+params[:p],open(@story.image_url))
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
@@ -93,7 +164,6 @@ class UserPanelController < ApplicationController
 	def user_stories
 		@my_story = UserStory.where(user_id: current_user.id)
 		@a_stories = []
-
 		i=0
 		@my_story.each do |ms|
 			#add all stories to the list
@@ -104,8 +174,15 @@ class UserPanelController < ApplicationController
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
 			if !ms.tw_post_id.nil? and twitter_user
-				@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
-				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				#to check whether tweet exist or not
+				@status_url=["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join("")
+				@response=HTTParty.get(@status_url)
+				if !@response==404  #tweet exist
+					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				end
+				#byebug
+				
 			end
 			if !ms.short_url.nil?
 				@url=bitly_hash(ms.story_id)
@@ -160,7 +237,8 @@ class UserPanelController < ApplicationController
 		end
 
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		
 		#last 10 user transaction
 		@last=UserTransaction.where(user_id: current_user.id).limit(10)
@@ -233,7 +311,7 @@ class UserPanelController < ApplicationController
 
 		      	#update debit transaction and wallet
 		      	if @rec_stat_data["status"]=="success"
-		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
+		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'recharge',trans_date: DateTime.now)
 					@new_trans.save
 					
 					@balance=@wallet.balance-@pay_status.amount
@@ -270,6 +348,20 @@ class UserPanelController < ApplicationController
 
 	private  # private methods dont add any public code below
     
+    #categories drop down for story page
+    def category_check
+    	@categories = Category.all
+		if !params[:category].nil? and params[:category] != ""
+			@category = Category.find(params[:category])
+			@selected = @category["name"]
+			if @selected != "All"
+				@stories = Story.where(category_id: params[:category])
+			else
+				@stories = Story.all
+			end
+		end
+    end
+
 	#check whether user is logged in
 	def check_user
 		if current_user.nil?
@@ -285,7 +377,8 @@ class UserPanelController < ApplicationController
 
 	#generate thumbnails from the url added
 	def load_story
-		@stories = Story.all
+		#select only active stories
+		@stories = Story.where(story_status: "active")
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?
 				link_data = story.link_thumbnail(story.orig_url)

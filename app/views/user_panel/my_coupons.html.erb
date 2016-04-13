@@ -1,0 +1,21 @@
+<% if $message=="not"%>
+	<h2><%= notice %></h2>
+<%else%>
+
+<h1> My Coupons </h1>
+
+<hr>
+
+ <% @my_coupons.each do |f| %>
+
+
+<div class="jumbotron">
+
+       <%= a =  f.to_i %>
+
+       <%= Coupon.find(a).coupon_title if Coupon.exists?(a) %>
+
+ </div>
+
+ 	<% end %>
+<% end%>
