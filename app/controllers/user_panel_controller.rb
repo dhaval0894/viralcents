@@ -17,7 +17,8 @@ class UserPanelController < ApplicationController
 		end
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@credit_type=["referral","credit"]
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
 		@week_earning=0.0
 		@last_week.each do |l|
 			if l.trans_date > 1.week.ago
@@ -25,7 +26,8 @@ class UserPanelController < ApplicationController
 			end
 		end
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		respond_to do |format|
       		format.html
       		format.js
@@ -35,11 +37,22 @@ class UserPanelController < ApplicationController
 
    #coupons
 		    def show_coupons
-		     	@coupons = Coupon.all.order("created_at DESC")
-
+		    	@coupons=[]
+		    	@my_coupons=Mapcoupon.pluck(:coupon_id)
+		    	@all_coupons = Coupon.all.order("created_at DESC")
+		     	#remove redeem coupons from all coupons list
+		     	@all_coupons.each do |c|
+		     		if !@my_coupons.include?c.id.to_s
+		     			@coupons.append(c)
+		     		end
+		     	end
+		     	
 		    end
 		       
 		    def my_coupons
+		    	if $i !=0
+		    		$message="yes"
+		    	end
 		     	   @my_coupons = []
 		     	   
 		     	   @all_coupons =  Mapcoupon.all
@@ -51,18 +64,37 @@ class UserPanelController < ApplicationController
 				     	  	else
 				     	  		@my_coupons = "else"
 				     	  	end
-				    end	
+				    end
+				    $i=1	
             end
 
 		    def map_coupon
-			     	 @mapcoupon_new = Mapcoupon.new
-	                 @mapcoupon_new.user_id = params[:user_id]
-	                 @mapcoupon_new.coupon_id =  params[:coupon_id]
-	                 if @mapcoupon_new.save
+		    	$i =0
+		    	@coupon=Coupon.find_by(id: params[:coupon_id])
+		        @c_amt=@coupon.coupon_amount
+		        @wallet=Wallet.find_by(user_id: params[:user_id])
+		        #redeem coupon if enough wallet balance 
+		        if @c_amt <= @wallet.balance
+					@mapcoupon_new = Mapcoupon.new
+	                @mapcoupon_new.user_id = params[:user_id]
+	                @mapcoupon_new.coupon_id =  params[:coupon_id]
+					if @mapcoupon_new.save
+	                 	#deduct coupon amt from wallet amt 
+	                 	@w_amt=@wallet.balance-@c_amt
+		                @wallet.update(balance: @w_amt)
+		                #do transaction entry
+	                 	@new_trans=UserTransaction.new(user_id: params[:user_id],amt: @c_amt,trans_type: 'coupon',trans_date: DateTime.now)
+						@new_trans.save
+						$massage="yes"
 	                 	redirect_to my_coupons_path ,notice: 'Coupon taken.' 
 	                 else
-	                 redirect_to show_coupons_path ,notice: 'Something went wrong'
+	                 	redirect_to show_coupons_path ,notice: 'Something went wrong'
 	                 end 
+	            else
+	            	#if not enough balance
+	            	$message="not"
+	            	redirect_to my_coupons_path ,notice: 'Not enough balance'
+	            end
 	        end
    
    #coupons end
@@ -206,7 +238,8 @@ class UserPanelController < ApplicationController
 		end
 
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		
 		#last 10 user transaction
 		@last=UserTransaction.where(user_id: current_user.id).limit(10)
@@ -280,7 +313,7 @@ class UserPanelController < ApplicationController
 
 		      	#update debit transaction and wallet
 		      	if @rec_stat_data["status"]=="success"
-		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
+		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'recharge',trans_date: DateTime.now)
 					@new_trans.save
 					
 					@balance=@wallet.balance-@pay_status.amount

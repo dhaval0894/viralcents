@@ -1,4 +1,6 @@
 ActiveAdmin.register Coupon do
+	permit_params :coupon_title, :coupon_company_logo, :coupon_company_name, :coupon_amount, :coupon_description, :coupon_reuse, :coupon_terms
+	
 
 index do 
  
@@ -10,6 +12,7 @@ index do
 	column :coupon_company_name
 	column :coupon_amount
 	column :coupon_description
+	column :coupon_reuse
 	column :coupon_terms
     actions
 end
