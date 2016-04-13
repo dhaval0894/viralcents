@@ -7,9 +7,10 @@
         <% @stories.each do |story|%>
             <div class="col-lg-4 col-md-4 col-sm-6 text-center">
                 <%= render 'user_panel/story', story: story %>
+                <%= render 'paypopover' , :story => story %>
             </div>
+
         <%end%>
     </div>
 </div>
 <!-- Rate popover -->
-<%= render 'paypopover' %>

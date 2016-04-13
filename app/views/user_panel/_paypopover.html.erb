@@ -1,24 +1,24 @@
 <!-- Popover box for social activities payout -->
 
 <div id="popover_content_wrapper" style="display: none">
-    
+
     <a class="btn btn-xs btn-block btn-social btn-facebook">
-        <span class="fa fa-facebook"></span>Like - 2&#8377;
-    </a>
-    <a class="btn btn-xs btn-block btn-social btn-facebook">
-        <span class="fa fa-facebook"></span>Share - 5&#8377;
+        <span class="fa fa-hand-pointer-o"></span>Click - <%= story.click_amt%>&#8377;
     </a>
     <a class="btn btn-xs btn-block btn-social btn-facebook">
-        <span class="fa fa-facebook"></span>Comment - 3&#8377;
+        <span class="fa fa-facebook"></span>Like - <%= story.like_amt%>&#8377;
+    </a>
+    <a class="btn btn-xs btn-block btn-social btn-facebook">
+        <span class="fa fa-facebook"></span>Share - <%= story.share_amt%>&#8377;
+    </a>
+    <a class="btn btn-xs btn-block btn-social btn-facebook">
+        <span class="fa fa-facebook"></span>Comment - <%= story.comment_amt%>&#8377;
     </a>
     <a class="btn btn-xs btn-block btn-social btn-twitter">
-        <span class="fa fa-twitter"></span>ReTweet - 5&#8377;
+        <span class="fa fa-twitter"></span>ReTweet - <%= story.retweet_amt%>&#8377;
     </a>
     <a class="btn btn-xs btn-block btn-social btn-twitter">
-        <span class="fa fa-twitter"></span>Favorite - 2&#8377;
-    </a>
-    <a class="btn btn-xs btn-block btn-social btn-twitter">
-        <span class="fa fa-twitter"></span>Converstion - 3&#8377;   
+        <span class="fa fa-twitter"></span>Favorite - <%= story.fav_amt%>&#8377;
     </a>
     
 </div>
