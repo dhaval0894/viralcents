@@ -277,7 +277,6 @@ class UserPanelController < ApplicationController
 
 	#user details for recharge
 	def recharges
-
 		@recharge=Recharge.new()
 		@recharge_stat=RechargeStat.new()
 	end

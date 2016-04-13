@@ -31,7 +31,6 @@
   	<%= javascript_include_tag 'application' %>
   	<%= javascript_include_tag 'user_panel' %>
   	<%= csrf_meta_tags %>
-	
 
 	<!-- Google Fonts-->
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
@@ -93,34 +92,21 @@
 					<li>
 						<a href="wallet" class="<%= 'active' if current_page?(wallet_path) %>">
 						<i class="fa fa-credit-card fa-fw"></i> Wallet </a>
-
 	                </li>
-	                
-
-
 	                <li>
-						<a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-rupee fa-fw"></i>Redeem Money<span class="caret"></span></a>
-
-						<ul id="demo2" class="collapse">
-								<li>
-					<a href="/x"><i class="fa fa-rupee fa-fw"></i> Mobile Recharge</a>
-								</li>
-								
-								<li>
-
-				<a href="/show_coupons"><i class="fa fa-money fa-tablet fa-fw"></i> Get Coupons </a>
+						<a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee fa-fw"></i>Redeem <span class="caret"></span></a>
+						<ul id="demo1" class="collapse">
+							<li>
+								<a href="/recharges"><i class="fa fa-tablet fa-fw"></i> Mobile Recharge</a>
 							</li>
-
-								<li>
-
-				<a href="/my_coupons"><i class="fa fa-user fa-fw"></i> My Coupons </a>
+							<li>
+								<a href="/show_coupons"><i class="fa fa-tags fa-fw"></i> Get Coupons</a>
 							</li>
-							
+							<li>
+								<a href="/my_coupons"><i class="fa fa-shopping-basket fa-fw"></i> My Coupons </a>
+							</li>
 						</ul>
 	                </li>
-
-
-
 					<li>
 						<a href="/referrals"><i class="fa fa-random fa-fw"></i> Referrals</a>
 	                </li>
