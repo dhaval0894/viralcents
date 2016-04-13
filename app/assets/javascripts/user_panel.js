@@ -14,6 +14,11 @@
       // Facebook Logout
       $(document).on("click", "#fb_logout", fbLogout);
 
+      // Facebook Referrer Share
+      $(document).on("click", "#fb_referrer", function(){
+          facebookShare($(this).data('referrer-link'),$(this).data('facebook-app-id'));
+      });
+
       // Facebook Share
       $(document).on("click", ".fb_share", function(){
           share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
@@ -57,13 +62,16 @@
           });  
       });
 
+      // Twitter Referrer Share
+      $(document).on("click", "#tw_referrer", function(){
+          twRefShareWindow($(this).data('referrer-link'));
+      });
+
       // Twitter Share Window
       $(document).on("click", ".tw_share", twShareWindow);
 
       // Zopim Chat
       $(document).on("ready", zopim_chat);
-
-  
 
     
   /*---- Function Definition ----*/
@@ -88,6 +96,16 @@
             }
             window.location = '/signout';
         });
+    }
+
+    //Facebook Referrer Share
+    function facebookShare(link, app_id)
+    {
+      FB.ui({
+      method: 'feed', 
+      link: link,  
+      href: link,
+      }, function(response){});
     }
 
     // Facebook Share
@@ -116,8 +134,7 @@
           }
           else{bootbox.alert("failure");}
         });
-      };
-
+    };
 
     // Generates Random string for Referral Url
     function epicRandomString(b){
@@ -162,14 +179,10 @@
 
     };
 
-    //share referrer to facebook
-    function facebookShare(link, app_id)
-    {
-      FB.ui({
-      method: 'feed', 
-      link: link,  
-      href: link,
-      }, function(response){});
+    //twitter referrer share window
+    function twRefShareWindow(ref_link){
+      window.open('https://twitter.com/intent/tweet?text=Sign up to an amazing app VIRALCENTS!! \r\n &amp;url='+ref_link+'','Twitter-dialog','width=626,height=436'); 
+      return false;    
     }
 
     //twitter share window

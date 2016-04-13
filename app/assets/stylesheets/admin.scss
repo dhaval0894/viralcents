@@ -240,6 +240,16 @@
             }
         }
 
+        /* grey panel*/
+        .panel-grey {
+            border-color: #e7e7e7;
+            .panel-heading {
+                border-color: #e7e7e7;
+                color: #fff;
+                background-color: #e7e7e7;
+            }
+        }
+
 
 /* Desktop Screens */
 @media (min-width: 768px) {
@@ -336,6 +346,3 @@
         margin-top: 170px;
     }
 }
-
-
-

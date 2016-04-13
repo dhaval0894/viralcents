@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411062452) do
+ActiveRecord::Schema.define(version: 20160411172523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,25 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "coupon_title"
+    t.string   "coupon_company_name"
+    t.string   "coupon_company_logo"
+    t.integer  "coupon_amount"
+    t.string   "coupon_description"
+    t.string   "coupon_terms"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "coupon_reuse",        default: false
+  end
+
+  create_table "mapcoupons", force: :cascade do |t|
+    t.string   "coupon_id"
+    t.string   "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
     t.integer "recharge_id"
@@ -73,13 +92,13 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "image_url"
-    t.integer  "admin_user_id"
     t.float    "click_amt",     default: 0.0
     t.float    "like_amt",      default: 0.0
     t.float    "share_amt",     default: 0.0
     t.float    "comment_amt",   default: 0.0
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
+    t.integer  "admin_user_id"
     t.float    "total_budget"
     t.boolean  "published",     default: false
     t.datetime "expiry_date"
@@ -111,8 +130,8 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.integer  "fb_likes",     default: 0
     t.integer  "fb_shares",    default: 0
     t.integer  "fb_comments",  default: 0
-    t.integer  "fav",          default: 0
     t.integer  "retweets",     default: 0
+    t.integer  "fav",          default: 0
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",               null: false
@@ -146,7 +165,6 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.string   "email"
     t.string   "referrer"
     t.string   "referral_link"
-    t.string   "role"
   end
 
   create_table "wallets", force: :cascade do |t|
