@@ -170,6 +170,8 @@ class UserPanelController < ApplicationController
 			#add all stories to the list
 			@a_stories << Story.where(id: ms.story_id)
 			@a_stories[i]<< ms.short_url
+			@a_stories[i]<<ms.fb_post_id
+			@a_stories[i]<<ms.tw_post_id
 			i+=1
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
@@ -278,7 +280,6 @@ class UserPanelController < ApplicationController
 
 	#user details for recharge
 	def recharges
-
 		@recharge=Recharge.new()
 		@recharge_stat=RechargeStat.new()
 	end

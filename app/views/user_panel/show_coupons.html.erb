@@ -1,97 +1,27 @@
-
-<h1> Coupons available for you </h1>
-<hr>
-
-<style type="text/css">
-	
-	#demo
-	{
-            background-image:url('assets/coupon1.jpg');
-            color: #fff;
-	}
-</style>
-
-
-
-<% @coupons.each do |coupon| %>
-		
-	<div class="well" id="demo" >    <!-- main div -->
-		 
-
-		<div class="text-left"> <h2 style="color: #fff">  <%= coupon.coupon_title %>  </h2></div>
-
-
-		<div class="text-left"> <h2 style="color:#fff"> By <i class="fa fa-hand fa-2x"></i> <%= coupon.coupon_company_name %> </h2> </div> 
-
-		<% if coupon.coupon_amount %>
-		<div class="text-left"> Only For <%= coupon.coupon_amount %> </div> 
-		<% end %>
-
-
-
-		<% $coupon =  coupon.id %>
-
-		<% def coupon_tag    
-		return $coupon    
-		end
-		%>
-
-
-
-
-<p class="row col-sm-12">    <!-- para with btn and logo -->
-
-        <p class="col-sm-3 col-sm-pull-1">
-                <%= image_tag coupon.coupon_company_logo ,:width=>"100px",:height=>"70px" ,:class=>"img-rounded" %>
-        </p>
-
-
-
-        <p class="col-sm-4 ">   <!-- redeem para -->
-
+<!--Coupons -->
+<div class="admin-row row">
+    <div class="col-lg-12">
+        <h2 class="page-header text-left">Coupons</h2>
+    </div>  
+    <% @coupons.each do |coupon| %>
+    <div class="col-xs-6 col-sm-4 col-md-3">
+        <div class="thumbnail">
+            <%= image_tag coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:150px;" %>
+            <div class="caption coupon-title">
+                <h5><%= coupon.coupon_title %>-<%= coupon.coupon_company_name %></h5>
+            </div>  
+            <span>
                 <%= form_tag("/map_coupon", method: "post") do %>
-                <%= hidden_field_tag 'user_id' , current_user.id %>
-                <%= hidden_field_tag 'coupon_id' , coupon_tag  %>
-                <button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom" data-content= "Description <br><%= coupon.coupon_description %> <hr> Terms
-                 <br> <%= coupon.coupon_terms %> <br> so"  >
-                TERMS  & Conditions
-                </button>
-
-
-
-                <% if current_user.mapcoupon == coupon.mapcoupon %>
-
-                     <% if coupon.coupon_reuse %>
-         
-                     <a data-toggle="tooltip">
-                     <%= submit_tag "REDEEM AGAIN", :class => "btn btn-info"  %> </a>
-                     <% else %>
-                     <button class="btn btn-warning"> Taken  </button> 
-                     <% end %>
-
-
-
-                <% else %>
-                     <a data-toggle="tooltip"> <%= submit_tag "REDEEM", :class => "btn btn-info"  %> </a>
-
-                <% end %>
-
-
-        </p>  <!-- redeem para ends -->
-
-
-
-
-
-
-      </p>     <!-- para with btn and logo -->
-
-
-    </div>   <!-- main div ends -->
-
-  <% end %>
-
-
-<% end %>
+                    <%= hidden_field_tag 'user_id' , current_user.id %>
+                    <%= hidden_field_tag 'coupon_id' , coupon_tag  %>
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-xs coupon-btn" role="button"><i class="fa fa-rupee fa-1x"></i><strong><%= coupon.coupon_amount %></strong></button> 
+                    </div>    
+                <% end %>    
+            </span>
+        </div>
+    </div>
+    <% end %>
+</div>
 
 
