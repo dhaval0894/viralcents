@@ -94,23 +94,11 @@
 						<i class="fa fa-credit-card fa-fw"></i> Wallet </a>
 	                </li>
 	                <li>
-<<<<<<< HEAD
-						<a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-rupee fa-fw"></i>Redeem<span class="caret"></span></a>
 
-						<ul id="demo2" class="collapse">
-								<li>
-					<a href="/x"><i class="fa fa-rupee fa-fw"></i> Mobile Recharge</a>
-								</li>
-								
-								<li>
-
-				<a href="/show_coupons"><i class="fa fa-money fa-tablet fa-fw"></i> Get Coupons </a>
-=======
 						<a href="javascript:;" class="<%= 'active' if (current_page?(recharges_path) || current_page?(show_coupons_path) || current_page?(my_coupons_path)) %>" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee fa-fw"></i>Redeem <span class="caret"></span></a>
 						<ul id="demo1" class="collapse">
 							<li>
 								<a href="/recharges" class="<%= 'active' if current_page?(recharges_path) %>"><i class="fa fa-tablet fa-fw"></i> Mobile Recharge</a>
->>>>>>> 5ca6bd54833afbc6ea777050899d23d46ec003c5
 							</li>
 							<li>
 								<a href="/show_coupons" class="<%= 'active' if current_page?(show_coupons_path) %>"><i class="fa fa-tags fa-fw"></i> Get Coupons</a>

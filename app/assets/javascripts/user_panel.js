@@ -172,7 +172,6 @@
       $('#but').addClass('disabled');
       //ajax call to controller action to add referral_url to database
       $.ajax({
->>>>>>> 5ca6bd54833afbc6ea777050899d23d46ec003c5
           type: "POST",
           url: "add_referral_link",
           data:  JSON.stringify({ 'r_link' : g_url}), // the JSON data, as an object or string
