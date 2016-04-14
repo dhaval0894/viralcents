@@ -58,23 +58,8 @@
                 </button>
 
 
+    <a data-toggle="tooltip"> <%= submit_tag "REDEEM", :class => "btn btn-info"  %> </a>
 
-                <% if current_user.mapcoupon == coupon.mapcoupon %>
-
-                     <% if coupon.coupon_reuse %>
-         
-                     <a data-toggle="tooltip">
-                     <%= submit_tag "REDEEM AGAIN", :class => "btn btn-info"  %> </a>
-                     <% else %>
-                     <button class="btn btn-warning"> Taken  </button> 
-                     <% end %>
-
-
-
-                <% else %>
-                     <a data-toggle="tooltip"> <%= submit_tag "REDEEM", :class => "btn btn-info"  %> </a>
-
-                <% end %>
 
 
         </p>  <!-- redeem para ends -->

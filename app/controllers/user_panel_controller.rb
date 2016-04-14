@@ -100,27 +100,28 @@ class UserPanelController < ApplicationController
 
 
 
-  def settings     #activate notifications
+  	def settings     #activate notifications
 
-		@user_email = params[:email]  # email after form submit
+		  if(params[:email] and current_user.email != params[:email])
+				current_user.update(:email => params[:email])
+				@email = params[:email]
+				NotificationMailSender.perform_async(@email)
 
-		@user_contact = params[:contact]  # contact after form submit
-    
-    if(@user_email != nil)
-      	
-      NotificationMailSender.perform_async(@user_email) #notification confirm mail to user
-	        
-    elsif(@user_contact != nil)
+				  
+		  elsif(params[:contact] and current_user.contact != params[:contact])
+				current_user.update(:contact => params[:contact])
+				@contact = params[:contact]
+				NotificationMessageSender.perform_async(@contact)
 
-      NotificationMessageSender.perform_async(@user_contact) #notification confrm msg_to user
-	       
-    end        
-        
-   end     #activate notifications ends
+		  end 
+		  	
+    end     #activate notifications ends
+  
+ 
 
 
+#all stories page
 
-	#all stories page
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
 	end

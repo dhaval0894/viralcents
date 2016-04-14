@@ -22,12 +22,15 @@ Rails.application.routes.draw do
   get 'stories' => 'user_panel#stories'
   #post to twitter
   get 'tweet' => 'user_panel#post_to_twitter'
+
   get 'settings' => 'user_panel#settings'
+  
+  
   get 'referrals' => 'user_panel#referrals'
   #Get details for mobile recharge
   get 'recharges' => 'user_panel#recharges'
   #show recharge details
-  post 'recharges' => 'user_panel#addrecharge'
+  put 'recharges' => 'user_panel#addrecharge'
   #get user wallet details
   get 'wallet' =>'user_panel#wallet'
   #store facebook post id

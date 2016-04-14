@@ -34,16 +34,23 @@
 
 			<!-- Subscribe to notifications -->
 			<div class="row">
-				
+
+			<form class="form" action="/settings" method="get">    <!--form to activate notifications  -->
+
+
 				<hr>
-				<h4>Get Notifications Via </h4>
+				<h4>Get Notifications Via 
+</h4>
 				<hr>
 
 				<!-- E-mail field -->
 				<div class="form-group">
-					<div class="col-md-2"><label for="" class="label-control">Email:</label></div>
+				
+				<div class="col-md-2"><label for="" class="label-control">Email:</label></div>
+					
 					<div class="col-md-8">
-					<input type="email" placeholder="Enter Email" class="form-control"></div>
+		<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>"></div>
+					
 					<button class="btn btn-theme">Submit</button>
 				</div>
 					
@@ -60,11 +67,16 @@
 				<!-- Mobile Number field -->
 				<div class="form-group">
 					<div class="col-md-2"><label for="" class="label-control">SMS:</label></div>
-					<div class="col-md-8"><input type="text" placeholder="Enter Mobile Number" class="form-control"></div>
+					<div class="col-md-8">
+
+		<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>"></div>
+					
 					<button class="btn btn-theme">Submit</button>
 				</div>
+                
+                 </form>  <!--form to activate notifications  -->
 
-			</div>
+							</div>
 			
 		</div>
 		<!--./panel-body-->
