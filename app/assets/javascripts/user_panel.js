@@ -40,7 +40,7 @@
 
       // Story rate popover
       $(document).ready(function() {
-        $('[data-toggle="popover"]').popover({
+        $('.rate').popover({
             html : true,
 
             content: function() {
