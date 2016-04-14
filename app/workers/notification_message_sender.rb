@@ -12,7 +12,7 @@ class NotificationMessageSender
         require 'net/http'
         uri = URI('http://sms.hspsms.com:/sendSMS')
         params = {:username => "nitesh.mishra143@gmail.com", 
-                :message => "Viralcents Notifications are active on number",
+                :message => "Viralcents Notifications are now active on this number.",
                 :sendername =>"VIRALS",
                 :smstype =>"TRANS",
                 :numbers => contact_number,
