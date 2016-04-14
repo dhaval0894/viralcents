@@ -76,10 +76,10 @@
               $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, position: "left", offsetY: 50, multiple: true});
             }
             else if( width < 768 && width >= 315){
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120});
+              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});
             }
             else if(width < 315){
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165});
+              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165, multiple: true});
             }
             $(gen_button).tooltipster("show");
       }); 
