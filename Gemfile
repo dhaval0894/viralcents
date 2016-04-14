@@ -1,82 +1,38 @@
 source 'https://rubygems.org'
 
-#url shortner
-gem 'bitly'
+gem 'rails', '4.2.3'   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
-# Use postgres as the database for Active Record
-gem 'pg'
-
-#admin-panel and authorize
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', github: 'activeadmin' #admin-panel and authorize
 gem 'active_skin'
-gem 'devise'
+gem 'bootstrap-sass', '~> 3.3.6'    # Bootstrap For rails
+gem 'bootbox-rails', '~>0.4'        # Bootstrap alert, confirm box
+gem 'bitly'                         #url shortner
 gem 'cancancan'
-
-gem 'sendgrid-ruby'
-
-gem 'sidekiq'
-
-gem 'sinatra' ,require: false
-
-gem 'slim'
-
-gem 'carrierwave'
-
+gem 'carrierwave'                   #file uploads
+gem 'clipboard-rails'               # Copy To Clipboard
+gem 'devise'
+gem "figaro", "~> 0.7.0"  
 gem 'fog'
-
-gem "figaro", "~> 0.7.0"
-# Use jquery as the JavaScript library
-
-
-# Bootstrap For rails
-gem 'bootstrap-sass', '~> 3.3.6'
-
-# Bootstrap alert, confirm box
-gem 'bootbox-rails', '~>0.4'
-
-# Copy To Clipboard
-gem 'clipboard-rails'
-
-# font-awesome web application icons for rails
-gem "font-awesome-rails"
-
+gem "font-awesome-rails"            # font-awesome web application icons for rails
 gem 'httparty'
+gem 'jquery-dotdotdot-rails'        # Jquery plugin for text excerpt
+gem 'jquery-rails'                  # Use jquery as the JavaScript library
+gem 'jquery-turbolinks'             # use jQuery plugin for drop-in fix binded events problem caused by Turbolinks
+gem 'koala'                         #facebook access
+gem 'link_thumbnailer'              #extract from link
+gem 'listjs-rails'                  # Search, sort and filter
+gem 'omniauth-twitter', '~> 1.0.1'  #for twitter authentication
+gem 'omniauth-facebook'             #facebook access
+gem 'pg'                            # Use postgres as the database for Active Record
+gem 'sendgrid-ruby'
+gem 'sidekiq'
+gem 'sinatra' ,require: false
+gem 'slim'
+gem 'sass-rails'                    # sass for rails
+gem 'turbolinks'                    # Turbolinks makes following links in your web application faster. 
+gem 'twitter', '~> 5.3.1'           #twitter access
+gem 'uglifier', '>= 1.3.0'          # Use Uglifier as compressor for JavaScript assets
 
-# Jquery plugin for text excerpt
-gem 'jquery-dotdotdot-rails'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# use jQuery plugin for drop-in fix binded events problem caused by Turbolinks
-gem 'jquery-turbolinks'
-
-#facebook access
-gem 'koala'
-gem 'omniauth-facebook'
-
-#extract from link
-gem 'link_thumbnailer'
-
-# Search, sort and filter
-gem 'listjs-rails'  
-
-#for twitter authentication
-gem 'omniauth-twitter', '~> 1.0.1'
-
-# sass for rails
-gem 'sass-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-#twitter access
-gem 'twitter', '~> 5.3.1'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
