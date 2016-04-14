@@ -77,10 +77,10 @@
         <% if not j==1 %> <!-- If shortened url is not generated -->
             
             <!-- Facebook Sharing button -->
-            <li><a class="btn btn-block btn-xs btn-social-icon btn-facebook facebook_share" data-story-id = "<%= story.id%>"><i class="fa fa-facebook"> Share</i></a>
+            <li><a class="btn btn-block btn-xs btn-social-icon btn-facebook so_share" data-story-id = "<%= story.id%>"><i class="fa fa-facebook"> Share</i></a>
 
             <!-- Twitter Sharing button -->    
-            <li><a  href="#" class="so_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
+            <li><a class="so_share" data-story-id = "<%= story.id%>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
         
         <%else%> <!-- If shortened url is genrated -->
 

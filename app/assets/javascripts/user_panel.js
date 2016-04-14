@@ -6,11 +6,6 @@
   });  
 
     /*---- Function Calls ----*/
-      // Facebook/Twitter Alert Box
-      $(document).on("click", ".so_share", function(){
-          bootbox.alert("Generate URL First");
-      });
-
       // Facebook Logout
       $(document).on("click", "#fb_logout", fbLogout);
 
@@ -74,11 +69,11 @@
       $(document).on("ready", zopim_chat);
 
       // tooltip for generate url
-      $(document).on("click",".facebook_share",function(){
+      $(document).on("click",".so_share",function(){
             var gen_button = '#gen_button' + $(this).data('story-id');
             var width = $(window).width();
             if( width > 768) {
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, position: "left", offsetY: 50});
+              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, position: "left", offsetY: 50, multiple: true});
             }
             else if( width < 768 && width >= 315){
               $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120});
@@ -88,9 +83,11 @@
             }
             $(gen_button).tooltipster("show");
       }); 
-      $(document).on("mouseout",".facebook_share",function(){
+      $(document).on("mouseout",".so_share",function(){
         var gen_button = '#gen_button' + $(this).data('story-id');
+        try{
         $(gen_button).tooltipster("hide");
+        }catch(err){}
       });
 
     
