@@ -284,11 +284,20 @@ button.disabled, a.disabled{cursor:not-allowed;pointer-events:none;opacity:.65;f
     font-weight: bold;
 }
 
-
-/* Custom Colored Panels */
 .btn-theme {
     background-color: #352f44;
     color: #fff;
+}
+
+/* Custom Colored Panels */
+.panel-grey {
+    border-color: #e7e7e7;
+}
+
+.panel-grey .panel-heading {
+    border-color: #e7e7e7;
+    color: #fff;
+    background-color: #e7e7e7;
 }
 
 .panel-theme {

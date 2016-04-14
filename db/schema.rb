@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411062452) do
+ActiveRecord::Schema.define(version: 20160411172523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,25 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string   "coupon_title"
+    t.string   "coupon_company_name"
+    t.string   "coupon_company_logo"
+    t.integer  "coupon_amount"
+    t.string   "coupon_description"
+    t.string   "coupon_terms"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "coupon_reuse",        default: false
+  end
+
+  create_table "mapcoupons", force: :cascade do |t|
+    t.string   "coupon_id"
+    t.string   "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "recharge_stats", force: :cascade do |t|
     t.integer "pay_id"
     t.integer "recharge_id"
@@ -80,11 +99,11 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
     t.integer  "admin_user_id"
-    t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
     t.datetime "expiry_date"
     t.integer  "category_id"
+    t.string   "story_status",  default: "active"
   end
 
   create_table "transactions", force: :cascade do |t|

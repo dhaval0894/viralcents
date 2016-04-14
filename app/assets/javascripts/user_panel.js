@@ -6,7 +6,8 @@ $(document).ready(function() {
 
   // Facebook Alert Box
   $('.facebook_share').click(function() {
-      bootbox.alert("Generate URL First");  
+      bootbox.alert("Generate URL First");
+       
   });
 
   // Facebook Logout
@@ -68,8 +69,8 @@ function fbLogout() {
           console.log("signing out")
           console.log(response.authResponse)
           FB.logout();
-          window.location = '/signout'
         }
+        window.location = '/signout';
     });
 }
 
@@ -134,16 +135,16 @@ function search_panel(){
 
   var storyList = new List('stories', options);
 
-  $('#filter-category').change(function () {
-      var selection = this.value;
-      if (selection) {
-          storyList.filter(function(item) {
-              return (item.values().category == selection);
-          });
-      } else {
-          storyList.filter();
-      }
-  });
+  // $('#filter-category').change(function () {
+  //     var selection = this.value;
+  //     if (selection) {
+  //         storyList.filter(function(item) {
+  //             return (item.values().category == selection);
+  //         });
+  //     } else {
+  //         storyList.filter();
+  //     }
+  // });
 }
 
 // Shortened Url for story
