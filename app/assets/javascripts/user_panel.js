@@ -4,12 +4,25 @@ $(document).ready(function() {
   // clipboard copy
   var clip = new Clipboard('.my_clip_button');
 
-  // Facebook Alert Box
-  $('.facebook_share').click(function() {
-      bootbox.alert("Generate URL First");
-       
+  // tooltip for generate url
+  $(".facebook_share").click(function(){
+        var gen_button = '#gen_button' + $(this).data('story-id');
+        var width = $(window).width();
+        if( width > 768) {
+          $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, position: "left", offsetY: 50});
+        }
+        else if( width < 768 && width >= 315){
+          $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120});
+        }
+        else if(width < 315){
+          $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165});
+        }
+        $(gen_button).tooltipster("show");
+  }); 
+  $(".facebook_share").mouseout(function(){
+    var gen_button = '#gen_button' + $(this).data('story-id');
+    $(gen_button).tooltipster("hide");
   });
-
   // Facebook Logout
   $('#fb_logout').click(function(){
     fbLogout();  
@@ -167,3 +180,8 @@ function facebookShare(link, app_id)
   }, function(response){});
 }
 
+//tooltip for facebook
+function social_tooltip(story_id)
+{
+  
+}
