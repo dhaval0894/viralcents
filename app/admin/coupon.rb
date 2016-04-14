@@ -1,5 +1,5 @@
 ActiveAdmin.register Coupon do
-	permit_params :coupon_title, :coupon_company_logo, :coupon_company_name, :coupon_amount, :coupon_description, :coupon_reuse, :coupon_terms
+	permit_params :coupon_title, :coupon_company_logo, :coupon_company_name, :coupon_amount, :coupon_description, :coupon_reuse, :coupon_terms,:coupon_code ,:expiry_date
 	
 
 index do 
@@ -10,10 +10,13 @@ index do
 	column :coupon_title
 	column :coupon_company_logo
 	column :coupon_company_name
+	column :expiry_date
 	column :coupon_amount
 	column :coupon_description
 	column :coupon_reuse
 	column :coupon_terms
+	
+	column :coupon_code
     actions
 end
 
@@ -38,18 +41,24 @@ def create
 		      end
 		end
     
-    end    # create new coupon ends
-
-    def coupon_params
-             params.require(:coupon).permit(:coupon_title, :coupon_company_name, 
-             	:coupon_company_logo ,:coupon_amount,:coupon_description,:coupon_terms)
-    
-    end  
-
-
-
+    end    # create new coupon end
 
 end    #coupon controller ends
+
+form do |f|
+	    f.inputs "Coupon" do
+		  f.input :coupon_title, :label => "Coupon Title"
+	      f.input :coupon_company_logo
+	      f.input :coupon_company_name
+	      f.input :coupon_amount
+	      f.input :coupon_description
+	      f.input :coupon_terms
+	      f.input :coupon_code
+	      f.input :expiry_date
+	      f.input :coupon_reuse, :label => "Coupon Reuse"
+	    end
+	    f.actions
+end	    
 
 
 end
