@@ -52,19 +52,10 @@ class UserPanelController < ApplicationController
 		    	if $i !=0
 		    		$message="yes"
 		    	end
-		     	   @my_coupons = []
-		     	   
-		     	   @all_coupons =  Mapcoupon.all
-		     	   
-		     	   @all_coupons.each do |f|
-		     	  		
-				     	  	if f.user_id.to_i == current_user.id
-				     	  		@my_coupons.push(f.coupon_id)
-				     	  	else
-				     	  		@my_coupons = "else"
-				     	  	end
-				    end
-				    $i=1	
+		    	   @user_coupons =  Mapcoupon.pluck(:coupon_id)
+		     	   @my_coupons = Coupon.where(id: @user_coupons)
+		     	
+		     	$i=1	
             end
 
 		    def map_coupon
