@@ -16,7 +16,8 @@ class UserPanelController < ApplicationController
 		end
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: "credit")
+		@credit_type=["referral","credit"]
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
 		@week_earning=0.0
 		@last_week.each do |l|
 			if l.trans_date > 1.week.ago
@@ -24,7 +25,8 @@ class UserPanelController < ApplicationController
 			end
 		end
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		respond_to do |format|
       		format.html
       		format.js
@@ -167,6 +169,8 @@ class UserPanelController < ApplicationController
 			#add all stories to the list
 			@a_stories << Story.where(id: ms.story_id)
 			@a_stories[i]<< ms.short_url
+			@a_stories[i]<<ms.fb_post_id
+			@a_stories[i]<<ms.tw_post_id
 			i+=1
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
@@ -235,7 +239,8 @@ class UserPanelController < ApplicationController
 		end
 
 		#find last_withdraw
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: "debit").last
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		
 		#last 10 user transaction
 		@last=UserTransaction.where(user_id: current_user.id).limit(10)
@@ -274,7 +279,6 @@ class UserPanelController < ApplicationController
 
 	#user details for recharge
 	def recharges
-
 		@recharge=Recharge.new()
 		@recharge_stat=RechargeStat.new()
 	end
@@ -309,7 +313,7 @@ class UserPanelController < ApplicationController
 
 		      	#update debit transaction and wallet
 		      	if @rec_stat_data["status"]=="success"
-		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'debit',trans_date: DateTime.now)
+		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'recharge',trans_date: DateTime.now)
 					@new_trans.save
 					
 					@balance=@wallet.balance-@pay_status.amount
