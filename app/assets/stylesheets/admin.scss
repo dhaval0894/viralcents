@@ -149,6 +149,16 @@
                 padding: 10px 10px;
             }
 
+            /* Coupon Title */
+            .thumbnail .coupon-title {
+                padding:inherit;
+            }
+
+            /* Coupon Button */
+            .coupon-btn {
+                width:30%;
+            }
+
             /* page-header styling*/
             .page-header{
                 color:rgb(97, 115, 244);
@@ -173,6 +183,10 @@
                 /* input-group-addon */
                 .input-group-addon{
                     padding:4px;    
+                }
+                /* Image Thumbnail */
+                .thumbnail-image{
+                    border: 1px solid #e7e7e7;
                 }
                 /* rate icon position in post */
                 .fa-stack{
