@@ -108,11 +108,11 @@ class UserPanelController < ApplicationController
     
       if(@user_email != nil)
       	
-	       Resque.enqueue(NotificationMailSender,@user_email)  #notification confirm mail to user
+      	        NotificationMailSender.perform_async(@user_email)  #notification confirm mail to user
 	        
       elsif(@user_contact != nil)
-	       
-	       Resque.enqueue(NotificationMessageSender,@user_contact)  #notification confirm msg. to user
+
+        NotificationMessageSender.perform_async(@user_contact)  #notification confirm msg. to user
 	       
        end        
         
