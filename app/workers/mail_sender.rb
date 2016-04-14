@@ -1,20 +1,20 @@
-
 class MailSender
 
   include Sidekiq::Worker
 
   def perform(param)
 
-   user_mail = param
+   
     
         require 'sendgrid-ruby'
           sendgrid = SendGrid::Client.new do |c|
-             c.api_key ='secret'
+        c.api_key ='secret'
+          
             end
 
           email = SendGrid::Mail.new do |m|
-              m.to      =  user_mail
-              m.from    = 'secret'
+              m.to      =  param
+              m.from    = 'Viralcents'
               m.subject = 'welcome'
                       m.html    = '<!DOCTYPE html>
 <html>

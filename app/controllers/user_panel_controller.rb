@@ -91,25 +91,28 @@ class UserPanelController < ApplicationController
 
 
 
-	def settings
+  	def settings     #activate notifications
 
-		@user_email = params[:email]  # email after form submit
+		  if(params[:email] and current_user.email != params[:email])
+				current_user.update(:email => params[:email])
+				@email = params[:email]
+				NotificationMailSender.perform_async(@email)
 
-		@user_contact = params[:contact]  # contact after form submit
-    
-      if(@user_email != nil)
-      	
-	       Resque.enqueue(NotificationMailSender,@user_email)  #notification confirm mail to user
-	        
-      elsif(@user_contact != nil)
-	       
-	       Resque.enqueue(NotificationMessageSender,@user_contact)  #notification confirm msg. to user
-	       
-       end        
-        
-	end
+				  
+		  elsif(params[:contact] and current_user.contact != params[:contact])
+				current_user.update(:contact => params[:contact])
+				@contact = params[:contact]
+				NotificationMessageSender.perform_async(@contact)
 
-	#all stories page
+		  end 
+		  	
+    end     #activate notifications ends
+  
+ 
+
+
+#all stories page
+
 	def stories
 		@us_story = UserStory.where(user_id: current_user.id)
 	end
