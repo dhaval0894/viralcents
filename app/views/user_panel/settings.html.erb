@@ -35,11 +35,10 @@
 			<!-- Subscribe to notifications -->
 			<div class="row">
 
-			<form class="form" action="/settings" method="get">    <!--form to activate notifications  -->
+			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
 
 
-				<hr>
-				<h4>Get Notifications Via 
+				<h4>Get Notifications Via  Email
 </h4>
 				<hr>
 
@@ -53,15 +52,39 @@
 					
 				</div>
 					
-				<div class="col-md-6">
-					<hr>
+
+				<!-- Mobile Number field -->
+				<div class="form-group">
+					
+					<input type="submit" class="btn btn-theme" value="submit" >
 				</div>
-				<div class="col-md-1">
-					OR
-				</div>
-				<div class="col-md-5">
-					<hr>
-				</div>
+                
+                 </form>  <!--form to activate notifications  -->
+
+							</div>
+	
+
+
+
+
+
+
+<hr>
+<h1> OR </h1>
+<hr>
+
+			<!-- Subscribe to notifications -->
+			<div class="row">
+
+
+
+
+				<h4>Get Notifications Via SMS
+</h4>
+				<hr>
+
+
+			<form class="form" action="/settings_save_email" method="get">    <!--form to activate notifications  -->
 
 				<!-- Mobile Number field -->
 				<div class="form-group">
@@ -76,7 +99,6 @@
                  </form>  <!--form to activate notifications  -->
 
 							</div>
-			
 		</div>
 		<!--./panel-body-->
 	</div>

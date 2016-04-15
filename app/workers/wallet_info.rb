@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+class WalletInfo
+
+  include Sidekiq::Worker
+
+
+    include Sidetiq::Schedulable
+
+    recurrence backfill: true do
+    weekly
+  end
+
+  def perform(param)
+
+    
+        require 'sendgrid-ruby'
+          sendgrid = SendGrid::Client.new do |c|
+        c.api_key ='secret'
+          
+            end
+
+          email = SendGrid::Mail.new do |m|
+              m.to      =  param
+              m.from    = 'Viralcents'
+              m.subject = 'welcome'
+                      m.html    = '<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -249,4 +273,24 @@
   </table>
 
 </body>
-</html>
+</html>'
+            end
+        sendgrid.send(email)
+
+    
+  end
+
+
+
+end
+
+
+
+
+
+
+
+
+
+
+  
