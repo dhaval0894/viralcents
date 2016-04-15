@@ -17,6 +17,8 @@ gem 'cancancan'
 gem 'sendgrid-ruby'
 
 gem 'sidekiq'
+gem 'sidetiq'
+
 
 gem 'sinatra' ,require: false
 

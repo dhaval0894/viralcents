@@ -113,6 +113,8 @@ class UserPanelController < ApplicationController
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
 
+				
+
 		  end 
 		  	
     end     #activate notifications ends
