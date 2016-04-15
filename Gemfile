@@ -27,6 +27,7 @@ gem 'pg'                            # Use postgres as the database for Active Re
 gem 'sendgrid-ruby'
 gem 'sidekiq'
 gem 'sinatra' ,require: false
+gem 'sidetiq'                       #repeat jobs for sidekiq workers
 gem 'slim'
 gem 'sass-rails'                    # sass for rails
 gem 'turbolinks'                    # Turbolinks makes following links in your web application faster. 

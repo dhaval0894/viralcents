@@ -1,6 +1,15 @@
-class MailSender
+class WalletInfo
 
   include Sidekiq::Worker
+  include Sidetiq::Schedulable
+
+
+ recurrence backfill: true do
+    weekly
+  end
+
+
+
 
   def perform(param)
 
@@ -279,3 +288,4 @@ end
 
 
   
+
