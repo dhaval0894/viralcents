@@ -14,7 +14,7 @@
                 <%= form_tag("/map_coupon", method: "post") do %>
 
                     <%= hidden_field_tag 'user_id' , current_user.id %>
-                    <%= hidden_field_tag 'coupon_id' , coupon_tag  %>
+                    <%= hidden_field_tag 'coupon_id' , coupon.id  %>
                     <div class="text-center">
                         <button class="btn btn-primary btn-xs coupon-btn" role="button"><i class="fa fa-rupee fa-1x"></i><strong><%= coupon.coupon_amount %></strong></button> 
                     </div>    
@@ -24,33 +24,3 @@
     </div>
     <% end %>
 </div>
-                <%= hidden_field_tag 'user_id' , current_user.id %>
-                <%= hidden_field_tag 'coupon_id' , coupon_tag  %>
-                <button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom" data-content= "Description <br><%= coupon.coupon_description %> <hr> Terms
-                 <br> <%= coupon.coupon_terms %> <br> so"  >
-                TERMS  & Conditions
-                </button>
-
-
-    <a data-toggle="tooltip"> <%= submit_tag "REDEEM", :class => "btn btn-info"  %> </a>
-
-
-
-        </p>  <!-- redeem para ends -->
-
-
-
-
-
-
-      </p>     <!-- para with btn and logo -->
-
-
-    </div>   <!-- main div ends -->
-
-  <% end %>
-
-
-<% end %>
-
-
