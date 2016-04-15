@@ -8,7 +8,7 @@
         <div class="col-md-offset-1 col-md-3">
             <%if current_user.referral_link.nil? %><!-- If referral link is not generated -->
                 <!-- Generate Referral Link button -->
-            	<button href="#" id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
+            	<button id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
             <%end%>
         </div>
 
@@ -34,12 +34,12 @@
             <ul class="list-inline">
             <!--facebook share -->
                 <li>
-                    <a href="#" id="fb_referrer" alt="Share on Facebook" data-referrer-link="<%= current_user.referral_link%>" data-facebook-app-id="<%= Rails.application.secrets.facebook_app_id%>" class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
+                    <a id="fb_referrer" alt="Share on Facebook" data-referrer-link="<%= current_user.referral_link%>" data-facebook-app-id="<%= Rails.application.secrets.facebook_app_id%>" class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
                 </li>
             
             <!--twitter share -->
                 <li>
-                    <a href="#" id="tw_referrer" alt="Share on Twitter" data-referrer-link="<%= current_user.referral_link%>">
+                    <a id="tw_referrer" alt="Share on Twitter" data-referrer-link="<%= current_user.referral_link%>">
                     <span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter">Tweet</i></span></a>
                 </li>
             </ul>
