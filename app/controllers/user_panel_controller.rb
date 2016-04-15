@@ -266,9 +266,19 @@ class UserPanelController < ApplicationController
 			
 		end
 		
-		#update credit transaction
-		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
-		@new_trans.save
+		#update credit transaction only when @total amount is changed
+		if UserTransaction.count>0
+			@last_trans = UserTransaction.last
+			if @last_trans.amt != @total and @last_trans.trans_type == "credit"
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save				
+			end
+		else		
+			if @total != 0	
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save
+			end
+		end
 	end
 
 
