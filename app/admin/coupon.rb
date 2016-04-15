@@ -15,15 +15,11 @@ index do
 	column :coupon_description
 	column :coupon_reuse
 	column :coupon_terms
-	
 	column :coupon_code
     actions
 end
 
-
-
-# coupon controller begins
-
+#form for new/edit
 form do |f|
 	    f.inputs "Coupon" do
 		  f.input :coupon_title, :label => "Coupon Title"
