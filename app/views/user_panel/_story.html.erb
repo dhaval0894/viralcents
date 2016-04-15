@@ -56,7 +56,7 @@
     <ul class="list-inline">
         <!-- Social Activity Payout --> 
         <li>
-            <a href="#"  data-story-id="<%=story.id%>" class="fa-stack rate" data-toggle="popover" data-trigger="hover">
+            <a data-story-id="<%=story.id%>" class="fa-stack rate" data-toggle="popover" data-trigger="hover">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
             </a>
@@ -104,7 +104,7 @@
                 <%end%>
                 
                 <% if i==1 %> <!-- If Story is already Tweeted on Twitter -->
-                    <a class ="disabled btn btn-block btn-xs btn-social-icon btn-twitter" href="#"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <a class ="disabled btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
                 
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->
