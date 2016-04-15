@@ -4,10 +4,10 @@
         <h2 class="page-header text-left">Coupons</h2>
     </div>  
     <% @coupons.each do |coupon| %>
-    <div class="col-xs-6 col-sm-4 col-md-3">
+    <div class="col-sm-4 col-md-3">
         <div class="thumbnail">
             <%= image_tag coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:150px;" %>
-            <div class="caption coupon-title">
+            <div class="caption">
                 <h5><%= coupon.coupon_title %>-<%= coupon.coupon_company_name %></h5>
             </div>  
             <span>

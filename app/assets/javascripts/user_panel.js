@@ -1,45 +1,44 @@
 (function(){
 
-  $(document).ready(function() {
-    // Clipboard copy instance
-    new Clipboard('.my_clip_button');
-  });  
-
     /*---- Function Calls ----*/
-      // Facebook/Twitter Alert Box
-      $(document).on("click", ".so_share", function(){
-          bootbox.alert("Generate URL First");
-      });
+      $(document).on("ready", function() {
 
-      // Facebook Logout
-      $(document).on("click", "#fb_logout", fbLogout);
+        // Clipboard copy instance
+        new Clipboard('.my_clip_button');  
 
-      // Facebook Referrer Share
-      $(document).on("click", "#fb_referrer", function(){
-          facebookShare($(this).data('referrer-link'),$(this).data('facebook-app-id'));
-      });
+        // Facebook/Twitter Alert Box
+        $(document).on("click", ".so_share", function(){
+            bootbox.alert("Generate URL First");
+        });
 
-      // Facebook Share
-      $(document).on("click", ".fb_share", function(){
-          share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
-      });
-      
-      // Generate Url
-      $(document).on("click", ".gen_link", function(){
-          url_generate($(this).data('story-id'));
-      });
-      
-      //menu-toggle
-      $(document).on("click", "#menu-toggle", function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-      });
+        // Facebook Logout
+        $(document).on("click", "#fb_logout", fbLogout);
 
-      // Search Panel 
-      $(document).on("ready",search_panel);
+        // Facebook Referrer Share
+        $(document).on("click", "#fb_referrer", function(){
+            facebookShare($(this).data('referrer-link'),$(this).data('facebook-app-id'));
+        });
 
-      // Story rate popover
-      $(document).ready(function() {
+        // Facebook Share
+        $(document).on("click", ".fb_share", function(){
+            share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
+        });
+        
+        // Generate Url
+        $(document).on("click", ".gen_link", function(){
+            url_generate($(this).data('story-id'));
+        });
+        
+        //menu-toggle
+        $(document).on("click", "#menu-toggle", function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+        // Search Panel 
+        search_panel();
+
+        // Story rate popover
         $('.rate').popover({
             html : true,
 
@@ -47,31 +46,31 @@
               return $('#popover_content_wrapper').html();
             }
         });
+
+        // Story title excerpt
+        $(".caption").dotdotdot(function(){
+            wrap: 'letter'  
+        });
+
+        // Twitter Alert Box
+        $(document).on("click", ".twitter_share", function(){ 
+            bootbox.dialog({
+              title: "Connect With Twitter First",
+              message: '<div class="text-center"><a class="btn btn-social-icon btn-sm btn-twitter" id="sign_in" href="/auth/twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a></div>'
+            });  
+        });
+
+        // Twitter Referrer Share
+        $(document).on("click", "#tw_referrer", function(){
+            twRefShareWindow($(this).data('referrer-link'));
+        });
+
+        // Twitter Share Window
+        $(document).on("click", ".tw_share", twShareWindow);
+
+        // Zopim Chat
+        zopim_chat();
       });  
-
-      // Story title excerpt
-      $(document).on("dotdotdot", ".caption", function(){
-          wrap: 'letter'  
-      });
-
-      // Twitter Alert Box
-      $(document).on("click", ".twitter_share", function(){ 
-          bootbox.dialog({
-            title: "Connect With Twitter First",
-            message: '<a class="btn btn-block btn-social-icon btn-sm btn-twitter" id="sign_in" href="/auth/twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a>'
-          });  
-      });
-
-      // Twitter Referrer Share
-      $(document).on("click", "#tw_referrer", function(){
-          twRefShareWindow($(this).data('referrer-link'));
-      });
-
-      // Twitter Share Window
-      $(document).on("click", ".tw_share", twShareWindow);
-
-      // Zopim Chat
-      $(document).on("ready", zopim_chat);
 
     
   /*---- Function Definition ----*/

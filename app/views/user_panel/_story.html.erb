@@ -13,7 +13,7 @@
     <!-- Story Title -->
     <%if !story.title.nil?%>
         <div class="caption">
-            <h5 class="title"><%= story.title %></h5>         
+            <h5 class="title"><%= story.title %></h5>
         </div>
     <% else %>    
         <div class="caption">
@@ -29,34 +29,34 @@
                 <%k=1%>
             <%end%>
     <%end%>
-    <!-- input-group -->
-    <div class="input-group">
-
+        <!-- input-group -->
         <% if k==1%> <!-- If Shortened URL Is Generated -->
-            <!-- copy to clipboard button -->
-            <span class="input-group-addon">
-                <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=story.id%>" title='Click here to copy to clipboard.'>
-                    <i class="fa fa-copy"></i>
-                </button>
-            </span>
-            
-            <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
-
+            <div class="input-group">
+                <!-- copy to clipboard button -->
+                <span class="input-group-addon">
+                    <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=story.id%>" title='Click here to copy to clipboard.'>
+                        <i class="fa fa-copy"></i>
+                    </button>
+                </span>
+                
+                <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
+            </div>
         <%else%> <!-- For Generating Shorten URL -->
-            <span class="input-group-addon">
-                <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>'>
-                    <i class="fa fa-link"></i>
-                </button>
-            </span>
-            <input type="text" id='fe_text1' class="form-control" value='Generate Url'>
+            <div class="input-group gen-group">
+                <span class="input-group-addon">
+                    <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>'>
+                        <i class="fa fa-link"></i>
+                    </button>
+                </span>
+                <input type="text" id='fe_text1' class="form-control" value='Generate Url' readonly>
+            </div>
         <% end%>
-    </div>
 
     <!-- list-inline -->
     <ul class="list-inline">
         <!-- Social Activity Payout --> 
         <li>
-            <a href="#" class="fa-stack rate" data-toggle="popover" data-trigger="hover">
+            <a class="fa-stack rate" data-toggle="popover" data-trigger="hover">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
             </a>
