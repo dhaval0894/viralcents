@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   #post to twitter
   get 'tweet' => 'user_panel#post_to_twitter'
 
+
   get 'settings' => 'user_panel#settings'
+
+  get 'settings_save_contact' => 'user_panel#settings_save_contact'
+  get 'settings_save_email' => 'user_panel#settings_save_email'
   
   
   get 'referrals' => 'user_panel#referrals'
