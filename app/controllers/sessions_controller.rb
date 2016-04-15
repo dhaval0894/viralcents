@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
         url = request.referrer
         uri = URI.parse(url) rescue nil
         ref = CGI.parse(uri.query) rescue nil
+
         #if new user uses a refferel link 
         if ref !=nil and user.referrer.nil? and user.uid != ref["ref"].join(",")[5..-6] and !@all_uid.include? user.uid.to_s
           @u = User.find(user.id)
