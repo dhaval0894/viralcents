@@ -1,4 +1,4 @@
-class UserPanelController < ApplicationController
+ class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
@@ -100,24 +100,31 @@ class UserPanelController < ApplicationController
 
 
 
-  	def settings     #activate notifications
+  	def settings_save_email     #activate notifications
 
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
 				NotificationMailSender.perform_async(@email)
+				redirect_to dashboard_path
+		end
 
-				  
-		  elsif(params[:contact] and current_user.contact != params[:contact])
+				  		  	
+    end     #activate notifications ends
+  
+
+ 	def settings_save_contact     #activate notifications
+  
+        if(params[:contact] and current_user.contact != params[:contact])
 				current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
+				redirect_to dashboard_path
 
-		  end 
+		end 
 		  	
     end     #activate notifications ends
   
- 
 
 
 #all stories page

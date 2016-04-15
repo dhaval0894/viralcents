@@ -3,9 +3,11 @@ class WalletInfo
   include Sidekiq::Worker
   include Sidetiq::Schedulable
 
+  sidekiq_options queue: "high"
+
 
  recurrence backfill: true do
-    weekly
+    minutely
   end
 
 
@@ -14,11 +16,9 @@ class WalletInfo
   def perform(param)
 
    
-    
         require 'sendgrid-ruby'
           sendgrid = SendGrid::Client.new do |c|
-        c.api_key ='secret'
-          
+             c.api_key ='Secret'  
             end
 
           email = SendGrid::Mail.new do |m|
@@ -42,19 +42,21 @@ class WalletInfo
 </head>
 
 
-<body style="background-color:#333A56">
+<body style="background-color:#e5e5e5">
 
 
+  <h1 style="font-family: Georgia;margin-left: 10%;color:#009ce6;text-shadow: 2px 2px #FFF;"> ViralCents </h1>
+              
+<div style="background-color:#fff;width:80%;margin-left: 10%"> 
 
   <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
     <tr>
-      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300;" valign="top">
+      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Georgia", "Arial", sans-serif !important; font-weight: 300;" valign="top">
         
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
           <tr>
-            <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#fff;text-align: center" valign="top">
+            <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
 
-                <h1 style="font-family: Georgia"> ViralCents </h1>
               
             </td>
           </tr>
@@ -74,19 +76,24 @@ class WalletInfo
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello and welcome to ViralCents</h1>
-                              <span style="color: #FFF;line-height: 30px;font-size:20px;font-family:Georgia">
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
+                              <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Georgia">
                               <br>
-                              Thank you for joining us and hope you enjoy using the website as much as we enjoyed making it. Our mission at clot co is to create the simplest event community in the world, so you can find/create events near you and make great friends.
+                              See how much you earn this week on viralcents
                               <br>
-                                <br>
-                                <br>
-                                Thank you very much
-                                <br>
-                                <br>
-                                <button style="background-color:#fff;color:#333A56;border:10px;padding: 10px 10px 10px"> 
+                              <h1>
+                                  2000 <span style="font-size:20px">  Rs </span> 
+                                </h1>
+                                Total Money in your wallet.
+                                <br><br>
+                                <button style="background-color:#009ce6;color:#fff;border:10px;border-radius:10px;padding: 12px 12px 12px 12px;font-size: 15px"> 
                                 <b>Continue  on Viralcents</b></button>
+                                
+                                <button style="background-color:#009ce6;color:#fff;border:10px;border-radius:10px;padding: 12px 12px 12px 12px;font-size: 15px"> 
+                                <b>Earn More Money</b></button>
+                                
                                 </span>
+
                               </br>
                             </td>
                           </tr>
@@ -99,7 +106,7 @@ class WalletInfo
             </td>
           </tr>
           <tr>
-            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #fff /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
+            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
               <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnFollowBlockOuter">
                   <tr>
@@ -135,7 +142,7 @@ class WalletInfo
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #323232;font-size: 20px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 35px;height: 15px;text-align: center;color:#fff">f</a>
 
 
                                                                     </td>
@@ -169,7 +176,7 @@ class WalletInfo
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
                                                                                                   
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 20px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 35px;height: 15px;text-align: center">t</a>
 
 
                                                                     </td>
@@ -237,7 +244,7 @@ class WalletInfo
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#fff;/*@editable*/font-family:Georgia; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
-                            <span style="color: #fff"> 
+                            <span style="color: #323232"> 
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
