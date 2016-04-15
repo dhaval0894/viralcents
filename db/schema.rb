@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20160414114904) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.boolean  "coupon_reuse",        default: false
+    t.string   "coupon_code"
+    t.date     "expiry_date"
   end
 
   create_table "mapcoupons", force: :cascade do |t|
