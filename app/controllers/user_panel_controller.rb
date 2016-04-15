@@ -1,4 +1,5 @@
 class UserPanelController < ApplicationController
+	require 'csv'    
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
@@ -52,19 +53,10 @@ class UserPanelController < ApplicationController
 		    	if $i !=0
 		    		$message="yes"
 		    	end
-		     	   @my_coupons = []
-		     	   
-		     	   @all_coupons =  Mapcoupon.all
-		     	   
-		     	   @all_coupons.each do |f|
-		     	  		
-				     	  	if f.user_id.to_i == current_user.id
-				     	  		@my_coupons.push(f.coupon_id)
-				     	  	else
-				     	  		@my_coupons = "else"
-				     	  	end
-				    end
-				    $i=1	
+		    	   @user_coupons =  Mapcoupon.pluck(:coupon_id)
+		     	   @my_coupons = Coupon.where(id: @user_coupons)
+		     	
+		     	$i=1	
             end
 
 		    def map_coupon
@@ -331,7 +323,17 @@ class UserPanelController < ApplicationController
       	
     end
 
-	
+	#leaderboard
+	def leaderboard 
+		csv_text = File.read('app/Files/MOCK_DATA.csv')
+		csv = CSV.parse(csv_text, :headers => true)
+		@data = []
+		csv.each do |row|
+		  @data.push(row.to_hash["credits"])
+		end
+		@data = @data.map(&:to_i)
+	end
+
 	protected # protected methods dont add any public methods below
 
 	#bitly connection and get its response
@@ -347,9 +349,6 @@ class UserPanelController < ApplicationController
 		client = Bitly.client
       	client.shorten(@story_url)
       end
-
-
-
 
 	private  # private methods dont add any public code below
     
