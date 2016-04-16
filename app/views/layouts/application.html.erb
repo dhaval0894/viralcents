@@ -113,7 +113,7 @@
 						<a href="/referrals" class="<%= 'active' if current_page?(referrals_path) %>"><i class="fa fa-random fa-fw"></i> Referrals</a>
 	                </li>
 	                <li>
-	                    <a href="#"><i class="fa fa-question-circle fa-fw"></i>Need Help</a>
+	                    <a href="#" data-toggle="modal" data-target="#faq-modal"><i class="fa fa-question-circle fa-fw"></i>Need Help</a>
 	                </li>
 	            </ul>
         	</div>
@@ -124,6 +124,10 @@
 				<%= yield %>
 	        </div>
 	        <!-- /#page-content-wrapper -->
+
+	        <!-- FAQs Modal -->
+	        <%= render 'faq' %>
+
 	    </div>
 	    <!-- /#wrapper -->
   	</body>

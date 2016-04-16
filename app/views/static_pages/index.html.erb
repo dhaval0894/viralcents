@@ -1,79 +1,12 @@
 <!-- home -->
 <div id="slider" data-section="home">
-  <div class="owl-carousel owl-carousel-fullwidth">
-    <!-- You may change the background image here.  -->
-      <div class="item" style="background-image:url(assets/slide_5.jpg)">
-        <div class="overlay"></div>
-        <div class="container" style="position: relative;">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center">
-              <div class="fh5co-owl-text-wrap">
-                <div class="fh5co-owl-text">
-                  <h1 class="fh5co-lead to-animate">Just Share To Get Your Share!</h1>
-                <h2 class="fh5co-sub-lead to-animate"><a href="#" style="color: rgb(97, 115, 244); text-decoration:none" onclick="fbLogin();">Register Here</a> To Join Our Social Sharing Army</h3>
-                <p class="to-animate-2"><a href="#" data-nav-section="about" class="btn btn-primary btn-lg">Wait, But how?</a></p>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- You may change the background color here. -->
-      <div class="item" style="background: #352f44;">
-        <div class="container" style="position: relative;">
-          <div class="row">
-            <div class="col-md-7 col-sm-7">
-              <div class="fh5co-owl-text-wrap">
-                <div class="fh5co-owl-text">
-                  <h1 class="fh5co-lead to-animate">Be A Part Of ViralCents</h1>
-                <h2 class="fh5co-sub-lead to-animate"> We'll help you to get the right value for your Share</h3>
-                <p class="to-animate-2"><a href="#" onclick="fbLogin();" class="btn btn-primary btn-lg">Register Here, It's Free</a></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-md-push-1 col-sm-4 col-sm-push-1 iphone-image">
-              <div class="iphone to-animate-2"><img src="assets/sm.jpg" alt="Free HTML5 Template by FREEHTML5.co"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
+  <%= render 'home' %>  
 </div>
 <!-- \.home -->
 
 <!-- features -->
 <div id="fh5co-features" data-section="features">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 section-heading text-center">
-        <h2 class="single-animate animate-features-1">Features</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 fh5co-service to-animate">
-        <div class="fh5co-icon"><i class="fa fa-gift"></i></div>
-        <div class="fh5co-desc">
-          <h3>Coupons, Mobile Recharge And Many more!</h3>
-          <p>Redeem money to recharge phone or purhcase coupons, anytime.</p>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 fh5co-service to-animate">
-        <div class="fh5co-icon"><i class="fa fa-eye"></i></div>
-        <div class="fh5co-desc">
-          <h3>Viral Content!</h3>
-          <p>Choose highly targeted content from many categories and publishers. </p>
-        </div>
-      </div>
-      <div class="clearfix visible-sm-block visible-xs-block"></div>
-      <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 fh5co-service to-animate">
-        <div class="fh5co-icon"><i class="fa fa-crop"></i></div>
-        <div class="fh5co-desc">
-          <h3>Every Activity Matters!</h3>
-          <p>Get paid not just for click but also likes/favorites, shares/retweets and comments</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'features' %>
 </div>
 <!-- ./features -->
 
@@ -93,121 +26,35 @@
 </div>
 
 
-<!-- social-influencers-->
-  <div id="fh5co-our-services" data-section="services">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="box to-animate">
-            <div class="icon colored-1"><span><i class="fa fa-users"></i></span></div>
-            <h3>Highest payment PPC network</h3>
-            <p>Get paid not just for clicks but also for likes, comments, shares (on Facebook) and favorites and retweets (on Twitter). Since we launched 2 months back, ViralCents has paid lakhs of Indian Rupees.</p>
-          </div>
-          <div class="box to-animate">
-            <div class="icon colored-3"><span><i class="fa fa-heart"></i></span></div>
-            <h3>Redeem cash on demand</h3>
-            <p>Want to recharge your phone urgently? Looking for some discount coupons? Don't worry, we got you covered. Use the money you earned on our platform to recharge your phone or to redeem coupons anytime!</p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box to-animate">
-            <div class="icon colored-6"><span><i class="fa fa-rocket"></i></span></div>
-            <h3>Loyalty Bonuses</h3>
-            <p>Double earnings if you get high traffic or if you get featured in ViralCents leaderboard.</p>
-          </div>
-          <div class="box to-animate">
-            <div class="icon colored-4"><span><i class="fa fa-desktop"></i></span></div>
-            <h3>Targeted content</h3>
-            <p>Content available from many categories and publishers. Tap into one of the largest pools of advertisers in the world. No matter how broad or niche your website is, we will always have content relevant to your social media account.</p>
-          </div>
-        </div>
+<!-- testimonials -->
+<div id="fh5co-testimonials" data-section="testimonials">   
+  <%= render 'testimonials' %>
+</div>
+<!-- ./testimonials -->
+
+<div id="advertisement-2">   
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 section-heading text-center">
+        <h2 class="to-animate">Minimize effort, Maximize revenue</h2>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 single-animate animate-features-3">
+        <a href="#" class="btn btn-primary btn-block">Join Us!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- social-influencers-->
+  <div id="fh5co-our-services" data-section="services">
+    <%= render 'influencers' %>
   </div>
   <!-- /.social-influencers -->
   
-  <div id="advertisement-2">   
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 section-heading text-center">
-          <h2 class="to-animate">Minimize effort, Maximize revenue</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-md-offset-4 single-animate animate-features-3">
-          <a href="#" class="btn btn-primary btn-block">Join Us!</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- testimonials -->
-  <div id="fh5co-testimonials" data-section="testimonials">   
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 section-heading text-center">
-          <h2 class="to-animate">Happy Clients Says...</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="box-testimony to-animate">
-            <blockquote>
-              <span class="quote"><span><i class="icon-quote-left"></i></span></span>
-              <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-            </blockquote>
-            <p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
-          </div>  
-        </div>
-        <div class="col-md-4">
-          <div class="box-testimony to-animate">
-            <blockquote>
-              <span class="quote"><span><i class="icon-quote-left"></i></span></span>
-              <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.&rdquo;</p>
-            </blockquote>
-            <p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
-          </div>          
-        </div>
-        <div class="col-md-4">
-          <div class="box-testimony to-animate">
-            <blockquote>
-              <span class="quote"><span><i class="icon-quote-left"></i></span></span>
-              <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-            </blockquote>
-            <p class="author">John Doe, Founder <a href="#">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ./testimonials -->
-
   <!-- contact -->
   <div id="fh5co-press" data-section="press">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 section-heading text-center">
-          <h2 class="single-animate animate-press-1">Contact Us!</h2>
-            <div class="col-md-8 col-md-offset-2 subtext single-animate animate-press-2">
-              <h3>If you have any query or suggestions, drop us a line.</h3>
-            </div>
-        </div>
-      </div>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <form action="">
-              <div class="form-group">
-                <label class="label-control"><h3>Email:</h3></label>
-                <input type="text" class="form-control" placeholder="Enter Email">
-              </div>
-              <div class="form-group">
-                <label class="label-co
-                ntrol"><h3>Message:</h3></label>
-                 <textarea class="form-control" rows="5" id="message" placeholder="Enter Message"></textarea>
-              </div>
-            </form>
-          </div>
-         </div>
-    </div>
+    <%= render 'contact' %>
   </div>
   <!-- ./contact -->
