@@ -2,8 +2,7 @@ class NotificationMessageSender
 
 
   include Sidekiq::Worker
-
-
+  
 
   def perform(contact)
 

@@ -21,7 +21,7 @@ class NotificationMailSender
 
 .table
 {
-  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
 }
 
 
@@ -37,13 +37,13 @@ class NotificationMailSender
 
   <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
     <tr>
-      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300;" valign="top">
+      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300;" valign="top">
         
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
           <tr>
             <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#fff;text-align: center" valign="top">
 
-                <h1 style="font-family: Helvetica"> ViralCents </h1>
+                <h1 style="font-family: Georgia"> ViralCents </h1>
               
             </td>
           </tr>
@@ -63,8 +63,8 @@ class NotificationMailSender
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello</h1>
-                              <span style="color: #FFF;line-height: 30px;font-size:20px;font-family:Helvetica">
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello</h1>
+                              <span style="color: #FFF;line-height: 30px;font-size:20px;font-family:Georgia">
                               <br>
                             You have activated the notifications on this email.
                               <br>
@@ -123,7 +123,7 @@ class NotificationMailSender
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
 
 
                                                                     </td>
@@ -157,7 +157,7 @@ class NotificationMailSender
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
                                                                                                   
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
 
 
                                                                     </td>
@@ -224,7 +224,7 @@ class NotificationMailSender
                       <table align="center" border="0" cellpadding="0" cellspacing="0" class="mcnTextContentContainer" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                         <tbody>
                           <tr>
-                            <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#fff;/*@editable*/font-family:Helvetica; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
+                            <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#fff;/*@editable*/font-family:Georgia; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
                             <span style="color: #fff"> 
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
