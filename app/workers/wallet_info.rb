@@ -7,7 +7,7 @@ class WalletInfo
    include Sidetiq::Schedulable
 
      recurrence backfill: true do
-       minutely
+       weekly
     end
 
 

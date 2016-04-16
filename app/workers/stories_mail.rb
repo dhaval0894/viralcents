@@ -2,6 +2,15 @@ class StoriesMail
 
   include Sidekiq::Worker
 
+
+  sidekiq_options queue: "high"
+
+   include Sidetiq::Schedulable
+
+     recurrence backfill: true do
+       hourly(3)
+    end
+
   def perform()
 
     
