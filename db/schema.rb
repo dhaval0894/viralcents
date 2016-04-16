@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160411062452) do
+ActiveRecord::Schema.define(version: 20160416110955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,34 @@ ActiveRecord::Schema.define(version: 20160411062452) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "email"
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "coupon_title"
+    t.string   "coupon_company_name"
+    t.string   "coupon_company_logo"
+    t.integer  "coupon_amount"
+    t.string   "coupon_description"
+    t.string   "coupon_terms"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "coupon_reuse",        default: false
+    t.string   "coupon_code"
+    t.date     "expiry_date"
+  end
+
+  create_table "mapcoupons", force: :cascade do |t|
+    t.string   "coupon_id"
+    t.string   "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -146,7 +174,7 @@ ActiveRecord::Schema.define(version: 20160411062452) do
     t.string   "email"
     t.string   "referrer"
     t.string   "referral_link"
-    t.string   "role"
+    t.string   "contact"
   end
 
   create_table "wallets", force: :cascade do |t|

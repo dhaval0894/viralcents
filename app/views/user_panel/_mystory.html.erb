@@ -38,9 +38,23 @@
 
             <!-- Social Sharing Button -->                             
             <ul class="list-inline">
-                <li><a  href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook facebook_share"><i class="fa fa-facebook"> Share</i></a>
+                <li>
+                    <%if !ms[2].nil?%><!--if shared on facebook-->
+                        <a id="fb_<%=ms[0].id%>" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <%else%>
+                        <a id="fb_<%=ms[0].id%>" class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= ms[1] %>' data-story-id='<%= ms[0].id%>'><i class="fa fa-facebook"> Share</i></a> 
+                    <% end %>
                 </li>
-                <li><a href="#"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                <li>
+                    <% if !ms[3].nil? %><!--if shared on twitter-->
+                        <a  class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" ><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <%else%>
+                        <%if twitter_user %> <!-- If connected via twitter -->
+                            <a target="popup" class="tw_share" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        <% else %> <!-- If Not connected via twitter -->
+                            <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        <%end%>
+                    <%end%>
                 </li>
             </ul>
 

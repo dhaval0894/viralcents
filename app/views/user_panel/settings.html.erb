@@ -34,38 +34,71 @@
 
 			<!-- Subscribe to notifications -->
 			<div class="row">
-				
-				<hr>
-				<h4>Get Notifications Via </h4>
+
+			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
+
+
+				<h4>Get Notifications Via  Email
+</h4>
 				<hr>
 
 				<!-- E-mail field -->
 				<div class="form-group">
-					<div class="col-md-2"><label for="" class="label-control">Email:</label></div>
+				
+				<div class="col-md-2"><label for="" class="label-control">Email:</label></div>
+					
 					<div class="col-md-8">
-					<input type="email" placeholder="Enter Email" class="form-control"></div>
-					<button class="btn btn-theme">Submit</button>
+		<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>"></div>
+					
 				</div>
 					
-				<div class="col-md-6">
-					<hr>
+
+				<!-- Mobile Number field -->
+				<div class="form-group">
+					
+					<input type="submit" class="btn btn-theme" value="submit" >
 				</div>
-				<div class="col-md-1">
-					OR
-				</div>
-				<div class="col-md-5">
-					<hr>
-				</div>
+                
+                 </form>  <!--form to activate notifications  -->
+
+							</div>
+	
+
+
+
+
+
+
+<hr>
+<h1> OR </h1>
+<hr>
+
+			<!-- Subscribe to notifications -->
+			<div class="row">
+
+
+
+
+				<h4>Get Notifications Via SMS
+</h4>
+				<hr>
+
+
+			<form class="form" action="/settings_save_email" method="get">    <!--form to activate notifications  -->
 
 				<!-- Mobile Number field -->
 				<div class="form-group">
 					<div class="col-md-2"><label for="" class="label-control">SMS:</label></div>
-					<div class="col-md-8"><input type="text" placeholder="Enter Mobile Number" class="form-control"></div>
-					<button class="btn btn-theme">Submit</button>
-				</div>
+					<div class="col-md-8">
 
-			</div>
-			
+		<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>"></div>
+					
+					<input type="submit" class="btn btn-theme" value="submit" >
+				</div>
+                
+                 </form>  <!--form to activate notifications  -->
+
+							</div>
 		</div>
 		<!--./panel-body-->
 	</div>

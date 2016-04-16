@@ -1,0 +1,29 @@
+<% if $message=="not"%>
+	<h2><%= notice %></h2>
+<%else%>
+	<div class="admin-row row">
+		<div class="col-lg-12">
+		    <h2 class="page-header text-left">Redeemed Coupons</h2>
+		</div>	
+		<% @my_coupons.each do |coupon| %>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+		    <div class="thumbnail">
+		        <%= image_tag coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:150px;" %>
+		        <div class="caption coupon-title">
+		            <h5><%= coupon.coupon_title %>-<%= coupon.coupon_company_name %></h5>
+
+		        </div> 
+		        <div style="margin-top:-40px">
+		        		<h5><b>Code : </b><%=coupon.coupon_code%></h5>
+		        		<h5><b>Validit Till : </b>
+		        			<% if !coupon.expiry_date.nil? %>
+		        				<%=coupon.expiry_date.strftime("%d/%m/%Y")%>
+		        			<% end -%>
+		        		</h5>
+		    	</div>
+		    </div>
+		</div>
+		<% end %>
+	</div>
+<% end %>
+

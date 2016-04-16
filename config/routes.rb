@@ -20,14 +20,22 @@ Rails.application.routes.draw do
   get 'user_stories' => 'user_panel#user_stories'
   get 'post' => 'user_panel#tweet'
   get 'stories' => 'user_panel#stories'
+  get 'leaderboard' => 'user_panel#leaderboard'
   #post to twitter
   get 'tweet' => 'user_panel#post_to_twitter'
+
+
   get 'settings' => 'user_panel#settings'
+
+  get 'settings_save_contact' => 'user_panel#settings_save_contact'
+  get 'settings_save_email' => 'user_panel#settings_save_email'
+  
+  
   get 'referrals' => 'user_panel#referrals'
   #Get details for mobile recharge
   get 'recharges' => 'user_panel#recharges'
   #show recharge details
-  post 'recharges' => 'user_panel#addrecharge'
+  put 'recharges' => 'user_panel#addrecharge'
   #get user wallet details
   get 'wallet' =>'user_panel#wallet'
   #store facebook post id
@@ -35,4 +43,10 @@ Rails.application.routes.draw do
   #get unique url per user per story
   get 'bitly' => 'user_panel#bitly'
   post 'add_referral_link' => "user_panel#add_referral_link"
+   
+   #show coupons in coupons page
+   get 'show_coupons' =>'user_panel#show_coupons'
+   get 'my_coupons' =>'user_panel#my_coupons'
+   post 'map_coupon' =>'user_panel#map_coupon'
+
 end

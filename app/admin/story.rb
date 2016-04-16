@@ -24,7 +24,6 @@ ActiveAdmin.register Story do
 	    end
 	    
 	end
-
 	index do
 		  selectable_column
 		  id_column
