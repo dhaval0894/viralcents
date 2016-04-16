@@ -1,19 +1,20 @@
-class WalletInfo < SmtpApiHeader
+class WalletInfo
 
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
+  
+  # include Sidetiq::Schedulable
 
-    recurrence backfill: true do
-      minutely
-   end
+    # recurrence backfill: true do
+      # minutely
+   # end
 
 
-def perform()
+
+  def perform()
 
 require 'SmtpApiHeader.rb'
 require 'mail'
 require 'json'
-
 
 Mail.defaults do
   delivery_method :smtp, { :address   => 'smtp.sendgrid.net',
@@ -27,21 +28,16 @@ end
 
 hdr = SmtpApiHeader.new
 
-@mails = hdr.user_mail_info   # getting user emails from method user_mail_info
-
-receiver = @mails
+receiver = ['rjv834@gmail.com','maheshwari.kajol@gmail.com']
 
 hdr.addTo(receiver)
 
 hdr.setUniqueArgs({'test' => 1 ,'foo' =>2})
 
+x = "rajiv"
+y ="kaju"
 
-money = hdr.wallet_info     # getting user money from method wallet_info
-names = hdr.user_names            # getting user name from method user_name_info
-
-hdr.addSubVal("-amount-" ,money) #adding money to a html variable amount for each user
-hdr.addSubVal("-name-" ,names)   #adding name to a html variable name for each user
-
+hdr.addSubVal("-name-" ,[x,y])
 
 hdr.setCategory('yourCategory')
 
@@ -49,14 +45,14 @@ hdr.setCategory('yourCategory')
 mail = Mail.deliver do
   header['X-SMTPAPI'] =  hdr.asJSON()
   to 'willnotdeliver@domain.com' # When using SMTPAPI's 'to' parameter, this address will not get delivered to
-  from 'Viralcents'
-  subject 'Viralcents Wallet'
+  from 'viralcents@gmil.com'
+  subject 'Ruby Example using X-SMTPAPI header'
   text_part do
-    body ''
+    body 'You  would put your content here, but I am going to say: Hello world!'
   end
   html_part do
     content_type 'text/html; charset=UTF-8'
-    body '<b>Hello </b> Rs. -amount-<br>Glad to have you here!'
+    body '<b>Hello world!</b> -name-<br>Glad to have you here!'
   end
 end
 
@@ -75,9 +71,3 @@ end
 
 
 
-
-
-
-
-
-  

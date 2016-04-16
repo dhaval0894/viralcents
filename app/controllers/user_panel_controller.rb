@@ -6,7 +6,8 @@
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
-		@us_story = UserStory.where(user_id: current_user.id)
+
+			@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
 		if !@wallet.nil?
@@ -102,12 +103,15 @@
 
   	def settings_save_email     #activate notifications
 
+  		
+
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
 				NotificationMailSender.perform_async(@email)
-				redirect_to dashboard_path
+				
 		end
+		redirect_to settings_path
 
 				  		  	
     end     #activate notifications ends
@@ -119,10 +123,11 @@
 				current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
-				redirect_to dashboard_path
-
+				
 		end 
 		  	
+		  	redirect_to settings_path
+
     end     #activate notifications ends
   
 
