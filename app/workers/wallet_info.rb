@@ -2,10 +2,12 @@ class WalletInfo
 
   include Sidekiq::Worker
 
+  sidekiq_options queue: "high"
+
    include Sidetiq::Schedulable
 
      recurrence backfill: true do
-       minutely
+       hourly
     end
 
 
@@ -58,3 +60,5 @@ end
 
 
 
+end
+end
