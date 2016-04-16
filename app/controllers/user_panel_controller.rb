@@ -35,6 +35,14 @@ class UserPanelController < ApplicationController
 
 
    #coupons
+   			def coupon_detail
+   				@coupon=Coupon.find(params[:id])
+   				respond_to do |format|
+			       format.html 
+			       format.js
+   				end	
+   			end	
+
 		    def show_coupons
 		    	@coupons=[]
 		    	@my_coupons=Mapcoupon.pluck(:coupon_id)

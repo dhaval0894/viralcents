@@ -4,7 +4,7 @@
       $(document).on("ready", function() {
 
         // Clipboard copy instance
-        new Clipboard('.my_clip_button');  
+        new Clipboard('.my_clip_button'); 
 
         // Facebook/Twitter Alert Box
         $(document).on("click", ".so_share", function(){

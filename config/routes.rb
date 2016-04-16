@@ -41,6 +41,7 @@ Rails.application.routes.draw do
    
    #show coupons in coupons page
    get 'show_coupons' =>'user_panel#show_coupons'
+   get '/coupon_detail/:id' =>'user_panel#coupon_detail'
    get 'my_coupons' =>'user_panel#my_coupons'
    post 'map_coupon' =>'user_panel#map_coupon'
 
