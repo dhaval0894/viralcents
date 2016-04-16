@@ -27,13 +27,13 @@ gem 'omniauth-twitter', '~> 1.0.1'  #for twitter authentication
 gem 'omniauth-facebook'             #facebook access
 gem 'pg'                            # Use postgres as the database for Active Record
 gem 'sendgrid-ruby'
-gem 'sidekiq'
-gem 'sidetiq'
+gem 'sidekiq'                       #background jobs
+gem 'sidetiq'                        #repeat jobs for sidekiq workers
 
 
 
 gem 'sinatra' ,require: false
-gem 'sidetiq'                       #repeat jobs for sidekiq workers
+
 gem 'slim'
 gem 'sass-rails'                    # sass for rails
 gem 'turbolinks'                    # Turbolinks makes following links in your web application faster. 

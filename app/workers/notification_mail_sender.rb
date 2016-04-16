@@ -2,6 +2,9 @@ class NotificationMailSender
 
   include Sidekiq::Worker
 
+  sidekiq_options queue: "low"
+
+
   def perform(email)
 
    

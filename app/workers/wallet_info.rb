@@ -7,7 +7,7 @@ class WalletInfo
    include Sidetiq::Schedulable
 
      recurrence backfill: true do
-       hourly
+       minutely
     end
 
 
@@ -36,10 +36,10 @@ hdr.addTo(receiver)
 
 hdr.setUniqueArgs({'test' => 1 ,'foo' =>2})
 
-x = "rajiv"
-y ="kaju"
 
 hdr.addSubVal("-name-" ,[x,y])
+
+hdr.addSubVal("-amount-" ,[x,y])
 
 hdr.setCategory('yourCategory')
 
