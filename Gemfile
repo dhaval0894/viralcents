@@ -28,6 +28,10 @@ gem 'omniauth-facebook'             #facebook access
 gem 'pg'                            # Use postgres as the database for Active Record
 gem 'sendgrid-ruby'
 gem 'sidekiq'
+gem 'sidetiq'
+
+
+
 gem 'sinatra' ,require: false
 gem 'sidetiq'                       #repeat jobs for sidekiq workers
 gem 'slim'

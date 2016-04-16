@@ -1,7 +1,7 @@
 class WalletInfo
 
   include Sidekiq::Worker
-  
+
    include Sidetiq::Schedulable
 
      recurrence backfill: true do
@@ -55,19 +55,6 @@ mail = Mail.deliver do
     body '<b>Hello world!</b> -name-<br>Glad to have you here!'
   end
 end
-
-
-
-
-  end
-
-
-
-end
-
-
-
-
 
 
 

@@ -48,10 +48,14 @@
 			</div>	
 
 			<!-- Subscribe to notifications -->
+			<div class="row">
+
+			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
 
 
-				<hr>
-				<h4>Get Notifications Via </h4>
+				<h4>Get Notifications Via  Email
+</h4>
+				
 				<hr>
 			<div class="row">
 
@@ -68,17 +72,37 @@
 		<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>"></div>
 					
 				</div>
-					
-                <input type="submit" class="btn btn-theme" value="submit" >
+			    <input type="submit" class="btn btn-theme" value="submit" >
 				
                  </form>  <!--form to activate notifications on mail  -->
 
 
 <br><br><br>
 
+							</div>
+	
+
+
+
+
+
+
+<hr>
+<h1> OR </h1>
+<hr>
+
+			<!-- Subscribe to notifications -->
+			<div class="row">
+
+
+
+
+				<h4>Get Notifications Via SMS
+</h4>
+				<hr>
+
+
 			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
-
-
 
 				<!-- Mobile Number field -->
 				<div class="form-group">
@@ -94,7 +118,6 @@
                  </form>  <!--form to activate notifications on contact  -->
 
 							</div>
-			
 		</div>
 		<!--./panel-body-->
 	</div>

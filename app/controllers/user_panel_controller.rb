@@ -1,4 +1,4 @@
- class UserPanelController < ApplicationController
+class UserPanelController < ApplicationController
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
@@ -53,19 +53,10 @@
 		    	if $i !=0
 		    		$message="yes"
 		    	end
-		     	   @my_coupons = []
-		     	   
-		     	   @all_coupons =  Mapcoupon.all
-		     	   
-		     	   @all_coupons.each do |f|
-		     	  		
-				     	  	if f.user_id.to_i == current_user.id
-				     	  		@my_coupons.push(f.coupon_id)
-				     	  	else
-				     	  		@my_coupons = "else"
-				     	  	end
-				    end
-				    $i=1	
+		    	   @user_coupons =  Mapcoupon.pluck(:coupon_id)
+		     	   @my_coupons = Coupon.where(id: @user_coupons)
+		     	
+		     	$i=1	
             end
 
 		    def map_coupon
@@ -103,13 +94,11 @@
 
   	def settings_save_email     #activate notifications
 
-  		
-
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
 				NotificationMailSender.perform_async(@email)
-				
+			
 		end
 		redirect_to settings_path
 
@@ -117,9 +106,10 @@
     end     #activate notifications ends
   
 
- 	def settings_save_contact     #activate notifications
-  
-        if(params[:contact] and current_user.contact != params[:contact])
+
+   def settings_save_contact
+ 			 
+ 			  if(params[:contact] and current_user.contact != params[:contact])
 				current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
@@ -343,7 +333,17 @@
       	
     end
 
-	
+	#leaderboard
+	def leaderboard 
+		csv_text = File.read('app/Files/MOCK_DATA.csv')
+		csv = CSV.parse(csv_text, :headers => true)
+		@data = []
+		csv.each do |row|
+		  @data.push(row.to_hash["credits"])
+		end
+		@data = @data.map(&:to_i)
+	end
+
 	protected # protected methods dont add any public methods below
 
 	#bitly connection and get its response
@@ -359,9 +359,6 @@
 		client = Bitly.client
       	client.shorten(@story_url)
       end
-
-
-
 
 	private  # private methods dont add any public code below
     

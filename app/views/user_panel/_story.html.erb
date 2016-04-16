@@ -35,7 +35,7 @@
         <% if k==1%> <!-- If Shortened URL Is Generated -->
             <!-- copy to clipboard button -->
             <span class="input-group-addon">
-                <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text<%=story.id%>" title='Click here to copy to clipboard.'>
+                <button class='my_clip_button btn btn-primary btn-xs' data-clipboard-target="#cp_text" data-story-id='<%= story.id %>' title='Click here to copy to clipboard.'>
                     <i class="fa fa-copy"></i>
                 </button>
             </span>
@@ -43,10 +43,10 @@
             <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
 
         <%else%> <!-- For Generating Shorten URL -->
-            <span class="input-group-addon">
-                <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>'>
-                    <i class="fa fa-link"></i>
-                </button>
+            <span class="input-group-addon" id="gen_button<%=story.id%>" title="Generate URL from here">
+            <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>'>
+                <i class="fa fa-link"></i>
+            </button>
             </span>
             <input type="text" id='fe_text1' class="form-control" value='Generate Url'>
         <% end%>
@@ -56,12 +56,12 @@
     <ul class="list-inline">
         <!-- Social Activity Payout --> 
         <li>
-            <a href="#" class="fa-stack rate" data-toggle="popover" data-trigger="hover">
+            <a data-story-id="<%=story.id%>" class="fa-stack rate" data-toggle="popover" data-trigger="hover">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-inr fa-stack-1x fa-inverse"></i>
             </a>
         </li>
-
+        
         <!-- Social Sharing Buttons -->
 
         <% i=0 %><% j=0 %>
@@ -77,20 +77,20 @@
         <% if not j==1 %> <!-- If shortened url is not generated -->
             
             <!-- Facebook Sharing button -->
-            <li><a  href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook so_share"><i class="fa fa-facebook"> Share</i></a>
+            <li><a class="btn btn-block btn-xs btn-social-icon btn-facebook so_share" data-story-id = "<%= story.id%>"><i class="fa fa-facebook"> Share</i></a>
 
             <!-- Twitter Sharing button -->    
-            <li><a  href="#" class="so_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
+            <li><a class="so_share" data-story-id = "<%= story.id%>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a></li>
         
         <%else%> <!-- If shortened url is genrated -->
 
             <!-- Facebook Sharing button --> 
             <li>
                 <% if i==1 %> <!-- If story is already shared on facebook -->
-                    <a id="fb_<%=story.id%>" href="#" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <a id="fb_<%=story.id%>" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
 
                 <%else%> <!-- If story is not shared on facebook -->
-                    <a id="fb_<%=story.id%>" href="#" class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= @u%>' data-story-id='<%= story.id %>'><i class="fa fa-facebook"> Share</i></a> 
+                    <a id="fb_<%=story.id%>" class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= @u%>' data-story-id='<%= story.id %>'><i class="fa fa-facebook"> Share</i></a> 
                 <%end%> 
             </li>
 
@@ -104,14 +104,14 @@
                 <%end%>
                 
                 <% if i==1 %> <!-- If Story is already Tweeted on Twitter -->
-                    <a class ="disabled btn btn-block btn-xs btn-social-icon btn-twitter" href="#"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
+                    <a class ="disabled btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
                 
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->
                         <a target="popup" class="tw_share" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     
                     <% else %> <!-- If Not connected via twitter -->
-                        <a  href="#" class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     <%end%>
                 <%end%>
             </li>
