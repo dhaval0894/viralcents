@@ -1,4 +1,4 @@
-class WalletInfo
+class Xyz
 
   include Sidekiq::Worker
   
