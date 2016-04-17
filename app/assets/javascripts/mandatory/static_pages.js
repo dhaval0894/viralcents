@@ -3,6 +3,9 @@
   /* --- Function Calls ---*/
     $(document).on("ready", function(){
 
+        // chat box
+        zopim_chat();
+
         // Facebook Login
         $(document).on("click", "#fb_login", fbLogin);    
     });
