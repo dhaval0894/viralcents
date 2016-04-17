@@ -4,9 +4,7 @@
     $(document).on("ready", function(){
 
         // Facebook Login
-        $(document).on("click", "#fb_login", fbLogin);  
-        // zopim chat
-        zopim_chat();  
+        $(document).on("click", "#fb_login", fbLogin);    
     });
     
   
