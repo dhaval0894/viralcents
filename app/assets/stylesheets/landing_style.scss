@@ -10,7 +10,7 @@
 	border:0;
 }
 
-#sign-up{
+#sign-up,#register{
 	color:#6173f4;
 	border-bottom: 0;
 	&:hover {
@@ -28,10 +28,11 @@
 .advertisement .section-heading {
 	padding-bottom: 0;
 	margin-bottom: 0;
+	h2 {
+	    color: #000;
+	    &:after {
+			background: rgba(0, 0, 0, 0.2);
+	    }
+	}
 }
-.advertisement .section-heading h2 {
-    color: #000;
-}
-.advertisement .section-heading h2:after {
-    background: rgba(0, 0, 0, 0.2);
-}
+
