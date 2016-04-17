@@ -1,40 +1,44 @@
 (function(){
 
-  $(document).ready(function() {
-    // Clipboard copy instance
-    new Clipboard('.my_clip_button');
-  });  
-
     /*---- Function Calls ----*/
-      // Facebook Logout
-      $(document).on("click", "#fb_logout", fbLogout);
+      $(document).on("ready", function() {
 
-      // Facebook Referrer Share
-      $(document).on("click", "#fb_referrer", function(){
-          facebookShare($(this).data('referrer-link'),$(this).data('facebook-app-id'));
-      });
+        // Clipboard copy instance
+        new Clipboard('.my_clip_button'); 
 
-      // Facebook Share
-      $(document).on("click", ".fb_share", function(){
-          share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
-      });
-      
-      // Generate Url
-      $(document).on("click", ".gen_link", function(){
-          url_generate($(this).data('story-id'));
-      });
-      
-      //menu-toggle
-      $(document).on("click", "#menu-toggle", function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-      });
+        // Facebook/Twitter Alert Box
+        $(document).on("click", ".so_share", function(){
+            bootbox.alert("Generate URL First");
+        });
 
-      // Search Panel 
-      $(document).on("ready",search_panel);
+        // Facebook Logout
+        $(document).on("click", "#fb_logout", fbLogout);
 
-      // Story rate popover
-      $(document).ready(function() {
+        // Facebook Referrer Share
+        $(document).on("click", "#fb_referrer", function(){
+            facebookShare($(this).data('referrer-link'),$(this).data('facebook-app-id'));
+        });
+
+        // Facebook Share
+        $(document).on("click", ".fb_share", function(){
+            share_to_fb($(this).data('story-url'),$(this).data('story-id'));  
+        });
+        
+        // Generate Url
+        $(document).on("click", ".gen_link", function(){
+            url_generate($(this).data('story-id'));
+        });
+        
+        //menu-toggle
+        $(document).on("click", "#menu-toggle", function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+        // Search Panel 
+        search_panel();
+
+        // Story rate popover
         $('.rate').popover({
             html : true,
 
@@ -42,65 +46,78 @@
               return $('#popover_content_wrapper').html();
             }
         });
+
+        // Story title excerpt
+        $(".caption").dotdotdot(function(){
+            wrap: 'letter'  
+        });
+
+        // tooltip for generate url
+        $(document).on("click",".so_share",function(){
+              var gen_button = '#gen_button' + $(this).data('story-id');
+              var width = $(window).width();
+              if( width > 768) {
+                $(gen_button).tooltipster({animation: 'fade',delay: 1000,autoClose: true, position: "left", offsetY: 50, multiple: true});
+              }
+              else if( width < 768 && width >= 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});
+              }
+              else if(width < 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165, multiple: true});
+              }
+              $(gen_button).tooltipster("show");
+        });
+         
+        $(document).on("mouseout",".so_share",function(){
+          var gen_button = '#gen_button' + $(this).data('story-id');
+          try{
+          $(gen_button).tooltipster("hide");
+          }catch(err){}
+        });
+
+        // Twitter Alert Box
+        $(document).on("click", ".twitter_share", function(){ 
+            bootbox.dialog({
+              title: "Connect With Twitter First",
+              message: '<div class="text-center"><a class="btn btn-social-icon btn-sm btn-twitter" id="sign_in" href="/auth/twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a></div>'
+            });  
+        });
+
+        // Twitter Referrer Share
+        $(document).on("click", "#tw_referrer", function(){
+            twRefShareWindow($(this).data('referrer-link'));
+        });
+
+        // tooltip for generate url
+        $(document).on("click",".so_share",function(){
+              var gen_button = '#gen_button' + $(this).data('story-id');
+              var width = $(window).width();
+              if( width > 768) {
+                $(gen_button).tooltipster({animation: 'fade',delay: 1000,autoClose: true, position: "left", offsetY: 50, multiple: true});
+              }
+              else if( width < 768 && width >= 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});
+              }
+              else if(width < 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165, multiple: true});
+              }
+              $(gen_button).tooltipster("show");
+        }); 
+        $(document).on("mouseout",".so_share",function(){
+          var gen_button = '#gen_button' + $(this).data('story-id');
+          try{
+          $(gen_button).tooltipster("hide");
+          }catch(err){}
+        });
+
+        // Twitter Share Window
+        $(document).on("click", ".tw_share", twShareWindow);
       });  
 
-      // Story title excerpt
-      $(document).on("dotdotdot", ".caption", function(){
-          wrap: 'letter'  
-      });
 
-      // Twitter Alert Box
-      $(document).on("click", ".twitter_share", function(){ 
-          bootbox.dialog({
-            title: "Connect With Twitter First",
-            message: '<a class="btn btn-block btn-social-icon btn-sm btn-twitter" id="sign_in" href="/auth/twitter"><span class="fa fa-twitter"></span> Connect with Twitter</a>'
-          });  
-      });
-
-      // Twitter Referrer Share
-      $(document).on("click", "#tw_referrer", function(){
-          twRefShareWindow($(this).data('referrer-link'));
-      });
-
-      // Twitter Share Window
-      $(document).on("click", ".tw_share", twShareWindow);
-
-      // Zopim Chat
-      $(document).on("ready", zopim_chat);
-
-      // tooltip for generate url
-      $(document).on("click",".so_share",function(){
-            var gen_button = '#gen_button' + $(this).data('story-id');
-            var width = $(window).width();
-            if( width > 768) {
-              $(gen_button).tooltipster({animation: 'fade',delay: 1000,autoClose: true, position: "left", offsetY: 50, multiple: true});
-            }
-            else if( width < 768 && width >= 315){
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});
-            }
-            else if(width < 315){
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165, multiple: true});
-            }
-            $(gen_button).tooltipster("show");
-      }); 
-      $(document).on("mouseout",".so_share",function(){
-        var gen_button = '#gen_button' + $(this).data('story-id');
-        try{
-        $(gen_button).tooltipster("hide");
-        }catch(err){}
-      });
 
     
   /*---- Function Definition ----*/
-
-    // chat box
-    function zopim_chat(){
-      window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-      d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-      _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-      $.src="//v2.zopim.com/?3kxTxB6zH9i31AZ0o3sfl0yiRkWHCToF";z.t=+new Date;$.
-      type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-    }
 
     // facebook logout 
     function fbLogout() {

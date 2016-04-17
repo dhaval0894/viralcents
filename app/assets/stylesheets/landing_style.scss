@@ -1,3 +1,38 @@
 @import "landing/landing_animation.min.scss";
 @import "landing/owl.carousel.min.scss";
 @import "landing/owl.theme.default.min.scss";
+
+#fh5co-features, #fh5co-press, #fh5co-testimonials{
+	padding: 2em 0;
+}
+
+.panel-contact{
+	border:0;
+}
+
+#sign-up,#register{
+	color:#6173f4;
+	border-bottom: 0;
+	&:hover {
+		border-bottom:1px solid rgba(255, 255, 255, 0.5);
+	}
+}
+
+#stats h2{
+	color:#6173f4;
+}
+
+.advertisement{
+	padding: 2em 0;
+}
+.advertisement .section-heading {
+	padding-bottom: 0;
+	margin-bottom: 0;
+	h2 {
+	    color: #000;
+	    &:after {
+			background: rgba(0, 0, 0, 0.2);
+	    }
+	}
+}
+
