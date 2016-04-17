@@ -186,13 +186,13 @@ ActiveAdmin.setup do |config|
   # and feel.
   #
   # To load a stylesheet:
-  config.register_stylesheet 'application.scss'
+  #config.register_stylesheet 'application'
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  # config.register_javascript 'application.js'
+  config.register_javascript 'admin.js'
 
   # == CSV options
   #

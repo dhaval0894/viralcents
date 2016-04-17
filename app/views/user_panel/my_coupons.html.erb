@@ -15,7 +15,7 @@
 		        </div> 
 		        <div style="margin-top:-40px">
 		        		<h5><b>Code : </b><%=coupon.coupon_code%></h5>
-		        		<h5><b>Validit Till : </b>
+		        		<h5><b>Valid Till : </b>
 		        			<% if !coupon.expiry_date.nil? %>
 		        				<%=coupon.expiry_date.strftime("%d/%m/%Y")%>
 		        			<% end -%>

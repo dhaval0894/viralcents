@@ -70,7 +70,7 @@
             var gen_button = '#gen_button' + $(this).data('story-id');
             var width = $(window).width();
             if( width > 768) {
-              $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, position: "left", offsetY: 50, multiple: true});
+              $(gen_button).tooltipster({animation: 'fade',delay: 1000,autoClose: true, position: "left", offsetY: 50, multiple: true});
             }
             else if( width < 768 && width >= 315){
               $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});

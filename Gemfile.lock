@@ -534,6 +534,7 @@ DEPENDENCIES
   koala
   link_thumbnailer
   listjs-rails
+  mail
   omniauth-facebook
   omniauth-twitter (~> 1.0.1)
   pg

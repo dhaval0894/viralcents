@@ -6,6 +6,21 @@
 		<div class="panel-heading">
 			<p class="text-center panel-title">
 				<i class="fa fa-gear"></i> Account Settings
+				<!-- set up the modal to start hidden and fade in and out -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- dialog body -->
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        Hello world!
+      </div>
+      <!-- dialog buttons -->
+      <div class="modal-footer"><button type="button" class="btn btn-primary">OK</button></div>
+    </div>
+  </div>
+</div>
+
 			</p>
 		</div>
 
@@ -35,12 +50,16 @@
 			<!-- Subscribe to notifications -->
 			<div class="row">
 
-			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
-
 
 				<h4>Get Notifications Via  Email
 </h4>
+				
 				<hr>
+			<div class="row">
+
+			<form class="form" action="/settings_save_email" method="get">    <!--form to activate notifications  -->
+
+
 
 				<!-- E-mail field -->
 				<div class="form-group">
@@ -51,15 +70,10 @@
 		<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>"></div>
 					
 				</div>
-					
+			    <input type="submit" class="btn btn-theme" value="submit" >
+				
+                 </form>  <!--form to activate notifications on mail  -->
 
-				<!-- Mobile Number field -->
-				<div class="form-group">
-					
-					<input type="submit" class="btn btn-theme" value="submit" >
-				</div>
-                
-                 </form>  <!--form to activate notifications  -->
 
 							</div>
 	
@@ -84,7 +98,7 @@
 				<hr>
 
 
-			<form class="form" action="/settings_save_email" method="get">    <!--form to activate notifications  -->
+			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
 
 				<!-- Mobile Number field -->
 				<div class="form-group">
@@ -93,10 +107,11 @@
 
 		<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>"></div>
 					
-					<input type="submit" class="btn btn-theme" value="submit" >
-				</div>
+					</div>
                 
-                 </form>  <!--form to activate notifications  -->
+                <input type="submit" class="btn btn-theme" value="submit" >
+				
+                 </form>  <!--form to activate notifications on contact  -->
 
 							</div>
 		</div>
@@ -105,3 +120,6 @@
 	<!--./panel-heading -->
 </div>
 <!-- ./panel -->	
+
+
+

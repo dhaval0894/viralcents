@@ -2,27 +2,62 @@ class WalletInfo
 
   include Sidekiq::Worker
 
+  sidekiq_options queue: "high"
 
-    include Sidetiq::Schedulable
+   include Sidetiq::Schedulable
 
-    recurrence backfill: true do
-    weekly
+     recurrence backfill: true do
+       weekly
+    end
+
+
+
+  def perform()
+
+require 'SmtpApiHeader.rb'
+require 'mail'
+require 'json'
+
+Mail.defaults do
+  delivery_method :smtp, { :address   => 'smtp.sendgrid.net',
+                           :port      => 587,
+                           :domain    => 'sendgrid.com',
+                           :user_name => 'rajiv-shrivastava',
+                           :password  => 'rajiv834',
+                           :authentication => 'plain',
+                           :enable_starttls_auto => true }
+end
+
+hdr = SmtpApiHeader.new
+
+@money = hdr.wallet_info
+@names = hdr.user_names
+
+receiver = hdr.user_mail_info
+
+hdr.addTo(receiver)
+
+hdr.setUniqueArgs({'test' => 1 ,'foo' =>2})
+
+
+hdr.addSubVal("-name-" ,@names)
+
+hdr.addSubVal("-amount-" ,@money)
+
+# hdr.setCategory('yourCategory')
+
+
+mail = Mail.deliver do
+  header['X-SMTPAPI'] =  hdr.asJSON()
+  to 'willnotdeliver@domain.com' # When using SMTPAPI's 'to' parameter, this address will not get delivered to
+  from 'Viralcents'
+  subject 'Viralcents Wallet Information'
+  text_part do
+    body 'You  would put your content here, but I am going to say: Hello world!'
   end
-
-  def perform(param)
-
-    
-        require 'sendgrid-ruby'
-          sendgrid = SendGrid::Client.new do |c|
-        c.api_key ='secret'
-          
-            end
-
-          email = SendGrid::Mail.new do |m|
-              m.to      =  param
-              m.from    = 'Viralcents'
-              m.subject = 'welcome'
-                      m.html    = '<!DOCTYPE html>
+  html_part do
+    content_type 'text/html; charset=UTF-8'
+    body '<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -41,7 +76,7 @@ class WalletInfo
 
 <body style="background-color:#E5E5E5">
 
-
+<br><br>
 <div style="margin-left: 10%;width: 80%;background-color: #fff">
 
 
@@ -73,13 +108,13 @@ class WalletInfo
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello -name-</h1>
                               <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Helvetica">
                               <br>
                                  
                                   See How much you earn this week on ViralCents
                               <br>
-                              <h1> 2000 <span style="font-size: 20px"> Rs.</span> </h1>
+                              <h1> -amount- <span style="font-size: 20px"> Rs.</span> </h1>
                                 Keep sharing and earning.
                                 <br>
                                 <br>
@@ -243,7 +278,7 @@ class WalletInfo
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#323232;/*@editable*/font-family:Helvetica; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
-                            <span style="color: #323232"> 
+                            <span style="color: #323232;text-align:center"> 
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
@@ -272,25 +307,14 @@ class WalletInfo
     </tr>
   </table>
 
+<br><br>
+
 </body>
 </html>'
-            end
-        sendgrid.send(email)
-
-    
   end
-
-
-
 end
 
 
 
-
-
-
-
-
-
-
-  
+end
+end

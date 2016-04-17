@@ -1,5 +1,4 @@
 class UserPanelController < ApplicationController
-	require 'csv'    
 
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
@@ -7,7 +6,8 @@ class UserPanelController < ApplicationController
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
-		@us_story = UserStory.where(user_id: current_user.id)
+
+			@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
 		if !@wallet.nil?
@@ -98,23 +98,28 @@ class UserPanelController < ApplicationController
 				current_user.update(:email => params[:email])
 				@email = params[:email]
 				NotificationMailSender.perform_async(@email)
-				
-             end
-				  
-		  	redirect_to settings_path
+			
+		end
+		redirect_to settings_path
+
+				  		  	
     end     #activate notifications ends
   
 
-def settings_save_contact
+
+   def settings_save_contact
  			 
  			  if(params[:contact] and current_user.contact != params[:contact])
 				current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
 				
-             end
-             redirect_to settings_path 
-end 
+		end 
+		  	
+		  	redirect_to settings_path
+
+    end     #activate notifications ends
+  
 
 
 #all stories page
@@ -271,9 +276,19 @@ end
 			
 		end
 		
-		#update credit transaction
-		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
-		@new_trans.save
+		#update credit transaction only when @total amount is changed
+		if UserTransaction.count>0
+			@last_trans = UserTransaction.last
+			if @last_trans.amt != @total and @last_trans.trans_type == "credit"
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save				
+			end
+		else		
+			if @total != 0	
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save
+			end
+		end
 	end
 
 

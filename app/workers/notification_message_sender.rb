@@ -3,7 +3,9 @@ class NotificationMessageSender
 
   include Sidekiq::Worker
 
+  sidekiq_options queue: "low"
 
+  
 
   def perform(contact)
 
