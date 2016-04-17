@@ -18,14 +18,7 @@
                 <!-- form group [Category] -->
                 <div class="form-group">
                     <label class="label-control" style="margin-right:0;" for="filter-category">Category:</label>
-                    <select id="filter-category" name="category" class="form-control">
-                        <option selected="selected" value="">Select a Category</option>
-                        <option value="Relationships">Relationships</option>
-                        <option value="Life">Life</option>
-                        <option value="Inspirational">Inspirational</option>
-                        <option value="Health and Well-being">Health and Well-being</option>
-                        <option value="Food">Food</option>
-                    </select>                                
+                    <%= select_tag "category", options_from_collection_for_select(categories, "id", "name"),prompt: "Select a category",selected: selected, class: "form-control", id: "filter-category", name: "category",onchange: 'form.submit();'%>
                 </div> 
 
                 <!-- form group [order by] --> 
@@ -44,4 +37,3 @@
     <!-- ./panel -->
 </div>
 <!-- ./row -->
-<hr>

@@ -1,6 +1,7 @@
-	class User < ActiveRecord::Base
+class User < ActiveRecord::Base
 	has_one :twitter_user
-	has_one :wallet
+	has_one :wallet, dependent: :destroy
+	has_many :mapcoupon
 	has_many :story, through: :user_stories
 	has_many :user_transaction
 	has_many :recharge
@@ -9,6 +10,7 @@
 	#save data to user when sign-up
 
 	def self.from_omniauth(auth)
+		
 	  where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
 	    user.provider = auth.provider
 	    user.uid = auth.uid
@@ -16,20 +18,16 @@
 	    user.email = auth.info.email	
 	    user.oauth_token = auth.credentials.token
 	    user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+	    #check if user doesn't exist already and send mail
+	    if not User.exists?(:uid => user.uid)
+	    	@param = auth.info.email
+	    	# send invitation mails to user
+        	MailSender.perform_async(@param)
+        end
 	    user.save!
-	    
-	    @param = auth.info.email
-
-
-        #MailSender.perform_async(@param)
-
 
 	  end
 	end
-
-	
-	
-
 
 	#facebook Graph API to get analytics for post
 

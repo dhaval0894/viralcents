@@ -1,0 +1,26 @@
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th> S_no </th>
+      <th> Story Url</th>
+      <th> Total Budget </th>
+      <th> Clicks </th>
+      <th> avg_CPC </th>
+      <th> Total_cost paid to users </th>
+    </tr>
+  </thead>
+  <tbody>
+    <%stories.each_with_index do |s,i|%>
+    <tr>
+        <td> <%=i+1%> </td>
+        <td> <%=s.orig_url%> </td>
+        <td> <%=s.total_budget%> </td>
+        <td> 500 </td>
+        <td> 0.2p </td>
+        <td> 100 </td>
+
+    </tr>
+    <%end%>
+  </tbody>
+</table>

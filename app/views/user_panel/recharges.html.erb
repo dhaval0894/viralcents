@@ -1,26 +1,43 @@
-<!-- form for recharge details-->
-<%= form_for @recharge, url: {action: "addrecharge"}, html: {class: "form-horizontal"} do |f| %>
-  <div class="form-group">
-          <div class="col-sm-2 label-control">
-            <%= f.label :Mobile %>
-          </div>
-          <div class="col-sm-10">
-            <%= f.text_field :mobile, :placeholder => "Enter Mobile Number", :class => 'form-control' %>
-          </div>
-      </div>
-<%= fields_for @recharge_stat do |fa| %>
+<h3 class="page-header text-left"><i class="fa fa-fw fa-mobile"></i> Mobile Recharge</h3>
+<div class="panel panel-grey">
+  <div class="panel-body">
+    <!-- form for recharge details-->
+    <%= form_for @recharge, url: {action: "addrecharge"}, html: {class: "form-horizontal"} do |f| %>
       <div class="form-group">
-          <div class="col-sm-2 label-control">
-            <%= fa.label :Amount %>
-          </div>
-          <div class="col-sm-10">
-            <%= fa.text_field :amount, :placeholder => "Enter Amount", :class => 'form-control' %>
-          </div>
+        <%= f.label :mobile, "Mobile Number", :class =>'col-sm-offset-1 col-sm-2 label-control' %>
+        <div class="col-sm-8">
+          <%= f.text_field :mobile, :placeholder => "Enter Mobile Number", id:'mobNum', :class => 'form-control' %>
+        </div>  
       </div>
-<%end%>
-      <div class="actions col-sm-offset-3 col-sm-9" style="margin-top:10px" >
-              
-        <%= f.submit 'Recharge', :class => "btn btn-default" %>
-
-      </div>
-<% end %>
+      <%= fields_for @recharge_stat do |fa| %>
+        <div class="form-group">
+          <label class="label-control col-sm-offset-1 col-sm-2">Operator</label>
+          <div class="col-sm-8">
+            <select name="operators" id="operator" class="form-control">
+              <option value="0">Select Operator</option>
+              <option value="AC">Aircel</option>
+              <option value="AT">Airtel</option>
+              <option value="CG">Bsnl</option>
+              <option value="DP">Mtnl</option>
+              <option value="ID">Idea</option>
+              <option value="MT">MTS India</option>
+              <option value="RC">Reliance CDMA</option>
+              <option value="RG">Reliance GSM</option>
+              <option value="TD">TATA Docomo</option>
+              <option value="UN">Uninor</option>
+              <option value="VF">Vodafone</option>
+              <option value="VD">Videocon Mobile Services</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= fa.label :amount, :class => 'col-sm-offset-1 col-sm-2 label-control' %>
+          <div class="col-sm-8">
+            <%= fa.text_field :amount, :placeholder => "Enter Amount", :class => 'form-control' %></div>
+          </div>
+      <%end%>
+      <%= f.submit 'Recharge', :class => "btn btn-theme" %>    
+    <% end %>
+  </div>  
+</div>
+  

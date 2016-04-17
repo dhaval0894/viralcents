@@ -13,7 +13,9 @@
             <div class="panel-body">
                 <% @stories[0,4].each do |story|%>
                     <div class="col-md-6 text-center">
-                        <%= render 'user_panel/story', story: story %>    
+                        <%= render 'user_panel/story', story: story %>
+                        <!-- Rate Popover -->
+                        <%= render 'paypopover', story: story %>    
                     </div>
                 <% end %>    
                 <div class="text-right">
@@ -68,7 +70,7 @@
                         </table>
                     </div>
                     <div class="text-right">
-                        <a href="#">View All <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="/leaderboard">View All <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
             </div>
         </div>
@@ -100,14 +102,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-right">
-                        <a href="#">View All <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
             </div>
         </div>
 
 </div>
 <!-- ./content-row -->
 
-<!-- Rate Popover -->
-<%= render 'paypopover' %>
+

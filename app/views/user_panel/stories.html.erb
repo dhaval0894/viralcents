@@ -1,15 +1,15 @@
 <div id="stories">
 	<!-- Search, filter panel -->
-    <%= render 'searchbox' %>
+    <%= render 'searchbox', categories: @categories, selected: @selected %>
     
 	<!-- All stories panel -->
     <div class="row admin-row list">
         <% @stories.each do |story|%>
             <div class="col-lg-4 col-md-4 col-sm-6 text-center">
                 <%= render 'user_panel/story', story: story %>
+                <%= render 'paypopover', story: story %>
             </div>
         <%end%>
     </div>
 </div>
 <!-- Rate popover -->
-<%= render 'paypopover' %>
