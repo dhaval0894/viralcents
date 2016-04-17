@@ -1,32 +1,70 @@
-class MailSender
+class WalletInfo
 
   include Sidekiq::Worker
 
-sidekiq_options queue: "low"
+  sidekiq_options queue: "high"
+
+   include Sidetiq::Schedulable
+
+     recurrence backfill: true do
+       weekly
+    end
 
 
-  def perform(param)
 
-   
-    
-        require 'sendgrid-ruby'
-          sendgrid = SendGrid::Client.new do |c|
-        c.api_key ='secret'
-          
-            end
+  def perform()
 
-          email = SendGrid::Mail.new do |m|
-              m.to      =  param
-              m.from    = 'Viralcents'
-              m.subject = 'welcome'
-                      m.html    = '<!DOCTYPE html>
+require 'SmtpApiHeader.rb'
+require 'mail'
+require 'json'
+
+Mail.defaults do
+  delivery_method :smtp, { :address   => 'smtp.sendgrid.net',
+                           :port      => 587,
+                           :domain    => 'sendgrid.com',
+                           :user_name => 'rajiv-shrivastava',
+                           :password  => 'rajiv834',
+                           :authentication => 'plain',
+                           :enable_starttls_auto => true }
+end
+
+hdr = SmtpApiHeader.new
+
+@money = hdr.wallet_info
+@names = hdr.user_names
+
+receiver = hdr.user_mail_info
+
+hdr.addTo(receiver)
+
+hdr.setUniqueArgs({'test' => 1 ,'foo' =>2})
+
+
+hdr.addSubVal("-name-" ,@names)
+
+hdr.addSubVal("-amount-" ,@money)
+
+# hdr.setCategory('yourCategory')
+
+
+mail = Mail.deliver do
+  header['X-SMTPAPI'] =  hdr.asJSON()
+  to 'willnotdeliver@domain.com' # When using SMTPAPI's 'to' parameter, this address will not get delivered to
+  from 'Viralcents'
+  subject 'Viralcents Wallet Information'
+  text_part do
+    body 'You  would put your content here, but I am going to say: Hello world!'
+  end
+  html_part do
+    content_type 'text/html; charset=UTF-8'
+    body '<!DOCTYPE html>
 <html>
 <head>
 <style>
 
 .table
 {
-  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
 }
 
 
@@ -36,19 +74,21 @@ sidekiq_options queue: "low"
 </head>
 
 
-<body style="background-color:#333A56">
+<body style="background-color:#E5E5E5">
 
+<br><br>
+<div style="margin-left: 10%;width: 80%;background-color: #fff">
 
 
   <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
     <tr>
-      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300;" valign="top">
+      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300;" valign="top">
         
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
           <tr>
-            <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#fff;text-align: center" valign="top">
+            <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
 
-                <h1 style="font-family: Georgia"> ViralCents </h1>
+                <h1 style="font-family: Helvetica"> ViralCents </h1>
               
             </td>
           </tr>
@@ -68,19 +108,26 @@ sidekiq_options queue: "low"
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello and welcome to ViralCents</h1>
-                              <span style="color: #FFF;line-height: 30px;font-size:20px;font-family:Georgia">
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello -name-</h1>
+                              <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Helvetica">
                               <br>
-                              Thank you for joining us and hope you enjoy using the website as much as we enjoyed making it. Our mission at clot co is to create the simplest event community in the world, so you can find/create events near you and make great friends.
+                                 
+                                  See How much you earn this week on ViralCents
                               <br>
+                              <h1> -amount- <span style="font-size: 20px"> Rs.</span> </h1>
+                                Keep sharing and earning.
                                 <br>
                                 <br>
-                                Thank you very much
-                                <br>
-                                <br>
-                                <button style="background-color:#fff;color:#333A56;border:10px;padding: 10px 10px 10px"> 
-                                <b>Continue  on Viralcents</b></button>
+                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
+                                
+                                <b>Recharge Account Now</b></button>
+                                
+                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
+                                
+                                <b>Earn More Money</b></button>
+                                
                                 </span>
+
                               </br>
                             </td>
                           </tr>
@@ -93,7 +140,7 @@ sidekiq_options queue: "low"
             </td>
           </tr>
           <tr>
-            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #fff /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
+            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
               <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnFollowBlockOuter">
                   <tr>
@@ -129,7 +176,7 @@ sidekiq_options queue: "low"
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
 
 
                                                                     </td>
@@ -163,7 +210,7 @@ sidekiq_options queue: "low"
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
                                                                                                   
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
 
 
                                                                     </td>
@@ -230,8 +277,8 @@ sidekiq_options queue: "low"
                       <table align="center" border="0" cellpadding="0" cellspacing="0" class="mcnTextContentContainer" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                         <tbody>
                           <tr>
-                            <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#fff;/*@editable*/font-family:Georgia; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
-                            <span style="color: #fff"> 
+                            <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#323232;/*@editable*/font-family:Helvetica; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
+                            <span style="color: #323232;text-align:center"> 
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
@@ -260,25 +307,14 @@ sidekiq_options queue: "low"
     </tr>
   </table>
 
+<br><br>
+
 </body>
 </html>'
-            end
-        sendgrid.send(email)
-
-    
   end
-
-
-
 end
 
 
 
-
-
-
-
-
-
-
-  
+end
+end

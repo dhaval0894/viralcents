@@ -52,6 +52,29 @@
             wrap: 'letter'  
         });
 
+        // tooltip for generate url
+        $(document).on("click",".so_share",function(){
+              var gen_button = '#gen_button' + $(this).data('story-id');
+              var width = $(window).width();
+              if( width > 768) {
+                $(gen_button).tooltipster({animation: 'fade',delay: 1000,autoClose: true, position: "left", offsetY: 50, multiple: true});
+              }
+              else if( width < 768 && width >= 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 120, multiple: true});
+              }
+              else if(width < 315){
+                $(gen_button).tooltipster({animation: 'fade',delay: 200,autoClose: true, offsetY: 165, multiple: true});
+              }
+              $(gen_button).tooltipster("show");
+        });
+         
+        $(document).on("mouseout",".so_share",function(){
+          var gen_button = '#gen_button' + $(this).data('story-id');
+          try{
+          $(gen_button).tooltipster("hide");
+          }catch(err){}
+        });
+
         // Twitter Alert Box
         $(document).on("click", ".twitter_share", function(){ 
             bootbox.dialog({
@@ -71,6 +94,7 @@
         // Zopim Chat
         zopim_chat();
       });  
+
 
     
   /*---- Function Definition ----*/
@@ -190,4 +214,3 @@
     }
 
 })();  
-

@@ -6,6 +6,14 @@ class SessionsController < ApplicationController
         @all_uid=User.pluck(:uid)
         user = User.from_omniauth(env["omniauth.auth"])
         session[:user_id] = user.id
+
+        #create a wallet for user when sign_up
+        @usr_wallet=Wallet.find_by(user_id: user.id)
+        if @usr_wallet.nil?
+          @new_wallet=Wallet.new(user_id: user.id,balance: 0.0)
+          @new_wallet.save
+        end
+
         #check whether the user is invited by a referral link
         url = request.referrer
         uri = URI.parse(url) rescue nil
@@ -18,12 +26,12 @@ class SessionsController < ApplicationController
           #update wallet amount for refferer
           @ref1=User.find_by(uid: ref["ref"].join(",")[5..-6 ])
           @wallet=Wallet.where(user_id: @ref1.id)
-          update_wallet(@wallet,@ref1.id,5.0)
+          update_wallet(@wallet,@ref1.id,10.0)
           #upadate wallet for second level referrer
           if @ref1.referrer
             @ref2=User.find_by(uid: @ref1.referrer)
             @wallet1=Wallet.where(user_id: @ref2.id)
-            update_wallet(@wallet1,@ref2.id,2.0)
+            update_wallet(@wallet1,@ref2.id,4.0)
           end
         end      
     else

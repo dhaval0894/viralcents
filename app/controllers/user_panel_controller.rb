@@ -6,7 +6,8 @@ class UserPanelController < ApplicationController
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
-		@us_story = UserStory.where(user_id: current_user.id)
+
+			@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
 		if !@wallet.nil?
@@ -60,19 +61,10 @@ class UserPanelController < ApplicationController
 		    	if $i !=0
 		    		$message="yes"
 		    	end
-		     	   @my_coupons = []
-		     	   
-		     	   @all_coupons =  Mapcoupon.all
-		     	   
-		     	   @all_coupons.each do |f|
-		     	  		
-				     	  	if f.user_id.to_i == current_user.id
-				     	  		@my_coupons.push(f.coupon_id)
-				     	  	else
-				     	  		@my_coupons = "else"
-				     	  	end
-				    end
-				    $i=1	
+		    	   @user_coupons =  Mapcoupon.pluck(:coupon_id)
+		     	   @my_coupons = Coupon.where(id: @user_coupons)
+		     	
+		     	$i=1	
             end
 
 		    def map_coupon
@@ -108,24 +100,34 @@ class UserPanelController < ApplicationController
 
 
 
-  	def settings     #activate notifications
+  	def settings_save_email     #activate notifications
 
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
 				NotificationMailSender.perform_async(@email)
+			
+		end
+		redirect_to settings_path
 
-				  
-		  elsif(params[:contact] and current_user.contact != params[:contact])
+				  		  	
+    end     #activate notifications ends
+  
+
+
+   def settings_save_contact
+ 			 
+ 			  if(params[:contact] and current_user.contact != params[:contact])
 				current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
-
-		  end 
+				
+		end 
 		  	
+		  	redirect_to settings_path
+
     end     #activate notifications ends
   
- 
 
 
 #all stories page
@@ -282,9 +284,19 @@ class UserPanelController < ApplicationController
 			
 		end
 		
-		#update credit transaction
-		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
-		@new_trans.save
+		#update credit transaction only when @total amount is changed
+		if UserTransaction.count>0
+			@last_trans = UserTransaction.last
+			if @last_trans.amt != @total and @last_trans.trans_type == "credit"
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save				
+			end
+		else		
+			if @total != 0	
+				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans.save
+			end
+		end
 	end
 
 
@@ -339,7 +351,17 @@ class UserPanelController < ApplicationController
       	
     end
 
-	
+	#leaderboard
+	def leaderboard 
+		csv_text = File.read('app/Files/MOCK_DATA.csv')
+		csv = CSV.parse(csv_text, :headers => true)
+		@data = []
+		csv.each do |row|
+		  @data.push(row.to_hash["credits"])
+		end
+		@data = @data.map(&:to_i)
+	end
+
 	protected # protected methods dont add any public methods below
 
 	#bitly connection and get its response
@@ -355,9 +377,6 @@ class UserPanelController < ApplicationController
 		client = Bitly.client
       	client.shorten(@story_url)
       end
-
-
-
 
 	private  # private methods dont add any public code below
     

@@ -65,6 +65,9 @@
         .navbar-collapse {
             padding-left: 0px;
         }
+        #fb_logout{&:hover{
+            cursor: pointer;
+        }}
 
     /*Wrapper for sidebar and page-content*/
     #wrapper {
