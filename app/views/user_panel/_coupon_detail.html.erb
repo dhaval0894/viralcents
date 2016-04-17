@@ -1,0 +1,45 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+	  	<div class="modal-body">	
+	  		<div class="row">
+	  			<div class="col-md-4">
+	  		  		    <%= image_tag @coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:250px;" %>
+	  		  		    <%= form_tag("/map_coupon", method: "post") do %>
+  		  		     	    <%= hidden_field_tag 'user_id' , current_user.id %>
+  		  		     	    <%= hidden_field_tag 'coupon_id' , @coupon.id  %>
+  		  		     	    <div class="text-center">
+  		  		     	        <button class="btn btn-primary btn-sm coupon-btn" role="button"><i class="fa fa-rupee fa-1x"></i><strong><%= @coupon.coupon_amount %></strong></button> 
+  		  		     	    </div>    
+	  		  		    <% end %>	
+	  		  	</div>
+	  			<div class="col-md-8">
+	  		 		<h4 class="page-header text-left"><%= @coupon.coupon_title %> @<strong><%= @coupon.coupon_company_name %></strong></h4>
+	  		 		<div>
+	  		 			<h4>About</h4>
+						<small class="text-left">
+							<%= @coupon.coupon_description %>
+								Cafe Coffee Day is a coffee shop for the young and the young at heart. We're part of Coffee Day Global Limited. We source our coffees from thousands of small coffee planters. They and the many plantation workers have truly made us who we are today and we're glad to be a part of their lives. Popularly known as CCD, we strive to provide the best experience to our guests. To put it plainly, we brought in the concept of cafes to India (this is where you thank us!).
+						</small>
+	  		 		</div>
+	  		 		<hr>
+					<h4>Terms And Conditions</h4>
+					<small>
+						<ul class="list-group">
+							<li class="list-group-item">Minimum transaction of Rs.300 (exclusive of taxes) is required for this offer. (	It would sum up to Rs.343 including taxes).
+							</li>
+							<li class="list-group-item">Cashback will be cancelled in case of full refund or cancellation of order
+							</li>
+							<li class="list-group-item">
+								This Offer is valid at all Cafe Coffee Day outlets across India except Coffee Day Lounge, Coffee Day Square, discounted and airport cafes
+							</li>
+						</ul>
+					</small>
+					
+	  		  	</div>
+	  		</div>
+	    </div>
+	    <div class="modal-footer">
+	        
+	    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
