@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get 'auth/failure' => redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
   
+  #static_pages contact form
+  post 'add_contact' => 'static_pages#add_contact'
+  
   #user_panel
   get 'dashboard' => 'user_panel#dashboard'
   get 'user_stories' => 'user_panel#user_stories'
@@ -29,11 +32,6 @@ Rails.application.routes.draw do
 
   get 'settings_save_contact' => 'user_panel#settings_save_contact'
   get 'settings_save_email' => 'user_panel#settings_save_email'
-  
-  get 'settings_save_email' => 'user_panel#settings_save_email'
-  
-  get 'settings_save_contact' => 'user_panel#settings_save_contact'
-  
 
   get 'referrals' => 'user_panel#referrals'
   #Get details for mobile recharge

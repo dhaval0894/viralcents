@@ -16,15 +16,15 @@
         <!-- Map Column -->
         <!-- Contact Details Column -->        
         <h3 class="lead">If you have any query or suggestions, drop us a line.</h3>
-        <form action="/" method="get">
+        <form name = "contact">
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Enter Email" name="email">
+            <input type="email" class="form-control" placeholder="Enter Email" name="email" id="email" data-toggle="tooltip" title="Enter your email">
           </div>
           <div class="form-group">
-            <textarea class="form-control" rows="5" id="message" placeholder="Enter Message" name="message"></textarea>
+            <textarea class="form-control" rows="5" id="message" placeholder="Enter Message" name="message" data-toggle="tooltip" title="Enter some message"></textarea>
           </div>
           <div class="col-md-12 single-animate animate-features-3">
-            <a href="#" class="btn btn-primary btn-md">Submit</a>
+            <a id = "submit" class="btn btn-primary btn-md">Submit</a>
           </div>
         </form>
       </div>
