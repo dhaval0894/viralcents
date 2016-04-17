@@ -13,10 +13,10 @@ $panelHeaderBck: #00284d;
 $secondary-color: #000000 !default;
 
 // Active Admin's got SASS!
-@import "bootstrap-sprockets";
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "active_skin";
+@import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
 
@@ -25,14 +25,70 @@ $secondary-color: #000000 !default;
 //	
 //   .status_tag { background: #6090DB; }
 //change label-color for admin view
-.label
-{
+
+.label{
 	color: #5E6469;
 	font-size: 100%;
-
+}
+div#wrapper.container{
+	max-width: 1280px !important;
+}
+.attributes_table{
+	color: #63696B;
+	font-size: 20px;
+}
+#title_bar h2{
+	font-size: 2em;
+}
+.section > h3, .panel > h3{
+	font-size: 1.1em;
 }
 form fieldset.inputs legend
 {
 	border-bottom: 0px;
 }
 
+@media only screen and (max-width: 760px) {
+
+	/* Force table to not be like tables anymore */
+	body.index.admin_dashboard{
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative; 
+		}
+		
+		td:before { 
+			/* Now like a table header */
+			position: relative;
+			width: 45%; 
+			float: left;
+			padding-right: 10px; 
+			white-space: nowrap;
+		}
+		td:nth-of-type(1):before { content: "S_no"; }
+		td:nth-of-type(2):before { content: "Title"; }
+		td:nth-of-type(3):before { content: "Original URL"; }
+		td:nth-of-type(4):before { content: "Total Budget"; }
+		td:nth-of-type(5):before { content: "Click amt"; }
+		td:nth-of-type(6):before { content: "Like amt"; }
+		td:nth-of-type(7):before { content: "Share amt"; }
+		td:nth-of-type(8):before { content: "Comment amt"; }
+		td:nth-of-type(9):before { content: "Fav amt"; }
+		td:nth-of-type(10):before { content: "Retweet amt"; }
+	}
+}
