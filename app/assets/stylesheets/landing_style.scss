@@ -6,40 +6,33 @@
 	padding: 2em 0;
 }
 
+.panel-contact{
+	border:0;
+}
+
 #sign-up{
 	color:#6173f4;
 	border-bottom: 0;
+	&:hover {
+		border-bottom:1px solid rgba(255, 255, 255, 0.5);
+	}
 }
 
-#advertisement-1 {
-	padding: 2em 0;
-    background: #6173f4;
+#stats h2{
+	color:#6173f4;
 }
-#advertisement-1 .section-heading {
+
+.advertisement{
+	padding: 2em 0;
+}
+.advertisement .section-heading {
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
-#advertisement-1 .section-heading h2 {
-    color: white;
-}
-#advertisement-1 .section-heading h2:after {
-    background: rgba(255, 255, 255, 0.2);
-}
- 
-.btn-ad {
-	color: #6173f4;
-}
-
-#advertisement-2{
-	padding: 2em 0;
-}
-#advertisement-2 .section-heading {
-	padding-bottom: 0;
-	margin-bottom: 0;
-}
-#advertisement-2 .section-heading h2 {
+.advertisement .section-heading h2 {
     color: #000;
 }
-#advertisement-2 .section-heading h2:after {
+.advertisement .section-heading h2:after {
     background: rgba(0, 0, 0, 0.2);
 }
+
