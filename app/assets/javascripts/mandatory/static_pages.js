@@ -10,18 +10,12 @@
         $(document).on("click", ".fb_login", fbLogin);  
 
         //contact form
-        $(document).on("click", "#submit", function(){
-            var email = $("input#email").val();
-            var message = $("textarea#message").val();
-            if(email != "" && message != ""){
-              addMessages(email,message);
-            }
-            else{
-              
-            }
-            // Clear the form.
-            $('input#email').val('');
-            $('textarea#message').val('');
+        $(document).on("submit", "#contact", function(e){
+            addMessages($("input#email").val(),$("textarea#message").val());
+            $("input#email").val("");
+            $("textarea#message").val("");
+            alert("Your message has been sent");
+            e.preventDefault();
         });  
     });
     

@@ -13,6 +13,8 @@ class StaticPagesController < ApplicationController
     if !params[:email].nil? and !params[:message].nil?
       @contact = Contact.new(email: params[:email], message: params[:message])
       @contact.save
+      flash[:alert] = "Your message has been sent"
     end
+    redirect_to '/'
   end
 end
