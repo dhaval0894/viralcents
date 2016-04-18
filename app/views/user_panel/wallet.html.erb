@@ -2,7 +2,7 @@
 <%= render 'stats' %>
 <!--details for last 10 user transaction-->
 <div class="row">
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>    
                 <th colspan="5">Date</th>
@@ -22,5 +22,8 @@
                 
             <%end%>
         </tbody>
-    </table>      
+    </table>
+    <div class="text-right">
+        <center><a href="/transactions">View More <i class="fa fa-arrow-circle-right"></i></a></center> 
+    </div>     
 </div>

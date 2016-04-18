@@ -362,6 +362,11 @@ class UserPanelController < ApplicationController
 		@data = @data.map(&:to_i)
 	end
 
+	#transaction history
+	def transactions
+		@all_trans=UserTransaction.where(user_id: current_user.id)
+	end
+
 	protected # protected methods dont add any public methods below
 
 	#bitly connection and get its response
