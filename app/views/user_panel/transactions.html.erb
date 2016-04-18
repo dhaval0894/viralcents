@@ -1,0 +1,22 @@
+<div class="table-responsive">
+	<h2>TRANSACTION HISTORY</h2>
+	<br>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+            	<th colspan="5">Date</th>
+                <th colspan="5">Amount</th>
+                <th colspan="5">Type</th> 
+            </tr>
+        </thead>
+        <tbody>
+        	<% @all_trans.each do |t| %>
+        		<tr>
+        			<td colspan="5"><%=t.trans_date.strftime("%d/%m/%Y") %></td>
+                    <td colspan="5"><%=t.amt%></td>
+                    <td><%=t.trans_type%></td>
+                </tr>
+            <%end%>
+        </tbody>
+    </table>
+</div>

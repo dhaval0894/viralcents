@@ -33,6 +33,15 @@ Rails.application.routes.draw do
   get 'settings_save_contact' => 'user_panel#settings_save_contact'
   get 'settings_save_email' => 'user_panel#settings_save_email'
 
+  
+  get 'settings_save_email' => 'user_panel#settings_save_email'
+  
+  get 'settings_save_contact' => 'user_panel#settings_save_contact'
+  
+  #transaction history
+  get 'transactions' => 'user_panel#transactions'
+
+
   get 'referrals' => 'user_panel#referrals'
   #Get details for mobile recharge
   get 'recharges' => 'user_panel#recharges'
