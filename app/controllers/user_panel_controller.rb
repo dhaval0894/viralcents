@@ -238,27 +238,6 @@ class UserPanelController < ApplicationController
 	#find wallet balance
 	def wallet
 		@u_story=UserStory.where(user_id: current_user.id)
-
-		#stats calculation
-		@usr_wallet=Wallet.find_by(user_id: current_user.id)
-		@shared_story = UserStory.where(user_id: current_user.id).count
-		#find week earning
-		@credit_type=["referral","credit"]
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
-		@week_earning=0.0
-		@last_week.each do |l|
-			if l.trans_date > 1.week.ago
-				@week_earning+=l.amt
-			end
-		end
-
-		#find last_withdraw
-		@debit_type=["coupon","recharge"]
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
-		
-		#last 10 user transaction
-		@last=UserTransaction.where(user_id: current_user.id).last(10).reverse
-
 		@total=0.0
 	
 		#calculate current earning of user
@@ -298,6 +277,26 @@ class UserPanelController < ApplicationController
 				@new_trans.save
 			end
 		end
+
+		#stats calculation
+		@usr_wallet=Wallet.find_by(user_id: current_user.id)
+		@shared_story = UserStory.where(user_id: current_user.id).count
+		#find week earning
+		@credit_type=["referral","credit"]
+		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
+		@week_earning=0.0
+		@last_week.each do |l|
+			if l.trans_date > 1.week.ago
+				@week_earning+=l.amt
+			end
+		end
+
+		#find last_withdraw
+		@debit_type=["coupon","recharge"]
+		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
+		
+		#last 10 user transaction
+		@last=UserTransaction.where(user_id: current_user.id).last(10).reverse
 	end
 
 
