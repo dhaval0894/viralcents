@@ -257,7 +257,7 @@ class UserPanelController < ApplicationController
 		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
 		
 		#last 10 user transaction
-		@last=UserTransaction.where(user_id: current_user.id).limit(10)
+		@last=UserTransaction.where(user_id: current_user.id).last(10).reverse
 
 		@total=0.0
 	
