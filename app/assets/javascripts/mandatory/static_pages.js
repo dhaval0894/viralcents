@@ -7,7 +7,16 @@
         zopim_chat();
 
         // Facebook Login
-        $(document).on("click", ".fb_login", fbLogin);    
+        $(document).on("click", ".fb_login", fbLogin);  
+
+        //contact form
+        $(document).on("submit", "#contact", function(e){
+            addMessages($("input#email").val(),$("textarea#message").val());
+            $("input#email").val("");
+            $("textarea#message").val("");
+            alert("Your message has been sent");
+            e.preventDefault();
+        });  
     });
     
   
@@ -52,6 +61,18 @@
         version    : 'v2.5' // use graph api version 2.5
       });
 
+    }
+
+    //add messages
+    function addMessages(email, message)
+    {
+        $.ajax({
+            type: "POST",
+            url: "add_contact",
+            data:  JSON.stringify({ 'email' : email, 'message' : message}), // the JSON data, as an object or string
+            contentType: "application/json",
+            dataType: "json",
+        }) 
     }
     
 })();
