@@ -364,7 +364,7 @@ class UserPanelController < ApplicationController
 
 	#transaction history
 	def transactions
-		@all_trans=UserTransaction.where(user_id: current_user.id)
+		@all_trans=UserTransaction.where(user_id: current_user.id).reverse
 	end
 
 	protected # protected methods dont add any public methods below
