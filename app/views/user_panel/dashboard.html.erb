@@ -37,35 +37,17 @@
                                 <tr>
                                     <th class="text-center"># Rank</th>
                                     <th class="text-center">Name</th>
-                                    <th class="text-center">Country</th>
+                                    <th class="text-center">Earning (in &#8377;)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>XXXX</td>
-                                    <td>India</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>XXXX</td>
-                                    <td>India</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>XXXX</td>
-                                    <td>France</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>XXXX</td>
-                                    <td>USA</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>XXXX</td>
-                                    <td>Serbia</td>
-                                </tr>
+                                <% @data[0,5].sort.reverse!.each_with_index do |d,i| %>
+                                    <tr>
+                                        <td><%=i+1%></td>
+                                        <td>XXXX</td>
+                                        <td><%= d%></td>
+                                    </tr>
+                                <%end%>
                             </tbody>
                         </table>
                     </div>

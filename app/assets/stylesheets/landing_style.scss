@@ -2,7 +2,7 @@
 @import "landing/owl.carousel.min.scss";
 @import "landing/owl.theme.default.min.scss";
 
-#fh5co-features, #fh5co-press, #fh5co-testimonials{
+#fh5co-features, #fh5co-press, #fh5co-testimonials, #footer{
 	padding: 2em 0;
 }
 
@@ -10,8 +10,20 @@
 	border:0;
 }
 
+.row.vdivide [class*='col-']:not(:last-child):after {
+  background: #e0e0e0;
+  width: 1px;
+  content: "";
+  display:block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 20px;
+}
+
 #sign-up,#register{
-	color:#6173f4;
+	color:#61A0F4;
 	border-bottom: 0;
 	&:hover {
 		border-bottom:1px solid rgba(255, 255, 255, 0.5);

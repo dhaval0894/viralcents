@@ -6,11 +6,11 @@
             <tr>
                 <th class="text-center"># Rank</th>
                 <th class="text-center">Name</th>
-                <th class="text-center">Earnings</th>
+                <th class="text-center">Earnings (in &#8377;)</th>
             </tr>
         </thead>
         <tbody>
-        <% @data.sort.reverse!.each_with_index do |d,i|%>
+        <% @data[0,5].each_with_index do |d,i|%>
             <tr>
                 <td><%=i+1%></td>
                 <td>XXXX</td>
