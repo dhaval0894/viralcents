@@ -40,6 +40,10 @@ gem 'turbolinks'                    # Turbolinks makes following links in your w
 gem 'twitter', '~> 5.3.1'           #twitter access
 gem 'uglifier', '>= 1.3.0'          # Use Uglifier as compressor for JavaScript assets
 
+group :production do 
+	gem 'capistrano-rails'
+	gem 'capistrano-passenger'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
