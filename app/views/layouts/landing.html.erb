@@ -70,6 +70,16 @@
 	<!-- footer -->
 	<footer id="footer" role="contentinfo">
 		<div class="container">
+			<div class="row vdivide">
+				<div class="col-md-12 text-center">
+					<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+						<a href="#" data-toggle="modal" data-target="#faq-modal">Faqs</a>
+					</div>
+				    <div class="col-md-6 col-sm-6 col-xs-6 text-left">
+				    	<a href="#" data-toggle="modal" data-target="#tc-modal">T&Cs</a>
+				    </div>
+				</div>
+			</div>
 			<div class="row row-bottom-padded-sm">
 				<div class="col-md-12">
 					<p class="copyright text-center">&copy; 2016 Copyright <a href="/">ViralCents</a>. All Rights Reserved.</p>
@@ -88,14 +98,20 @@
 		</div>
 	</footer>
 
-	<!-- main js script -->
-	<script type="text/javascript" src="assets/landing/main.js"></script>
-	<!-- jQuery Easing -->
-	<script src="assets/landing/jquery.easing.1.3.js"></script>
-	<!-- Waypoints -->
-	<script src="assets/landing/jquery.waypoints.min.js"></script>
-	<!-- Owl Carousel -->
-	<script src="assets/landing/owl.carousel.min.js"></script>
+	<!-- Faqs Modal -->
+	<%= render 'user_panel/faq' %>
 
+	<!-- T&Cs Modal -->
+	<%= render 'tc' %>
+
+	<!-- main js script -->
+	<%= javascript_include_tag 'landing/main'%>
+	<!-- jquery easing -->
+	<%= javascript_include_tag 'landing/jquery.easing.1.3'%>
+	<!-- jquery waypoints -->
+	<%= javascript_include_tag 'landing/jquery.waypoints.min'%>
+	<!-- owl carousel -->
+	<%= javascript_include_tag 'landing/owl.carousel.min'%>
+	
 </body>
 </html>
