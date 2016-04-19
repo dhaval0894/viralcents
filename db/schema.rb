@@ -101,18 +101,18 @@ ActiveRecord::Schema.define(version: 20160416110955) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "image_url"
-    t.integer  "admin_user_id"
     t.float    "click_amt",     default: 0.0
     t.float    "like_amt",      default: 0.0
     t.float    "share_amt",     default: 0.0
     t.float    "comment_amt",   default: 0.0
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
+    t.integer  "admin_user_id"
+    t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
     t.datetime "expiry_date"
     t.integer  "category_id"
-    t.string   "story_status",  default: "active"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -139,8 +139,8 @@ ActiveRecord::Schema.define(version: 20160416110955) do
     t.integer  "fb_likes",     default: 0
     t.integer  "fb_shares",    default: 0
     t.integer  "fb_comments",  default: 0
-    t.integer  "fav",          default: 0
     t.integer  "retweets",     default: 0
+    t.integer  "fav",          default: 0
     t.integer  "user_id"
     t.integer  "story_id"
     t.datetime "created_at",               null: false
