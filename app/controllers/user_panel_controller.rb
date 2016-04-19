@@ -15,6 +15,16 @@ class UserPanelController < ApplicationController
 		else
 			@wallet_amt=0.0
 		end
+
+		csv_text = File.read('app/Files/MOCK_DATA.csv')
+		csv = CSV.parse(csv_text, :headers => true)
+		@data = []
+		csv.each do |row|
+		  @data.push(row.to_hash["credits"])
+		end
+		@data = @data.map(&:to_i)
+		@data= @data.sort.reverse!
+
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
 		@credit_type=["referral","credit"]
