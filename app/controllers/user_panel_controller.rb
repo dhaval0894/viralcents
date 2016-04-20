@@ -247,6 +247,7 @@ class UserPanelController < ApplicationController
 
 	#find wallet balance
 	def wallet
+		@usr_wallet=Wallet.find_by(user_id: current_user.id)
 		@u_story=UserStory.where(user_id: current_user.id)
 		@total=0.0
 	
@@ -289,7 +290,6 @@ class UserPanelController < ApplicationController
 		end
 
 		#stats calculation
-		@usr_wallet=Wallet.find_by(user_id: current_user.id)
 		@shared_story = UserStory.where(user_id: current_user.id).count
 		#find week earning
 		@credit_type=["referral","credit"]
