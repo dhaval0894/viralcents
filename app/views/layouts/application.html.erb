@@ -8,6 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel='shortcut icon' href='assets/viral.ico' type='image/x-icon'/ >
 	<title>ViralCents: Monetize your Social media audience</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,8 +29,6 @@
 	<!-- Custom Css -->
 	<%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
   	
-  	<%= javascript_include_tag 'application' %>
-  	<%= javascript_include_tag 'user_panel' %>
   	<%= csrf_meta_tags %>
 
 	<!-- Google Fonts-->
@@ -130,5 +129,10 @@
 
 	    </div>
 	    <!-- /#wrapper -->
+
+		<!-- Application js -->
+	    <%= javascript_include_tag 'application' %>
+		<!-- user_panel js -->
+	    <%= javascript_include_tag 'user_panel' %>
   	</body>
 </html>
