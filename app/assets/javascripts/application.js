@@ -20,7 +20,7 @@
 //= require list
 //= require clipboard
 //= require_tree ./mandatory
-//= reuire_self
+//= require_self
 
 /* Google Analytics */
 ((function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
