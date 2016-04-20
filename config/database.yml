@@ -26,4 +26,6 @@ production:
   endpoint: viralcents-db.cua4w9s0j1kv.ap-southeast-1.rds.amazonaws.com
   port: 5432
   pool: 25
-  
+  username: techritzy_viral
+  password: viral12345
+
