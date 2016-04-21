@@ -43,7 +43,8 @@
             html : true,
 
             content: function() {
-              return $('#popover_content_wrapper').html();
+              var popover_id = '#popover_content_wrapper' + $(this).data('story-id')
+              return $(popover_id).html();
             }
         });
 
