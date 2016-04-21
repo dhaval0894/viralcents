@@ -50,7 +50,7 @@ ActiveAdmin.register Story do
 	      f.input :story_status, :as => :select, 
                 :label => "Story Status", :include_blank => false,
                 :collection => [['Active','active'],['Pause','pause'],['Expire','expire']]
-          f.input :category_id,:as => :select, :collection =>Category.all.collect{|category| [category.name,category.id]}, :prompt => true
+          f.input :category_id,:as => :select, :collection =>Category.where.not(name: 'All').collect{|category| [category.name,category.id]}, :prompt => true
 		end 
 
 		f.actions
