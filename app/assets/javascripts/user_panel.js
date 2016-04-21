@@ -93,6 +93,11 @@
         $(document).on("click", ".tw_share", twShareWindow);
       });  
 
+      // generate referral link
+        $(document).on("click", "#but", function(){
+            generate_ref_url($(this).data('current-user'),$(this).data('root-url'));
+        });
+
 
 
     
