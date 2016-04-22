@@ -8,7 +8,7 @@
         <div class="col-md-offset-1 col-md-3">
             <%if current_user.referral_link.nil? %><!-- If referral link is not generated -->
                 <!-- Generate Referral Link button -->
-            	<button id = "but" onclick="generate_ref_url( <%=current_user.uid %>, '<%=root_url%>');" class="btn btn-primary btn-sm">Generate Referral Link</button>
+            	<button id = "but" data-current-user = '<%=current_user.uid %>' data-root-url = '<%=root_url%>' class="btn btn-primary btn-sm">Generate Referral Link</button>
             <%end%>
         </div>
 
