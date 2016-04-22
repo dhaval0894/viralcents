@@ -8,6 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<%= favicon_link_tag 'viral.ico' %>
 	<link rel='shortcut icon' href='assets/viral.ico' type='image/x-icon'/ >
 	<title>ViralCents: Monetize your Social media audience</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,9 +24,6 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-
 	<!-- Mandatory CSS -->
 	<%= stylesheet_link_tag 'application', media: 'all'%>
 
@@ -34,6 +32,7 @@
 	
   	<%= csrf_meta_tags %>
 
+  	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
   	
@@ -45,7 +44,7 @@
 	          <div class="navbar-header">
 	            <!-- Mobile Toggle Menu Button -->
 	        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-	              <a class="navbar-brand" href="/"><img src="assets/logo.png" alt="ViralCents"></a>
+	              <a class="navbar-brand" href="/"><%= image_tag("logo.png", alt: "ViralCents") %></a>
 	          </div>
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav navbar-right">

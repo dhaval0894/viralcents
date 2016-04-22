@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel='shortcut icon' href='assets/viral.ico' type='image/x-icon'/ >
+	<%= favicon_link_tag 'viral.ico' %>
 	<title>ViralCents: Monetize your Social media audience</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,7 +43,7 @@
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/dashboard">ViralCents</a>
+					<a class="navbar-brand" href="/dashboard"><%= image_tag("logo.png", alt: "ViralCents") %></a>
 					<a href="#menu-toggle" class="navbar-toggle" id="menu-toggle">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-bars"></i>
