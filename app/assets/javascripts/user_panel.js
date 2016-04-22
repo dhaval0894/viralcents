@@ -43,7 +43,8 @@
             html : true,
 
             content: function() {
-              return $('#popover_content_wrapper').html();
+              var popover_id = '#popover_content_wrapper' + $(this).data('story-id')
+              return $(popover_id).html();
             }
         });
 
@@ -91,6 +92,11 @@
         // Twitter Share Window
         $(document).on("click", ".tw_share", twShareWindow);
       });  
+
+      // generate referral link
+        $(document).on("click", "#but", function(){
+            generate_ref_url($(this).data('current-user'),$(this).data('root-url'));
+        });
 
 
 
