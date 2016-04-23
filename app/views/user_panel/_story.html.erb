@@ -109,6 +109,13 @@
                 
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->
+                        <% if story.title.size >88 %>
+                            <% c=89 %>
+                            <% while (story.title[c]!= " ") %>
+                                <% c=c-1 %>
+                            <%end%>
+                            <% story.title=story.title[0,c]+".." %>
+                        <%end%>
                         <a target="popup" class="tw_share" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                     
                     <% else %> <!-- If Not connected via twitter -->
