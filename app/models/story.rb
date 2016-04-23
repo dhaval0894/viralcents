@@ -3,6 +3,9 @@ class Story < ActiveRecord::Base
 	has_many :user_stories, dependent: :destroy
 	belongs_to :admin_user
 	belongs_to :category
+	validates_uniqueness_of :orig_url
+	validates_presence_of :category_id
+
 	#generate thumbnails from url for each story
 	def link_thumbnail(url)
 		#to handle execution expired error

@@ -1,6 +1,6 @@
 <!-- Popover box for social activities payout -->
 
-<div id="popover_content_wrapper" style="display: none">
+<div id="popover_content_wrapper<%= story.id%>" style="display: none" data-story-id = <%= story.id%>>
     <a class="btn btn-xs btn-block btn-social btn-facebook">
         <span class="fa fa-hand-pointer-o"></span>Click - <%= story.click_amt%>&#8377;
     </a>
