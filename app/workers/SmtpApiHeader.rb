@@ -19,8 +19,11 @@ class SmtpApiHeader
 def user_mail_info
          @all_user_emails = []
          @users = User.all
+      
       @users.each do |user|
+           if user.email != nil and user.email 
            @all_user_emails.push(user.email)
+           end
       end
   return @all_user_emails
 end
