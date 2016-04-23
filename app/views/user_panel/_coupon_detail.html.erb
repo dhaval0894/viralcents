@@ -1,6 +1,7 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
-	  	<div class="modal-body">	
+	  	<div class="modal-body">
+	  		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>	
 	  		<div class="row">
 	  			<div class="col-md-4">
 	  		  		    <%= image_tag @coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:250px;" %>
@@ -18,7 +19,6 @@
 	  		 			<h4>About</h4>
 						<small class="text-left">
 							<%= @coupon.coupon_description %>
-								Cafe Coffee Day is a coffee shop for the young and the young at heart. We're part of Coffee Day Global Limited. We source our coffees from thousands of small coffee planters. They and the many plantation workers have truly made us who we are today and we're glad to be a part of their lives. Popularly known as CCD, we strive to provide the best experience to our guests. To put it plainly, we brought in the concept of cafes to India (this is where you thank us!).
 						</small>
 	  		 		</div>
 	  		 		<hr>
