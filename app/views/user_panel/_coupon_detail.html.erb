@@ -5,6 +5,7 @@
 	  		<div class="row">
 	  			<div class="col-md-4">
 	  		  		    <%= image_tag @coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:250px;" %>
+	  		  		    <hr>
 	  		  		    <%= form_tag("/map_coupon", method: "post") do %>
   		  		     	    <%= hidden_field_tag 'user_id' , current_user.id %>
   		  		     	    <%= hidden_field_tag 'coupon_id' , @coupon.id  %>
@@ -25,13 +26,11 @@
 					<h4>Terms And Conditions</h4>
 					<small>
 						<ul class="list-group">
-							<li class="list-group-item">Minimum transaction of Rs.300 (exclusive of taxes) is required for this offer. (	It would sum up to Rs.343 including taxes).
-							</li>
-							<li class="list-group-item">Cashback will be cancelled in case of full refund or cancellation of order
-							</li>
-							<li class="list-group-item">
-								This Offer is valid at all Cafe Coffee Day outlets across India except Coffee Day Lounge, Coffee Day Square, discounted and airport cafes
-							</li>
+							<% @coupon_terms.each do |coupon_term| %>
+								<li class="list-group-item">
+									<%= coupon_term %>
+								</li>
+							<% end %>	
 						</ul>
 					</small>
 					

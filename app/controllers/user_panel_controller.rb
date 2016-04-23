@@ -48,6 +48,7 @@ class UserPanelController < ApplicationController
    #coupons
    			def coupon_detail
    				@coupon=Coupon.find(params[:id])
+   				@coupon_terms=@coupon.coupon_terms.split('.')
    				respond_to do |format|
 			       format.html 
 			       format.js
