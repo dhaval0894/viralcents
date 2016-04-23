@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel='shortcut icon' href='assets/viral.ico' type='image/x-icon'/ >
+	<%= favicon_link_tag 'viral.ico' %>
 	<title>ViralCents: Monetize your Social media audience</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,7 +43,7 @@
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/dashboard">ViralCents</a>
+					<a class="navbar-brand" href="/dashboard"><%= image_tag("panel-logo.png", alt: "ViralCents") %></a>
 					<a href="#menu-toggle" class="navbar-toggle" id="menu-toggle">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-bars"></i>
@@ -75,10 +75,10 @@
 	        <div id="sidebar-wrapper">
 	            <ul class="sidebar-nav">
 	                <li>
-	                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %>"><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
+	                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %> text-center"><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
 	                </li>
 	                <li>
-						<a href="javascript:;" class="<%= 'active' if (current_page?(stories_path) || current_page?(user_stories_path)) %>" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
+						<a href="javascript:;" class="<%= 'active' if (current_page?(stories_path) || current_page?(user_stories_path)) %> text-center" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="/stories" class="<%= 'active' if current_page?(stories_path)%>"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>

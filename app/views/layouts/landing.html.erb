@@ -8,6 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<%= favicon_link_tag 'viral.ico' %>
 	<link rel='shortcut icon' href='assets/viral.ico' type='image/x-icon'/ >
 	<title>ViralCents: Monetize your Social media audience</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,9 +24,6 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-
 	<!-- Mandatory CSS -->
 	<%= stylesheet_link_tag 'application', media: 'all'%>
 
@@ -34,6 +32,7 @@
 	
   	<%= csrf_meta_tags %>
 
+  	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
   	
@@ -45,15 +44,15 @@
 	          <div class="navbar-header">
 	            <!-- Mobile Toggle Menu Button -->
 	        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-	              <a class="navbar-brand" href="/"><img src="assets/logo.png" alt="ViralCents"></a>
+	              <a class="navbar-brand" href="/"><%= image_tag("logo.png", alt: "ViralCents") %></a>
 	          </div>
 	          <div id="navbar" class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav navbar-right">
-	              <li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
-	              <li><a href="#" data-nav-section="features"><span>Features</span></a></li>
-	              <li><a href="#" data-nav-section="testimonials"><span>Testimonials</span></a></li>
-	              <li><a href="#" data-nav-section="services"><span>Why ViralCents!</span></a></li>
-	              <li><a href="#" data-nav-section="press"><span>Contact Us</span></a></li>
+	              <li class="active"><a href="#" data-nav-section="home"><strong><span>Home</span></strong></a></li>
+	              <li><a href="#" data-nav-section="features"><strong><span>Features</span></strong></a></li>
+	              <li><a href="#" data-nav-section="testimonials"><strong><span>Testimonials</span></strong></a></li>
+	              <li><a href="#" data-nav-section="services"><strong><span>Why ViralCents!</span></strong></a></li>
+	              <li><a href="#" data-nav-section="press"><strong><span>Contact Us</span></strong></a></li>
 	              <li><a class="fb_login">
     					<span class="btn btn-social-icon btn-facebook btn-xs"><i class="fa fa-facebook"></i> Login</span>
   					  </a>
@@ -74,11 +73,14 @@
 		<div class="container">
 			<div class="row vdivide">
 				<div class="col-md-12 text-center">
-					<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+					<div class="col-md-5 col-sm-5 col-xs-5 text-right">
 						<a href="#" data-toggle="modal" data-target="#faq-modal">Faqs</a>
 					</div>
-				    <div class="col-md-6 col-sm-6 col-xs-6 text-left">
-				    	<a href="#" data-toggle="modal" data-target="#tc-modal">T&Cs</a>
+				    <div class="col-md-2 col-sm-2 col-xs-2 text-center">
+				    	<a href="#" data-toggle="modal" data-target="#tc-modal">Terms and Conditions</a>
+				    </div>
+				    <div class="col-md-5 col-sm-5 col-xs-5 text-left">
+				    	<a href="#">Privacy Policy</a>
 				    </div>
 				</div>
 			</div>
@@ -91,7 +93,7 @@
 				<div class="col-md-12 text-center">
 					<ul class="social social-circle">
 						<li><a href="https://twitter.com/ViralCents" target="_blank"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="https://www.facebook.com/ViralCents-514054015444603" target="_blank"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="https://www.facebook.com/viralCents" target="_blank"><i class="fa fa-facebook"></i></a></li>
 						<li><a href="https://www.instagram.com/viralcents/" target="_blank"><i class="fa fa-instagram"></i></a></li>
 						<li><a href="https://plus.google.com/117754438152238825831" target="_blank"><i class="fa fa-google-plus"></i></a></li>				
 					</ul>
