@@ -19,8 +19,6 @@
 
 	<!-- Mandatory Css -->
 	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-	
-	<%= javascript_include_tag 'application' %>
 
   	<%= csrf_meta_tags %>
 	
@@ -37,7 +35,7 @@
 		<h3 class="text-left text-muted">Share a link with your followers</h2>
 		<div class="row">
 			<div class="col-md-12 col-lg-12">
-				<%=  text_area_tag 'query', params[:url], :id => "txt", rows: "3", :class => 'form-control', maxlength: "140" %>
+				<%=  text_area_tag 'query', params[:url], :id => "txt", rows: "3", :class => 'form-control', maxlength: "115" %>
 			</div>
 		</div>
 		<br/>
@@ -47,7 +45,10 @@
 	            <strong>Tweet</strong> 
 	        </a>
 		</div>
-	</div>
-	<script type="text/javascript" src="assets/post_to_twitter.js"></script>	
+	</div>	
+	<!-- Application Js-->
+	<%= javascript_include_tag 'application' %>
+	<!-- post to twitter -->
+	<%= javascript_include_tag 'post_to_twitter' %>
 </body>
 </html>

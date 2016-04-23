@@ -48,6 +48,7 @@ class UserPanelController < ApplicationController
    #coupons
    			def coupon_detail
    				@coupon=Coupon.find(params[:id])
+   				@coupon_terms=@coupon.coupon_terms.split('.')
    				respond_to do |format|
 			       format.html 
 			       format.js
@@ -156,7 +157,7 @@ class UserPanelController < ApplicationController
   	def tweet
 		@user_id=current_user.id
 		@story=Story.find_by(id: $sid)
-		@tweet=twitter_user.twitter.update_with_media(@story.title+" : "+params[:p],open(@story.image_url))
+		@tweet=twitter_user.twitter.update_with_media(params[:p],open(@story.image_url))
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
