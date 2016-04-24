@@ -39,17 +39,27 @@ end
 
 def all_stories_title
        @story_titles = []
-       @stories = Story.all.take(1)
+       @stories = Story.all.take(2)
+
        @stories.each do |story|
-           @story_titles.push(story.title)
-       end
+        @story_titles.push(story.title)
+      end
+
+
     return @story_titles   
+end
+
+def story_data(var , val)
+  @data['story'][var] = val
+
 end
 
 
   def initialize()
     @data = {}
   end
+
+
 
   def addTo(to)
     @data['to'] ||= []

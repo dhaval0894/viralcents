@@ -1,63 +1,4 @@
-class WalletInfo
-
-  include Sidekiq::Worker
-
-  #sidekiq_options queue: "high"
-
-   include Sidetiq::Schedulable
-
-     recurrence backfill: true do
-       weekly
-    end
-
-
-
-  def perform()
-
-require 'SmtpApiHeader.rb'
-require 'mail'
-require 'json'
-
-Mail.defaults do
-  delivery_method :smtp, { :address   => 'smtp.sendgrid.net',
-                           :port      => 587,
-                           :domain    => 'sendgrid.com',
-                           :user_name => 'rajiv-shrivastava',
-                           :password  => 'rajiv834',
-                           :authentication => 'plain',
-                           :enable_starttls_auto => true }
-end
-
-hdr = SmtpApiHeader.new
-
-@money = hdr.wallet_info
-@names = hdr.user_names
-
-receiver = hdr.user_mail_info
-
-hdr.addTo(receiver)
-
-hdr.setUniqueArgs({'test' => 1 ,'foo' =>2})
-
-
-hdr.addSubVal("-name-" ,@names)
-
-hdr.addSubVal("-amount-" ,@money)
-
-# hdr.setCategory('yourCategory')
-
-
-mail = Mail.deliver do
-  header['X-SMTPAPI'] =  hdr.asJSON()
-  to 'willnotdeliver@domain.com' # When using SMTPAPI's 'to' parameter, this address will not get delivered to
-  from 'Viralcents'
-  subject 'Viralcents Wallet Information'
-  text_part do
-    body 'You  would put your content here, but I am going to say: Hello world!'
-  end
-  html_part do
-    content_type 'text/html; charset=UTF-8'
-    body '<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -76,7 +17,7 @@ mail = Mail.deliver do
 
 <body style="background-color:#E5E5E5">
 
-<br><br>
+
 <div style="margin-left: 10%;width: 80%;background-color: #fff">
 
 
@@ -85,10 +26,12 @@ mail = Mail.deliver do
       <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300;" valign="top">
         
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
+          
+
           <tr>
             <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
 
-                <h1 style="font-family: Helvetica"> ViralCents </h1>
+                <h1 style="font-family: Helvetica;color: grey"> ViralCents </h1>
               
             </td>
           </tr>
@@ -98,6 +41,8 @@ mail = Mail.deliver do
 
             <td id="templateHeader" valign="top"></td>
           </tr>
+
+
           <tr>
             <td id="templateBody" valign="top">
               <table border="0" cellpadding="0" cellspacing="0" class="mcnTextBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
@@ -108,24 +53,51 @@ mail = Mail.deliver do
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello -name-</h1>
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
                               <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Helvetica">
                               <br>
                                  
-                                  See How much you earn this week on ViralCents
-                              <br>
-                              <h1> -amount- <span style="font-size: 20px"> Rs.</span> </h1>
-                                Keep sharing and earning.
-                                <br>
-                                <br>
-                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
+                                  Popular Stories on ViralCents
+                               <hr>
+
+                              
+            <div style="font-size: 15px;line-height: 18px;">    <!-- stories here -->
+
+                    <% @count  =Story.all.count %>   <!-- ruby code -->
+                             
+                          <!-- count is less than 10 -->
+
+                            <% if @count < 10 %>
+                                     <% @stories = Story.order("created_at DESC")%>
+                                     <% @stories.each do |story| %>
+                                     <%= story.title %>  
+
                                 
-                                <b>Recharge Account Now</b></button>
+                                <br><br>
+ <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+ <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
+                                     <% end %>
+                            
+                          
+                          <!-- count is more than 10 -->
+                            <% else %>
+                                  <% @stories = Story.order("created_at DESC").take(10)%>
+                                     <% @stories.each do |story| %>
+                                     <%= story.title %> 
+
+                                <br><br>
+ <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+ <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
+                            <% end %>
+
+                         <% end %>    <!-- ruby code ends -->
+
+
                                 
-                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
-                                
-                                <b>Earn More Money</b></button>
-                                
+
+                              </div>   <!-- stories here -->                             
+
+
                                 </span>
 
                               </br>
@@ -140,7 +112,11 @@ mail = Mail.deliver do
             </td>
           </tr>
           <tr>
+
+
             <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
+              
+
               <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnFollowBlockOuter">
                   <tr>
@@ -176,7 +152,7 @@ mail = Mail.deliver do
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">f</a>
 
 
                                                                     </td>
@@ -210,7 +186,7 @@ mail = Mail.deliver do
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
                                                                                                   
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 13px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">t</a>
 
 
                                                                     </td>
@@ -278,11 +254,10 @@ mail = Mail.deliver do
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#323232;/*@editable*/font-family:Helvetica; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
-                            <span style="color: #323232;text-align:center"> 
-                              <em>Copyright © 2016 Techritzy, All rights reserved.</em>
+                            <span style="color: #323232"> 
+                              <b><i>Copyright © 2016 Techritzy, All rights reserved.</i></b>
                               <br>
                                 <br>
-                                  <strong>any-email@gmail.com</strong>
                                   </span>
                                 </br>
                               </br>
@@ -302,19 +277,11 @@ mail = Mail.deliver do
           </tr>
           </table>
         <![endif]-->
+       
         <!-- // END TEMPLATE -->
       </td>
     </tr>
   </table>
 
-<br><br>
-
 </body>
-</html>'
-  end
-end
-
-
-
-end
-end
+</html>
