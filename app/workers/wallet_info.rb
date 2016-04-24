@@ -2,7 +2,7 @@ class WalletInfo
 
   include Sidekiq::Worker
 
-  sidekiq_options queue: "high"
+  #sidekiq_options queue: "high"
 
    include Sidetiq::Schedulable
 
