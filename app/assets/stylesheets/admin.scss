@@ -301,6 +301,14 @@
     #sidebar-wrapper {
         width: 220px;
     }
+    .nav-icon{
+        position:absolute;
+        left:65px;
+    }
+    .nav-dropdown-icon{
+        position: absolute;
+        left:75px;
+    }
     #page-content-wrapper {
         padding: 20px;
         position: relative;
@@ -322,6 +330,14 @@
     }
     #sidebar-wrapper{
         margin-top:-10px;
+    }
+    .nav-icon{
+        position:absolute;
+        left:65px;
+    }
+    .nav-dropdown-icon{
+        position: absolute;
+        left:75px;
     }
     #page-content-wrapper {
         margin-top: 130px;

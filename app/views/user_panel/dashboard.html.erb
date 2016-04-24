@@ -11,13 +11,15 @@
         </div>
         <div class="panel panel-default col-lg-8 feature-stories">
             <div class="panel-body">
-                <% @stories[0,4].each do |story|%>
-                    <div class="col-md-6 text-center">
-                        <%= render 'user_panel/story', story: story %>
-                        <!-- Rate Popover -->
-                        <%= render 'paypopover', story: story %>    
-                    </div>
-                <% end %>    
+                <div class="row">
+                    <% @stories[0,4].each do |story|%>
+                        <div class="col-md-6 text-center">
+                            <%= render 'user_panel/story', story: story %>
+                            <!-- Rate Popover -->
+                            <%= render 'paypopover', story: story %>    
+                        </div>
+                    <% end %>
+                </div>
                 <div class="text-right">
                     <a href="/stories">View More <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
