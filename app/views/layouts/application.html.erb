@@ -75,44 +75,44 @@
 	        <div id="sidebar-wrapper">
 	            <ul class="sidebar-nav">
 	                <li>
-	                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %> text-center"><i class="fa fa-dashboard fa-fw"></i><span class="pos"> Dashboard</span></a>
+	                     <a href="/dashboard" class="<%= 'active' if current_page?(dashboard_path) %> text-center"><span class="nav-icon"><i class="fa fa-dashboard fa-fw"></i></span> Dashboard</a>
 	                </li>
 	                <li>
-						<a href="javascript:;" class="<%= 'active' if (current_page?(stories_path) || current_page?(user_stories_path)) %> text-center" data-toggle="collapse" data-target="#demo"><i class="fa fa-book fa-fw"></i> Stories <span class="caret"></span></a>
+						<a href="javascript:;" class="<%= 'active' if (current_page?(stories_path) || current_page?(user_stories_path)) %> text-center" data-toggle="collapse" data-target="#demo"><span class="nav-icon"><i class="fa fa-book fa-fw"></i></span> Stories <span class="caret"></span></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="/stories" class="<%= 'active' if current_page?(stories_path)%>"><i class="fa fa-newspaper-o fa-fw"></i> All Stories</a>
+                                <a href="/stories" class="<%= 'active' if current_page?(stories_path)%>"><span class="nav-dropdown-icon"><i class="fa fa-newspaper-o fa-fw"></i></span> All Stories</a>
                             </li>
                             <li>
-                                <a href="/user_stories" class="<%= 'active' if current_page?(user_stories_path)%>"><i class="fa fa-history fa-fw"></i> My Stories</a>
+                                <a href="/user_stories" class="<%= 'active' if current_page?(user_stories_path)%>"><span class="nav-dropdown-icon"><i class="fa fa-history fa-fw"></i></span> My Stories</a>
                             </li>
                         </ul>
 	                </li>
 					<li>
 						<a href="wallet" class="<%= 'active' if current_page?(wallet_path) %>">
-						<i class="fa fa-credit-card fa-fw"></i> Wallet </a>
+						<span class="nav-icon"><i class="fa fa-credit-card fa-fw"></i></span> Wallet </a>
 	                </li>
 	                <li>
 
-						<a href="javascript:;" class="<%= 'active' if (current_page?(recharges_path) || current_page?(show_coupons_path) || current_page?(my_coupons_path)) %>" data-toggle="collapse" data-target="#demo1"><i class="fa fa-rupee fa-fw"></i>Redeem <span class="caret"></span></a>
+						<a href="javascript:;" class="<%= 'active' if (current_page?(recharges_path) || current_page?(show_coupons_path) || current_page?(my_coupons_path)) %>" data-toggle="collapse" data-target="#demo1"><span class="nav-icon"><i class="fa fa-rupee fa-fw"></i></span>Redeem <span class="caret"></span></a>
 						<ul id="demo1" class="collapse">
 							<li>
-								<a href="/recharges" class="<%= 'active' if current_page?(recharges_path) %>"><i class="fa fa-tablet fa-fw"></i> Mobile Recharge</a>
+								<a href="/recharges" class="<%= 'active' if current_page?(recharges_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-tablet fa-fw"></i></span> Mobile Recharge</a>
 
 							</li>
 							<li>
-								<a href="/show_coupons" class="<%= 'active' if current_page?(show_coupons_path) %>"><i class="fa fa-tags fa-fw"></i> Get Coupons</a>
+								<a href="/show_coupons" class="<%= 'active' if current_page?(show_coupons_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-tags fa-fw"></i></span> Get Coupons</a>
 							</li>
 							<li>
-								<a href="/my_coupons" class="<%= 'active' if current_page?(my_coupons_path) %>"><i class="fa fa-shopping-basket fa-fw"></i> My Coupons </a>
+								<a href="/my_coupons" class="<%= 'active' if current_page?(my_coupons_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-shopping-basket fa-fw"></i></span> My Coupons </a>
 							</li>
 						</ul>
 	                </li>
 					<li>
-						<a href="/referrals" class="<%= 'active' if current_page?(referrals_path) %>"><i class="fa fa-random fa-fw"></i> Referrals</a>
+						<a href="/referrals" class="<%= 'active' if current_page?(referrals_path) %>"><span class="nav-icon"><i class="fa fa-random fa-fw"></i></span> Referrals</a>
 	                </li>
 	                <li>
-	                    <a href="#" data-toggle="modal" data-target="#faq-modal"><i class="fa fa-question-circle fa-fw"></i>Need Help</a>
+	                    <a href="#" data-toggle="modal" data-target="#faq-modal"><span class="nav-icon"><i class="fa fa-question-circle fa-fw"></i></span> Need Help</a>
 	                </li>
 	            </ul>
         	</div>
