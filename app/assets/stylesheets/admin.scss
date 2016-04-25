@@ -192,7 +192,7 @@
                 /* generate url group */
                 .gen-group{
                     margin-bottom: 10px;
-                    moz-margin-bottom:11.8px;
+                    @include prefix(margin-bottom, 11.8px, moz);
                 }
 
                 /* input-group-addon */
