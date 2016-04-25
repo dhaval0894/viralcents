@@ -18,6 +18,12 @@
 	background: image-url('c2.png')
 }
 
+@-moz-document url-prefix() {
+	#twitter-widget-0, #twitter-widget-1, #twitter-widget-2 { 
+	    width: 100% !important; 
+	}
+}
+
 .panel-contact{
 	border:0;
 }
