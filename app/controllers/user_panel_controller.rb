@@ -196,6 +196,7 @@ class UserPanelController < ApplicationController
 			@a_stories[i]<<ms.fb_post_id
 			@a_stories[i]<<ms.tw_post_id
 			i+=1
+			#byebug
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
@@ -205,6 +206,7 @@ class UserPanelController < ApplicationController
 				@response=HTTParty.get(@status_url)
 				if !@response==404  #tweet exist
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+					# byebug
 					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
 				end
 				#byebug
