@@ -73,14 +73,14 @@
 		<div class="container">
 			<div class="row vdivide">
 				<div class="col-md-12 text-center">
-					<div class="col-md-5 col-sm-5 col-xs-5 text-right">
+					<div class="col-md-5 col-sm-4 col-xs-4 text-right">
 						<a href="#" data-toggle="modal" data-target="#faq-modal">Faqs</a>
 					</div>
-				    <div class="col-md-2 col-sm-2 col-xs-2 text-center">
+				    <div class="col-md-2 col-sm-4 col-xs-4 text-center">
 				    	<a href="#" data-toggle="modal" data-target="#tc-modal">Terms and Conditions</a>
 				    </div>
-				    <div class="col-md-5 col-sm-5 col-xs-5 text-left">
-				    	<a href="#">Privacy Policy</a>
+				    <div class="col-md-5 col-sm-4 col-xs-4 text-left">
+				    	<a href="#" data-toggle="modal" data-target="#pp-modal">Privacy Policy</a>
 				    </div>
 				</div>
 			</div>
@@ -107,6 +107,9 @@
 
 	<!-- T&Cs Modal -->
 	<%= render 'tc' %>
+
+	<!-- Privacy Modal -->
+	<%= render 'pp' %>
 
 	<!-- Application js -->
 	<%= javascript_include_tag 'application'%>
