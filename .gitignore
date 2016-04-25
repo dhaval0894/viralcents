@@ -16,5 +16,11 @@
 !/log/.keep
 /tmp
 
+# Ignore Carrierwave Uploads
+/public/uploads
+
+# Ignore Production Assets
+/public/assets
+
 # Ignore all secret keys and id
 /config/secrets.yml

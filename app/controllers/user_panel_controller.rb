@@ -377,6 +377,7 @@ class UserPanelController < ApplicationController
 		  @data.push(row.to_hash["credits"])
 		end
 		@data = @data.map(&:to_i)
+		@data= @data.sort.reverse!
 	end
 
 	#transaction history
