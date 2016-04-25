@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
 
+      require 'sidekiq/web'
       mount Sidekiq::Web ,at: '/sidekiq'
 
 

@@ -7,7 +7,7 @@ class WalletInfo
    include Sidetiq::Schedulable
 
      recurrence backfill: true do
-       weekly
+       minutely
     end
 
 
@@ -31,9 +31,10 @@ end
 hdr = SmtpApiHeader.new
 
 @money = hdr.wallet_info
-@names = hdr.user_names
 
 receiver = hdr.user_mail_info
+
+@names = hdr.user_names
 
 hdr.addTo(receiver)
 
