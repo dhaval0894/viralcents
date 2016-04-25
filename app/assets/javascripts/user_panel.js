@@ -6,11 +6,6 @@
         // Clipboard copy instance
         new Clipboard('.my_clip_button'); 
 
-        // Facebook/Twitter Alert Box
-        $(document).on("click", ".so_share", function(){
-            bootbox.alert("Generate URL First");
-        });
-
         // Facebook Logout
         $(document).on("click", "#fb_logout", fbLogout);
 
@@ -90,15 +85,14 @@
         });
 
         // Twitter Share Window
-        $(document).on("click", ".tw_share", twShareWindow);
-      });  
+        $(document).on("click", ".tw_share", twShareWindow);  
 
       // generate referral link
         $(document).on("click", "#but", function(){
             generate_ref_url($(this).data('current-user'),$(this).data('root-url'));
         });
 
-
+    });
 
     
   /*---- Function Definition ----*/
