@@ -44,8 +44,8 @@
             </div>
         <%else%> <!-- For Generating Shorten URL -->
             <div class="input-group gen-group">
-                <span class="input-group-addon">
-                    <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>'>
+                <span class="input-group-addon" id='gen_button<%= story.id%>' title="Generate URL from here">
+                    <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>' >
                         <i class="fa fa-link"></i>
                     </button>
                 </span>
