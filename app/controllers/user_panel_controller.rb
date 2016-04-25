@@ -6,7 +6,10 @@ class UserPanelController < ApplicationController
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
-
+		#connect twitter user
+		@tuser= TwitterUser.find_by(user_id: current_user.id)
+		session[:tuser_id] = @tuser.id
+		
 		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
