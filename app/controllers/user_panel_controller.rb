@@ -6,6 +6,7 @@ class UserPanelController < ApplicationController
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
+		#SocialAnalytics.new.perform
 		#connect twitter user
 		@tuser= TwitterUser.find_by(user_id: current_user.id)
 		session[:tuser_id] = @tuser.id
