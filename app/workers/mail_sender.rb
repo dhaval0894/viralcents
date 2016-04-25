@@ -18,7 +18,7 @@ class MailSender
           email = SendGrid::Mail.new do |m|
               m.to      =  param
               m.from    = 'Viralcents'
-              m.subject = 'welcome'
+              m.subject = 'welcome to viralcents'
                       m.html    = '<!DOCTYPE html>
 <html>
 <head>
@@ -68,15 +68,17 @@ class MailSender
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello and welcome to ViralCents</h1>
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#fff;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello</h1>
                               <span style="color: #FFF;line-height: 30px;font-size:20px;font-family:Georgia">
                               <br>
-                              Thank you for joining us and hope you enjoy using the website as much as we enjoyed making it. Our mission at clot co is to create the simplest event community in the world, so you can find/create events near you and make great friends.
+                            Welcome to viralcents.
+
                               <br>
+                                
                                 <br>
-                                <br>
-                                Thank you very much
-                                <br>
+
+                                Keep sharing the articles and earn money
+
                                 <br>
                                 <button style="background-color:#fff;color:#333A56;border:10px;padding: 10px 10px 10px"> 
                                 <b>Continue  on Viralcents</b></button>
@@ -235,7 +237,6 @@ class MailSender
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
-                                  <strong>any-email@gmail.com</strong>
                                   </span>
                                 </br>
                               </br>
