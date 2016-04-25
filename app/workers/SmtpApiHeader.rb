@@ -115,7 +115,7 @@ end
 
   #get the current user
   def current_user
-    return User.find(7)
+    return User.find(1)
   end
 
 end
