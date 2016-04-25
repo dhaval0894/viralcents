@@ -283,7 +283,7 @@ mail = Mail.deliver do
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
-                                  <strong>any-email@gmail.com</strong>
+                                  <strong></strong>
                                   </span>
                                 </br>
                               </br>
