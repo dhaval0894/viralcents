@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 		begin 
 			facebook.get_object(fpost_id, :fields => "likes.summary(true)")["likes"]["summary"]["total_count"]
 		rescue 
-			return false
+			return 0
 		end	
 	end
 
