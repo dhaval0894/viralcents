@@ -7,7 +7,7 @@ class UserPanelController < ApplicationController
 
 	def dashboard
 
-			@us_story = UserStory.where(user_id: current_user.id)
+		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
 		if !@wallet.nil?
