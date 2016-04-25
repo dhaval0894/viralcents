@@ -3,6 +3,9 @@ require 'json'
 
 class SmtpApiHeader
 
+ $all_user_names = []
+
+
   def wallet_info
    
           @user_wallets = []
@@ -23,18 +26,15 @@ def user_mail_info
       @users.each do |user|
            if user.email != nil and user.email 
            @all_user_emails.push(user.email)
+           $all_user_names.push(user.name)
+        
            end
       end
   return @all_user_emails
 end
 
 def user_names
-       @all_user_names = []
-          @users = User.all
-       @users.each do |user|
-           @all_user_names.push(user.name)
-        end
-    return @all_user_names
+        return $all_user_names
 end
 
 def all_stories_title

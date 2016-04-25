@@ -31,9 +31,10 @@ end
 hdr = SmtpApiHeader.new
 
 @money = hdr.wallet_info
-@names = hdr.user_names
 
 receiver = hdr.user_mail_info
+
+@names = hdr.user_names
 
 hdr.addTo(receiver)
 
@@ -282,7 +283,7 @@ mail = Mail.deliver do
                               <em>Copyright © 2016 Techritzy, All rights reserved.</em>
                               <br>
                                 <br>
-                                  <strong>any-email@gmail.com</strong>
+                                  <strong></strong>
                                   </span>
                                 </br>
                               </br>
