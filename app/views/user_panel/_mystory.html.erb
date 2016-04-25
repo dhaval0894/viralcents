@@ -50,6 +50,13 @@
                         <a  class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" ><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
                     <%else%>
                         <%if twitter_user %> <!-- If connected via twitter -->
+                            <% if ms[0].title.size >88 %>
+                            <% c=89 %>
+                            <% while (ms[0].title[c]!= " ") %>
+                                <% c=c-1 %>
+                            <%end%>
+                            <% ms[0].title=ms[0].title[0,c]+".." %>
+                        <%end%>
                             <a target="popup" class="tw_share" href="/tweet?id=<%= ms[0].id%>&url=<%= ms[0].title+' : '+ms[1] %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
                         <% else %> <!-- If Not connected via twitter -->
                             <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>

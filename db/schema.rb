@@ -108,11 +108,11 @@ ActiveRecord::Schema.define(version: 20160416110955) do
     t.float    "fav_amt",       default: 0.0
     t.float    "retweet_amt",   default: 0.0
     t.integer  "admin_user_id"
-    t.string   "story_status",  default: "active"
     t.float    "total_budget"
     t.boolean  "published",     default: false
     t.datetime "expiry_date"
     t.integer  "category_id"
+    t.string   "story_status",  default: "active"
   end
 
   create_table "transactions", force: :cascade do |t|

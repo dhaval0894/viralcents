@@ -1,26 +1,10 @@
 <div class="col-md-offset-2 col-md-8">
 	<!-- panel-->
 	<div class="panel panel-theme">
-		
 		<!-- panel-heading -->
 		<div class="panel-heading">
 			<p class="text-center panel-title">
 				<i class="fa fa-gear"></i> Account Settings
-				<!-- set up the modal to start hidden and fade in and out -->
-<div id="myModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- dialog body -->
-      <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        Hello world!
-      </div>
-      <!-- dialog buttons -->
-      <div class="modal-footer"><button type="button" class="btn btn-primary">OK</button></div>
-    </div>
-  </div>
-</div>
-
 			</p>
 		</div>
 
@@ -28,11 +12,20 @@
 		<div class="panel-body">
 			
 			<!-- Connect With Twitter -->	
-			<div class="row">
-				<h4>Social Network </h4>
-				<hr>
+			<div class="row settings-row">
+				<div class="col-md-12">
+					<div class="col-md-4">
+						<hr>
+					</div>
+					<div class="col-md-4">
+						<h4>Social Network </h4>
+					</div>
+					<div class="col-md-4">
+						<hr>
+					</div>
+				</div>
 				<div class="form-group">
-					<div class="col-md-2"><label for="" class="label-control">Connected Via:</label></div>
+					<div class="col-md-3"><label for="" class="label-control">Connect Via:</label></div>
 					<div class="col-md-8">
 						<% if twitter_user %>
 			                <a class="btn btn-block btn-social btn-twitter">
@@ -48,76 +41,67 @@
 			</div>	
 
 			<!-- Subscribe to notifications -->
-			<div class="row">
-
-
-				<h4>Get Notifications Via  Email
-</h4>
-				
-				<hr>
-			<div class="row">
-
-			<form class="form" action="/settings_save_email" method="get">    <!--form to activate notifications  -->
-
-
-
-				<!-- E-mail field -->
-				<div class="form-group">
-				
-				<div class="col-md-2"><label for="" class="label-control">Email:</label></div>
-					
-					<div class="col-md-8">
-		<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>"></div>
-					
-				</div>
-			    <input type="submit" class="btn btn-theme" value="submit" >
-				
-                 </form>  <!--form to activate notifications on mail  -->
-
-
-							</div>
-	
-
-
-
-
-
-
-<hr>
-<h1> OR </h1>
-<hr>
-
-			<!-- Subscribe to notifications -->
-			<div class="row">
-
-
-
-
-				<h4>Get Notifications Via SMS
-</h4>
-				<hr>
-
-
-			<form class="form" action="/settings_save_contact" method="get">    <!--form to activate notifications  -->
-
-				<!-- Mobile Number field -->
-				<div class="form-group">
-					<div class="col-md-2"><label for="" class="label-control">SMS:</label></div>
-					<div class="col-md-8">
-
-		<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>"></div>
-					
+			<div class="row settings-row">
+				<div class="col-md-12">
+					<div class="col-md-3">
+						<hr>
 					</div>
-                
-                <input type="submit" class="btn btn-theme" value="submit" >
+					<div class="col-md-6">
+						<h4>Get Notifications Via Email </h4>
+					</div>
+					<div class="col-md-3">
+						<hr>
+					</div>
+				</div>
+				<!--form to activate notifications via email-->
+				<form action="/settings_save_email" method="get">    
 				
-                 </form>  <!--form to activate notifications on contact  -->
+					<!-- E-mail field -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="" class="label-control">Email:</label>
+						</div>
+						<div class="col-md-8">
+							<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>">
+						</div>
+					</div>
+				    <input type="submit" class="btn btn-theme" value="submit" >
+				
+                 </form>  
+			</div>
+	
+			
+			<!-- Subscribe to notifications -->
+			<div class="row settings-row">
+				<div class="col-md-12">
+					<div class="col-md-3">
+						<hr>
+					</div>
+					<div class="col-md-6">
+						<h4>Get Notifications Via SMS </h4>
+					</div>
+					<div class="col-md-3">
+						<hr>
+					</div>
+				</div>
 
-							</div>
+				<!--form to activate notifications via phone -->
+				<form action="/settings_save_contact" method="get">    
+					<!-- Mobile Number field -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="" class="label-control">SMS:</label>
+						</div>
+						<div class="col-md-8">
+							<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>">
+						</div>
+					</div>
+	                <input type="submit" class="btn btn-theme" value="submit" >
+	            </form> 
+
+			</div>
 		</div>
 		<!--./panel-body-->
-	</div>
-	<!--./panel-heading -->
 </div>
 <!-- ./panel -->	
 

@@ -48,6 +48,7 @@ class UserPanelController < ApplicationController
    #coupons
    			def coupon_detail
    				@coupon=Coupon.find(params[:id])
+   				@coupon_terms=@coupon.coupon_terms.split('.')
    				respond_to do |format|
 			       format.html 
 			       format.js
@@ -156,7 +157,7 @@ class UserPanelController < ApplicationController
   	def tweet
 		@user_id=current_user.id
 		@story=Story.find_by(id: $sid)
-		@tweet=twitter_user.twitter.update_with_media(@story.title+" : "+params[:p],open(@story.image_url))
+		@tweet=twitter_user.twitter.update_with_media(params[:p],open(@story.image_url))
 		$tid=@tweet.id
 		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
@@ -195,6 +196,7 @@ class UserPanelController < ApplicationController
 			@a_stories[i]<<ms.fb_post_id
 			@a_stories[i]<<ms.tw_post_id
 			i+=1
+			#byebug
 			if !ms.fb_post_id.nil?
 				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
 			end
@@ -204,6 +206,7 @@ class UserPanelController < ApplicationController
 				@response=HTTParty.get(@status_url)
 				if !@response==404  #tweet exist
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
+					# byebug
 					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
 				end
 				#byebug

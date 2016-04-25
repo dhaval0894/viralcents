@@ -5,11 +5,7 @@
 
 .table
 {
-<<<<<<< HEAD
-  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Georgia", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-=======
   style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
 }
 
 
@@ -17,42 +13,25 @@
 
 
 </head>
-<<<<<<< HEAD
-
-
-<body style="background-color:#e5e5e5">
-=======
 
 
 <body style="background-color:#E5E5E5">
 
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
 
 <div style="margin-left: 10%;width: 80%;background-color: #fff">
 
-<<<<<<< HEAD
-  <h1 style="font-family: Georgia;margin-left: 10%;color:#009ce6;text-shadow: 2px 2px #FFF;"> ViralCents </h1>
-              
-<div style="background-color:#fff;width:80%;margin-left: 10%"> 
-
-  <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
-    <tr>
-      <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Georgia", "Arial", sans-serif !important; font-weight: 300;" valign="top">
-=======
 
   <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
     <tr>
       <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300;" valign="top">
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
         
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
+          
+
           <tr>
             <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
 
-<<<<<<< HEAD
-=======
-                <h1 style="font-family: Helvetica"> ViralCents </h1>
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
+                <h1 style="font-family: Helvetica;color: grey"> ViralCents </h1>
               
             </td>
           </tr>
@@ -62,6 +41,8 @@
 
             <td id="templateHeader" valign="top"></td>
           </tr>
+
+
           <tr>
             <td id="templateBody" valign="top">
               <table border="0" cellpadding="0" cellspacing="0" class="mcnTextBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
@@ -72,41 +53,51 @@
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-<<<<<<< HEAD
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Georgia;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
-                              <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Georgia">
-                              <br>
-                              See how much you earn this week on viralcents
-                              <br>
-                              <h1>
-                                  2000 <span style="font-size:20px">  Rs </span> 
-                                </h1>
-                                Total Money in your wallet.
-                                <br><br>
-                                <button style="background-color:#009ce6;color:#fff;border:10px;border-radius:10px;padding: 12px 12px 12px 12px;font-size: 15px"> 
-                                <b>Continue  on Viralcents</b></button>
-                                
-                                <button style="background-color:#009ce6;color:#fff;border:10px;border-radius:10px;padding: 12px 12px 12px 12px;font-size: 15px"> 
-=======
                               <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
                               <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Helvetica">
                               <br>
                                  
-                                  See How much you earn this week on ViralCents
-                              <br>
-                              <h1> 2000 <span style="font-size: 20px"> Rs.</span> </h1>
-                                Keep sharing and earning.
-                                <br>
-                                <br>
-                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
+                                  Popular Stories on ViralCents
+                               <hr>
+
+                              
+            <div style="font-size: 15px;line-height: 18px;">    <!-- stories here -->
+
+                    <% @count  =Story.all.count %>   <!-- ruby code -->
+                             
+                          <!-- count is less than 10 -->
+
+                            <% if @count < 10 %>
+                                     <% @stories = Story.order("created_at DESC")%>
+                                     <% @stories.each do |story| %>
+                                     <%= story.title %>  
+
                                 
-                                <b>Recharge Account Now</b></button>
+                                <br><br>
+ <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+ <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
+                                     <% end %>
+                            
+                          
+                          <!-- count is more than 10 -->
+                            <% else %>
+                                  <% @stories = Story.order("created_at DESC").take(10)%>
+                                     <% @stories.each do |story| %>
+                                     <%= story.title %> 
+
+                                <br><br>
+ <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+ <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
+                            <% end %>
+
+                         <% end %>    <!-- ruby code ends -->
+
+
                                 
-                                <button style="background-color:#d5d5d5;color:#323232;border:10px;padding: 10px 10px 10px"> 
-                                
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
-                                <b>Earn More Money</b></button>
-                                
+
+                              </div>   <!-- stories here -->                             
+
+
                                 </span>
 
                               </br>
@@ -121,7 +112,11 @@
             </td>
           </tr>
           <tr>
+
+
             <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
+              
+
               <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnFollowBlockOuter">
                   <tr>
@@ -157,11 +152,7 @@
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-<<<<<<< HEAD
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #323232;font-size: 20px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 35px;height: 15px;text-align: center;color:#fff">f</a>
-=======
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">f</a>
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">f</a>
 
 
                                                                     </td>
@@ -195,11 +186,7 @@
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
                                                                                                   
-<<<<<<< HEAD
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Georgia Neue&quot;, &quot;Georgia&quot;, Georgia, Arial, sans-serif;color: #FFF;font-size: 20px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 35px;height: 15px;text-align: center">t</a>
-=======
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 10px;text-align: center">t</a>
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
+                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 13px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">t</a>
 
 
                                                                     </td>
@@ -266,16 +253,11 @@
                       <table align="center" border="0" cellpadding="0" cellspacing="0" class="mcnTextContentContainer" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                         <tbody>
                           <tr>
-<<<<<<< HEAD
-                            <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#fff;/*@editable*/font-family:Georgia; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
-=======
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px; *@editable*/color:#323232;/*@editable*/font-family:Helvetica; /*@editable*/font-size:12px; /*@editable*/line-height:150%; /*@editable*/text-align:center;" valign="top">
->>>>>>> a3405c22e1528d3d1aef48f09ea6e674ac3b3561
                             <span style="color: #323232"> 
-                              <em>Copyright © 2016 Techritzy, All rights reserved.</em>
+                              <b><i>Copyright © 2016 Techritzy, All rights reserved.</i></b>
                               <br>
                                 <br>
-                                  <strong>any-email@gmail.com</strong>
                                   </span>
                                 </br>
                               </br>
@@ -295,6 +277,7 @@
           </tr>
           </table>
         <![endif]-->
+       
         <!-- // END TEMPLATE -->
       </td>
     </tr>
