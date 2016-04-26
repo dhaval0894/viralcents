@@ -21,7 +21,6 @@ class SocialAnalytics
     	@users.each do |user|
 	     	twitter_user = TwitterUser.find_by(user_id: user.id)
 	   		@my_story = UserStory.where(user_id: user.id)
-
 		 	@my_story.each do |ms|
 		 		#add all stories to the list
 			 		
