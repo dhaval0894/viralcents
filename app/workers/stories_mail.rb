@@ -4,7 +4,7 @@ class StoriesMail
   include Sidetiq::Schedulable
 
   recurrence backfill: true do
-      minutely(1)
+      daily(1)
   end
 
   def perform()
