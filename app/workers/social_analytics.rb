@@ -18,12 +18,14 @@ class SocialAnalytics
     	#to encode url
     	require 'uri'
     	@users = User.all
+    	#update analytics for all users
     	@users.each do |user|
 	     	twitter_user = TwitterUser.find_by(user_id: user.id)
 	   		@my_story = UserStory.where(user_id: user.id)
 		 	@my_story.each do |ms|
 		 		#add all stories to the list
 			 		
+			 	#facebook analytics	
 				if not ms.fb_post_id.nil?
 					ms.update(fb_likes: user.fb_likes(ms.fb_post_id), fb_shares: user.fb_shares(ms.fb_post_id), fb_comments: user.fb_comments(ms.fb_post_id) )
 				end
