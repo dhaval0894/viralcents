@@ -5,8 +5,8 @@ class SocialAnalytics
 	#sidekiq_options queue: "high"
 	include Sidetiq::Schedulable
     recurrence {
-
-       minutely(20)
+    daily(1)
+       #minutely(20)
     }
 
     def perform
