@@ -9,7 +9,7 @@ include SendGrid
  	@users = users
         
 
-    mail( :to => @users,
+    mail( :to => 'dhaval.shin@gmail.com',
     :subject => 'Viralcents Latest Stories' )
   end
 

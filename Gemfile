@@ -22,7 +22,7 @@ gem 'jquery-turbolinks'             # use jQuery plugin for drop-in fix binded e
 gem 'koala'                         #facebook access
 gem 'link_thumbnailer'              #extract from link
 gem 'listjs-rails'
-gem 'mail'                  # Search, sort and filter
+gem 'mail'        		            # Search, sort and filter
 gem 'omniauth-twitter', '~> 1.0.1'  #for twitter authentication
 gem 'omniauth-facebook'             #facebook access
 gem 'pg'                            # Use postgres as the database for Active Record
@@ -44,6 +44,9 @@ gem 'uglifier', '>= 1.3.0'          # Use Uglifier as compressor for JavaScript 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  # Preview Rails Mail
+  gem "letter_opener"
 
   # pry rails console
   gem "pry-rails"

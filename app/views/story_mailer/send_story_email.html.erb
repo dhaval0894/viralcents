@@ -1,50 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+  <style>
 
-.table
-{
-  style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
-}
-
-
-</style>
+  .table
+  {
+    style="border-collapse:collapse; height:100%; margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300; mso-table-lspace:0pt; mso-table-rspace:0pt;"
+  }
 
 
+  </style>
 </head>
-
-
-<body style="background-color:#E5E5E5">
-
+<body style="background-color:#E5E5E5"> 
 
 <div style="margin-left: 10%;width: 80%;background-color: #fff">
-
-
   <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" id="bodyTable" width="100%">
     <tr>
       <td align="center" id="bodyCell" style="height:100%;  margin:0; padding:0; width:100%; font-family: "Source Sans Pro", "Helvetica", "Arial", sans-serif !important; font-weight: 300;" valign="top">
-        
         <table border="0" cellpadding="0" cellspacing="0" class="templateContainer" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; max-width:564px;" width="100%">
-          
-
           <tr>
-            <td id="templatePreheader" style="border-top:0;border-bottom:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
-
-                <h1 style="font-family: Helvetica;color: grey"> ViralCents </h1>
+            <td id="templatePreheader" style="border-top:0;padding-top:9px;padding-bottom:9px;color:#323232;text-align: center" valign="top">
+                <%= image_tag("panel-logo.png", alt: "ViralCents") %>
+            </td>
+            <td>
               
             </td>
           </tr>
           
-
           <tr>
-
             <td id="templateHeader" valign="top"></td>
           </tr>
 
-
           <tr>
-            <td id="templateBody" valign="top">
+            <td id="templateBody" valign="top" style="border-top: 2px solid #EEEEEE;">
               <table border="0" cellpadding="0" cellspacing="0" class="mcnTextBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnTextBlockOuter">
                   <tr>
@@ -53,54 +41,43 @@
                         <tbody>
                           <tr>
                             <td class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;" valign="top">
-                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#323232;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">Hello User</h1>
-                              <span style="color: #323232;line-height: 30px;font-size:20px;font-family:Helvetica">
-                              <br>
-                                 
-                                  Popular Stories on ViralCents
-                               <hr>
+                              <h1 style="text-align: left; display:block; margin:0; padding:0; color:#6173f4;    font-family:Helvetica;font-size:26px;font-style:normal;   font-weight:bold; line-height:125%;   letter-spacing:normal;">
+                                Hey <!--%= @users.name  %-->Dhaval,
+                              </h1>
+                              <span style="color: #7f7f7f;line-height: 30px;font-size:20px;font-family:Helvetica">
+                                <br>  
+                                    Here are some Top Paid stories on ViralCents
+                                <hr style="border: 1px solid #EEEEEE;">
 
                               
-            <div style="font-size: 15px;line-height: 18px;">    <!-- stories here -->
+                              <div style="font-size: 15px;line-height: 18px;">    <!-- stories here -->
 
-                    <% @count  =Story.all.count %>   <!-- ruby code -->
-                             
-                          <!-- count is less than 10 -->
+                                <% @count=Story.all.count %>   <!-- ruby code -->    
+                                  <!-- count is less than 10 -->
+                                  <% if @count < 10 %>
+                                    <% @stories = Story.order("created_at DESC")%>
+                                    <% @stories.each do |story| %>
+                                      <%= link_to story.title, story.orig_url, :style => 'text-decoration:none; color:#6173f4 !important;' %>
+                                    <br><br>
+                                    <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+                                    <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Tweet on Twitter</b></button>   
+                                    <br><br>
+                                  <% end %>
+                                            
+                                  <!-- count is more than 10 -->
+                                  <% else %>
+                                    <% @stories = Story.order("created_at DESC").take(10)%>
+                                      <% @stories.each do |story| %>
+                                      <%= story.title %> 
+                                      <br><br>
+                                      <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
+                                      <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
+                                    <% end %>
 
-                            <% if @count < 10 %>
-                                     <% @stories = Story.order("created_at DESC")%>
-                                     <% @stories.each do |story| %>
-                                     <%= story.title %>  
-
-                                
-                                <br><br>
- <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
- <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
-                                     <% end %>
-                            
-                          
-                          <!-- count is more than 10 -->
-                            <% else %>
-                                  <% @stories = Story.order("created_at DESC").take(10)%>
-                                     <% @stories.each do |story| %>
-                                     <%= story.title %> 
-
-                                <br><br>
- <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Share on Facebook</b></button>
- <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px"> <b>Retweet Story</b></button>   <br><br>
-                            <% end %>
-
-                         <% end %>    <!-- ruby code ends -->
-
-
-                                
-
-                              </div>   <!-- stories here -->                             
-
-
-                                </span>
-
-                              </br>
+                                  <% end %>    <!-- ruby code ends -->                        
+                                </div>   <!-- stories here -->                             
+                              </span>
+                              <br/>
                             </td>
                           </tr>
                         </tbody>
@@ -112,14 +89,17 @@
             </td>
           </tr>
           <tr>
-
-
-            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px;" valign="top">
-              
+            <td id="templateFooter" style="text-align:center; /*@editable*/ /*@editable*/border-top:0;color: #323232 /*@editable*/border-bottom:0; /*@editable*/padding-top:9px; /*@editable*/padding-bottom:9px; border-top: 2px solid #EEEEEE;" valign="top">
 
               <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowBlock" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                 <tbody class="mcnFollowBlockOuter">
                   <tr>
+                    <td align="center" class="mcnFollowBlockInner" style="padding:9px" valign="top">
+                      <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowContentContainer" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
+                      <span style="color: #7f7f7f;line-height: 30px;font-size:20px;font-family:Helvetica">
+                        Follow Us On:
+                      </span>
+                    </td>
                     <td align="center" class="mcnFollowBlockInner" style="padding:9px" valign="top">
                       <table border="0" cellpadding="0" cellspacing="0" class="mcnFollowContentContainer" style="min-width:100%; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" width="100%">
                         <tbody>
@@ -152,7 +132,7 @@
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">                            
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">f</a>
+                                                                      <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 12px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #3B5998!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">f</a>
 
 
                                                                     </td>
@@ -185,9 +165,8 @@
                                                                 <tbody>
                                                                   <tr>
                                                                     <td align="center" class="mcnFollowIconContent" valign="middle" width="24">
-                                                                                                  
-                          <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 13px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">t</a>
-
+                                                                                                                                                                    
+                                                                      <a href="http://zurb.com/playground/projects/responsive-email-templates/newsletter.html#" style="margin: 0;padding: 10px 2px;font-family: &quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;color: #fff;font-size: 13px;margin-bottom: 10px;text-decoration: none;font-weight: bold;display: block;text-align: center;background-color: #1daced!important;border-radius:30px 30px 30px 30px;width: 30px;height: 12px;text-align: center">t</a>
 
                                                                     </td>
                                                                   </tr>
