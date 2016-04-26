@@ -5,14 +5,9 @@ class SocialAnalytics
 	#sidekiq_options queue: "high"
 	include Sidetiq::Schedulable
     recurrence {
-       #minutely(1)
-       weekly(1)
+       minutely(20)
+       #weekly(1)
     }
-
-# def perform
-# 	@w= Wallet.new(user_id: 6,balance:500)
-# 	@w.save
-# end
 
     def perform
     	#to encode url
