@@ -433,7 +433,7 @@ class UserPanelController < ApplicationController
 	#generate thumbnails from the url added
 	def load_story
 		#select only active stories
-		@stories = Story.where(story_status: "active")
+		@stories = Story.where(story_status: "active").reverse
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?
 				link_data = story.link_thumbnail(story.orig_url)
