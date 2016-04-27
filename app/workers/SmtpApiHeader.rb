@@ -6,20 +6,7 @@ class SmtpApiHeader
  $all_user_names = []
 
 
-  def wallet_info
-   
-          @user_wallets = []
-          @users = User.all
-      @users.each do |user|
-          @wallet_refrence = Wallet.find_by user_id: user.id
-          @each_user_balance = @wallet_refrence.balance
-          @user_wallets.push(@each_user_balance)
-      end
-  
-      return @user_wallets
-  end
-
-def user_mail_info
+  def user_mail_info
          @all_user_emails = []
          @users = User.all
       
@@ -113,4 +100,5 @@ end
     return str
   end
 
+ 
 end

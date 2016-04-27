@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   #Get details for mobile recharge
   get 'recharges' => 'user_panel#recharges'
   #show recharge details
-  put 'recharges' => 'user_panel#addrecharge'
+  post 'recharges' => 'user_panel#addrecharge'
   #get user wallet details
   get 'wallet' =>'user_panel#wallet'
   #store facebook post id

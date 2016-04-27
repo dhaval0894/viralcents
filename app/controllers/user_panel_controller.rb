@@ -1,13 +1,18 @@
 class UserPanelController < ApplicationController
-
+	#to encode url
+    require 'uri'
 	before_action :check_user
 	before_action :load_story, only: [:dashboard, :stories, :user_stories]
 	before_action :category_check, only: [:stories, :user_stories]
 	#before_action :check_twitter_user ,only: [:post_to_twitter]
 
 	def dashboard
-
-			@us_story = UserStory.where(user_id: current_user.id)
+		#SocialAnalytics.new.perform
+		#connect twitter user
+		@tuser= TwitterUser.find_by(user_id: current_user.id)
+		session[:tuser_id] = @tuser.id
+		
+		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
 		@wallet = Wallet.find_by(user_id: current_user.id)
 		if !@wallet.nil?
@@ -116,7 +121,7 @@ class UserPanelController < ApplicationController
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
-				NotificationMailSender.perform_async(@email)
+				NotificationMailSender.perform_async(current_user.name,@email)
 			
 		end
 		redirect_to settings_path
@@ -202,7 +207,7 @@ class UserPanelController < ApplicationController
 			end
 			if !ms.tw_post_id.nil? and twitter_user
 				#to check whether tweet exist or not
-				@status_url=["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join("")
+				@status_url=URI.escape(["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join(""))
 				@response=HTTParty.get(@status_url)
 				if !@response==404  #tweet exist
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
@@ -429,7 +434,7 @@ class UserPanelController < ApplicationController
 	#generate thumbnails from the url added
 	def load_story
 		#select only active stories
-		@stories = Story.where(story_status: "active")
+		@stories = Story.where(story_status: "active").reverse
 		@stories.each do |story|	
 			if story.image_url.nil? and story.title.nil?
 				link_data = story.link_thumbnail(story.orig_url)
