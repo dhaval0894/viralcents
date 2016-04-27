@@ -5,8 +5,7 @@ class SocialAnalytics
 	#sidekiq_options queue: "high"
 	include Sidetiq::Schedulable
     recurrence {
-    daily(1)
-       #minutely(20)
+	    minutely(20)
     }
 
     def perform
@@ -34,8 +33,12 @@ class SocialAnalytics
 		 			@response=HTTParty.get(@status_url)
 		 			
 		 			if not @response==404  #tweet exist
-		 				@tweet_info=t_user.twitter.status(ms.tw_post_id)
-		 				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+		 				begin
+			 				@tweet_info=t_user.twitter.status(ms.tw_post_id)
+			 				ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+			 			rescue Twitter::Error::NotFound
+			 				return
+			 			end
 		 			end
 				end
 				#clicks analytics
