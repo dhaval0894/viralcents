@@ -15,8 +15,6 @@ class StoriesMail
                 ViralcentsMailer.send_story_email(each_user.name,each_user.email).deliver
             end
       end
-      
-      
   end
 end
 
