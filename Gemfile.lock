@@ -320,10 +320,6 @@ GEM
       addressable
       faraday
       multi_json
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.4.1)
-      launchy (~> 2.2)
     link_thumbnailer (3.1.1)
       activesupport (>= 3.0)
       image_info (~> 1.0)
@@ -536,7 +532,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   koala
-  letter_opener
   link_thumbnailer
   listjs-rails
   mail
@@ -556,6 +551,3 @@ DEPENDENCIES
   turbolinks
   twitter (~> 5.3.1)
   uglifier (>= 1.3.0)
-
-BUNDLED WITH
-   1.11.2

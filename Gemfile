@@ -46,7 +46,7 @@ group :development, :test do
   gem 'byebug'
 
   # Preview Rails Mail
-  gem "letter_opener"
+  #gem "letter_opener"
 
   # pry rails console
   gem "pry-rails"

@@ -113,4 +113,9 @@ end
     return str
   end
 
+  #get the current user
+  def current_user
+    return User.find(1)
+  end
+
 end
