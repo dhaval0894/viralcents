@@ -1,0 +1,28 @@
+<!--email template for daily stories-->
+<span style="color: #7f7f7f;line-height: 30px;font-size:20px;font-family:Helvetica">
+  <br>  
+  Here are some Top Paid stories on ViralCents
+  <hr style="border: 1px solid #EEEEEE;">
+  <div style="font-size: 15px;line-height: 18px;">    <!-- stories here -->
+    <% @count  = Story.all.count %>   <!-- ruby code -->
+    <!-- count is less than 10 -->
+    <% if @count < 10 %>
+      <% @stories = Story.order("created_at DESC")%>
+    <% else %>
+      <% @stories = Story.order("created_at DESC").take(10)%>
+    <% end %>
+    <% @stories.each do |story| %>
+      <%= link_to story.title, story.orig_url, :style => 'text-decoration:none; color:#6173f4 !important;' %>
+      <br><br>
+      <button style="background-color:#3B5998;color:#fff;border:10px;padding: 10px 10px 10px;margin-bottom:4px">
+        <b>Share on Facebook</b>
+      </button>
+      <button style="background-color:#1daced;color:#fff;border:10px;padding: 10px 10px 10px">
+        <b>Tweet on Twitter</b>
+      </button>   
+      <br><br>
+    <% end %>
+  </div>   <!-- stories here -->                             
+</span>
+                              
+          

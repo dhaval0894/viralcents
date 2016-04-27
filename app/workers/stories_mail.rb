@@ -12,7 +12,7 @@ class StoriesMail
     #create list of all users      
       @list_of_users.each do |each_user|
             if each_user.email != nil
-                StoryMailer.send_story_email(each_user.name,each_user.email).deliver
+                ViralcentsMailer.send_story_email(each_user.name,each_user.email).deliver
             end
       end
       
