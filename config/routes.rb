@@ -1,14 +1,19 @@
-require 'sidetiq/web'
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   
+
+      require 'sidekiq/web'
+      mount Sidekiq::Web ,at: '/sidekiq'
+
+
   # Landing page route
+
   root 'static_pages#index'
 
-      mount Sidekiq::Web ,at: '/sidekiq'
   
   #facebook login
   get 'auth/:provider/callback' => 'sessions#create'
@@ -46,7 +51,7 @@ Rails.application.routes.draw do
   #Get details for mobile recharge
   get 'recharges' => 'user_panel#recharges'
   #show recharge details
-  put 'recharges' => 'user_panel#addrecharge'
+  post 'recharges' => 'user_panel#addrecharge'
   #get user wallet details
   get 'wallet' =>'user_panel#wallet'
   #store facebook post id

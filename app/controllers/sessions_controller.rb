@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
           end
         end      
     else
-        @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash)
+        @twitter_user = TwitterUser.find_or_create_from_auth_hash(auth_hash,current_user)
         session[:tuser_id]=@twitter_user.id
     end
     redirect_to '/dashboard'

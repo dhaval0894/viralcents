@@ -3,38 +3,25 @@ require 'json'
 
 class SmtpApiHeader
 
-  def wallet_info
-   
-          @user_wallets = []
-          @users = User.all
-      @users.each do |user|
-          @wallet_refrence = Wallet.find_by user_id: user.id
-          @each_user_balance = @wallet_refrence.balance
-          @user_wallets.push(@each_user_balance)
-      end
-  
-      return @user_wallets
-  end
+ $all_user_names = []
 
-def user_mail_info
+
+  def user_mail_info
          @all_user_emails = []
          @users = User.all
       
       @users.each do |user|
            if user.email != nil and user.email 
            @all_user_emails.push(user.email)
+           $all_user_names.push(user.name)
+        
            end
       end
   return @all_user_emails
 end
 
 def user_names
-       @all_user_names = []
-          @users = User.all
-       @users.each do |user|
-           @all_user_names.push(user.name)
-        end
-    return @all_user_names
+        return $all_user_names
 end
 
 def all_stories_title
@@ -113,4 +100,5 @@ end
     return str
   end
 
+ 
 end
