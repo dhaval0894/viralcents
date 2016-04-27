@@ -121,7 +121,7 @@ class UserPanelController < ApplicationController
 		  if(params[:email] and current_user.email != params[:email])
 				current_user.update(:email => params[:email])
 				@email = params[:email]
-				NotificationMailSender.perform_async(@email)
+				NotificationMailSender.perform_async(current_user.name,@email)
 			
 		end
 		redirect_to settings_path

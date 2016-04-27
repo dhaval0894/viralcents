@@ -8,17 +8,13 @@ class StoriesMail
   end
 
   def perform()
-    @users = []
     @list_of_users = User.all
-          
+    #create list of all users      
       @list_of_users.each do |each_user|
             if each_user.email != nil
-                @users.append(each_user)
+                ViralcentsMailer.send_story_email(each_user.name,each_user.email).deliver
             end
       end
-      
-      StoryMailer.send_story_email(@users).deliver
   end
-
 end
 

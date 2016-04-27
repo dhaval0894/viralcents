@@ -1,30 +1,36 @@
-/* Function Calls */
-$(document).ready(function() {
-	// Tweet on  twitter
-	$("#tweet_btn").click(function(){
-    	run();
-  	});
-  	countChar();
-  	$("#txt").keyup(function(){
-    	countChar();
-  	});
-});
+(function(){
+	
+	/* Function Calls */
+	$(document).on("ready", function() {
+		// Tweet on  twitter
+		$("#tweet_btn").on("click", function(){
+	    	run();
+	  	});
 
-// Tweet on Twitter
-function run(){
-  var txt = document.getElementById('txt').value;
+	  	// Count character
+	  	countChar();
+	  	$("#txt").on("keyup", function(){
+	    	countChar();
+	  	});
+	});
 
-  window.opener.location.href = "post?p=" + txt;
-  self.close();
-}
+	// Tweet on Twitter
+	function run(){
+	  var txt = document.getElementById('txt').value;
 
-function countChar(){
-	var tweet_field=document.getElementById('txt').value;
-	var max_char=document.getElementById('txt').maxLength;
-	var current_char=tweet_field.length;
-	console.log(current_char);
-	var remaining_char=max_char-current_char;
-	console.log(max_char);
-	console.log(remaining_char);
-	$("#remaining_char").text(remaining_char);
-}
+	  window.opener.location.href = "post?p=" + txt;
+	  self.close();
+	}
+
+	function countChar(){
+		var tweet_field=document.getElementById('txt').value;
+		var max_char=document.getElementById('txt').maxLength;
+		var current_char=tweet_field.length;
+		console.log(current_char);
+		var remaining_char=max_char-current_char;
+		console.log(max_char);
+		console.log(remaining_char);
+		$("#remaining_char").text(remaining_char);
+	}
+
+})();	
