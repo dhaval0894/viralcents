@@ -10,7 +10,9 @@ class UserPanelController < ApplicationController
 		#SocialAnalytics.new.perform
 		#connect twitter user
 		@tuser= TwitterUser.find_by(user_id: current_user.id)
-		session[:tuser_id] = @tuser.id
+		if !@tuser.nil?
+			session[:tuser_id] = @tuser.id
+		end	
 		
 		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
