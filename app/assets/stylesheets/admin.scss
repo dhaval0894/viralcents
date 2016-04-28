@@ -189,11 +189,6 @@
                     filter:alpha(opacity=65);
                     @include prefix(box-shadow, none, webkit);
                 }
-                /* generate url group */
-                .gen-group{
-                    -moz-margin-bottom: 11.8px;
-                    margin-bottom: 10px;
-                }
                 /* input-group-addon */
                 .input-group-addon{
                     padding:4px;    
