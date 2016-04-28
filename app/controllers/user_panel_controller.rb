@@ -55,7 +55,7 @@ class UserPanelController < ApplicationController
    #coupons
    			def coupon_detail
    				@coupon=Coupon.find(params[:id])
-   				@coupon_terms=@coupon.coupon_terms.split('.')
+   				@coupon_terms=@coupon.coupon_terms.split('.~')
    				respond_to do |format|
 			       format.html 
 			       format.js
@@ -211,7 +211,7 @@ class UserPanelController < ApplicationController
 				#to check whether tweet exist or not
 				@status_url=URI.escape(["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join(""))
 				@response=HTTParty.get(@status_url)
-				if !@response==404  #tweet exist
+				if not @response==404  #tweet exist
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
 					# byebug
 					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
