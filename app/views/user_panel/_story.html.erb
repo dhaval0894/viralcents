@@ -43,7 +43,7 @@
                 <input type="text" id='cp_text<%=story.id%>' class="form-control" value='<%=@u%>' readonly>
             </div>
         <%else%> <!-- For Generating Shorten URL -->
-            <div class="input-group gen-group">
+            <div class="input-group">
                 <span class="input-group-addon" id='gen_button<%= story.id%>' title="Generate URL from here">
                     <button class='btn btn-primary btn-xs gen_link' data-story-id='<%= story.id %>' >
                         <i class="fa fa-link"></i>
@@ -96,7 +96,6 @@
             </li>
 
             <!-- Twitter Sharing Button -->
-            <li>
                 <% i=0 %>
             `    <%@us_story.each do |usr_str|%>
                     <%if usr_str.story_id == story.id && !usr_str.tw_post_id.nil?%>
@@ -105,8 +104,9 @@
                 <%end%>
                 
                 <% if i==1 %> <!-- If Story is already Tweeted on Twitter -->
-                    <a class ="disabled btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
-                
+                    <li>
+                        <a class="disabled"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></span></a>
+                    </li>
                 <%else%> 
                     <%if twitter_user %> <!-- If connected via twitter -->
                         <% if story.title.size >88 %>
@@ -116,13 +116,16 @@
                             <%end%>
                             <% story.title=story.title[0,c]+".." %>
                         <%end%>
-                        <a target="popup" class="tw_share" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
-                    
+                        <li>
+                            <a target="popup" class="tw_share" href="/tweet?id=<%= story.id%>&url=<%= story.title+' : '+@u %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        </li>
                     <% else %> <!-- If Not connected via twitter -->
-                        <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        <li>
+                            <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        </li>    
                     <%end%>
                 <%end%>
-            </li>
+            
 
         <%end%>    
     </ul>

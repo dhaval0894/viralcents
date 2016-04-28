@@ -10,7 +10,9 @@ class UserPanelController < ApplicationController
 		#SocialAnalytics.new.perform
 		#connect twitter user
 		@tuser= TwitterUser.find_by(user_id: current_user.id)
-		session[:tuser_id] = @tuser.id
+		if !@tuser.nil?
+			session[:tuser_id] = @tuser.id
+		end	
 		
 		@us_story = UserStory.where(user_id: current_user.id)
 		#stats calculation
@@ -53,7 +55,7 @@ class UserPanelController < ApplicationController
    #coupons
    			def coupon_detail
    				@coupon=Coupon.find(params[:id])
-   				@coupon_terms=@coupon.coupon_terms.split('.')
+   				@coupon_terms=@coupon.coupon_terms.split('.~')
    				respond_to do |format|
 			       format.html 
 			       format.js
@@ -208,11 +210,15 @@ class UserPanelController < ApplicationController
 			if !ms.tw_post_id.nil? and twitter_user
 				#to check whether tweet exist or not
 				@status_url=URI.escape(["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join(""))
-				@response=HTTParty.get(@status_url)
-				if !@response==404  #tweet exist
+				# @response=HTTParty.get(@status_url)
+				# if not @response==404  
+				#tweet exist
+				begin
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
 					# byebug
 					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				rescue
+					return
 				end
 				#byebug
 				

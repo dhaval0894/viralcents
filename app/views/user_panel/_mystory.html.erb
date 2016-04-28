@@ -38,31 +38,38 @@
 
             <!-- Social Sharing Button -->                             
             <ul class="list-inline">
-                <li>
-                    <%if !ms[2].nil?%><!--if shared on facebook-->
+                <%if !ms[2].nil?%><!--if shared on facebook-->
+                    <li>
                         <a id="fb_<%=ms[0].id%>" class = "btn btn-block btn-xs btn-social-icon btn-facebook disabled"><i class="fa fa-facebook"> Share</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
-                    <%else%>
+                    </li>
+                <%else%>
+                    <li>
                         <a id="fb_<%=ms[0].id%>" class="btn btn-block btn-xs btn-social-icon btn-facebook fb_share" data-story-url='<%= ms[1] %>' data-story-id='<%= ms[0].id%>'><i class="fa fa-facebook"> Share</i></a> 
-                    <% end %>
-                </li>
-                <li>
-                    <% if !ms[3].nil? %><!--if shared on twitter-->
+                    </li>
+                <% end %>    
+            
+                <% if !ms[3].nil? %><!--if shared on twitter-->
+                    <li>
                         <a  class="btn btn-block btn-xs btn-social-icon btn-twitter disabled" ><i class="fa fa-twitter"> Tweet</i><span class="fa fa-check-circle fa-lg top-corner"></span></a>
-                    <%else%>
-                        <%if twitter_user %> <!-- If connected via twitter -->
-                            <% if ms[0].title.size >88 %>
-                            <% c=89 %>
-                            <% while (ms[0].title[c]!= " ") %>
-                                <% c=c-1 %>
-                            <%end%>
-                            <% ms[0].title=ms[0].title[0,c]+".." %>
+                    </li>
+                <%else%>
+                    <%if twitter_user %> <!-- If connected via twitter -->
+                        <% if ms[0].title.size >88 %>
+                        <% c=89 %>
+                        <% while (ms[0].title[c]!= " ") %>
+                            <% c=c-1 %>
                         <%end%>
-                            <a target="popup" class="tw_share" href="/tweet?id=<%= ms[0].id%>&url=<%= ms[0].title+' : '+ms[1] %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
-                        <% else %> <!-- If Not connected via twitter -->
-                            <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
-                        <%end%>
+                        <% ms[0].title=ms[0].title[0,c]+".." %>
                     <%end%>
-                </li>
+                        <li>
+                            <a target="popup" class="tw_share" href="/tweet?id=<%= ms[0].id%>&url=<%= ms[0].title+' : '+ms[1] %>"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        </li>
+                    <% else %> <!-- If Not connected via twitter -->
+                        <li>
+                            <a class="twitter_share"><span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter"> Tweet</i></span></a>
+                        </li>
+                    <%end%>
+                <%end%>
             </ul>
 
         </div>
