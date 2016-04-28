@@ -210,11 +210,15 @@ class UserPanelController < ApplicationController
 			if !ms.tw_post_id.nil? and twitter_user
 				#to check whether tweet exist or not
 				@status_url=URI.escape(["https://twitter.com/",twitter_user.twitter_name,"/status/",ms.tw_post_id].join(""))
-				@response=HTTParty.get(@status_url)
-				if not @response==404  #tweet exist
+				# @response=HTTParty.get(@status_url)
+				# if not @response==404  
+				#tweet exist
+				begin
 					@tweet_info=twitter_user.twitter.status(ms.tw_post_id)
 					# byebug
 					ms.update(fav: @tweet_info.favorite_count,retweets: @tweet_info.retweet_count)
+				rescue
+					return
 				end
 				#byebug
 				
