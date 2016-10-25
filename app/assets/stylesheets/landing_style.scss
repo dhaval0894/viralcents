@@ -15,7 +15,7 @@
 	background: image-url('c1.jpg');
 }
 #c2{
-	background: image-url('c2.png')
+	background: image-url('c2.png');
 }
 
 @-moz-document url-prefix() {
@@ -23,7 +23,9 @@
 	    width: 100% !important; 
 	}
 }
-
+#twitter-widget-0, #twitter-widget-1, #twitter-widget-2 {
+            width: 100% !important;
+}
 .panel-contact{
 	border:0;
 }
