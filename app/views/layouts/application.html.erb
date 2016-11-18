@@ -55,11 +55,11 @@
 				<div class="col navbar-col">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-secret"></i> <%=current_user.name %> <span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-secret"></i> <%=@current_user.name %> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="/settings" class="text-center"><i class="fa fa-gears"></i> Settings</a></li>
 								<li role="separator" class="divider"></li>
-								<% if current_user %> 
+								<% if @current_user %> 
 									<li><a id="fb_logout" class="text-center"><i class="fa fa-sign-out"></i> Logout</a></li>
 								<%end%>
 							</ul>
@@ -101,12 +101,12 @@
 								<a href="/recharges" class="<%= 'active' if current_page?(recharges_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-tablet fa-fw"></i></span> Mobile Recharge</a>
 
 							</li>
-							<li>
+							<!-- <li>
 								<a href="/show_coupons" class="<%= 'active' if current_page?(show_coupons_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-tags fa-fw"></i></span> Get Coupons</a>
 							</li>
 							<li>
 								<a href="/my_coupons" class="<%= 'active' if current_page?(my_coupons_path) %>"><span class="nav-dropdown-icon"><i class="fa fa-shopping-basket fa-fw"></i></span> My Coupons </a>
-							</li>
+							</li> -->
 						</ul>
 	                </li>
 					<li>

@@ -7,7 +7,7 @@
 	  		  		    <%= image_tag @coupon.coupon_company_logo, :class=>"img-responsive thumbnail-image", style: "width:300px;height:250px;" %>
 	  		  		    <hr>
 	  		  		    <%= form_tag("/map_coupon", method: "post") do %>
-  		  		     	    <%= hidden_field_tag 'user_id' , current_user.id %>
+  		  		     	    <%= hidden_field_tag 'user_id' , @current_user.id %>
   		  		     	    <%= hidden_field_tag 'coupon_id' , @coupon.id  %>
   		  		     	    <div class="text-center">
   		  		     	        <button class="btn btn-primary btn-sm coupon-btn" role="button"><i class="fa fa-rupee fa-1x"></i><strong><%= @coupon.coupon_amount %></strong></button> 

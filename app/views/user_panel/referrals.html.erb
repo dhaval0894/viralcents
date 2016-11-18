@@ -6,9 +6,9 @@
         <p>Share the referral link with your friends and get them signed up using this link to get free mobile recharge of worth &#8377;100!</p>
 
         <div class="col-md-offset-1 col-md-3">
-            <%if current_user.referral_link.nil? %><!-- If referral link is not generated -->
+            <%if @current_user.referral_link.nil? %><!-- If referral link is not generated -->
                 <!-- Generate Referral Link button -->
-            	<button id = "but" data-current-user = '<%=current_user.uid %>' data-root-url = '<%=root_url%>' class="btn btn-primary btn-sm">Generate Referral Link</button>
+            	<button id = "but" data-current-user = '<%=@current_user.uid %>' data-root-url = '<%=root_url%>' class="btn btn-primary btn-sm">Generate Referral Link</button>
             <%end%>
         </div>
 
@@ -20,13 +20,13 @@
             </button>
             </span>
             
-            <%if current_user.referral_link.nil?%><!-- If referral link is not generated -->
+            <%if @current_user.referral_link.nil?%><!-- If referral link is not generated -->
                 <!-- Blank input field -->
                 <input type="text" id="g_url" class="form-control" readonly>
 
             <%else%><!-- If referral link is generated -->
                 <!-- Input field with genrated url -->
-                <input type="text" id="g_url" class="form-control" value="<%= current_user.referral_link %>" readonly>
+                <input type="text" id="g_url" class="form-control" value="<%= @current_user.referral_link %>" readonly>
             <%end%>
             </div>
             
@@ -34,12 +34,12 @@
             <ul class="list-inline">
             <!--facebook share -->
                 <li>
-                    <a id="fb_referrer" alt="Share on Facebook" data-referrer-link="<%= current_user.referral_link%>" data-facebook-app-id="1357150584310400" class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
+                    <a id="fb_referrer" alt="Share on Facebook" data-referrer-link="<%= @current_user.referral_link%>" data-facebook-app-id="1357150584310400" class="btn btn-block btn-xs btn-social-icon btn-facebook"><i class="fa fa-facebook"> Share</i></a>
                 </li>
             
             <!--twitter share -->
                 <li>
-                    <a id="tw_referrer" alt="Share on Twitter" data-referrer-link="<%= current_user.referral_link%>">
+                    <a id="tw_referrer" alt="Share on Twitter" data-referrer-link="<%= @current_user.referral_link%>">
                     <span class="btn btn-block btn-xs btn-social-icon btn-twitter"><i class="fa fa-twitter">Tweet</i></span></a>
                 </li>
             </ul>
@@ -61,7 +61,7 @@
 
         <tbody>
             <%@all_users.each do |au|%>
-                <%if au.referrer == current_user.uid%>
+                <%if au.referrer == @current_user.uid%>
                     <tr>
                         <td colspan="5"><%=au.name %></td>
                         <td colspan="5"><%=au.created_at.strftime("%d/%m/%Y")%></td>

@@ -9,14 +9,14 @@ class UserPanelController < ApplicationController
 	def dashboard
 		#SocialAnalytics.new.perform
 		#connect twitter user
-		@tuser= TwitterUser.find_by(user_id: current_user.id)
+		@tuser= TwitterUser.find_by(user_id: @current_user.id)
 		if !@tuser.nil?
 			session[:tuser_id] = @tuser.id
 		end	
 		
-		@us_story = UserStory.where(user_id: current_user.id)
+		@us_story = UserStory.where(user_id: @current_user.id)
 		#stats calculation
-		@wallet = Wallet.find_by(user_id: current_user.id)
+		@wallet = Wallet.find_by(user_id: @current_user.id)
 		if !@wallet.nil?
 			@wallet_amt=@wallet.balance
 		else
@@ -32,10 +32,10 @@ class UserPanelController < ApplicationController
 		@data = @data.map(&:to_i)
 		@data= @data.sort.reverse!
 
-		@shared_story = UserStory.where(user_id: current_user.id).count
+		@shared_story = UserStory.where(user_id: @current_user.id).count
 		#find week earning
 		@credit_type=["referral","credit"]
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
+		@last_week=UserTransaction.where(user_id: @current_user.id,trans_type: @credit_type)
 		@week_earning=0.0
 		@last_week.each do |l|
 			if l.trans_date > 1.week.ago
@@ -44,7 +44,7 @@ class UserPanelController < ApplicationController
 		end
 		#find last_withdraw
 		@debit_type=["coupon","recharge"]
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
+		@last_withdraw=UserTransaction.where(user_id: @current_user.id,trans_type: @debit_type).last
 		respond_to do |format|
       		format.html
       		format.js
@@ -120,10 +120,10 @@ class UserPanelController < ApplicationController
 
   	def settings_save_email     #activate notifications
 
-		  if(params[:email] and current_user.email != params[:email])
-				current_user.update(:email => params[:email])
+		  if(params[:email] and @current_user.email != params[:email])
+				@current_user.update(:email => params[:email])
 				@email = params[:email]
-				NotificationMailSender.perform_async(current_user.name,@email)
+				NotificationMailSender.perform_async(@current_user.name,@email)
 			
 		end
 		redirect_to settings_path
@@ -135,8 +135,8 @@ class UserPanelController < ApplicationController
 
    def settings_save_contact
  			 
- 			  if(params[:contact] and current_user.contact != params[:contact])
-				current_user.update(:contact => params[:contact])
+ 			  if(params[:contact] and @current_user.contact != params[:contact])
+				@current_user.update(:contact => params[:contact])
 				@contact = params[:contact]
 				NotificationMessageSender.perform_async(@contact)
 				
@@ -151,7 +151,7 @@ class UserPanelController < ApplicationController
 #all stories page
 
 	def stories
-		@us_story = UserStory.where(user_id: current_user.id)
+		@us_story = UserStory.where(user_id: @current_user.id)
 	end
 
 	#twitter widget for displaying tweet
@@ -162,11 +162,11 @@ class UserPanelController < ApplicationController
 
   	#post tweet to twitter
   	def tweet
-		@user_id=current_user.id
+		@user_id=@current_user.id
 		@story=Story.find_by(id: $sid)
 		@tweet=twitter_user.twitter.update_with_media(params[:p],open(@story.image_url))
 		$tid=@tweet.id
-		@user_story = UserStory.find_by(user_id: current_user.id, story_id: $sid)
+		@user_story = UserStory.find_by(user_id: @current_user.id, story_id: $sid)
 		@user_story.update(tw_post_id: @tweet.id)
 		
 		redirect_to dashboard_path
@@ -178,9 +178,9 @@ class UserPanelController < ApplicationController
 			#connect with bitly
 			@url=bitly_hash(params[:sid])
       		
-      		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:sid])
+      		@u_story = UserStory.find_by(user_id: @current_user.id, story_id: params[:sid])
 	      		if @u_story.nil?
-		      		@u_story=UserStory.new(user_id: current_user.id,story_id: params[:sid],short_url: @url.short_url)
+		      		@u_story=UserStory.new(user_id: @current_user.id,story_id: params[:sid],short_url: @url.short_url)
 		      		#raise :test
 		      		@u_story.save
 		      	end
@@ -193,7 +193,7 @@ class UserPanelController < ApplicationController
 
   	#stories shared by user and stories analytics
 	def user_stories
-		@my_story = UserStory.where(user_id: current_user.id)
+		@my_story = UserStory.where(user_id: @current_user.id)
 		@a_stories = []
 		i=0
 		@my_story.each do |ms|
@@ -205,7 +205,7 @@ class UserPanelController < ApplicationController
 			i+=1
 			#byebug
 			if !ms.fb_post_id.nil?
-				ms.update(fb_likes: current_user.fb_likes(ms.fb_post_id), fb_shares: current_user.fb_shares(ms.fb_post_id), fb_comments: current_user.fb_comments(ms.fb_post_id) )
+				ms.update(fb_likes: @current_user.fb_likes(ms.fb_post_id), fb_shares: @current_user.fb_shares(ms.fb_post_id), fb_comments: @current_user.fb_comments(ms.fb_post_id) )
 			end
 			if !ms.tw_post_id.nil? and twitter_user
 				#to check whether tweet exist or not
@@ -238,16 +238,16 @@ class UserPanelController < ApplicationController
 
 	#adds referral link to user
 	def add_referral_link
-		if current_user.referral_link.nil?
-			current_user.update(referral_link: params[:r_link])
+		if @current_user.referral_link.nil?
+			@current_user.update(referral_link: params[:r_link])
 		end
 	end
 
 	#adds fbshare_post id to UserStory
 	def add_fbStory_id
-		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
+		@u_story = UserStory.find_by(user_id: @current_user.id, story_id: params[:id])
 		if @u_story.fb_post_id.nil?
-			@u_story.update(fb_post_id: params[:post_id], user_id: current_user.id, story_id: params[:id])
+			@u_story.update(fb_post_id: params[:post_id], user_id: @current_user.id, story_id: params[:id])
 	    end
 	    respond_to do |format|
 	      format.json
@@ -256,13 +256,13 @@ class UserPanelController < ApplicationController
 
 	#check whether a post is already shared to facebook
 	def check_fb_share
-		@u_story = UserStory.find_by(user_id: current_user.id, story_id: params[:id])
+		@u_story = UserStory.find_by(user_id: @current_user.id, story_id: params[:id])
 	end
 
 	#find wallet balance
 	def wallet
-		@usr_wallet=Wallet.find_by(user_id: current_user.id)
-		@u_story=UserStory.where(user_id: current_user.id)
+		@usr_wallet=Wallet.find_by(user_id: @current_user.id)
+		@u_story=UserStory.where(user_id: @current_user.id)
 		@total=0.0
 	
 		#calculate current earning of user
@@ -281,7 +281,7 @@ class UserPanelController < ApplicationController
 		#update wallet
 		
 		if @usr_wallet.nil?
-			@new_wallet=Wallet.new(user_id: current_user.id,balance: @total)
+			@new_wallet=Wallet.new(user_id: @current_user.id,balance: @total)
 			@new_wallet.save
 		else
 			@wallet_amt=@total+@usr_wallet.balance
@@ -293,21 +293,21 @@ class UserPanelController < ApplicationController
 		if UserTransaction.count>0
 			@last_trans = UserTransaction.last
 			if @last_trans.amt != @total and @last_trans.trans_type == "credit"
-				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans=UserTransaction.new(user_id: @current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
 				@new_trans.save				
 			end
 		else		
 			if @total != 0	
-				@new_trans=UserTransaction.new(user_id: current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
+				@new_trans=UserTransaction.new(user_id: @current_user.id,amt: @total,trans_type: 'credit',trans_date: DateTime.now)
 				@new_trans.save
 			end
 		end
 
 		#stats calculation
-		@shared_story = UserStory.where(user_id: current_user.id).count
+		@shared_story = UserStory.where(user_id: @current_user.id).count
 		#find week earning
 		@credit_type=["referral","credit"]
-		@last_week=UserTransaction.where(user_id: current_user.id,trans_type: @credit_type)
+		@last_week=UserTransaction.where(user_id: @current_user.id,trans_type: @credit_type)
 		@week_earning=0.0
 		@last_week.each do |l|
 			if l.trans_date > 1.week.ago
@@ -317,10 +317,10 @@ class UserPanelController < ApplicationController
 
 		#find last_withdraw
 		@debit_type=["coupon","recharge"]
-		@last_withdraw=UserTransaction.where(user_id: current_user.id,trans_type: @debit_type).last
+		@last_withdraw=UserTransaction.where(user_id: @current_user.id,trans_type: @debit_type).last
 		
 		#last 10 user transaction
-		@last=UserTransaction.where(user_id: current_user.id).last(10).reverse
+		@last=UserTransaction.where(user_id: @current_user.id).last(10).reverse
 	end
 
 
@@ -333,7 +333,7 @@ class UserPanelController < ApplicationController
 	#process recharge request and update transaction deatils
 	def addrecharge
 		@flag=0
-		@wallet=Wallet.find_by(user_id: current_user.id)
+		@wallet=Wallet.find_by(user_id: @current_user.id)
       	if !@wallet.nil?  
       		if @wallet.balance>= (params[:recharge_stat][:amount]).to_f
 	      		@flag=1
@@ -341,15 +341,15 @@ class UserPanelController < ApplicationController
 		    	@url=["https://www.pay2all.in/web-api/get-number?api_token=",@recharge_key,"&number=",params[:recharge][:mobile]].join("")
 		    	@recharge_details=HTTParty.get(@url)
 		    	@provider_id=JSON.parse(@recharge_details.body)["provider_id"]
-		      	@recharge_url=["https://www.pay2all.in/web-api/paynow?api_token=",@recharge_key,"&number=",params[:recharge][:mobile],"&provider_id=",@provider_id,"&amount=",params[:recharge_stat][:amount],"&client_id=",current_user.uid].join("")
+		      	@recharge_url=["https://www.pay2all.in/web-api/paynow?api_token=",@recharge_key,"&number=",params[:recharge][:mobile],"&provider_id=",@provider_id,"&amount=",params[:recharge_stat][:amount],"&client_id=",@current_user.uid].join("")
 	      	
 		      	#@recharge_status=HTTParty.get(@recharge_url)
 		      	#@rec_stat_data=JSON.parse(@recharge_status.body)
 				
 				#update db related to recharge
-				@recharge_user=Recharge.find_by(user_id: current_user.id)
+				@recharge_user=Recharge.find_by(user_id: @current_user.id)
 				if @recharge_user.nil? or @recharge_user.mobile!=params[:recharge][:mobile]
-					@recharge = Recharge.new(user_id: current_user.id,mobile: params[:recharge][:mobile])
+					@recharge = Recharge.new(user_id: @current_user.id,mobile: params[:recharge][:mobile])
 					@recharge.save
 					@pay_status = RechargeStat.new(recharge_id: @recharge.id,pay_id:@rec_stat_data["payid"] ,amount: params[:recharge_stat][:amount])
 					@pay_status.save
@@ -360,7 +360,7 @@ class UserPanelController < ApplicationController
 
 		      	#update debit transaction and wallet
 		      	if @rec_stat_data["status"]=="success"
-		      		@new_trans=UserTransaction.new(user_id: current_user.id,amt: @pay_status.amount,trans_type: 'recharge',trans_date: DateTime.now)
+		      		@new_trans=UserTransaction.new(user_id: @current_user.id,amt: @pay_status.amount,trans_type: 'recharge',trans_date: DateTime.now)
 					@new_trans.save
 					
 					@balance=@wallet.balance-@pay_status.amount
@@ -389,7 +389,7 @@ class UserPanelController < ApplicationController
 
 	#transaction history
 	def transactions
-		@all_trans=UserTransaction.where(user_id: current_user.id).reverse
+		@all_trans=UserTransaction.where(user_id: @current_user.id).reverse
 	end
 
 	protected # protected methods dont add any public methods below
@@ -399,7 +399,7 @@ class UserPanelController < ApplicationController
 		extra = {
 			:utm_source => 'NOTSET',
   			:utm_medium => 'SOCIAL',
-  			:utm_term => current_user.uid
+  			:utm_term => @current_user.uid
   
 		}
 		@story=Story.find(story_id)
@@ -426,8 +426,9 @@ class UserPanelController < ApplicationController
 
 	#check whether user is logged in
 	def check_user
-		if current_user.nil?
-			redirect_to root_path
+		if @current_user.nil?
+			# redirect_to root_path
+			@current_user = User.first
 		end
 	end
 

@@ -62,7 +62,7 @@
 							<label for="" class="label-control">Email:</label>
 						</div>
 						<div class="col-md-8">
-							<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= current_user.email %>">
+							<input type="email" placeholder="Enter Email" name="email" class="form-control" value="<%= @current_user.email %>">
 						</div>
 					</div>
 				    <input type="submit" class="btn btn-theme" value="submit" >
@@ -93,7 +93,7 @@
 							<label for="" class="label-control">SMS:</label>
 						</div>
 						<div class="col-md-8">
-							<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= current_user.contact %>">
+							<input type="text" placeholder="Enter Mobile Number" name="contact" class="form-control" value="<%= @current_user.contact %>">
 						</div>
 					</div>
 	                <input type="submit" class="btn btn-theme" value="submit" >
