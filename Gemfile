@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-gem 'activeadmin', github: 'activeadmin' #admin-panel and authorize
+gem 'activeadmin' #admin-panel and authorize
 gem 'active_skin'
 gem 'bootstrap-sass', '~> 3.3.6'    # Bootstrap For rails
 gem 'bootbox-rails', '~>0.4'        # Bootstrap alert, confirm box
@@ -17,7 +17,7 @@ gem "font-awesome-rails"            # font-awesome web application icons for rai
 gem 'httparty'
 gem 'jquery-dotdotdot-rails'        # Jquery plugin for text excerpt
 gem 'jquery-rails'                  # Use jquery as the JavaScript library
-
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'jquery-turbolinks'             # use jQuery plugin for drop-in fix binded events problem caused by Turbolinks
 gem 'koala'                         #facebook access
 gem 'link_thumbnailer'              #extract from link
